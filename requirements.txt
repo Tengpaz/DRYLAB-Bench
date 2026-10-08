@@ -1,0 +1,36 @@
+# Core
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
+pyyaml>=6.0
+
+# LLM API clients
+openai>=1.0.0
+anthropic>=0.20.0
+google-generativeai>=0.4.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Data handling
+biopython>=1.81
+h5py>=3.8.0
+
+# Progress
+tqdm>=4.65.0
+
+# Statistics
+scikit-learn>=1.2.0
+
+# --- Optional: in-silico verification ---
+# ESM-2 loads via transformers (weights fetched by transformers on first
+# use — needs HF access). EVE TP53 predictions come from
+# scripts/download_insilico_models.py. The code degrades gracefully when
+# these packages are absent (rules-only in-silico scoring) — nothing here
+# is required for offline tests or legacy runs. CPU torch wheel:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# torch
+# transformers
+# NOTE: do NOT install fair-esm in this env — its top-level module name is
+# also `esm` and would clobber the EvolutionaryScale esm package.

@@ -1,0 +1,60 @@
+# ============================================================================
+# DRYLAB-Bench — Conda Environment Configuration
+# ============================================================================
+# Usage:
+#   conda env create -f environment.yml
+#   conda activate drylab_bench
+#
+# Or use the setup script:
+#   chmod +x setup.sh && ./setup.sh
+# ============================================================================
+
+name: drylab_bench
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.11
+  - pip
+
+  # Scientific computing
+  - numpy>=1.24.0
+  - pandas>=2.0.0
+  - scipy>=1.10.0
+  - scikit-learn>=1.2.0
+
+  # Configuration
+  - pyyaml>=6.0
+
+  # Progress bars
+  - tqdm>=4.65.0
+
+  # Data handling
+  - h5py>=3.8.0
+
+  # Visualization
+  - matplotlib>=3.7.0
+  - seaborn>=0.12.0
+
+  # Jupyter (optional, useful for exploration)
+  - jupyter
+  - ipython
+
+  # Pip-installed packages (not available on conda-forge with same versions)
+  - pip:
+      - openai>=1.0.0
+      - anthropic>=0.20.0
+      - google-generativeai>=0.4.0
+      - biopython>=1.81
+      - huggingface_hub>=0.20.0   # for dataset download
+
+# NOTE (optional in-silico verification):
+# ESM-2 scoring needs torch + transformers. They are intentionally NOT
+# listed here (heavy installs; the code degrades to rules-only when absent).
+# Install on demand:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+#   pip install transformers   # ESM-2 weights fetched by transformers itself
+# EVE TP53 + ESM-2 pre-download: python scripts/download_insilico_models.py (HF access)
+# Do NOT install fair-esm in this env: its top-level module name is also
+# `esm` and would clobber the installed EvolutionaryScale esm package.
