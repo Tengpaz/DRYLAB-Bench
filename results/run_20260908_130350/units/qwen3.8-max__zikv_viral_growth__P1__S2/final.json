@@ -1,0 +1,483 @@
+{
+  "unit_id": "qwen3.8-max__zikv_viral_growth__P1__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "zikv_viral_growth",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "T76I",
+        "confidence": 0.75,
+        "evidence_refs": [
+          "E00003",
+          "E00006"
+        ],
+        "decision_summary": "T76I receives perfect ESM-1v plausibility (z=1.000) and high ProteinMPNN structural compatibility (z=0.793), indicating this conservative hydrophobic substitution at the DI/DII hinge is well-tolerated and may enhance fusion dynamics for improved replication fitness."
+      },
+      {
+        "rank": 2,
+        "mutation": "L107F",
+        "confidence": 0.58,
+        "evidence_refs": [
+          "E00001",
+          "E00002",
+          "E00005"
+        ],
+        "decision_summary": "L107F shows consistent moderate support across evolution (z=0.500), sequence plausibility (z=0.571), and structural compatibility (z=0.527), suggesting the aromatic substitution is tolerated and may improve local hydrophobic packing in domain II."
+      },
+      {
+        "rank": 3,
+        "mutation": "L107I",
+        "confidence": 0.52,
+        "evidence_refs": [
+          "E00001",
+          "E00002",
+          "E00005"
+        ],
+        "decision_summary": "L107I is a more conservative substitution at the same position as L107F; given L107F's moderate tolerance across all tools, the smaller isoleucine should be at least as well accommodated structurally while maintaining hydrophobic character."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Maximum agent rounds (4) reached; no further rounds available for additional evidence gathering."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "L107F": {
+      "candidate_id": "L107F",
+      "mutation": "L107F",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.58,
+      "evidence_refs": [
+        "E00001",
+        "E00002",
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Position 107 (L) is in domain I; phenylalanine may enhance hydrophobic packing and dimer stability, supporting higher virion production."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Evolutionary MSA shows 50% frequency of F at position 107 among homologs, indicating strong natural tolerance. ESM-1v score of 0.57 is moderately supportive but not exceptional; overall the mutation is viable but not strongly distinguished from other candidates."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "L107F maintains moderate support across all three evidence dimensions (evolution z=0.5, PLM z=0.571, structure z=0.527), with no contradicting evidence. The structure score is modest but positive, consistent with a tolerated aromatic substitution at a surface-exposed position."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "L107F shows moderate but consistent support across all three tools (evolution z=0.500, ESM-1v z=0.571, structure z=0.527). The aromatic substitution may improve local hydrophobic packing in domain II."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "L107F shows consistent moderate support across all three evidence dimensions (evolution z=0.500, PLM z=0.571, structure z=0.527), suggesting the aromatic substitution is tolerated and may subtly improve local hydrophobic packing in domain II."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T76I": {
+      "candidate_id": "T76I",
+      "mutation": "T76I",
+      "first_seen_round": 1,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.75,
+      "evidence_refs": [
+        "E00003",
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Position 76 is in the DI/DII hinge region; conservative hydrophobic substitution may improve packing and conformational dynamics relevant to fusion, potentially enhancing replication fitness."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "T76I shows the highest ESM-1v plausibility score (1.0) and strong structural compatibility (0.793), indicating this conservative hydrophobic substitution is both sequence-plausible and structurally well-accommodated. This combination strongly supports its potential to enhance replication fitness through improved DI/DII hinge packing."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "T76I has the strongest combined evidence: perfect ESM-1v plausibility (z=1.0) and high structural compatibility (z=0.793). Position 76 is in the DI/DII hinge region where conservative hydrophobic substitutions can improve conformational dynamics relevant to fusion and replication."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "T76I has the strongest combined evidence: perfect ESM-1v plausibility (z=1.000) and high ProteinMPNN compatibility (z=0.793), indicating this conservative hydrophobic substitution at the DI/DII hinge is both evolutionarily plausible and structurally favorable for enhancing fusion dynamics and replication fitness."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G302A": {
+      "candidate_id": "G302A",
+      "mutation": "G302A",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.48,
+      "evidence_refs": [
+        "E00004",
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Position 302 is in the stem region; a G-to-A change may subtly alter backbone flexibility and improve stem-helix packing, potentially enhancing fusion efficiency."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "G302A receives very low scores from both ESM-1v (0.343) and ProteinMPNN (0.017), indicating this substitution is both sequence-implausible and structurally incompatible. The severe structural penalty (ΔlogP=-5.52) suggests this mutation would destabilize the protein, making it unlikely to improve replication fitness."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "G302A receives very low scores from both ESM-1v (0.343) and ProteinMPNN (0.017), indicating this substitution is both sequence-implausible and structurally incompatible. The severe structural penalty (ΔlogP=-5.52) suggests this mutation would destabilize the protein, making it unlikely to improve replication fitness.",
+        "evidence_refs": [
+          "E00004",
+          "E00007"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "L107I": {
+      "candidate_id": "L107I",
+      "mutation": "L107I",
+      "first_seen_round": 2,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Given L107F's moderate support, the more conservative L107I substitution may be better tolerated structurally while still providing hydrophobic optimization at this position. This is a safer alternative that may preserve protein stability while subtly improving local interactions."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.52,
+          "rationale": "L107I is a more conservative substitution at the same position as L107F, likely better tolerated structurally. It serves as a safer alternative that preserves hydrophobic character while minimizing perturbation."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.52,
+          "rationale": "L107I is a more conservative substitution at the same position as L107F; given L107F's moderate tolerance across all tools, the smaller isoleucine should be at least as well accommodated structurally while maintaining hydrophobic character, though direct evidence is lacking."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "T76I": 86.283,
+    "L107F": 52.781,
+    "L107I": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "L107F",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.5,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.74,
+        "local": 1.0,
+        "reason": "MSA depth 74, Neff 24.33 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 74/74 homologs"
+      },
+      "interpretation": "mutant frequency of F at position 107 = 0.5000 among 74 homologs; conservation entropy 0.798 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__zikv_viral_growth__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "L107F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L107F",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5705,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "qwen3.8-max__zikv_viral_growth__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "L107F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T76I",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "qwen3.8-max__zikv_viral_growth__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T76I",
+          "G302A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G302A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.343,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "qwen3.8-max__zikv_viral_growth__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T76I",
+          "G302A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L107F",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.8427,
+        "normalized": 0.527237,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.484,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 51.59"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=-1.8427)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "qwen3.8-max__zikv_viral_growth__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L107F",
+          "T76I",
+          "G302A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T76I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.3805,
+        "normalized": 0.792693,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.502,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 49.77"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=-0.3805)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "qwen3.8-max__zikv_viral_growth__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L107F",
+          "T76I",
+          "G302A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G302A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -5.5238,
+        "normalized": 0.016861,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.531,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 46.85"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=-5.5238)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "qwen3.8-max__zikv_viral_growth__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L107F",
+          "T76I",
+          "G302A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 16,
+    "c0_size": 1,
+    "final_novelty": 0.6666666666666666,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

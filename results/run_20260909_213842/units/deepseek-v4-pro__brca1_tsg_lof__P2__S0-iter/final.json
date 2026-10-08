@@ -1,0 +1,356 @@
+{
+  "unit_id": "deepseek-v4-pro__brca1_tsg_lof__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-pro",
+  "scenario_id": "brca1_tsg_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K1702A",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "Removes the BRCT phosphopeptide-binding lysine side chain, likely abolishing pSer binding while retaining overall BRCT fold."
+      },
+      {
+        "rank": 2,
+        "mutation": "M1775R",
+        "confidence": 0.8,
+        "evidence_refs": [],
+        "decision_summary": "Cancer-associated BRCT pocket substitution that disrupts hydrophobic phosphopeptide binding and is expected to retain overall domain folding."
+      },
+      {
+        "rank": 3,
+        "mutation": "C61G",
+        "confidence": 0.75,
+        "evidence_refs": [],
+        "decision_summary": "Disrupts a RING zinc ligand, strongly impairing BARD1/E3 function; confidence tempered by local folding-preservation uncertainty."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 are stable and additional self-iteration would not materially improve confidence or ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "C61G": {
+      "candidate_id": "C61G",
+      "mutation": "C61G",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "Known pathogenic RING-domain mutation that disrupts zinc coordination and BARD1 interaction, abolishing E3 ligase activity while largely preserving the domain fold."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.75,
+          "rationale": "Strong RING E3/BARD1 loss-of-function, but zinc-ligand disruption may compromise local RING folding, so downweighted relative to BRCT surface mutations."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C64G": {
+      "candidate_id": "C64G",
+      "mutation": "C64G",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Zinc-chelating RING residue; glycine substitution removes the thiol ligand and is expected to abolish BRCA1 RING function."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.75,
+          "rationale": "Zinc-ligand mutation likely abolishes RING function; confidence tempered by folding preservation uncertainty."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S1655A": {
+      "candidate_id": "S1655A",
+      "mutation": "S1655A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "BRCT phosphopeptide-binding residue; alanine is conservative for folding but removes the hydroxyl required for phosphoserine recognition."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "May remove a phosphorylation site or binding determinant, but evidence for direct BRCA1 tumor-suppressor ablation is weaker than for BRCT pocket residues."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K1702A": {
+      "candidate_id": "K1702A",
+      "mutation": "K1702A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Key BRCT phosphate-binding residue; alanine substitution should impair phosphopeptide binding while maintaining overall BRCT structure."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "BRCT phosphate-binding residue; removing the Lys side chain likely abolishes pSer binding while preserving the BRCT fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "M1775R": {
+      "candidate_id": "M1775R",
+      "mutation": "M1775R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Known BRCT cancer-associated mutation that disrupts BRCT function; likely tolerated enough to preserve global folding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "Cancer-associated BRCT variant that disrupts the hydrophobic phosphopeptide-binding pocket and likely retains overall BRCT folding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R1699W": {
+      "candidate_id": "R1699W",
+      "mutation": "R1699W",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "BRCT cancer-associated variant that impairs phosphopeptide recognition; aromatic substitution may retain partial packing."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Known BRCT cancer-associated variant with strong functional loss, though bulky Trp may partially affect BRCT stability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C47A": {
+      "candidate_id": "C47A",
+      "mutation": "C47A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "RING zinc ligand; alanine maintains small size but removes metal coordination, likely abolishing E3 ligase activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "Zinc-ligand disruption should impair RING function, but lower confidence for folding preservation and less prominent validation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C24A": {
+      "candidate_id": "C24A",
+      "mutation": "C24A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "RING zinc ligand; alanine substitution disrupts zinc binding and BRCA1 RING function."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "Redundant RING zinc-ligand candidate with lower confidence; less favorable expected folding preservation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Redundant RING zinc-ligand candidate with lower confidence; less favorable expected folding preservation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C27A": {
+      "candidate_id": "C27A",
+      "mutation": "C27A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "RING zinc ligand; alanine substitution disrupts the RING fold's catalytic function."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "Redundant RING zinc-ligand candidate with lower confidence; less favorable expected folding preservation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Redundant RING zinc-ligand candidate with lower confidence; less favorable expected folding preservation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C61A": {
+      "candidate_id": "C61A",
+      "mutation": "C61A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Alternative conservative loss of the RING zinc ligand; alanine may preserve local packing better than glycine."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Similar mechanism to C61G but somewhat less validated; retained as a functional RING disruption candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R1699A": {
+      "candidate_id": "R1699A",
+      "mutation": "R1699A",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Removes the BRCT phosphate-binding Arg side chain with less steric perturbation than Trp, likely preserving BRCT folding while abolishing binding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K1702A": null,
+    "M1775R": null,
+    "C61G": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 11,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

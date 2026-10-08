@@ -1,0 +1,109 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the H3N2 hemagglutinin (MC22 strain, 504 aa).
+
+PRIMARY OBJECTIVE: Maximize HA folding stability (environmental persistence).
+
+SEQUENCE (full-length exactly as numbered below):
+```
+QKIPGNDNSTATLCLGHHAVPNGTIVKTITNDRIEVTNATELVQNSSIGKICNSPHQILDGGNCTLIDALLGDPQCDGFQNKEWDLFVERSRANSSCYPYDVPDYASLRSLVASSGTLEFKNESFNWTGVKQNGTSSACKRGSSSSFFSRLNWLTSLNNIYPAQNVTMPNKEQFDKLYIWGVHHPDTDKNQFSLFAQSSGRITVSTKRSQQAVIPNIGSRPRVRDIPSRISIYWTIVKPGDILLINSTGNLIAPRGYFKIRSGKSSIMRSDAPIGKCKSECITPNGSIPNDKPFQNVNRITYGACPRYVKQSTLKLATGMRNVPEKQTRGIFGAIAGFIENGWEGMVDGWYGFRHQNSEGRGQAADLKSTQAAIDQISGKLNRLIGKTNEKFHQIEKEFSEVEGRVQDLEKYVEDTKIDLWSYNAELLVALENQHTIDLTDSEMNKLFEKTKKQLRENAEDMGNGCFKIYHKCDNACIGSIRNETYDHNVYRDEALNNRFQIKG
+```
+NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  T318I  confidence=0.580  rank=1
+  N133D  confidence=0.550  rank=2
+  L381I  confidence=0.530  rank=3
+  N246D  confidence=0.500  rank=6
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  - drop N38D (round 2): Position 38 is near the N-terminus of HA1 in a surface-exposed loop region; deamidation removal here is less likely to impact overall folding stability significantly.
+  - add T318I (round 1): Position 318 is in the HA2 stalk domain. Thr to Ile substitution increases hydrophobic packing in the coiled-coil region, which is known to enhance trimer stability and thermal resistance.
+  - add L381I (round 1): Position 381 is in the HA2 stalk. Leu to Ile is a conservative hydrophobic substitution that may improve packing density in the coiled-coil, enhancing thermostability.
+Changes this round:
+  - T318I retain: Position 318 is in the HA2 stalk coiled-coil region. Thr to Ile increases hydrophobic packing and is a well-known strategy for enhancing trimer thermostability.
+  - L381I retain: Conservative hydrophobic substitution in the HA2 coiled-coil that may improve packing density and thermostability.
+  - N133D retain: Removes a potential deamidation site (Asn) that could lead to destabilization over time; Asp substitution preserves charge and may improve environmental persistence.
+  - N246D retain: Removes another deamidation-prone Asn residue; Asp substitution is conservative and may improve long-term stability.
+  - G47A add: Position 47 is in HA1. Gly to Ala substitution reduces backbone conformational entropy, which can stabilize local structure and improve folding stability.
+  - S375T add: Ser to Thr at position 375 in HA2 stalk adds a methyl group that can improve hydrophobic packing and reduce backbone flexibility, modestly enhancing stability.
+Remaining doubts: Without experimental or computational evidence, confidence in any specific mutation remains limited; the relative ranking of stalk-packing vs. deamidation-removal strategies is uncertain.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 3 — respond with a single JSON object, nothing else.

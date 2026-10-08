@@ -1,0 +1,1056 @@
+{
+  "unit_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+  "condition": "S2",
+  "model_id": "gpt-5.6-sol",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "W95P",
+        "confidence": 0.94,
+        "evidence_refs": [
+          "E00001",
+          "E00007"
+        ],
+        "decision_summary": "W95P has the highest pathogenicity score and complete evolutionary intolerance. Introducing proline at this conserved catalytic-domain position is strongly disruptive."
+      },
+      {
+        "rank": 2,
+        "mutation": "G255R",
+        "confidence": 0.91,
+        "evidence_refs": [
+          "E00003",
+          "E00009"
+        ],
+        "decision_summary": "G255R combines very high predicted pathogenicity with complete evolutionary intolerance at strong alignment coverage. The large charged substitution at a conserved glycine is likely to disrupt catalytic-domain structure."
+      },
+      {
+        "rank": 3,
+        "mutation": "L309P",
+        "confidence": 0.9,
+        "evidence_refs": [
+          "E00006",
+          "E00012"
+        ],
+        "decision_summary": "L309P has extremely high predicted pathogenicity and no observed homologous tolerance. Its rank is limited by only moderate MSA coverage, but proline insertion remains strongly likely to impair folding or activity."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further applicable evidence is unlikely to alter the Top-3, while no available tool directly verifies complete loss of catalytic activity."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "W95P": {
+      "candidate_id": "W95P",
+      "mutation": "W95P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.94,
+      "evidence_refs": [
+        "E00001",
+        "E00007",
+        "E00013",
+        "E00017"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.84,
+          "rationale": "Replacing an aromatic residue with proline in the catalytic domain is likely to disrupt local backbone geometry and core packing, producing strong loss of function."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.93,
+          "rationale": "Near-maximal predicted pathogenicity and complete absence of proline among aligned homologs strongly support a disruptive catalytic-domain substitution."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.94,
+          "rationale": "Extremely high predicted pathogenicity, complete evolutionary intolerance, and very low sequence plausibility jointly support a strongly disruptive substitution. The annotation fallback is uninformative."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R157W": {
+      "candidate_id": "R157W",
+      "mutation": "R157W",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.82,
+      "evidence_refs": [
+        "E00002",
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.82,
+          "rationale": "This nonconservative substitution introduces a bulky hydrophobic residue at a charged catalytic-domain position and is likely to impair folding or catalytic-site organization."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.61,
+          "rationale": "It has the weakest pathogenicity score in the pool, and limited natural occurrence of tryptophan further reduces confidence that it will abolish activity."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "It has the weakest pathogenicity score in the pool, and limited natural occurrence of tryptophan further reduces confidence that it will abolish activity.",
+        "evidence_refs": [
+          "E00008"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "C243R": {
+      "candidate_id": "C243R",
+      "mutation": "C243R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.85,
+      "evidence_refs": [
+        "E00005",
+        "E00011",
+        "E00016",
+        "E00020"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.79,
+          "rationale": "Replacing a buried-looking cysteine with arginine is likely to disrupt hydrophobic packing and catalytic-domain stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.84,
+          "rationale": "Predicted pathogenicity is high, but rare natural occurrence of arginine weakens the case for complete loss of function relative to the leaders."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "High predicted pathogenicity, low homologous mutant frequency, and negligible sequence plausibility support a disruptive effect. It remains below the Top-3 because its combined phenotype and conservation evidence is slightly weaker."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G255R": {
+      "candidate_id": "G255R",
+      "mutation": "G255R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.91,
+      "evidence_refs": [
+        "E00003",
+        "E00009",
+        "E00015",
+        "E00019"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.81,
+          "rationale": "This glycine lies in a proline- and hydrophobe-rich segment, so introduction of arginine should strongly disrupt its constrained local conformation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.89,
+          "rationale": "High predicted pathogenicity and absence of arginine at this glycine position support severe disruption, with good MSA coverage."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.91,
+          "rationale": "The substitution combines high predicted pathogenicity with strong evolutionary intolerance at good alignment coverage and negligible sequence-model plausibility. It is promoted above L309P because its conservation evidence has substantially better applicability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L309P": {
+      "candidate_id": "L309P",
+      "mutation": "L309P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.9,
+      "evidence_refs": [
+        "E00006",
+        "E00012",
+        "E00014",
+        "E00018"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Proline at this leucine is expected to break regular secondary structure and destabilize the catalytic-domain fold."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.9,
+          "rationale": "The mutation has near-maximal predicted pathogenicity, while proline is absent among covered homologs; reduced MSA coverage limits confidence slightly."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.9,
+          "rationale": "High predicted pathogenicity and negligible sequence plausibility support disruption by proline. It remains a leading candidate but is demoted because its evolutionary evidence has only moderate alignment coverage."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W339P": {
+      "candidate_id": "W339P",
+      "mutation": "W339P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.8,
+      "evidence_refs": [
+        "E00004",
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Replacing a large aromatic residue with proline near the catalytic-domain C terminus should disrupt packing and backbone structure."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.67,
+          "rationale": "Although predicted pathogenicity is high, proline occurs frequently among the limited aligned homologs, suggesting this substitution may be evolutionarily tolerated."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Although predicted pathogenicity is high, proline occurs frequently among the limited aligned homologs, suggesting this substitution may be evolutionarily tolerated.",
+        "evidence_refs": [
+          "E00010"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "W95P": 45.509,
+    "G255R": 45.64,
+    "L309P": 48.664
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "W95P",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9975,
+        "normalized": 0.9975,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.998 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "R157W",
+          "G255R",
+          "W339P",
+          "C243R",
+          "L309P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R157W",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.7579,
+        "normalized": 0.7579,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.758 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "R157W",
+          "G255R",
+          "W339P",
+          "C243R",
+          "L309P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G255R",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9854,
+        "normalized": 0.9854,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.985 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "R157W",
+          "G255R",
+          "W339P",
+          "C243R",
+          "L309P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W339P",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9767,
+        "normalized": 0.9767,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.977 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "R157W",
+          "G255R",
+          "W339P",
+          "C243R",
+          "L309P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C243R",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9688,
+        "normalized": 0.9688,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.969 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "R157W",
+          "G255R",
+          "W339P",
+          "C243R",
+          "L309P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L309P",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9913,
+        "normalized": 0.9913,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.991 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "R157W",
+          "G255R",
+          "W339P",
+          "C243R",
+          "L309P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W95P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 95 = 0.0000 among 23 homologs; conservation entropy 1.914 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "R157W",
+          "G255R",
+          "W339P",
+          "C243R",
+          "L309P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R157W",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.043478,
+        "normalized": 0.043478,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of W at position 157 = 0.0435 among 23 homologs; conservation entropy 2.017 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "R157W",
+          "G255R",
+          "W339P",
+          "C243R",
+          "L309P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G255R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 0.913,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.913,
+        "reason": "alignment coverage 21/23 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 255 = 0.0000 among 21 homologs; conservation entropy 1.634 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "R157W",
+          "G255R",
+          "W339P",
+          "C243R",
+          "L309P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W339P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.307692,
+        "normalized": 0.307692,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 0.565,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.565,
+        "reason": "alignment coverage 13/23 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 339 = 0.3077 among 13 homologs; conservation entropy 1.605 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "R157W",
+          "G255R",
+          "W339P",
+          "C243R",
+          "L309P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C243R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.043478,
+        "normalized": 0.043478,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 243 = 0.0435 among 23 homologs; conservation entropy 2.171 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "R157W",
+          "G255R",
+          "W339P",
+          "C243R",
+          "L309P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L309P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 0.565,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.565,
+        "reason": "alignment coverage 13/23 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 309 = 0.0000 among 13 homologs; conservation entropy 1.605 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "R157W",
+          "G255R",
+          "W339P",
+          "C243R",
+          "L309P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W95P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "L309P",
+          "G255R",
+          "C243R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L309P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "L309P",
+          "G255R",
+          "C243R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G255R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "L309P",
+          "G255R",
+          "C243R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C243R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "L309P",
+          "G255R",
+          "C243R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W95P",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "L309P",
+          "G255R",
+          "C243R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L309P",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "L309P",
+          "G255R",
+          "C243R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G255R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "L309P",
+          "G255R",
+          "C243R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C243R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "gpt-5.6-sol__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95P",
+          "L309P",
+          "G255R",
+          "C243R"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 6,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 4,
+    "c0_size": 6,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 2,
+    "budget_exhausted": true
+  }
+}

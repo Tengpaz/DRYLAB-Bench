@@ -1,0 +1,373 @@
+{
+  "unit_id": "glm-5.3__psae_stability_disruption__P2__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "I33P",
+        "confidence": 0.8,
+        "evidence_refs": [
+          "E00001"
+        ],
+        "decision_summary": "Proline in the conserved SGIIYP core both breaks the core helix and removes buried hydrophobic packing. Highest-value disruptor given no direct folding predictor."
+      },
+      {
+        "rank": 2,
+        "mutation": "L11P",
+        "confidence": 0.78,
+        "evidence_refs": [
+          "E00004"
+        ],
+        "decision_summary": "evolution_msa shows near-zero tolerance (z=0.023) for proline in the conserved N-terminal helix, indicating a fold-critical position."
+      },
+      {
+        "rank": 3,
+        "mutation": "W17G",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "Glycine at the largest buried aromatic in the Y16-W17-Y18 core removes nearly all packing volume and destabilizes the fold."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Evidence is sufficient and consistent; remaining budget better saved than spent on redundant calls."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "Y45A": {
+      "candidate_id": "Y45A",
+      "mutation": "Y45A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Aromatic-to-alanine removes large hydrophobic packing surface; less drastic than charge burial but still core-destabilizing."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "WT residue at position 45 in the provided sequence is N, not Y, so Y45A violates the numbering/WT-residue constraint and is invalid."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "WT residue at position 45 in the provided sequence is N, not Y, so Y45A violates the numbering/WT-residue constraint and is invalid.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "I33P": {
+      "candidate_id": "I33P",
+      "mutation": "I33P",
+      "first_seen_round": 3,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "I33 sits in a conserved hydrophobic stretch (SGIIYP) in the core; a proline both breaks the helix and removes core packing, a stronger destabilizer than surface Lys mutations."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V36P": {
+      "candidate_id": "V36P",
+      "mutation": "V36P",
+      "first_seen_round": 3,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "V36 is adjacent to the conserved Y34-P35 region and buried (V36I V38); Pro here should propagate a kink into the core helix, mirroring the strong effects seen for other prolines."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W17G": {
+      "candidate_id": "W17G",
+      "mutation": "W17G",
+      "first_seen_round": 3,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "W17 is the largest buried aromatic in the hydrophobic core (Y16-W17-Y18); Gly substitution removes ~all core packing volume and reduces helix propensity, strongly destabilizing the fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "I33P": null,
+    "L11P": 2.326,
+    "W17G": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "K7P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 7 = 0.0000 among 43 homologs; conservation entropy 1.278 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K7P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K7P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0046,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K7P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K7P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -2.3559,
+        "normalized": 0.374903,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-2.3559)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K7P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L11P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.023256,
+        "normalized": 0.023256,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 11 = 0.0233 among 43 homologs; conservation entropy 1.019 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__psae_stability_disruption__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L11P",
+          "L65P",
+          "K7P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L65P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.907,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.907,
+        "reason": "alignment coverage 39/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 65 = 0.0000 among 39 homologs; conservation entropy 1.311 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__psae_stability_disruption__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L11P",
+          "L65P",
+          "K7P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K7P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 7 = 0.0000 among 43 homologs; conservation entropy 1.278 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__psae_stability_disruption__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L11P",
+          "L65P",
+          "K7P"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 14,
+    "c0_size": 1,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

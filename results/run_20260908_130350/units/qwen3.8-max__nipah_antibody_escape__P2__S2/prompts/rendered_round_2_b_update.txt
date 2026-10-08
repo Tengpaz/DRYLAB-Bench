@@ -1,0 +1,1040 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in the Nipah virus attachment glycoprotein G (receptor-binding protein, 532 aa).
+
+THE DESIGN OBJECTIVE: Maximize antibody immune escape from m102.4-class neutralizing antibodies while preserving ephrin-B2/B3 receptor binding.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+QNYTRSTDNQAVIKDALQGIQQQIKGLADKIGTEIGPKVSLIDTSSTITIPANIGLLGSKISQSTASINENVNEKCKFTLPPLKIHECNISCPNPLPFREYRPQTEGVSNLVGLPNNICLQKTSNQILKPKLISYTLPVVGQSGTCITDPLLAMDEGYFAYSHLERIGSCSRGVSKQRIIGVGEVLDRGDEVPSLFMTNVWTPPNPNTVYHCSAVYNNEFYYVLCAVSTVGDPILNSTYWSGSLMMTRLAVKPKSNGGGYNQHQLALRSIEKGRYDKVMPYGPSGIKQGDTLYFPAVGFLVRTEFKYNDSNCPITKCQYSKPENCRLSMGIRPNSHYILRSGLLKYNLSDGENPKVVFIEISDQRLSIGSPSKIYDSLGQPVFYQASFSWDTMIKFGDVLTVNPLVVNWRNNTVISRPGQSQCPRFNTCPEICWEGVYNDAFLIDRINWISAGVFLDSNQTAENPVFTVFKDNEILYRAQLASEDTNAQKTITNCFLLKNKIWCISLVEIYDTGDNVIRPKLFAVKIPEQCT
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   For THIS task the backbone is PDB 3D11 chain A — 80% of this sequence's residues have experimental coordinates (resolution 2.31 Å). Positions OUTSIDE the structure return status = "not_applicable" (no score).
+
+4. functional_annotation — curated UniProt features (accession Q9IH62) for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'antibody escape (EVEscape)' via evescape — predictions are AVAILABLE for this task.. Higher = more of that phenotype.
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Given the evidence (if any) and the current pool, decide the updates: add / modify (rerank) / delete (reject) / re-evaluate candidates, and give your reasoning. Do NOT output a STOP decision in this step. Weigh each tool's evidence by how close its measured dimension is to the REWARD phenotype: a tool whose dimension differs from the reward (or trades off against it) must not be followed blindly.
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  E501K  confidence=0.720  rank=1
+  S506A  confidence=0.680  rank=2
+  Y502A  confidence=0.650  rank=3
+  K498E  confidence=0.620  rank=4
+  L503R  confidence=0.600  rank=5
+  Q504A  confidence=0.580  rank=6
+  D499A  confidence=0.570  rank=7
+  N505A  confidence=0.550  rank=8
+  T500A  confidence=0.550  rank=9
+BT evidence so far (before this round):
+  E00001 phenotype(E501K): z=?, app=0.00
+  E00002 phenotype(Y502A): z=?, app=0.00
+  E00003 phenotype(K498E): z=?, app=0.00
+  E00004 phenotype(L503R): z=?, app=0.00
+  E00005 phenotype(Q504A): z=?, app=0.00
+  E00006 phenotype(D499A): z=?, app=0.00
+  E00007 phenotype(N505A): z=?, app=0.00
+  E00008 phenotype(T500A): z=?, app=0.00
+  E00009 phenotype(S506A): z=0.552, app=1.00
+  E00010 phenotype(G507A): z=?, app=0.00
+  E00011 structure_compatibility(E501K): z=?, app=0.00
+  E00012 structure_compatibility(Y502A): z=?, app=0.00
+  E00013 structure_compatibility(K498E): z=?, app=0.00
+  E00014 structure_compatibility(L503R): z=?, app=0.00
+  E00015 structure_compatibility(Q504A): z=?, app=0.00
+  E00016 structure_compatibility(D499A): z=?, app=0.00
+  E00017 structure_compatibility(N505A): z=?, app=0.00
+  E00018 structure_compatibility(T500A): z=?, app=0.00
+  E00019 structure_compatibility(S506A): z=0.936, app=1.00
+  E00020 structure_compatibility(G507A): z=?, app=0.00
+Evidence obtained this round:
+  E00021 phenotype(I502A): z=0.659, app=1.00
+  E00022 phenotype(I505A): z=0.487, app=1.00
+  E00023 phenotype(L507A): z=0.506, app=1.00
+  E00024 phenotype(V508A): z=0.625, app=1.00
+  E00025 phenotype(E509A): z=0.426, app=1.00
+  E00026 phenotype(I510A): z=0.609, app=1.00
+  E00027 phenotype(K501A): z=0.810, app=1.00
+  E00028 phenotype(S506R): z=0.527, app=1.00
+  E00029 phenotype(W503F): z=0.618, app=1.00
+  E00030 phenotype(C504S): z=0.279, app=1.00
+  E00031 structure_compatibility(I502A): z=0.143, app=1.00
+  E00032 structure_compatibility(I505A): z=0.227, app=1.00
+  E00033 structure_compatibility(L507A): z=0.552, app=1.00
+  E00034 structure_compatibility(V508A): z=0.199, app=1.00
+  E00035 structure_compatibility(E509A): z=0.504, app=1.00
+  E00036 structure_compatibility(I510A): z=0.457, app=1.00
+  E00037 structure_compatibility(K501A): z=0.617, app=1.00
+  E00038 structure_compatibility(S506R): z=0.311, app=1.00
+  E00039 structure_compatibility(W503F): z=0.792, app=1.00
+  E00040 structure_compatibility(C504S): z=0.519, app=1.00
+Change history:
+  - drop G507A (round 1): No evidence returned and G507 is likely in a structurally constrained region; glycine-to-alanine is conservative and unlikely to strongly disrupt antibody contacts.
+</WORKING_MEMORY>
+
+<NEW_EVIDENCE>
+[
+  {
+    "candidate": "I502A",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.6594,
+      "normalized": 0.6594,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.659; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00021",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I505A",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.4875,
+      "normalized": 0.4875,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.487; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00022",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "L507A",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.5058,
+      "normalized": 0.5058,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.506; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00023",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "V508A",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.6252,
+      "normalized": 0.6252,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.625; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00024",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E509A",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.426,
+      "normalized": 0.426,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.426; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00025",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I510A",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.6089,
+      "normalized": 0.6089,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.609; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00026",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "K501A",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.8102,
+      "normalized": 0.8102,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.810; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00027",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "S506R",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.5271,
+      "normalized": 0.5271,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.527; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00028",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "W503F",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.6181,
+      "normalized": 0.6181,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.618; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00029",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "C504S",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.2785,
+      "normalized": 0.2785,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.279; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00030",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I502A",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": -5.2307,
+      "normalized": 0.14321,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.623,
+      "reason": "PDB 3D11 at 2.31 A; residue B-factor 37.73"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "residue has experimental coordinates in the mapped chain"
+    },
+    "interpretation": "ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-5.2307)",
+    "limitations": [
+      "fixed-backbone approximation; decoding-order averaged (N=2)",
+      "structure-conditioned compatibility does not equal the requested phenotype"
+    ],
+    "evidence_id": "E00031",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I505A",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": -4.7879,
+      "normalized": 0.227233,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.699,
+      "reason": "PDB 3D11 at 2.31 A; residue B-factor 30.09"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "residue has experimental coordinates in the mapped chain"
+    },
+    "interpretation": "ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-4.7879)",
+    "limitations": [
+      "fixed-backbone approximation; decoding-order averaged (N=2)",
+      "structure-conditioned compatibility does not equal the requested phenotype"
+    ],
+    "evidence_id": "E00032",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "L507A",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": -2.7458,
+      "normalized": 0.552453,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.715,
+      "reason": "PDB 3D11 at 2.31 A; residue B-factor 28.5"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "residue has experimental coordinates in the mapped chain"
+    },
+    "interpretation": "ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-2.7458)",
+    "limitations": [
+      "fixed-backbone approximation; decoding-order averaged (N=2)",
+      "structure-conditioned compatibility does not equal the requested phenotype"
+    ],
+    "evidence_id": "E00033",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "V508A",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": -4.9524,
+      "normalized": 0.198937,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.716,
+      "reason": "PDB 3D11 at 2.31 A; residue B-factor 28.43"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "residue has experimental coordinates in the mapped chain"
+    },
+    "interpretation": "ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-4.9524)",
+    "limitations": [
+      "fixed-backbone approximation; decoding-order averaged (N=2)",
+      "structure-conditioned compatibility does not equal the requested phenotype"
+    ],
+    "evidence_id": "E00034",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E509A",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": -3.0361,
+      "normalized": 0.504016,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.692,
+      "reason": "PDB 3D11 at 2.31 A; residue B-factor 30.85"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "residue has experimental coordinates in the mapped chain"
+    },
+    "interpretation": "ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-3.0361)",
+    "limitations": [
+      "fixed-backbone approximation; decoding-order averaged (N=2)",
+      "structure-conditioned compatibility does not equal the requested phenotype"
+    ],
+    "evidence_id": "E00035",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I510A",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": -3.3509,
+      "normalized": 0.457309,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.665,
+      "reason": "PDB 3D11 at 2.31 A; residue B-factor 33.53"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "residue has experimental coordinates in the mapped chain"
+    },
+    "interpretation": "ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-3.3509)",
+    "limitations": [
+      "fixed-backbone approximation; decoding-order averaged (N=2)",
+      "structure-conditioned compatibility does not equal the requested phenotype"
+    ],
+    "evidence_id": "E00036",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "K501A",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": -2.3343,
+      "normalized": 0.616829,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.589,
+      "reason": "PDB 3D11 at 2.31 A; residue B-factor 41.07"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "residue has experimental coordinates in the mapped chain"
+    },
+    "interpretation": "ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-2.3343)",
+    "limitations": [
+      "fixed-backbone approximation; decoding-order averaged (N=2)",
+      "structure-conditioned compatibility does not equal the requested phenotype"
+    ],
+    "evidence_id": "E00037",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "S506R",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": -4.2583,
+      "normalized": 0.31138,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.716,
+      "reason": "PDB 3D11 at 2.31 A; residue B-factor 28.4"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "residue has experimental coordinates in the mapped chain"
+    },
+    "interpretation": "ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-4.2583)",
+    "limitations": [
+      "fixed-backbone approximation; decoding-order averaged (N=2)",
+      "structure-conditioned compatibility does not equal the requested phenotype"
+    ],
+    "evidence_id": "E00038",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "W503F",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": -1.0795,
+      "normalized": 0.791795,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.655,
+      "reason": "PDB 3D11 at 2.31 A; residue B-factor 34.47"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "residue has experimental coordinates in the mapped chain"
+    },
+    "interpretation": "ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-1.0795)",
+    "limitations": [
+      "fixed-backbone approximation; decoding-order averaged (N=2)",
+      "structure-conditioned compatibility does not equal the requested phenotype"
+    ],
+    "evidence_id": "E00039",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "C504S",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": -2.9421,
+      "normalized": 0.519091,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.677,
+      "reason": "PDB 3D11 at 2.31 A; residue B-factor 32.33"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "residue has experimental coordinates in the mapped chain"
+    },
+    "interpretation": "ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-2.9421)",
+    "limitations": [
+      "fixed-backbone approximation; decoding-order averaged (N=2)",
+      "structure-conditioned compatibility does not equal the requested phenotype"
+    ],
+    "evidence_id": "E00040",
+    "run_id": "qwen3.8-max__nipah_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "I502A",
+        "I505A",
+        "L507A",
+        "V508A",
+        "E509A",
+        "I510A",
+        "K501A",
+        "S506R",
+        "W503F",
+        "C504S"
+      ],
+      "positions": null
+    }
+  }
+]
+</NEW_EVIDENCE>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "candidate_updates": [
+    {"mutation": "<WT><POS><MUT>", "action": "add | retain | rerank | reject | reconsider",
+     "current_confidence": 0.78,
+     "supporting_evidence_ids": ["E00003"],
+     "contradicting_evidence_ids": ["E00021"],
+     "origin": "initial_pool | new_hypothesis_from_evidence",
+     "trigger_evidence_ids": ["E00017"],
+     "decision_rationale": "<= 2 sentences"}
+  ],
+  "active_candidate_ranking": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.78}
+  ],
+  "evidence_assessment": [
+    {"evidence_id": "E00017", "candidate": "<WT><POS><MUT>",
+     "llm_reliability_assessment": "high | medium | low",
+     "effect_on_candidate": "support | weak_against | against",
+     "reason": "<= 2 sentences"}
+  ],
+  "thinking": "<= 3 sentences — the reasoning behind THIS round's changes",
+  "doubts": "<= 1 sentence — remaining uncertainties"
+}
+Rules: if you add/reconsider, give decision_rationale; every supporting/
+contradicting evidence id referenced in updates must appear in evidence_assessment.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

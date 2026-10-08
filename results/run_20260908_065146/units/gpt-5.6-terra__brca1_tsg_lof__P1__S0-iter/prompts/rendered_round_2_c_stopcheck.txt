@@ -1,0 +1,109 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in Human BRCA1 (1863 aa).
+
+PRIMARY OBJECTIVE: Abolish human BRCA1 DNA-repair/tumor-suppressor function, while preserving overall folding.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MDLSALRVEEVQNVINAMQKILECPICLELIKEPVSTKCDHIFCKFCMLKLLNQKKGPSQCPLCKNDITKRSLQESTRFSQLVEELLKIICAFQLDTGLEYANSYNFAKKENNSPEHLKDEVSIIQSMGYRNRAKRLLQSEPENPSLQETSLSVQLSNLGTVRTLRTKQRIQPQKTSVYIELGSDSSEDTVNKATYCSVGDQELLQITPQGTRDEISLDSAKKAACEFSETDVTNTEHHQPSNNDLNTTEKRAAERHPEKYQGSSVSNLHVEPCGTNTHASSLQHENSSLLLTKDRMNVEKAEFCNKSKQPGLARSQHNRWAGSKETCNDRRTPSTEKKVDLNADPLCERKEWNKQKLPCSENPRDTEDVPWITLNSSIQKVNEWFSRSDELLGSDDSHDGESESNAKVADVLDVLNEVDEYSGSSEKIDLLASDPHEALICKSERVHSKSVESNIEDKIFGKTYRKKASLPNLSHVTENLIIGAFVTEPQIIQERPLTNKLKRKRRPTSGLHPEDFIKKADLAVQKTPEMINQGTNQTEQNGQVMNITNSGHENKTKGDSIQNEKNPNPIESLEKESAFKTKAEPISSSISNMELELNIHNSKAPKKNRLRRKSSTRHIHALELVVSRNLSPPNCTELQIDSCSSSEEIKKKKYNQMPVRHSRNLQLMEGKEPATGAKKSNKPNEQTSKRHDSDTFPELKLTNAPGSFTKCSNTSELKEFVNPSLPREEKEEKLETVKVSNNAEDPKDLMLSGERVLQTERSVESSSISLVPGTDYGTQESISLLEVSTLGKAKTEPNKCVSQCAAFENPKGLIHGCSKDNRNDTEGFKYPLGHEVNHSRETSIEMEESELDAQYLQNTFKVSKRQSFAPFSNPGNAEEECATFSAHSGSLKKQSPKVTFECEQKEENQGKNESNIKPVQTVNITAGFPVVGQKDKPVDNAKCSIKGGSRFCLSSQFRGNETGLITPNKHGLLQNPYRIPPLFPIKSFVKTKCKKNLLEENFEEHSMSPEREMGNENIPSTVSTISRNNIRENVFKEASSSNINEVGSSTNEVGSSINEIGSSDENIQAELGRNRGPKLNAMLRLGVLQPEVYKQSLPGSNCKHPEIKKQEYEEVVQTVNTDFSPYLISDNLEQPMGSSHASQVCSETPDDLLDDGEIKEDTSFAENDIKESSAVFSKSVQKGELSRSPSPFTHTHLAQGYRRGAKKLESSEENLSSEDEELPCFQHLLFGKVNNIPSQSTRHSTVATECLSKNTEENLLSLKNSLNDCSNQVILAKASQEHHLSEETKCSASLFSSQCSELEDLTANTNTQDPFLIGSSKQMRHQSESQGVGLSDKELVSDDEERGTGLEENNQEEQSMDSNLGEAASGCESETSVSEDCSGLSSQSDILTTQQRDTMQHNLIKLQQEMAELEAVLEQHGSQPSNSYPSIISDSSALEDLRNPEQSTSEKAVLTSQKSSEYPISQNPEGLSADKFEVSADSSTSKNKEPGVERSSPSKCPSLDDRWYMHSCSGSLQNRNYPSQEELIKVVDVEEQQLEESGPHDLTETSYLPRQDLEGTPYLESGISLFSDDPESDPSEDRAPESARVGNIPSSTSALKVPQLKVAESAQSPAAAHTTDTAGYNAMEESVSREKPELTASTERVNKRMSMVVSGLTPEEFMLVYKFARKHHITLTNLITEETTHVVMKTDAEFVCERTLKYFLGIAGGKWVVSYFWVTQSIKERKMLNEHDFEVRGDVVNGRNHQGPKRARESQDRKIFRGLEICCYGPFTNMPTDQLEWMVQLCGASVVKELSSFTLGTGVHPIVVVQPDAWTEDNGFHAIGQMCEAPVVTREWVLDSVALYQCQELDTYLIPQIPHSHY
+```
+NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  M1775R  confidence=0.840  rank=1
+  K1702M  confidence=0.780  rank=2
+  R1699W  confidence=0.750  rank=3
+  C61G  confidence=0.680  rank=4
+  C64G  confidence=0.630  rank=5
+  I26A  confidence=0.520  rank=6
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+Changes this round:
+  - M1775R retain: M1775 is in the C-terminal BRCT region, making a charged substitution at this hydrophobic position a strong hypothesis for disabling critical repair-associated molecular recognition while retaining the full-length polypeptide.
+  - K1702M retain: K1702M targets the BRCT-region functional surface and is a plausible separation-of-function-like lesion with less direct risk of globally disrupting the protein than truncating or zinc-ligand mutations.
+  - R1699W retain: Replacing R1699 with bulky hydrophobic tryptophan is likely to impair BRCT-domain function and interactions, although its local structural impact remains uncertain.
+  - C61G rerank: C61G is likely strongly loss-of-function because it removes a RING-region cysteine, but likely disruption of local zinc-dependent folding is less aligned with preserving folding.
+  - C64G rerank: C64G similarly offers a high likelihood of RING impairment but carries a substantial local-folding risk due to loss of a cysteine in the N-terminal RING region.
+  - I26A rerank: I26A is structurally conservative relative to cysteine-ligand substitutions, but its likelihood of fully abolishing BRCA1 repair function is comparatively uncertain.
+Remaining doubts: The main uncertainty is whether the BRCT substitutions primarily disrupt function rather than substantially destabilize the BRCT tandem-domain structure.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

@@ -1,0 +1,343 @@
+{
+  "unit_id": "claude-opus-5__oct1_transport_ablation__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "claude-opus-5",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D473N",
+        "confidence": 0.88,
+        "evidence_refs": [],
+        "decision_summary": "Verified D at 473 (…L471-C472-D473-I-G-G…, TM11); this is the OCT1 counterpart of the canonical cation-coordinating aspartate (hOCT1 D474 / rat OCT1 D475) whose carboxylate is essential for organic-cation binding. Asn is isosteric and neutral, so the charge required for transport is removed with minimal expected impact on folding or plasma-membrane abundance.",
+        "evidence_refs_note": null
+      },
+      {
+        "rank": 2,
+        "mutation": "D473A",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "Same critical TM11 aspartate, fully removing the carboxylate and any residual polar coordination, so loss of transport should be at least as complete as D473N. Slightly lower confidence only because cavity creation in a transmembrane helix carries a modest risk of reduced stability/abundance relative to the isosteric Asn.",
+        "evidence_refs_note": null
+      },
+      {
+        "rank": 3,
+        "mutation": "E385Q",
+        "confidence": 0.66,
+        "evidence_refs": [],
+        "decision_summary": "Verified E at 385 (…S-A-L-V-E385-I-P-G-A-F…, TM7), an acidic residue lining the central cation-binding cavity and a second charge determinant of substrate recognition. Gln is isosteric and neutral, a classic 'kill binding, keep fold' substitution, though the risk of only partial (rather than complete) transport loss makes it rank below the D473 pair.",
+        "evidence_refs_note": null
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Candidate pool is stable and additional tool-free rounds cannot add discriminating information beyond the already-verified pocket residues."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "D473N": {
+      "candidate_id": "D473N",
+      "mutation": "D473N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.87,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.87,
+          "rationale": "D473 (this numbering) is the conserved TM11 aspartate (rOCT1 D475 / hOCT1 D474) that provides the negative charge for organic-cation recognition; Asn is isosteric so folding/abundance should be retained while cation transport is lost."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.87,
+          "rationale": "Verified D at 473 (LCD473IGG, TM11); this is the OCT1 orthologue of rat OCT1 D475, the key cation-coordinating acidic residue, and Asn is isosteric so charge is neutralized with minimal folding/abundance penalty."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D473A": {
+      "candidate_id": "D473A",
+      "mutation": "D473A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.76,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.76,
+          "rationale": "Complete removal of the TM11 cation-coordinating carboxylate should abolish substrate translocation; Ala is small and generally tolerated in a helix, so surface expression is likely preserved."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.76,
+          "rationale": "Same critical site as D473N but with cavity creation, giving a slightly higher (though still modest) risk of local destabilization in a TM helix."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W216A": {
+      "candidate_id": "W216A",
+      "mutation": "W216A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "W216 (rOCT1 W218) lines the TM4 substrate-binding cleft and its mutation strongly perturbs cation binding; Trp->Ala creates a cavity that may mildly destabilize but usually still traffics."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Verified W at 216 (GNW216MAGY); the conserved cation-pocket tryptophan whose loss should abolish substrate recognition, though removing a large buried side chain carries some stability risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y220A": {
+      "candidate_id": "Y220A",
+      "mutation": "Y220A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Y220 (rOCT1 Y222) is a core binding-pocket residue contributing aromatic/H-bond contacts to cationic substrates; Ala substitution should abrogate affinity with limited folding cost."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Verified Y at 220 (MAGY220TLIT), a pocket-lining aromatic; alanine should strongly impair substrate binding with moderate folding risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q446A": {
+      "candidate_id": "Q446A",
+      "mutation": "Q446A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.47,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.47,
+          "rationale": "Q446 (rOCT1 Q448) is part of the modeled inner substrate-binding cleft in TM10; loss of its polar contact should impair translocation while remaining sterically conservative."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.47,
+          "rationale": "Verified Q at 446 (IAIQ446MIC, TM10); plausible pocket polar contact, small side-chain change so abundance should be preserved, but effect size on transport is uncertain."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R174A": {
+      "candidate_id": "R174A",
+      "mutation": "R174A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "R174 belongs to the conserved MFS A-motif (D170-R171-x-G173-R174) that mediates rocker-switch salt-bridge cycling; its loss typically freezes the transport cycle without preventing membrane insertion."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.52,
+          "rationale": "Verified R at 174 in the MFS A-motif (ADR171FGR174K); loss should block the conformational cycle, but A-motif mutants sometimes traffic poorly, so it ranks below direct pocket mutations."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D170N": {
+      "candidate_id": "D170N",
+      "mutation": "D170N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 10,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "D170 is the A-motif aspartate whose salt bridge to the C-terminal half drives conformational alternation; the conservative Asn substitution should block cycling while preserving fold."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Verified D at 170 (FAD170RFGRK, A-motif); neutralization likely impairs the salt-bridge network for conformational switching, but this is an indirect mechanism with folding/trafficking risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R401A": {
+      "candidate_id": "R401A",
+      "mutation": "R401A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "R401 lies in the second (C-half) A-motif (D397-R398-x-G400-R401) that pairs with the N-half in the rocker-switch mechanism; removing it should abolish translocation with minimal folding penalty."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.22,
+          "rationale": "R401 sits in a cytoplasmic-facing TM8/loop region with no strong link to the cation-binding cavity; expected partial rather than complete loss of transport."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "R401 sits in a cytoplasmic-facing TM8/loop region with no strong link to the cation-binding cavity; expected partial rather than complete loss of transport.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G400S": {
+      "candidate_id": "G400S",
+      "mutation": "G400S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "G400 corresponds to the clinically characterized reduced-function OCT1 variant G401S located in the conserved intracellular A-motif loop; the small polar substitution disrupts function more than folding."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Verified G at 400, but this natural reduced-function variant is reported to act largely by lowering plasma-membrane expression/stability, directly conflicting with the requirement to preserve abundance."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Verified G at 400, but this natural reduced-function variant is reported to act largely by lowering plasma-membrane expression/stability, directly conflicting with the requirement to preserve abundance.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "T224A": {
+      "candidate_id": "T224A",
+      "mutation": "T224A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.38,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "T224 (rOCT1 T226) contributes a hydroxyl to the TM4 binding pocket; the highly conservative Thr->Ala change should reduce/abolish substrate handling while being essentially neutral for stability."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Threonine-to-alanine at 224 typically shifts affinity/selectivity rather than abolishing transport, so it is unlikely to reach a full loss-of-transport phenotype."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Threonine-to-alanine at 224 typically shifts affinity/selectivity rather than abolishing transport, so it is unlikely to reach a full loss-of-transport phenotype.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "D473N": null,
+    "D473A": null,
+    "E385Q": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

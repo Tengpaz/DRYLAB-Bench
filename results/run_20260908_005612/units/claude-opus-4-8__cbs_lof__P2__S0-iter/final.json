@@ -1,0 +1,350 @@
+{
+  "unit_id": "claude-opus-4-8__cbs_lof__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "claude-opus-4-8",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.88,
+        "evidence_refs": [],
+        "decision_summary": "K119 is the catalytic PLP Schiff-base lysine in human CBS; substitution to Ala eliminates covalent cofactor attachment and abolishes catalysis, the most reliable LOF."
+      },
+      {
+        "rank": 2,
+        "mutation": "D309A",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "D309 in the GVDP motif hydrogen-bonds the PLP pyridine nitrogen, essential for the cofactor electron sink; its removal strongly impairs catalysis."
+      },
+      {
+        "rank": 3,
+        "mutation": "K119P",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "Proline at the catalytic lysine position both removes the essential PLP-binding residue and adds local backbone rigidity, making abolition of activity near-certain though structurally riskier than the clean Ala variant."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Catalytic-residue LOF candidates are well-supported by mechanistic reasoning and further LLM-only rounds add little without evidence tools."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.88,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "Lys119 is the conserved catalytic PLP-binding lysine that forms the Schiff base with the pyridoxal cofactor; substitution to Ala abolishes internal aldimine formation and catalysis."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.88,
+          "rationale": "K119 is the catalytic PLP Schiff-base lysine in human CBS; removing it abolishes cofactor covalent attachment and catalysis. Strong LOF candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119P": {
+      "candidate_id": "K119P",
+      "mutation": "K119P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.88,
+          "rationale": "Proline at the catalytic PLP-Lys position removes the essential ε-amino group and disrupts local backbone, eliminating cofactor covalent attachment and activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.85,
+          "rationale": "Loses the essential PLP-binding lysine and adds backbone rigidity likely disrupting local fold; near-certain LOF though slightly riskier than clean Ala substitution."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T260A": {
+      "candidate_id": "T260A",
+      "mutation": "T260A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Thr260 lies in the conserved TSGN PLP-binding motif region; mutation likely perturbs substrate/cofactor binding and reduces activity."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "T260 lies outside the canonical PLP/substrate glycine-rich phosphate loop; a conservative Thr->Ala is unlikely to reliably abolish activity."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "T260 lies outside the canonical PLP/substrate glycine-rich phosphate loop; a conservative Thr->Ala is unlikely to reliably abolish activity.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G259A": {
+      "candidate_id": "G259A",
+      "mutation": "G259A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Conserved glycine in the glycine-rich phosphate-binding loop of PLP enzymes; substitution introduces steric bulk that disrupts PLP phosphate anchoring."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Conserved glycines in the TSGN/GTGGT motifs provide backbone flexibility for PLP binding; Ala substitution can rigidify and impair catalysis."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N149A": {
+      "candidate_id": "N149A",
+      "mutation": "N149A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Asn149 is near the catalytic pocket and may coordinate substrate/PLP; disruption could impair turnover."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "N149 in the fold II PLP-binding region may hydrogen-bond to cofactor; a moderate LOF candidate retained as backup."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R266A": {
+      "candidate_id": "R266A",
+      "mutation": "R266A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Conserved arginine often stabilizes the phosphate group of PLP; its removal weakens cofactor binding and lowers activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "Conserved arginines near the active site often coordinate substrate carboxylate/phosphate; removal plausibly reduces activity but effect is less certain than catalytic Lys."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T257A": {
+      "candidate_id": "T257A",
+      "mutation": "T257A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Part of the conserved GNTG PLP-binding loop; alteration may disrupt cofactor/substrate contacts."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Part of the TSGNTG phosphate-binding loop; contributes to PLP phosphate anchoring but single Thr->Ala effect is uncertain."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G256A": {
+      "candidate_id": "G256A",
+      "mutation": "G256A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Conserved glycine within the PLP-binding loop; steric replacement can distort the active-site geometry."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "Conserved glycine in the TSGNTGIG phosphate loop; Ala may restrict loop conformation needed for PLP binding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S349A": {
+      "candidate_id": "S349A",
+      "mutation": "S349A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Residue in the second (CBS) domain region potentially involved in substrate channel; less central but candidate for reduced activity."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "S349 is in the C-terminal regulatory region rather than the catalytic core; likely affects AdoMet regulation, not a reliable abolition of activity."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "S349 is in the C-terminal regulatory region rather than the catalytic core; likely affects AdoMet regulation, not a reliable abolition of activity.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G307A": {
+      "candidate_id": "G307A",
+      "mutation": "G307A",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "The GVDP motif (D residue coordinates PLP) region is critical; targeting conserved D/G here provides an additional active-site LOF hypothesis. WT is G at 307 in the GVDPEG stretch."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D309A": {
+      "candidate_id": "D309A",
+      "mutation": "D309A",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Conserved aspartate in the GVDP motif typically hydrogen-bonds the PLP pyridine nitrogen, essential for cofactor electron sink; its removal is a strong LOF candidate. WT is D in the DPEG stretch."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K119A": null,
+    "D309A": null,
+    "K119P": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 11,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 9,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

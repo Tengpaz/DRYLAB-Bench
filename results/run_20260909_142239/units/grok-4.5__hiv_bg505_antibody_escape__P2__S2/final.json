@@ -1,0 +1,487 @@
+{
+  "unit_id": "grok-4.5__hiv_bg505_antibody_escape__P2__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K160N",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "Highest combined phenotype score and best sequence_plm plausibility among initial pool."
+      },
+      {
+        "rank": 2,
+        "mutation": "R325K",
+        "confidence": 0.8,
+        "evidence_refs": [],
+        "decision_summary": "Strong phenotype with relatively higher sequence_plm than other non-K160N candidates."
+      },
+      {
+        "rank": 3,
+        "mutation": "E463N",
+        "confidence": 0.75,
+        "evidence_refs": [],
+        "decision_summary": "Solid phenotype score with better sequence_plm than I276N."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No further rounds possible due to replication fitness doubts and inapplicable tools"
+    },
+    "remaining_budget": {
+      "tool_calls": 2,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K160N": {
+      "candidate_id": "K160N",
+      "mutation": "K160N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.85,
+      "evidence_refs": [
+        "E00001",
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Position 160 lies in the V2 loop of gp160, a hypervariable region frequently targeted by antibodies. K160N introduces a charge reversal that can disrupt epitope recognition and enhance immune escape while the conservative nature of the substitution helps preserve local structure and replication fitness."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "Highest combined phenotype score and best sequence_plm plausibility among initial pool."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I276N": {
+      "candidate_id": "I276N",
+      "mutation": "I276N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00002",
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Position 276 is located in the V3 loop, a major antibody target. I276N creates an N-glycosylation sequon that adds bulky glycans shielding the epitope, thereby increasing escape potential. The change is tolerated in many Env variants without abolishing core function."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.7,
+          "rationale": "Lowest phenotype and sequence_plm scores, reducing combined support for escape + fitness balance."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Lowest phenotype and sequence_plm scores, reducing combined support for escape + fitness balance.",
+        "evidence_refs": [
+          "E00006"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "R325K": {
+      "candidate_id": "R325K",
+      "mutation": "R325K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.8,
+      "evidence_refs": [
+        "E00004",
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Position 325 is in the tip of the V3 loop, critical for antibody binding. R325K alters surface charge and side-chain volume, potentially evading common neutralizing antibodies. Such substitutions are known to maintain Env viability while conferring escape."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Strong phenotype with relatively higher sequence_plm than other non-K160N candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E463N": {
+      "candidate_id": "E463N",
+      "mutation": "E463N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.75,
+      "evidence_refs": [
+        "E00003",
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Position 463 resides in the V4 loop, another antibody hotspot. E463N can introduce an N-glycosylation site or modify electrostatic interactions at the epitope, promoting escape. The mutation is conservative enough to retain overall protein folding and fitness."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Solid phenotype score with better sequence_plm than I276N."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 2,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K160N": 46.865,
+    "R325K": 43.708,
+    "E463N": 40.141
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "K160N",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.8709,
+        "normalized": 0.8709,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.871; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__hiv_bg505_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K160N",
+          "I276N",
+          "E463N",
+          "R325K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I276N",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.6902,
+        "normalized": 0.6902,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.690; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__hiv_bg505_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K160N",
+          "I276N",
+          "E463N",
+          "R325K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E463N",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.7624,
+        "normalized": 0.7624,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.762; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__hiv_bg505_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K160N",
+          "I276N",
+          "E463N",
+          "R325K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R325K",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.8291,
+        "normalized": 0.8291,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.829; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__hiv_bg505_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K160N",
+          "I276N",
+          "E463N",
+          "R325K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K160N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0217,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "grok-4.5__hiv_bg505_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K160N",
+          "I276N",
+          "E463N",
+          "R325K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I276N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0002,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "grok-4.5__hiv_bg505_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K160N",
+          "I276N",
+          "E463N",
+          "R325K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E463N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0003,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "grok-4.5__hiv_bg505_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K160N",
+          "I276N",
+          "E463N",
+          "R325K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R325K",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0015,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "grok-4.5__hiv_bg505_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K160N",
+          "I276N",
+          "E463N",
+          "R325K"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 4,
+    "final_novelty": 0.0,
+    "tool_calls_used": 2,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

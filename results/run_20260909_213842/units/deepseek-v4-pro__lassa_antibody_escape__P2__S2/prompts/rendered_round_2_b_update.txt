@@ -1,0 +1,1902 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in the Lassa virus glycoprotein complex GPC (Josiah strain, 491 aa).
+
+THE DESIGN OBJECTIVE: Maximize antibody immune escape from neutralizing antibodies (12.1F/37.2D/8.9F, the Arevirumab-3 cocktail) while preserving cell entry.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MGQIVTFFQEVPHVIEEVMNIVLIALSVLAVLKGLYNFATCGLVGLVTFLLLCGRSCTTSLYKGVYELQTLELNMETLNMTMPLSCTKNNSHHYIMVGNETGLELTLTNTSIINHKFCNLSDAHKKNLYDHALMSIISTFHLSIPNFNQYEAMSCDFNGGKISVQYNLSHSYAGDAANHCGTVANGVLQTFMRMAWGGSYIALDSGRGNWDCIMTSYQYLIIQNTTWEDHCQFSRPSPIGYLGLLSQRTRDIYISRRLLGTFTWTLSDSEGKDTPGGYCLTRWMLIEAELKCFGNTAVAKCNEKHDEEFCDMLRLFDFNKQAIQRLKAEAQMSIQLINKAVNALINDQLIMKNHLRDIMGIPYCNYSKYWYLNHTTTGRTSLPKCWLVSNGSYLNETHFSDDIEQQADNMITEMLQKEYMERQGKTPLGLVDLFVFSTSFYLISIFLHLVKIPTHRHIVGKSCPKPHRLNHMGICSCGLYKQPGVPVKWKR
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   For THIS task the backbone is PDB 5VK2 chain b — 32% of this sequence's residues have experimental coordinates (resolution 3.2 Å). Positions OUTSIDE the structure return status = "not_applicable" (no score).
+
+4. functional_annotation — curated UniProt features (accession P08669) for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'antibody escape (EVEscape)' via evescape — predictions are AVAILABLE for this task.. Higher = more of that phenotype.
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Given the evidence (if any) and the current pool, decide the updates: add / modify (rerank) / delete (reject) / re-evaluate candidates, and give your reasoning. Do NOT output a STOP decision in this step. Weigh each tool's evidence by how close its measured dimension is to the REWARD phenotype: a tool whose dimension differs from the reward (or trades off against it) must not be followed blindly.
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  H141Y  confidence=0.700  rank=1
+  N119D  confidence=0.680  rank=2
+  K126E  confidence=0.660  rank=3
+  N148D  confidence=0.660  rank=4
+  S169A  confidence=0.650  rank=5
+  Y172F  confidence=0.640  rank=6
+  Q149R  confidence=0.630  rank=7
+  F147A  confidence=0.620  rank=8
+  Y150F  confidence=0.600  rank=9
+  M153I  confidence=0.590  rank=10
+BT evidence so far (before this round):
+  (no evidence collected before this round)
+Evidence obtained this round:
+  E00001 phenotype(H141Y): z=0.386, app=1.00
+  E00002 phenotype(N119D): z=0.562, app=1.00
+  E00003 phenotype(K126E): z=0.925, app=1.00
+  E00004 phenotype(N148D): z=0.521, app=1.00
+  E00005 phenotype(S169A): z=0.599, app=1.00
+  E00006 phenotype(Y172F): z=0.831, app=1.00
+  E00007 phenotype(Q149R): z=0.724, app=1.00
+  E00008 phenotype(F147A): z=0.389, app=1.00
+  E00009 phenotype(Y150F): z=0.788, app=1.00
+  E00010 phenotype(M153I): z=0.535, app=1.00
+  E00011 evolution_msa(H141Y): z=0.040, app=0.96
+  E00012 evolution_msa(N119D): z=0.000, app=0.85
+  E00013 evolution_msa(K126E): z=0.040, app=0.96
+  E00014 evolution_msa(N148D): z=0.231, app=1.00
+  E00015 evolution_msa(S169A): z=0.038, app=1.00
+  E00016 evolution_msa(Y172F): z=0.214, app=0.54
+  E00017 evolution_msa(Q149R): z=0.231, app=1.00
+  E00018 evolution_msa(F147A): z=0.040, app=0.96
+  E00019 evolution_msa(Y150F): z=0.000, app=1.00
+  E00020 evolution_msa(M153I): z=0.192, app=1.00
+  E00021 sequence_plm(H141Y): z=1.000, app=0.90
+  E00022 sequence_plm(N119D): z=0.290, app=0.90
+  E00023 sequence_plm(K126E): z=0.806, app=0.90
+  E00024 sequence_plm(N148D): z=0.738, app=0.90
+  E00025 sequence_plm(S169A): z=0.249, app=0.90
+  E00026 sequence_plm(Y172F): z=1.000, app=0.90
+  E00027 sequence_plm(Q149R): z=0.964, app=0.90
+  E00028 sequence_plm(F147A): z=0.861, app=0.90
+  E00029 sequence_plm(Y150F): z=1.000, app=0.90
+  E00030 sequence_plm(M153I): z=1.000, app=0.90
+  E00031 structure_compatibility(H141Y): z=?, app=0.00
+  E00032 structure_compatibility(N119D): z=?, app=0.00
+  E00033 structure_compatibility(K126E): z=?, app=0.00
+  E00034 structure_compatibility(N148D): z=?, app=0.00
+  E00035 structure_compatibility(S169A): z=?, app=0.00
+  E00036 structure_compatibility(Y172F): z=?, app=0.00
+  E00037 structure_compatibility(Q149R): z=?, app=0.00
+  E00038 structure_compatibility(F147A): z=?, app=0.00
+  E00039 structure_compatibility(Y150F): z=?, app=0.00
+  E00040 structure_compatibility(M153I): z=?, app=0.00
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+</WORKING_MEMORY>
+
+<NEW_EVIDENCE>
+[
+  {
+    "candidate": "H141Y",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.3861,
+      "normalized": 0.3861,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.386; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00001",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N119D",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.5623,
+      "normalized": 0.5623,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.562; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00002",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "K126E",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.9252,
+      "normalized": 0.9252,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.925; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00003",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N148D",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.5208,
+      "normalized": 0.5208,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.521; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00004",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "S169A",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.5994,
+      "normalized": 0.5994,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.599; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00005",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Y172F",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.8309,
+      "normalized": 0.8309,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.831; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00006",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Q149R",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.7244,
+      "normalized": 0.7244,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.724; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00007",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "F147A",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.389,
+      "normalized": 0.389,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.389; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00008",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Y150F",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.7885,
+      "normalized": 0.7885,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.788; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00009",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "M153I",
+    "tool": "phenotype",
+    "tool_version": "evescape_v1",
+    "score": {
+      "raw": 0.5349,
+      "normalized": 0.5349,
+      "percentile": null,
+      "direction": "higher_is_more_escaping"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "evescape antibody escape (EVEscape) 0.535; higher = more higher_is_more_escaping",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00010",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "H141Y",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.04,
+      "normalized": 0.04,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.26,
+      "local": 0.962,
+      "reason": "MSA depth 26, Neff 22.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.962,
+      "reason": "alignment coverage 25/26 homologs"
+    },
+    "interpretation": "mutant frequency of Y at position 141 = 0.0400 among 25 homologs; conservation entropy 1.532 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00011",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N119D",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.26,
+      "local": 0.846,
+      "reason": "MSA depth 26, Neff 22.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.846,
+      "reason": "alignment coverage 22/26 homologs"
+    },
+    "interpretation": "mutant frequency of D at position 119 = 0.0000 among 22 homologs; conservation entropy 0.663 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00012",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "K126E",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.04,
+      "normalized": 0.04,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.26,
+      "local": 0.962,
+      "reason": "MSA depth 26, Neff 22.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.962,
+      "reason": "alignment coverage 25/26 homologs"
+    },
+    "interpretation": "mutant frequency of E at position 126 = 0.0400 among 25 homologs; conservation entropy 2.169 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00013",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N148D",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.230769,
+      "normalized": 0.230769,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.26,
+      "local": 1.0,
+      "reason": "MSA depth 26, Neff 22.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 26/26 homologs"
+    },
+    "interpretation": "mutant frequency of D at position 148 = 0.2308 among 26 homologs; conservation entropy 1.888 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00014",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "S169A",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.038462,
+      "normalized": 0.038462,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.26,
+      "local": 1.0,
+      "reason": "MSA depth 26, Neff 22.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 26/26 homologs"
+    },
+    "interpretation": "mutant frequency of A at position 169 = 0.0385 among 26 homologs; conservation entropy 0.964 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00015",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Y172F",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.214286,
+      "normalized": 0.214286,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.26,
+      "local": 0.538,
+      "reason": "MSA depth 26, Neff 22.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.538,
+      "reason": "alignment coverage 14/26 homologs"
+    },
+    "interpretation": "mutant frequency of F at position 172 = 0.2143 among 14 homologs; conservation entropy 2.069 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00016",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Q149R",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.230769,
+      "normalized": 0.230769,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.26,
+      "local": 1.0,
+      "reason": "MSA depth 26, Neff 22.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 26/26 homologs"
+    },
+    "interpretation": "mutant frequency of R at position 149 = 0.2308 among 26 homologs; conservation entropy 1.811 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00017",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "F147A",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.04,
+      "normalized": 0.04,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.26,
+      "local": 0.962,
+      "reason": "MSA depth 26, Neff 22.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.962,
+      "reason": "alignment coverage 25/26 homologs"
+    },
+    "interpretation": "mutant frequency of A at position 147 = 0.0400 among 25 homologs; conservation entropy 1.799 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00018",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Y150F",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.26,
+      "local": 1.0,
+      "reason": "MSA depth 26, Neff 22.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 26/26 homologs"
+    },
+    "interpretation": "mutant frequency of F at position 150 = 0.0000 among 26 homologs; conservation entropy 1.454 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00019",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "M153I",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.192308,
+      "normalized": 0.192308,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.26,
+      "local": 1.0,
+      "reason": "MSA depth 26, Neff 22.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 26/26 homologs"
+    },
+    "interpretation": "mutant frequency of I at position 153 = 0.1923 among 26 homologs; conservation entropy 1.782 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00020",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "H141Y",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 1.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00021",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N119D",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.2904,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00022",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "K126E",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.8059,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00023",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N148D",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.7383,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00024",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "S169A",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.2487,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00025",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Y172F",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 1.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00026",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Q149R",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.9639,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00027",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "F147A",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.8613,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00028",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Y150F",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 1.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00029",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "M153I",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 1.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00030",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "H141Y",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 141 has no coordinates in 5VK2"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 141 has no coordinates in 5VK2"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00031",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N119D",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 119 has no coordinates in 5VK2"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 119 has no coordinates in 5VK2"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00032",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "K126E",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 126 has no coordinates in 5VK2"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 126 has no coordinates in 5VK2"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00033",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N148D",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 148 has no coordinates in 5VK2"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 148 has no coordinates in 5VK2"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00034",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "S169A",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 169 has no coordinates in 5VK2"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 169 has no coordinates in 5VK2"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00035",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Y172F",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 172 has no coordinates in 5VK2"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 172 has no coordinates in 5VK2"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00036",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Q149R",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 149 has no coordinates in 5VK2"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 149 has no coordinates in 5VK2"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00037",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "F147A",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 147 has no coordinates in 5VK2"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 147 has no coordinates in 5VK2"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00038",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Y150F",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 150 has no coordinates in 5VK2"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 150 has no coordinates in 5VK2"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00039",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "M153I",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 153 has no coordinates in 5VK2"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 153 has no coordinates in 5VK2"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00040",
+    "run_id": "deepseek-v4-pro__lassa_antibody_escape__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "H141Y",
+        "N119D",
+        "K126E",
+        "N148D",
+        "S169A",
+        "Y172F",
+        "Q149R",
+        "F147A",
+        "Y150F",
+        "M153I"
+      ],
+      "positions": null
+    }
+  }
+]
+</NEW_EVIDENCE>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "candidate_updates": [
+    {"mutation": "<WT><POS><MUT>", "action": "add | retain | rerank | reject | reconsider",
+     "current_confidence": 0.78,
+     "supporting_evidence_ids": ["E00003"],
+     "contradicting_evidence_ids": ["E00021"],
+     "origin": "initial_pool | new_hypothesis_from_evidence",
+     "trigger_evidence_ids": ["E00017"],
+     "decision_rationale": "<= 2 sentences"}
+  ],
+  "active_candidate_ranking": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.78}
+  ],
+  "evidence_assessment": [
+    {"evidence_id": "E00017", "candidate": "<WT><POS><MUT>",
+     "llm_reliability_assessment": "high | medium | low",
+     "effect_on_candidate": "support | weak_against | against",
+     "reason": "<= 2 sentences"}
+  ],
+  "thinking": "<= 3 sentences — the reasoning behind THIS round's changes",
+  "doubts": "<= 1 sentence — remaining uncertainties"
+}
+Rules: if you add/reconsider, give decision_rationale; every supporting/
+contradicting evidence id referenced in updates must appear in evidence_assessment.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

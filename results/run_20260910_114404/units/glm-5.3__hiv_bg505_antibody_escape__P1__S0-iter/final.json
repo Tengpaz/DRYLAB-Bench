@@ -1,0 +1,198 @@
+{
+  "unit_id": "glm-5.3__hiv_bg505_antibody_escape__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "glm-5.3",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N301S",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "N301 anchors the V3 glycan-loop; altering this site perturbs V3-directed antibody recognition while leaving the surrounding glycan shield largely intact. S conserves local polarity, limiting folding risk."
+      },
+      {
+        "rank": 2,
+        "mutation": "N390S",
+        "confidence": 0.5,
+        "evidence_refs": [],
+        "decision_summary": "N390 is a V3-proximal N-linked glycan site frequently implicated in escape from glycan-dependent neutralizing antibodies. A serine substitution preserves local character better than alanine, reducing fitness cost."
+      },
+      {
+        "rank": 3,
+        "mutation": "N337A",
+        "confidence": 0.48,
+        "evidence_refs": [],
+        "decision_summary": "Loss of the N337 glycan site is associated with resistance to some glycan-dependent broadly neutralizing antibodies and is tolerated in many Env backgrounds. Fitness cost is uncertain but generally moderate."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "LLM-only iterative control with no external evidence; one self-review round completed and further rounds are unlikely to improve the Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N301S": {
+      "candidate_id": "N301S",
+      "mutation": "N301S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Disrupts the N301-N303 PNG site at the V3 base (verified N301 followed by T303), which is a key contact for PGT121/PGT128/PGT135-family bNAbs; glycan-hole loss here is a common fitness-retaining escape route."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "N301 is a well-established V3 glycosylation-loop position; removing/altering it shifts V3 exposure and can reduce neutralization by V3-directed antibodies while the surrounding glycan shield remains intact."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N337A": {
+      "candidate_id": "N337A",
+      "mutation": "N337A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Removes the N337-E338-T339 PNG site (verified N337 followed by T339) in the C3/V3 stem, reducing neutralization by glycan-V3-dependent antibodies; partial compensation from neighboring glycans (N301, N390) limits fitness cost."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.48,
+          "rationale": "Loss of the N337 glycan site is associated with resistance to some glycan-dependent broadly neutralizing antibodies and is tolerated in many Env backgrounds."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N390S": {
+      "candidate_id": "N390S",
+      "mutation": "N390S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Disrupts the N390-S391 PNG site (verified N390 followed by S391) in the V3-adjacent glycan cluster, an escape route for PGT128-like and 2G12-like bNAbs while other glycans maintain the outer-domain shield."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "N390 is a V3-loop-proximal N-linked glycan site frequently implicated in antibody escape, so it is slightly more attractive than initially ranked; a S substitution preserves local character better than A."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N187A": {
+      "candidate_id": "N187A",
+      "mutation": "N187A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "N187 lies in the V2 region (verified N at position 187 within the NRSNNSN motif); altering this Asn cluster perturbs strand-antibody contact in the V1V2 apex region without introducing a cysteine or proline that would destabilize folding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "N187 glycan participates in the V1V2 glycan cluster recognized by apex antibodies; deleting it can disrupt those epitopes, though folding risk is moderate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K162N": {
+      "candidate_id": "K162N",
+      "mutation": "K162N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "K162 (verified Lys at position 162 in QKVYSL) sits in V2; substitution to Asn can modulate strand-based V1V2-apex bNAb (PG9/PGDM1400-class) recognition and may create a compensatory sequon context in adjacent residues, though fitness impact is uncertain."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "This mutation creates an artificial glycan rather than removing one; gain-of-glycan at the V2 apex is a known escape mechanism, but prediction of correct NXS/T occupancy is uncertain."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "N301S": null,
+    "N390S": null,
+    "N337A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 3,
+    "c0_size": 5,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

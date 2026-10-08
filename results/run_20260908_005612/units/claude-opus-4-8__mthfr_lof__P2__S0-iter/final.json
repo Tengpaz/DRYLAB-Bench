@@ -1,0 +1,168 @@
+{
+  "unit_id": "claude-opus-4-8__mthfr_lof__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "claude-opus-4-8",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 2,
+        "mutation": "G149R",
+        "confidence": 0.68,
+        "evidence_refs": [],
+        "decision_summary": "Conserved glycine providing backbone flexibility in the catalytic core; Gly->Arg introduces a bulky charged sidechain likely to sterically and electrostatically disrupt catalysis. WT Gly at 149 verified."
+      },
+      {
+        "rank": 3,
+        "mutation": "R157Q",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "R157 lies in the N-terminal catalytic FAD-binding region where severe MTHFR-deficiency mutations cluster; losing a conserved Arg salt bridge is likely destabilizing/inactivating. WT Arg at 157 verified."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Candidate pool is stable and no evidence tools are available to refine further."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R157Q": {
+      "candidate_id": "R157Q",
+      "mutation": "R157Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "R157 in the RGDP region is a conserved charged residue likely involved in folate/FAD binding; loss of positive charge often severely reduces MTHFR activity (analogous to known clinical LOF variants)."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "R157 lies in the catalytic FAD-binding domain; the well-known A222V and severe MTHFR-deficiency mutations cluster in this N-terminal catalytic region, and losing a conserved Arg salt bridge is likely destabilizing/inactivating."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G149R": {
+      "candidate_id": "G149R",
+      "mutation": "G149R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Conserved glycine in a tight-turn (ALRGDP) region; substituting a bulky charged arginine likely introduces steric/backbone strain that disrupts the catalytic fold."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.75,
+          "rationale": "Conserved glycines often provide backbone flexibility at tight turns; a Gly->Arg introduces a bulky charged sidechain likely to sterically/electrostatically disrupt the catalytic core, making LOF probable."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "P572L": {
+      "candidate_id": "P572L",
+      "mutation": "P572L",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Proline in a conserved segment of the C-terminal regulatory domain; substitution may destabilize the regulatory fold, indirectly compromising function/stability."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "Position 572 lies in the C-terminal regulatory (SAM-binding) domain; mutations there tend to alter allosteric regulation rather than abolish catalytic activity, so it is a weaker LOF candidate."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 572 lies in the C-terminal regulatory (SAM-binding) domain; mutations there tend to alter allosteric regulation rather than abolish catalytic activity, so it is a weaker LOF candidate.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C130Y": {
+      "candidate_id": "C130Y",
+      "mutation": "C130Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Cysteine in the TCCRQR cluster may contribute to structural/catalytic integrity; a large aromatic substitution could disrupt local packing and reduce activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "C130 sits in the catalytic domain near the CCRQR motif; a Cys->Tyr bulky substitution could disrupt local packing/redox and impair activity, retained as a mid-tier candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "G149R": null,
+    "R157Q": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 7,
+    "c0_size": 4,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,812 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the human organic cation transporter 1 (OCT1 / SLC22A1, 553 aa).
+
+PRIMARY OBJECTIVE: Abolish OCT1 substrate transport while preserving protein abundance and folding.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+PTVDDILEQVGESGWFQKQAFLILCLLSAAFAPICVGIVFLGFTPDHHCQSPGVAELSQRCGWSPAEELNYTVPGLGPAGEAFLGQCRRYEVDWNQSALSCVDPLASLATNRSHLPLGPCQDGWVYDTPGSSIVTEFNLVCADSWKLDLFQSCLNAGFLFGSLGVGYFADRFGRKLCLLGTVLVNAVSGVLMAFSPNYMSMLLFRLLQGLVSKGNWMAGYTLITEFVGSGSRRTVAIMYQMAFTVGLVALTGLAYALPHWRWLQLAVSLPTFLFLLYYWCVPESPRWLLSQKRNTEAIKIMDHIAQKNGKLPPADLKMLSLEEDVTEKLSPSFADLFRTPRLRKRTFILMYLWFTDSVLYQGLILHMGATSGNLYLDFLYSALVEIPGAFIALITIDRVGRIYPMAMSNLLAGAACLVMIFISPDLHWLNIIIMCVGRMGITIAIQMICLVNAELYPTFVRNLGVMVCSSLCDIGGIITPFIVFRLREVWQALPLILFAVLGLLAAGVTLLLPETKGVALPETMKDAENLGRKAKPKENTIYLKVQTSEPSGT
+```
+NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   No experimental structure is configured for this task — every query returns status = "not_applicable".
+
+4. functional_annotation — curated UniProt features for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'pathogenicity (LOF proxy)' via alphamissense — predictions are AVAILABLE for this task.. Higher = more of that phenotype.
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Given the evidence (if any) and the current pool, decide the updates: add / modify (rerank) / delete (reject) / re-evaluate candidates, and give your reasoning. Do NOT output a STOP decision in this step. Weigh each tool's evidence by how close its measured dimension is to the REWARD phenotype: a tool whose dimension differs from the reward (or trades off against it) must not be followed blindly.
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  R60C  confidence=0.850
+  C87R  confidence=0.800
+  G464R  confidence=0.800
+  G400S  confidence=0.750
+  R487M  confidence=0.700
+  E385Q  confidence=0.600
+  R438Q  confidence=0.550
+  W216F  confidence=0.500
+BT evidence so far (before this round):
+  (no evidence collected before this round)
+Evidence obtained this round:
+  E00001 evolution_msa(R60C): z=0.046, app=0.89
+  E00002 evolution_msa(C87R): z=0.129, app=0.93
+  E00003 evolution_msa(G464R): z=0.000, app=0.35
+  E00004 evolution_msa(G400S): z=0.078, app=0.43
+  E00005 evolution_msa(R487M): z=0.057, app=0.36
+  E00006 evolution_msa(E385Q): z=0.000, app=0.48
+  E00007 evolution_msa(R438Q): z=0.000, app=0.38
+  E00008 evolution_msa(W216F): z=0.063, app=0.79
+  E00009 sequence_plm(R60C): z=0.000, app=0.90
+  E00010 sequence_plm(C87R): z=0.000, app=0.90
+  E00011 sequence_plm(G464R): z=0.000, app=0.90
+  E00012 sequence_plm(G400S): z=0.001, app=0.90
+  E00013 sequence_plm(R487M): z=1.000, app=0.90
+  E00014 sequence_plm(E385Q): z=0.001, app=0.90
+  E00015 sequence_plm(R438Q): z=0.000, app=0.90
+  E00016 sequence_plm(W216F): z=0.003, app=0.90
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+</WORKING_MEMORY>
+
+<NEW_EVIDENCE>
+[
+  {
+    "candidate": "R60C",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.046296,
+      "normalized": 0.046296,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.893,
+      "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.893,
+      "reason": "alignment coverage 216/242 homologs"
+    },
+    "interpretation": "mutant frequency of C at position 60 = 0.0463 among 216 homologs; conservation entropy 2.632 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00001",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "C87R",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.128889,
+      "normalized": 0.128889,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.93,
+      "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.93,
+      "reason": "alignment coverage 225/242 homologs"
+    },
+    "interpretation": "mutant frequency of R at position 87 = 0.1289 among 225 homologs; conservation entropy 2.692 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00002",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G464R",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.355,
+      "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.355,
+      "reason": "alignment coverage 86/242 homologs"
+    },
+    "interpretation": "mutant frequency of R at position 464 = 0.0000 among 86 homologs; conservation entropy 2.019 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00003",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G400S",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.07767,
+      "normalized": 0.07767,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.426,
+      "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.426,
+      "reason": "alignment coverage 103/242 homologs"
+    },
+    "interpretation": "mutant frequency of S at position 400 = 0.0777 among 103 homologs; conservation entropy 2.334 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00004",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R487M",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.057471,
+      "normalized": 0.057471,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.36,
+      "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.36,
+      "reason": "alignment coverage 87/242 homologs"
+    },
+    "interpretation": "mutant frequency of M at position 487 = 0.0575 among 87 homologs; conservation entropy 2.663 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00005",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E385Q",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.479,
+      "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.479,
+      "reason": "alignment coverage 116/242 homologs"
+    },
+    "interpretation": "mutant frequency of Q at position 385 = 0.0000 among 116 homologs; conservation entropy 2.450 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00006",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R438Q",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.376,
+      "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.376,
+      "reason": "alignment coverage 91/242 homologs"
+    },
+    "interpretation": "mutant frequency of Q at position 438 = 0.0000 among 91 homologs; conservation entropy 2.304 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00007",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "W216F",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.063158,
+      "normalized": 0.063158,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.785,
+      "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.785,
+      "reason": "alignment coverage 190/242 homologs"
+    },
+    "interpretation": "mutant frequency of F at position 216 = 0.0632 among 190 homologs; conservation entropy 2.733 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00008",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R60C",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0004,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00009",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "C87R",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0003,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00010",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G464R",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00011",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G400S",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0009,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00012",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R487M",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 1.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00013",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E385Q",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0005,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00014",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R438Q",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0002,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00015",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "W216F",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0033,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00016",
+    "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+    "round": 1,
+    "input": {
+      "candidate_ids": [
+        "R60C",
+        "C87R",
+        "G464R",
+        "G400S",
+        "R487M",
+        "E385Q",
+        "R438Q",
+        "W216F"
+      ],
+      "positions": null
+    }
+  }
+]
+</NEW_EVIDENCE>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "candidate_updates": [
+    {"mutation": "<WT><POS><MUT>", "action": "add | retain | rerank | reject | reconsider",
+     "current_confidence": 0.78,
+     "supporting_evidence_ids": ["E00003"],
+     "contradicting_evidence_ids": ["E00021"],
+     "origin": "initial_pool | new_hypothesis_from_evidence",
+     "trigger_evidence_ids": ["E00017"],
+     "decision_rationale": "<= 2 sentences"}
+  ],
+  "active_candidate_ranking": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.78}
+  ],
+  "evidence_assessment": [
+    {"evidence_id": "E00017", "candidate": "<WT><POS><MUT>",
+     "llm_reliability_assessment": "high | medium | low",
+     "effect_on_candidate": "support | weak_against | against",
+     "reason": "<= 2 sentences"}
+  ],
+  "thinking": "<= 3 sentences — the reasoning behind THIS round's changes",
+  "doubts": "<= 1 sentence — remaining uncertainties"
+}
+Rules: if you add/reconsider, give decision_rationale; every supporting/
+contradicting evidence id referenced in updates must appear in evidence_assessment.
+</OUTPUT_SCHEMA>
+
+ROUND 1 — respond with a single JSON object, nothing else.

@@ -1,0 +1,197 @@
+{
+  "timestamp": "2026-09-10T11:47:41",
+  "code_version": "87092dd-f78acb97",
+  "model_ids": [
+    "claude-opus-5",
+    "claude-opus-4-8",
+    "gpt-5.6-luna",
+    "gpt-5.6-sol",
+    "gpt-5.6-terra",
+    "gemini-3.6-flash",
+    "qwen3.8-max",
+    "deepseek-v4-flash",
+    "grok-4.5",
+    "deepseek-v4-pro",
+    "kimi-k3",
+    "glm-5.3"
+  ],
+  "scenario_ids": [
+    "brca1_tsg_lof",
+    "flu_h1_antibody_escape",
+    "hiv_bg505_antibody_escape",
+    "nipah_antibody_escape",
+    "lassa_antibody_escape",
+    "flu_h5_stability_dual",
+    "h3n2_mc22_stability",
+    "zikv_viral_growth",
+    "nipah_cell_entry",
+    "hiv_tat_replication",
+    "sarscov2_rbd_ace2_binding",
+    "psae_stability_disruption",
+    "mthfr_lof",
+    "cbs_lof",
+    "oct1_transport_ablation"
+  ],
+  "approach1": {
+    "num_repeats": 3,
+    "temperatures": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "temperature_greedy": 0.0,
+    "use_greedy": false,
+    "prompt_variants": 3,
+    "min_parse_fraction": 0.67,
+    "random_baseline_samples": 1000,
+    "repeat_analysis": {
+      "min_repeats": 3,
+      "consistency_threshold": 0.35,
+      "dispersion_ratio_threshold": 1.5
+    }
+  },
+  "approach2": {
+    "num_sample_sets": 5,
+    "max_attempts": 15,
+    "top_k_values": [
+      1,
+      3,
+      5,
+      10,
+      20
+    ],
+    "ndcg_k_values": [
+      5,
+      10,
+      20
+    ],
+    "permutation_test_n": 10000,
+    "min_parse_fraction": 0.6,
+    "max_api_errors_per_model": 3
+  },
+  "experiment": {
+    "version": "5.0",
+    "skip_approach2": true
+  },
+  "insilico": {
+    "enabled": true,
+    "cache_dir": "./results/insilico_cache",
+    "esm_root": "./data/insilico/esm_dge",
+    "eve_tp53_file": "./data/insilico/EVE_TP53_predictions.csv",
+    "held_out_samples": 1000,
+    "calibration_samples": 500,
+    "random_seed": 42,
+    "reliability_threshold_rho": 0.4,
+    "refusal_score_override": null,
+    "components": {
+      "esm2": {
+        "enabled": true,
+        "model": "facebook/esm2_t33_650M_UR50D"
+      },
+      "eve": {
+        "enabled": true
+      },
+      "rules": {
+        "enabled": true
+      }
+    }
+  },
+  "conditions": {
+    "budget": {
+      "max_tool_calls": 4,
+      "max_agent_rounds": 4,
+      "max_active_candidates": 10,
+      "max_new_candidates_per_round": 5,
+      "final_k": 3
+    },
+    "state_retries": 1,
+    "tools": {
+      "evidence_dir": "./data/bt_evidence",
+      "sequence_plm": {
+        "cache_file": "./data/insilico/esm1v_predictions.json",
+        "model_root": "./data/insilico/esm1v_models",
+        "device": "cpu"
+      },
+      "evolution_msa": {
+        "backend": "mmseqs2_swissprot",
+        "mmseqs_bin": "./.tools/mmseqs/bin/mmseqs",
+        "db": "./data/bt_evidence/sprotDB"
+      },
+      "structure_compatibility": {
+        "backend": "proteinmpnn_pdb"
+      },
+      "functional_annotation": {
+        "source": "uniprot_gff"
+      },
+      "toxin": {
+        "model_path": "./data/insilico/toxinpred3_trees.npz",
+        "window": 20,
+        "threshold": 0.38
+      },
+      "phenotype": {
+        "foldx": {
+          "binary": "./.tools/foldx/foldx_x86",
+          "arch_prefix": "arch -x86_64",
+          "pdb": {
+            "cross_species": "./data/bt_evidence/1JSN.pdb",
+            "antibiotic_resistance": "./data/bt_evidence/1BTL_clean.pdb.gz",
+            "immune_escape": "./data/bt_evidence/6M0J.pdb.gz"
+          },
+          "chain": {
+            "cross_species": "A",
+            "antibiotic_resistance": "A",
+            "immune_escape": "E"
+          },
+          "tmp_dir": "/tmp/foldx_ondemand",
+          "cache_dir": "./data/bt_evidence"
+        }
+      }
+    },
+    "derived_snapshot": true,
+    "warmup_evidence": true
+  },
+  "mvp": {
+    "enabled": true,
+    "models": [
+      "claude-opus-5",
+      "claude-opus-4-8",
+      "gpt-5.6-luna",
+      "gpt-5.6-sol",
+      "gpt-5.6-terra",
+      "gemini-3.6-flash",
+      "qwen3.8-max",
+      "deepseek-v4-flash",
+      "grok-4.5",
+      "deepseek-v4-pro",
+      "kimi-k3",
+      "glm-5.3"
+    ],
+    "tasks": [
+      "brca1_tsg_lof",
+      "flu_h1_antibody_escape",
+      "hiv_bg505_antibody_escape",
+      "nipah_antibody_escape",
+      "lassa_antibody_escape",
+      "flu_h5_stability_dual",
+      "h3n2_mc22_stability",
+      "zikv_viral_growth",
+      "nipah_cell_entry",
+      "hiv_tat_replication",
+      "sarscov2_rbd_ace2_binding",
+      "psae_stability_disruption",
+      "mthfr_lof",
+      "cbs_lof",
+      "oct1_transport_ablation"
+    ],
+    "conditions": [
+      "S0-iter",
+      "S2"
+    ],
+    "prompt_variants": 3
+  },
+  "only_models": [
+    "glm-5.3"
+  ],
+  "only_scenarios": null,
+  "log_file": "/Users/a1234/Documents/Code/MutaRiskEval/results_v5/run_20260910_114404/experiment.log"
+}

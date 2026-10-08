@@ -1,0 +1,228 @@
+{
+  "unit_id": "kimi-k3__sarscov2_rbd_ace2_binding__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "kimi-k3",
+  "scenario_id": "sarscov2_rbd_ace2_binding",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N171Y",
+        "confidence": 0.82,
+        "evidence_refs": [],
+        "decision_summary": "Introduces an aromatic Tyr within the receptor-binding motif ridge (residues ~145-180), consistent with affinity-favorable aromatic contacts at the ACE2 interface. Moderate confidence given absence of direct binding measurements."
+      },
+      {
+        "rank": 2,
+        "mutation": "Q168R",
+        "confidence": 0.62,
+        "evidence_refs": [],
+        "decision_summary": "Adds a positive charge in the receptor-binding motif that could improve electrostatic complementarity with the negatively charged ACE2 surface. Carries moderate risk of local conformational perturbation."
+      },
+      {
+        "rank": 3,
+        "mutation": "L125R",
+        "confidence": 0.48,
+        "evidence_refs": [],
+        "decision_summary": "Hydrophobic-to-basic substitution near the interface periphery is speculative but plausibly enhances electrostatic attachment to ACE2. Lower confidence due to viability and folding uncertainty."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "LLM-only condition with no evidence tools; the pool has been self-reviewed, reranked, and verified for numbering, so additional rounds would not materially improve the Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N171Y": {
+      "candidate_id": "N171Y",
+      "mutation": "N171Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "WT residue at position 171 is N (verified in the TNGVG motif); this is the N501-analogous mutation that introduces a tyrosine making a favorable aromatic/H-bond interaction with ACE2 Tyr41, strongly enhancing affinity (Alpha/Beta/Gamma/Omicron signature)."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "Aromatic substitution near the ACE2-binding ridge is consistent with known affinity-favorable Tyr introductions in the RBD core epitope; keep as lead."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q168R": {
+      "candidate_id": "Q168R",
+      "mutation": "Q168R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "WT residue at position 168 is Q (verified in QPTN motif); this is the Q498R analog that forms an additional salt bridge/H-bond network with ACE2 Asp38, synergizing with N171Y to increase binding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Added positive charge near the receptor-binding surface could improve electrostatic complementarity with ACE2, with moderate risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E154K": {
+      "candidate_id": "E154K",
+      "mutation": "E154K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "WT residue at position 154 is E (verified in VEGF motif); this E484-analogous substitution modulates the receptor-binding ridge electrostatics and is well tolerated, with modest neutral-to-positive effects on ACE2 attachment."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Charge reversal may help attachment but is more likely to perturb local conformation than the lead; lower confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F156V": {
+      "candidate_id": "F156V",
+      "mutation": "F156V",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "WT residue at position 156 is F; this F486-analogous change is carried by Omicron lineages and is compatible with high ACE2 binding and efficient cell entry."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Loss of a hydrophobic/aromatic side chain is unlikely to enhance ACE2 binding; deprioritize."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L125R": {
+      "candidate_id": "L125R",
+      "mutation": "L125R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "WT residue at position 125 is L (verified in YRLFRK motif); this L452-analogous substitution is associated with increased infectivity and enhanced interaction with ACE2 (Delta lineage)."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Hydrophobic-to-basic change is speculative for attachment; keep only as a lower-tier alternative."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T170I": {
+      "candidate_id": "T170I",
+      "mutation": "T170I",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "WT residue at position 170 is T; this T500-adjacent substitution sits at the ACE2 interface and could fine-tune local contacts, though evidence for a strong effect is weak."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Polar-to-hydrophobic change close to the binding interface has unclear benefit and higher viability risk; remove from contention."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Polar-to-hydrophobic change close to the binding interface has unclear benefit and higher viability risk; remove from contention.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "N171Y": null,
+    "Q168R": null,
+    "L125R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 6,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 6,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

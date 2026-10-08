@@ -1,0 +1,356 @@
+{
+  "unit_id": "qwen3.8-max__psae_stability_disruption__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "W17P",
+        "confidence": 0.92,
+        "evidence_refs": [],
+        "decision_summary": "Tryptophan at position 17 is a large aromatic residue likely critical for structural packing; proline substitution maximally disrupts local backbone geometry and removes a key hydrophobic anchor in the YWY motif."
+      },
+      {
+        "rank": 2,
+        "mutation": "L11P",
+        "confidence": 0.91,
+        "evidence_refs": [],
+        "decision_summary": "Leucine at position 11 resides in a predicted alpha-helical segment (residues 8-14); proline is the strongest helix breaker and would disrupt this secondary structure element essential for PsaE folding."
+      },
+      {
+        "rank": 3,
+        "mutation": "F40D",
+        "confidence": 0.87,
+        "evidence_refs": [],
+        "decision_summary": "Phenylalanine at position 40 is likely buried in the hydrophobic core of this small protein; introducing a charged aspartate would create a severely destabilizing buried charge and disrupt core packing."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 candidates are well-differentiated and grounded in established biophysical principles; no external tools available to further refine."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "L11P": {
+      "candidate_id": "L11P",
+      "mutation": "L11P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.91,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.92,
+          "rationale": "Proline is a strong helix breaker; Leu11 sits in a likely helical N-terminal segment, and substitution should disrupt secondary structure and folding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.91,
+          "rationale": "L11 sits in a likely alpha-helical segment (residues 8-14); proline is a strong helix breaker and would disrupt this secondary structure element."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W17P": {
+      "candidate_id": "W17P",
+      "mutation": "W17P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.92,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "Proline substitution at Trp17 disrupts the aromatic cluster (YWY) and breaks local secondary structure, severely destabilizing the hydrophobic core."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.92,
+          "rationale": "Tryptophan is a large aromatic residue often critical for structural integrity; proline substitution is maximally disruptive to local backbone geometry and removes a key hydrophobic anchor."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I10P": {
+      "candidate_id": "I10P",
+      "mutation": "I10P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.86,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.88,
+          "rationale": "Ile10 is in a likely helical region; proline insertion breaks the backbone hydrogen-bonding pattern and destabilizes folding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.86,
+          "rationale": "Same helical region as L11P; proline introduction here would also break the helix but is slightly less impactful than L11P due to position relative to helix center."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F40D": {
+      "candidate_id": "F40D",
+      "mutation": "F40D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.87,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Replacing hydrophobic Phe40 with charged Asp introduces a buried charge that destabilizes the hydrophobic core and disrupts packing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.87,
+          "rationale": "Phenylalanine at position 40 is likely buried in the hydrophobic core of this small beta-sheet protein; introducing a charged aspartate would severely destabilize the fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V43P": {
+      "candidate_id": "V43P",
+      "mutation": "V43P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.83,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.84,
+          "rationale": "Proline at Val43 disrupts a likely helical segment in the central region, breaking backbone geometry and destabilizing the fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.83,
+          "rationale": "Proline introduction in a structured region near the hydrophobic core; disruptive but V is smaller than L or W so slightly less impactful."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y34D": {
+      "candidate_id": "Y34D",
+      "mutation": "Y34D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.81,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.82,
+          "rationale": "Replacing aromatic Tyr34 with charged Asp disrupts hydrophobic/aromatic packing and introduces unfavorable electrostatics in the core."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.81,
+          "rationale": "Aromatic to charged substitution; Y34 may participate in hydrophobic packing or pi-stacking interactions important for stability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L55P": {
+      "candidate_id": "L55P",
+      "mutation": "L55P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.79,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Leu55 to Proline breaks a likely helical element in the C-terminal half, disrupting local structure and global stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.79,
+          "rationale": "Proline in a region that may form part of a beta-strand or loop-to-structure transition; moderately destabilizing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I2D": {
+      "candidate_id": "I2D",
+      "mutation": "I2D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Introducing a charged residue at the N-terminus near Ile2 may disrupt early folding nucleation and local hydrophobic interactions."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.6,
+          "rationale": "Position 2 is at the extreme N-terminus which is likely flexible and solvent-exposed; mutation here is unlikely to significantly disrupt the overall fold."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 2 is at the extreme N-terminus which is likely flexible and solvent-exposed; mutation here is unlikely to significantly disrupt the overall fold.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "V67D": {
+      "candidate_id": "V67D",
+      "mutation": "V67D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Charged substitution at C-terminal Val67 disrupts the hydrophobic C-terminal region and may prevent proper folding termination."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.6,
+          "rationale": "Position 67 is near the C-terminus which is likely flexible; less likely to disrupt the core fold compared to internal positions."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 67 is near the C-terminus which is likely flexible; less likely to disrupt the core fold compared to internal positions.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K13D": {
+      "candidate_id": "K13D",
+      "mutation": "K13D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Reversing the charge at Lys13 may disrupt salt bridges or electrostatic interactions important for stabilizing the N-terminal helix."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "Charge reversal in the helical region could disrupt a salt bridge but is less universally destabilizing than proline or hydrophobic-to-charged mutations."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F48D": {
+      "candidate_id": "F48D",
+      "mutation": "F48D",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.84,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.84,
+          "rationale": "F48 is another large hydrophobic residue likely in or near the core of this small protein; converting to aspartate would introduce a buried charge and severely destabilize the fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "W17P": null,
+    "L11P": null,
+    "F40D": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 11,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,117 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in Photosystem-I subunit IV PsaE (68 aa).
+
+GOAL: Destabilize and disrupt PsaE folding (knock out the photosystem-I component).
+
+SEQUENCE (full-length exactly as numbered below):
+```
+AIERGSKVKILRKESYWYGDVGTVASIDKSGIIYPVIVRFNKVNYNGFSGSAGGLNTNNFAEHELEVV
+```
+IMPORTANT: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  W17P  confidence=0.920  rank=1
+  L11P  confidence=0.910  rank=2
+  F40D  confidence=0.870  rank=3
+  I10P  confidence=0.860  rank=4
+  F48D  confidence=0.840  rank=5
+  V43P  confidence=0.830  rank=6
+  Y34D  confidence=0.810  rank=7
+  L55P  confidence=0.790  rank=8
+  K13D  confidence=0.720  rank=9
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+Changes this round:
+  - W17P rerank: Tryptophan is a large aromatic residue often critical for structural integrity; proline substitution is maximally disruptive to local backbone geometry and removes a key hydrophobic anchor.
+  - L11P retain: L11 sits in a likely alpha-helical segment (residues 8-14); proline is a strong helix breaker and would disrupt this secondary structure element.
+  - F40D retain: Phenylalanine at position 40 is likely buried in the hydrophobic core of this small beta-sheet protein; introducing a charged aspartate would severely destabilize the fold.
+  - I10P retain: Same helical region as L11P; proline introduction here would also break the helix but is slightly less impactful than L11P due to position relative to helix center.
+  - V43P retain: Proline introduction in a structured region near the hydrophobic core; disruptive but V is smaller than L or W so slightly less impactful.
+  - Y34D retain: Aromatic to charged substitution; Y34 may participate in hydrophobic packing or pi-stacking interactions important for stability.
+  - L55P retain: Proline in a region that may form part of a beta-strand or loop-to-structure transition; moderately destabilizing.
+  - K13D retain: Charge reversal in the helical region could disrupt a salt bridge but is less universally destabilizing than proline or hydrophobic-to-charged mutations.
+  - I2D reject: Position 2 is at the extreme N-terminus which is likely flexible and solvent-exposed; mutation here is unlikely to significantly disrupt the overall fold.
+  - V67D reject: Position 67 is near the C-terminus which is likely flexible; less likely to disrupt the core fold compared to internal positions.
+  - F48D add: F48 is another large hydrophobic residue likely in or near the core of this small protein; converting to aspartate would introduce a buried charge and severely destabilize the fold.
+Remaining doubts: Without structural data or experimental evidence, exact core positions and secondary structure assignments are inferred from sequence patterns and general knowledge of PsaE topology.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 1 — respond with a single JSON object, nothing else.

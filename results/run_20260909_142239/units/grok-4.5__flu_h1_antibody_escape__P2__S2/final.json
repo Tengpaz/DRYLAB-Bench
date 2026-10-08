@@ -1,0 +1,237 @@
+{
+  "unit_id": "grok-4.5__flu_h1_antibody_escape__P2__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "flu_h1_antibody_escape",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "R242K",
+        "confidence": 0.62,
+        "evidence_refs": [
+          "E00001",
+          "E00002",
+          "E00003",
+          "E00004"
+        ],
+        "decision_summary": "R242K shows balanced high escape potential (phenotype z=0.497) with strong structure compatibility (z=0.845) and good evolutionary tolerance; retains fitness proxy via PLM plausibility."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Max rounds and tool calls reached; evidence gathering complete"
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R242K": {
+      "candidate_id": "R242K",
+      "mutation": "R242K",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.62,
+      "evidence_refs": [
+        "E00001",
+        "E00002",
+        "E00003",
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "242 is near the receptor-binding site and antigenic loops. R242K is charge-conservative and common in natural variants; it can enhance escape while keeping side-chain properties suitable for function and structure."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Retained as provided in working memory; plausible position for potential structural/functional impact in HA without immediate contradiction."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Positive phenotype score for antibody escape (0.497) combined with strong structure compatibility (normalized 0.845) supports retention for the escape + fitness objective."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "New evolution_msa and sequence_plm evidence show low support (z=0.03 and 0.01) for R242K, indicating reduced evolutionary tolerance and sequence-model plausibility that could compromise replication fitness retention despite moderate phenotype score."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "R242K": 38.391
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "R242K",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.4969,
+        "normalized": 0.4969,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.497; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R242K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R242K",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.9762,
+        "normalized": 0.845135,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.159,
+        "reason": "PDB 1RUZ at 2.9 A; residue B-factor 84.05"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1RUZ:H (ΔlogP=-0.9762)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R242K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R242K",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.029586,
+        "normalized": 0.029586,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.955,
+        "reason": "MSA depth 177, Neff 11.34 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.955,
+        "reason": "alignment coverage 169/177 homologs"
+      },
+      "interpretation": "mutant frequency of K at position 242 = 0.0296 among 169 homologs; conservation entropy 1.848 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__flu_h1_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "R242K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R242K",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0102,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__flu_h1_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "R242K"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 1,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 16,
+    "c0_size": 1,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

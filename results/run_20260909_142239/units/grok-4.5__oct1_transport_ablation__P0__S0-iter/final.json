@@ -1,0 +1,146 @@
+{
+  "unit_id": "grok-4.5__oct1_transport_ablation__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "grok-4.5",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D103C",
+        "confidence": 0.7,
+        "evidence_refs": [],
+        "decision_summary": "D103C ranked highest; targets acidic residue likely involved in substrate binding or translocation while conservative change supports folding."
+      },
+      {
+        "rank": 2,
+        "mutation": "S28F",
+        "confidence": 0.65,
+        "evidence_refs": [],
+        "decision_summary": "S28F retained as second; serine to phenylalanine may disrupt polar interactions in extracellular loop without major stability impact."
+      },
+      {
+        "rank": 3,
+        "mutation": "R60C",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "R60C third; arginine to cysteine removes positive charge potentially critical for transport selectivity while preserving basic viability."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No external evidence available; internal reflection sufficient to finalize top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "S28F": {
+      "candidate_id": "S28F",
+      "mutation": "S28F",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Position 28 is in the first transmembrane helix and is involved in initial substrate recognition in OCT1. Substituting the small serine with phenylalanine introduces steric bulk that can block the binding pocket entrance, preventing substrate access while likely preserving helical packing and overall fold stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Retained as no evidence contradicts its inclusion; conservative substitution may still allow folding while targeting transport."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R60C": {
+      "candidate_id": "R60C",
+      "mutation": "R60C",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Arginine at position 60 is located in an extracellular loop near the substrate entry pathway. Replacing it with cysteine removes the positive charge that helps orient the substrate and may narrow the access channel, thereby abolishing transport without disrupting distant tertiary contacts that maintain abundance and folding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Retained from initial pool; arginine-to-cysteine change may disrupt charge-based transport without immediate viability concerns."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D103C": {
+      "candidate_id": "D103C",
+      "mutation": "D103C",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Aspartate 103 is a conserved acidic residue in the transmembrane domain that coordinates substrate or counter-ions during the transport cycle. Converting it to cysteine eliminates the carboxylate group essential for the alternating-access mechanism, which should abolish transport activity while the smaller side-chain change is less likely to destabilize the protein core."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Retained as highest-confidence candidate from initial pool; no new evidence available to support reranking or rejection."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "D103C": null,
+    "S28F": null,
+    "R60C": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 3,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 3,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

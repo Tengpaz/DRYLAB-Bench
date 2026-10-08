@@ -1,0 +1,1653 @@
+{
+  "unit_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "flu_h1_antibody_escape",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "S206R",
+        "confidence": 0.75,
+        "evidence_refs": [
+          "E00008",
+          "E00016",
+          "E00024"
+        ],
+        "decision_summary": "Highest escape score (EVEscape 0.945) with strong ProteinMPNN fold support (0.942), indicating escape without compromising replication. Weak PLM prior is a proxy only and outweighed by direct fold compatibility."
+      },
+      {
+        "rank": 2,
+        "mutation": "N212D",
+        "confidence": 0.72,
+        "evidence_refs": [
+          "E00006",
+          "E00014"
+        ],
+        "decision_summary": "Best overall balance: solid escape (0.829) and the highest ESM-1v plausibility in the pool (0.917). No structural coverage, but strong sequence-level plausibility mitigates replication risk."
+      },
+      {
+        "rank": 3,
+        "mutation": "K157E",
+        "confidence": 0.6,
+        "evidence_refs": [
+          "E00007",
+          "E00015"
+        ],
+        "decision_summary": "Top escape score (0.964) but minimal evolutionary support (MSA 0.006, PLM 0.378) and no structural coverage. Retained as a high-escape hedge with the largest residual replication-risk uncertainty."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Ranking has been stable for two rounds and remaining evidence would not change the Top-3 composition or ordering."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N146D": {
+      "candidate_id": "N146D",
+      "mutation": "N146D",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00002",
+        "E00010",
+        "E00018",
+        "E00029"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Mature HA residue 129 in the Ca/Sa antigenic region; Asn-to-Asp at this site is a recurring H1 antibody-escape substitution. Surface-exposed, distant from the RBS core, so folding/replication risk is modest."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "Head-domain N-glycan loss near antigenic site Ca; plausible escape route pending evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Decent escape and moderate plausibility, but no structural evidence due to WT mapping mismatch, limiting confidence."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Zero MSA tolerance, low PLM plausibility, no structure coverage, and lowest escape of the pool; no redeeming dimension."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Zero MSA tolerance, low PLM plausibility, no structure coverage, and lowest escape of the pool; no redeeming dimension.",
+        "evidence_refs": [
+          "E00029",
+          "E00010",
+          "E00018"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "G156N": {
+      "candidate_id": "G156N",
+      "mutation": "G156N",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00001",
+        "E00009",
+        "E00017"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Introducing Asn at 156 creates an N-K-S N-glycosylation sequon (N156-S158) in the Sa antigenic site; added glycans are a classic H1 mechanism for masking antibody epitopes. Site is a flexible surface loop, tolerating substitution."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Historic K156 glycosylation-site gain is a well-known H1 immune-evasion mechanism with modest fitness cost; retained as top pending evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "High EVEscape score but both ESM-1v (0.006) and ProteinMPNN (0.111) indicate very poor viability/fold compatibility, so fitness cost likely outweighs escape gain."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Very poor plausibility on both ESM-1v (0.006) and ProteinMPNN (0.111); replication risk dominates its escape signal."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Very poor plausibility on both ESM-1v (0.006) and ProteinMPNN (0.111); replication risk dominates its escape signal.",
+        "evidence_refs": [
+          "E00009",
+          "E00017"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "G156E": {
+      "candidate_id": "G156E",
+      "mutation": "G156E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00004",
+        "E00012",
+        "E00020"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Charge insertion in the Sa antigenic ridge (mature 139), a region under strong positive selection in human H1N1. Gly->Glu is structurally plausible in a loop and can disrupt antibody contacts while preserving the fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Alternative substitution at 156; charge change may perturb folding more than N, held below G156N."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Poorest combined plausibility (0.006 ESM-1v, 0.064 ProteinMPNN) despite high escape score; replication risk too high."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Poorest combined plausibility (0.006 ESM-1v, 0.064 ProteinMPNN) despite high escape score; replication risk too high.",
+        "evidence_refs": [
+          "E00012",
+          "E00020"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "N210D": {
+      "candidate_id": "N210D",
+      "mutation": "N210D",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.6,
+      "evidence_refs": [
+        "E00003",
+        "E00011",
+        "E00019",
+        "E00028"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Corresponds to mature HA1 residue 193 in the Sb antigenic site, one of the strongest antibody-escape positions in H1 DMS studies. N->D preserves size while altering charge and H-bonding at the epitope."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Glycosylation-site loss in head domain adjacent to antigenic region; retained for evidence round."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "Good structural compatibility (0.931) supports fitness, but weak sequence plausibility and only moderate escape."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "Zero MSA tolerance and very low ESM plausibility (0.056) despite good structure score; replication risk too high for a mid escape score."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Zero MSA tolerance and very low ESM plausibility (0.056) despite good structure score; replication risk too high for a mid escape score.",
+        "evidence_refs": [
+          "E00028",
+          "E00011"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "N212D": {
+      "candidate_id": "N212D",
+      "mutation": "N212D",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.72,
+      "evidence_refs": [
+        "E00006",
+        "E00014",
+        "E00022",
+        "E00027"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Neighboring Sb-site Asn (mature 195) also a documented escape-adjacent position; a conservative acidic substitution likely tolerated while perturbing antibody binding surfaces."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.48,
+          "rationale": "Second glycan-site option near 210; redundant with N210D, kept as backup."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.65,
+          "rationale": "Strong ESM-1v plausibility (0.917) with good escape score, though structural evidence is unavailable."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Best all-around balance: solid escape (0.829), highest ESM-1v plausibility (0.917), and highest MSA tolerance (0.065) among candidates. Promoted to rank 2."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D172G": {
+      "candidate_id": "D172G",
+      "mutation": "D172G",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.4,
+      "evidence_refs": [
+        "E00005",
+        "E00013",
+        "E00021"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Mature residue 155 in the Sa site, a well-known H1 antigenic drift position. D->G removes a charged antibody contact; loop position suggests low structural cost."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Antigenic-site substitution; glycosylation-conservative D-to-N alternative may be reconsidered."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "High escape and moderate plasmid plausibility, but no structural evidence available due to mapping mismatch."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "High escape but a glycine at a loop position with no structure coverage and no evolutionary support; dominated by safer candidates."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "High escape but a glycine at a loop position with no structure coverage and no evolutionary support; dominated by safer candidates.",
+        "evidence_refs": [
+          "E00021"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "K157E": {
+      "candidate_id": "K157E",
+      "mutation": "K157E",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00007",
+        "E00015",
+        "E00023",
+        "E00026"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Charge-reversal in the Sa antigenic ridge adjacent to known escape sites, expected to disrupt antibody paratope contacts. Requires structure evidence to confirm no local destabilization."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.42,
+          "rationale": "Charge flip adjacent to 156; may destabilize helix region, retained at low confidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Highest EVEscape score (0.964) with moderate sequence plausibility; no structural evidence but overall balance is favorable."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.65,
+          "rationale": "Top escape score (0.964) but nearly absent natural evolutionary support (0.006) and no structural coverage; demoted to rank 3 as a replication-risk hedge."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S159R": {
+      "candidate_id": "S159R",
+      "mutation": "S159R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.38,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "Adds a positive charge at the Sa/Ca boundary (mature 142); antigenic-site substitutions with charge changes frequently mediate escape. Loop location implies moderate fitness cost."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Low prior and redundant with S206R class of charge mutations near a critical glycan region; pruning to focus budget."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Low prior and redundant with S206R class of charge mutations near a critical glycan region; pruning to focus budget.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "S206R": {
+      "candidate_id": "S206R",
+      "mutation": "S206R",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.75,
+      "evidence_refs": [
+        "E00008",
+        "E00016",
+        "E00024",
+        "E00025"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Sb site (mature 189) surface serine; arginine insertion creates a large charged epitope change. Plausible folding-wise on a surface helix/loop but escape evidence is indirect."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Surface charge change in head; generic escape heuristic, low prior."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.75,
+          "rationale": "Strong escape (0.945) AND excellent structural compatibility (0.942) — best balance of immune escape and fold/fitness preservation."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.75,
+          "rationale": "Highest escape (0.945) with strong ProteinMPNN fold support (0.942) outweighs weak PLM/MSA priors, which are only proxies. Retains rank 1."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "S206R": 51.862,
+    "N212D": 48.598,
+    "K157E": 36.784
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "G156N",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.8031,
+        "normalized": 0.8031,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.803; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N146D",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.8627,
+        "normalized": 0.8627,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.863; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N210D",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.7637,
+        "normalized": 0.7637,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.764; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G156E",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.8715,
+        "normalized": 0.8715,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.872; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D172G",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.9345,
+        "normalized": 0.9345,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.934; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N212D",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.8287,
+        "normalized": 0.8287,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.829; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K157E",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.9643,
+        "normalized": 0.9643,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.964; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S206R",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.9445,
+        "normalized": 0.9445,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.945; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G156N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0056,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N146D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1831,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N210D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0557,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G156E",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0056,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D172G",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.4588,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N212D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.9172,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K157E",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.3781,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S206R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0769,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G156N",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -5.3698,
+        "normalized": 0.111145,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.006,
+        "reason": "PDB 1RUZ at 2.9 A; residue B-factor 99.4"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1RUZ:H (ΔlogP=-5.3698)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N146D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N210D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.0747,
+        "normalized": 0.931034,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.0,
+        "reason": "PDB 1RUZ at 2.9 A; residue B-factor 112.17"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1RUZ:H (ΔlogP=-0.0747)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G156E",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -5.4954,
+        "normalized": 0.064039,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.006,
+        "reason": "PDB 1RUZ at 2.9 A; residue B-factor 99.4"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1RUZ:H (ΔlogP=-5.4954)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D172G",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N212D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K157E",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00023",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S206R",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.0844,
+        "normalized": 0.94181,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.0,
+        "reason": "PDB 1RUZ at 2.9 A; residue B-factor 114.53"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1RUZ:H (ΔlogP=0.0844)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00024",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G156N",
+          "N146D",
+          "N210D",
+          "G156E",
+          "D172G",
+          "N212D",
+          "K157E",
+          "S206R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S206R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.059172,
+        "normalized": 0.059172,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.955,
+        "reason": "MSA depth 177, Neff 11.34 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.955,
+        "reason": "alignment coverage 169/177 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 206 = 0.0592 among 169 homologs; conservation entropy 2.061 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00025",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S206R",
+          "K157E",
+          "N212D",
+          "N210D",
+          "N146D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K157E",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.006135,
+        "normalized": 0.006135,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.921,
+        "reason": "MSA depth 177, Neff 11.34 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.921,
+        "reason": "alignment coverage 163/177 homologs"
+      },
+      "interpretation": "mutant frequency of E at position 157 = 0.0061 among 163 homologs; conservation entropy 2.032 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00026",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S206R",
+          "K157E",
+          "N212D",
+          "N210D",
+          "N146D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N212D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.065089,
+        "normalized": 0.065089,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.955,
+        "reason": "MSA depth 177, Neff 11.34 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.955,
+        "reason": "alignment coverage 169/177 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 212 = 0.0651 among 169 homologs; conservation entropy 1.945 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00027",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S206R",
+          "K157E",
+          "N212D",
+          "N210D",
+          "N146D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N210D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.955,
+        "reason": "MSA depth 177, Neff 11.34 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.955,
+        "reason": "alignment coverage 169/177 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 210 = 0.0000 among 169 homologs; conservation entropy 1.927 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00028",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S206R",
+          "K157E",
+          "N212D",
+          "N210D",
+          "N146D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N146D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.927,
+        "reason": "MSA depth 177, Neff 11.34 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.927,
+        "reason": "alignment coverage 164/177 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 146 = 0.0000 among 164 homologs; conservation entropy 1.946 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00029",
+      "run_id": "glm-5.3__flu_h1_antibody_escape__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S206R",
+          "K157E",
+          "N212D",
+          "N210D",
+          "N146D"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 9,
+    "n_rejected": 6,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 9,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

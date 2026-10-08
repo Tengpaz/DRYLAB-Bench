@@ -1,0 +1,114 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in Photosystem-I subunit IV PsaE (68 aa).
+
+THE DESIGN OBJECTIVE: Destabilize and disrupt PsaE folding (knock out the photosystem-I component).
+
+SEQUENCE (full-length exactly as numbered below):
+```
+AIERGSKVKILRKESYWYGDVGTVASIDKSGIIYPVIVRFNKVNYNGFSGSAGGLNTNNFAEHELEVV
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  G19P  confidence=0.850  rank=1
+  I33D  confidence=0.800  rank=2
+  G22P  confidence=0.750  rank=3
+  P35G  confidence=0.700  rank=4
+  F60D  confidence=0.700  rank=5
+  L11D  confidence=0.680  rank=6
+  I37E  confidence=0.650  rank=7
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+Changes this round:
+  - G19P retain: Gly-to-Pro in a loop/helix region imposes rigid kinks and breaks backbone H-bonding, strongly disrupting the small PsaE fold.
+  - I33D retain: Buried hydrophobic Ile replaced by charged Asp is a classic folding-disruptive core mutation.
+  - G22P rerank: Gly22 sits adjacent to Gly19; a Pro here is also highly destabilizing and may be structurally equivalent, so I promote it above P35G.
+  - P35G rerank: Pro35 is likely a core or turn-anchoring residue; removing its rigid constraint can collapse local packing, but effect is less certain than charge-in-core mutations.
+  - F60D retain: Hydrophobic-to-charged substitution in the C-terminal helix region disrupts packing.
+  - L11D retain: Charged residue in a hydrophobic N-terminal helix position destabilizes the fold.
+  - I37E retain: Core Ile-to-Glu is destabilizing but Glu is slightly more tolerable than Asp in buried sites.
+  - W17A reject: Trp-to-Ala removes a large hydrophobe but Ala remains fold-compatible; weaker knockout than charge-in-core or Pro-in-helix options.
+  - G53P reject: Gly53 is in a flexible Gly-rich segment where Pro may be tolerated without global unfolding.
+  - F48D reject: Position may be surface-exposed near the partner-binding face; charged substitution is less reliably fold-disruptive than core-targeted options.
+Remaining doubts: Exact secondary-structure and burial assignments are inferred from the sequence alone, so per-position destabilization strength is uncertain.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 1 — respond with a single JSON object, nothing else.

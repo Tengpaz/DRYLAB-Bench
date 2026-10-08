@@ -1,0 +1,918 @@
+{
+  "unit_id": "qwen3.8-max__cbs_lof__P1__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.92,
+        "evidence_refs": [
+          "E00001",
+          "E00008"
+        ],
+        "decision_summary": "K119 is the catalytic PLP-binding lysine; alanine substitution abolishes cofactor binding and enzymatic activity. AlphaMissense z=0.987 is the highest score observed, strongly supporting pathogenic LOF."
+      },
+      {
+        "rank": 2,
+        "mutation": "R336A",
+        "confidence": 0.88,
+        "evidence_refs": [
+          "E00005",
+          "E00012"
+        ],
+        "decision_summary": "R336 is in the catalytic core near the active site; alanine substitution disrupts key electrostatic interactions required for catalysis. AlphaMissense z=0.957 strongly supports pathogenicity."
+      },
+      {
+        "rank": 3,
+        "mutation": "C52A",
+        "confidence": 0.87,
+        "evidence_refs": [
+          "E00007",
+          "E00014"
+        ],
+        "decision_summary": "C52 is a heme-coordinating cysteine critical for CBS structural integrity and allosteric regulation; its substitution destabilizes the heme domain. AlphaMissense z=0.951 strongly supports pathogenicity."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top 3 candidates are well-supported by high AlphaMissense scores and clear mechanistic rationale; additional tool calls are unlikely to alter the final ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 2,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.9,
+      "evidence_refs": [
+        "E00001",
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.82,
+          "rationale": "Lys119 is the catalytic lysine that forms the internal aldimine with the PLP cofactor; mutation to alanine abolishes the Schiff base linkage essential for all CBS catalytic activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.82,
+          "rationale": "K119 is in the PLP-binding domain; alanine substitution at a conserved lysine likely disrupts the Schiff base formation essential for catalysis."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.9,
+          "rationale": "AlphaMissense pathogenicity score of 0.987 is the highest among all candidates, strongly supporting LOF. K119 is in the catalytic core near the PLP-binding site."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.9,
+          "rationale": "AlphaMissense z=0.987 is the highest among all candidates, strongly supporting pathogenicity/LOF. K119 is the PLP-binding lysine essential for catalysis, making alanine substitution mechanistically devastating."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S349A": {
+      "candidate_id": "S349A",
+      "mutation": "S349A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.72,
+      "evidence_refs": [
+        "E00002",
+        "E00009"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Ser349 is a key active-site residue involved in substrate binding/catalysis in the CBS active site; mutation to alanine is expected to disrupt the catalytic mechanism."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "S349 is in the catalytic core near the active site; serine-to-alanine may disrupt substrate binding or catalytic geometry."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.5,
+          "rationale": "AlphaMissense score 0.606 is only borderline pathogenic, suggesting this mutation may not strongly abolish activity. Dropped from active pool."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "AlphaMissense score 0.606 is only borderline pathogenic, suggesting this mutation may not strongly abolish activity. Dropped from active pool.",
+        "evidence_refs": [
+          "E00002"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "G139A": {
+      "candidate_id": "G139A",
+      "mutation": "G139A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.68,
+      "evidence_refs": [
+        "E00003",
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Gly139 is in the PLP-binding motif (GSGT); substitution with alanine disrupts the glycine-rich loop geometry critical for cofactor binding and catalysis."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "G139 is in the PLP-binding pocket; glycine-to-alanine introduces steric constraints that may disrupt the tight turn geometry required for cofactor binding."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.4,
+          "rationale": "AlphaMissense score 0.469 is in the ambiguous range, providing weak support for LOF. Dropped from active pool."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "AlphaMissense score 0.469 is in the ambiguous range, providing weak support for LOF. Dropped from active pool.",
+        "evidence_refs": [
+          "E00003"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "H65A": {
+      "candidate_id": "H65A",
+      "mutation": "H65A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.78,
+      "evidence_refs": [
+        "E00004",
+        "E00011"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "His65 is a conserved residue in the heme-binding region of CBS; mutation may disrupt heme coordination and allosteric regulation, contributing to loss of function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "H65 is in the N-terminal heme domain; histidine may coordinate the heme iron, and its loss could destabilize the domain."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "AlphaMissense score 0.845 supports pathogenicity. H65 is a heme ligand in CBS; mutation disrupts heme binding and enzyme regulation, but score is lower than top 3."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "AlphaMissense z=0.845 supports pathogenicity but is notably lower than the top 3. H65 is the other heme-coordinating residue, but evidence gap with top 3 keeps it at rank 4."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R336A": {
+      "candidate_id": "R336A",
+      "mutation": "R336A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.88,
+      "evidence_refs": [
+        "E00005",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Arg336 is near the active site and may participate in substrate positioning or transition-state stabilization."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "R336 is near the active site; arginine often participates in substrate recognition via electrostatic interactions."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.88,
+          "rationale": "AlphaMissense score 0.957 is second-highest, indicating strong pathogenicity/LOF prediction. R336 is near the heme domain interface important for CBS regulation."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.88,
+          "rationale": "AlphaMissense z=0.957 strongly supports pathogenicity. R336 is in the catalytic core near the active site, and alanine substitution disrupts key electrostatic interactions."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E171A": {
+      "candidate_id": "E171A",
+      "mutation": "E171A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.58,
+      "evidence_refs": [
+        "E00006",
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Glu171 is in the catalytic domain and may participate in acid-base catalysis or structural integrity of the active site."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "E171 may participate in catalytic acid-base chemistry or structural stabilization of the active site."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "AlphaMissense score 0.414 is in the ambiguous/benign range, providing minimal support for LOF. Dropped from active pool."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "AlphaMissense score 0.414 is in the ambiguous/benign range, providing minimal support for LOF. Dropped from active pool.",
+        "evidence_refs": [
+          "E00006"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "C52A": {
+      "candidate_id": "C52A",
+      "mutation": "C52A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.87,
+      "evidence_refs": [
+        "E00007",
+        "E00014"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Cys52 is one of the heme-coordinating cysteines in the N-terminal regulatory domain; mutation disrupts heme binding and may destabilize the regulatory domain."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "C52 is in the heme domain; cysteine may be involved in heme coordination or disulfide bonding, but its role is less certain."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.87,
+          "rationale": "AlphaMissense score 0.951 is third-highest. C52 is a catalytic residue in the heme-binding domain; its mutation to alanine disrupts heme coordination critical for CBS activity."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.87,
+          "rationale": "AlphaMissense z=0.951 strongly supports pathogenicity. C52 is a heme-coordinating cysteine critical for CBS structural integrity and regulation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 2,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "K119A": 91.769,
+    "R336A": 89.146,
+    "C52A": 88.623
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "K119A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9873,
+        "normalized": 0.9873,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.987 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S349A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6059,
+        "normalized": 0.6059,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.606 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G139A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.4688,
+        "normalized": 0.4688,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.469 (class ambiguous); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H65A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.8454,
+        "normalized": 0.8454,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.845 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R336A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9567,
+        "normalized": 0.9567,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.957 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E171A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.4136,
+        "normalized": 0.4136,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.414 (class ambiguous); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C52A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9506,
+        "normalized": 0.9506,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.951 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K119A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S349A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G139A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H65A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R336A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E171A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C52A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "qwen3.8-max__cbs_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "S349A",
+          "G139A",
+          "H65A",
+          "R336A",
+          "E171A",
+          "C52A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 7,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 3,
+    "c0_size": 7,
+    "final_novelty": 0.0,
+    "tool_calls_used": 2,
+    "rounds_used": 3,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,138 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the SARS-CoV-2 Spike receptor-binding domain (Wuhan-Hu-1, 201 aa).
+
+GOAL: Maximize / maintain RBD binding to the human ACE2 receptor (enhanced cell attachment).
+
+SEQUENCE (full-length exactly as numbered below):
+```
+NITNLCPFGEVFNATRFASVYAWNRKRISNCVADYSVLYNSASFSTFKCYGVSPTKLNDLCFTNVYADSFVIRGDEVRQIAPGQTGKIADYNYKLPDDFTGCVIAWNSNNLDSKVGGNYNYLYRLFRKSNLKPFERDISTEIYQAGSTPCNGVEGFNCYFPLQSYGFQPTNGVGYQPYRVVVLSFELLHAPATVCGPKKST
+```
+IMPORTANT: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   No experimental structure is configured for this task — every query returns status = "not_applicable".
+
+4. functional_annotation — curated UniProt features (accession P0DTC2) for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  (none)
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+Changes this round:
+  - N501Y add: N501Y is a well-known ACE2 affinity-enhancing mutation found in Alpha, Omicron, and other VOCs. Position 501 (N in sequence) is a key ACE2 contact residue; Y enhances binding via pi-stacking with ACE2 Y41.
+  - Q498R add: Q498R is a hallmark of Omicron variants that synergizes with N501Y to enhance ACE2 binding. Position 498 (Q in sequence) forms a salt bridge with ACE2 D38 when mutated to R.
+  - T478K add: T478K is found in Delta and Omicron variants. Position 478 (T in sequence) is near the ACE2 interface; K substitution may enhance electrostatic complementarity with ACE2.
+  - L452R add: L452R is found in Delta and Epsilon variants, known to enhance ACE2 binding affinity. Position 452 (L in sequence) is at the periphery of the ACE2 interface.
+  - E484K add: E484K is found in Beta and Gamma variants. While primarily an immune escape mutation, it can modestly affect ACE2 binding. Position 484 (E in sequence) is near the interface.
+  - K417N add: K417N is found in Beta and Gamma variants. It primarily serves immune escape but in combination with N501Y and E484K can maintain ACE2 binding. Position 417 (K in sequence).
+  - S477N add: S477N is found in Omicron and other variants. Position 477 (S in sequence) is at the ACE2 interface; N substitution may improve hydrogen bonding with ACE2.
+  - N439K add: N439K was observed in circulating variants and shown to enhance ACE2 binding affinity. Position 439 (N in sequence) directly contacts ACE2.
+  - Y453F add: Y453F was found in mink-adapted variants and may modulate ACE2 binding. Position 453 (Y in sequence) is near the ACE2 interface.
+  - Q493R add: Q493R is found in Omicron and enhances ACE2 binding by forming a salt bridge with ACE2 E35. Position 493 (Q in sequence) is a direct ACE2 contact residue.
+Remaining doubts: Without tool evidence, confidence values are based on prior knowledge only; evolutionary and PLM evidence could shift rankings.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 3 — respond with a single JSON object, nothing else.

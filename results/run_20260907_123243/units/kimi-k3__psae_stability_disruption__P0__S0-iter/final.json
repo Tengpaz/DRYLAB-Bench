@@ -1,0 +1,284 @@
+{
+  "unit_id": "kimi-k3__psae_stability_disruption__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "kimi-k3",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "I10P",
+        "confidence": 0.8,
+        "evidence_refs": [],
+        "decision_summary": "Proline at Ile10 disrupts backbone hydrogen bonding in the predicted N-terminal beta-strand, strongly destabilizing the fold."
+      },
+      {
+        "rank": 2,
+        "mutation": "V36P",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "V36P creates a P35-P36 double-proline motif in the predicted central strand, which is incompatible with beta-sheet geometry and should severely misfold PsaE."
+      },
+      {
+        "rank": 3,
+        "mutation": "F40P",
+        "confidence": 0.75,
+        "evidence_refs": [],
+        "decision_summary": "Removes a bulky core aromatic (Phe40) while imposing proline conformational constraints, combining core-packing loss with strand disruption."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 mutations are mechanistically independent and mutually complementary; additional self-iteration would not improve them."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "I10P": {
+      "candidate_id": "I10P",
+      "mutation": "I10P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Introduces proline into a hydrophobic N-terminal region, likely breaking secondary structure and disrupting core packing in this small 68-aa protein."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "Proline substitution in the N-terminal beta-rich region breaks backbone hydrogen bonding and is strongly destabilizing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L11P": {
+      "candidate_id": "L11P",
+      "mutation": "L11P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Proline at a buried hydrophobic leucine adjacent to I10 should strongly destabilize any helix/strand and impair folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Adjacent to I10P but overlapping effects; kept as backup but ranked below independent core disruptions."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F40P": {
+      "candidate_id": "F40P",
+      "mutation": "F40P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Aromatic-to-proline substitution in the hydrophobic core removes favorable packing and introduces a backbone constraint likely to disrupt the fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "Removes a bulky hydrophobic core aromatic and imposes proline constraints in a strand region, both destabilizing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V36P": {
+      "candidate_id": "V36P",
+      "mutation": "V36P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Proline replacement of a buried valine mid-sequence is expected to disrupt local structure and destabilize the small protein."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "Creates a Pro35-Pro36 double-proline motif in the predicted central beta-strand, which should severely disrupt the sheet and fold; reranked up."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W17G": {
+      "candidate_id": "W17G",
+      "mutation": "W17G",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Removing the large tryptophan side chain to glycine eliminates core hydrophobic packing and adds conformational flexibility, likely destabilizing the fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Loss of a core tryptophan removes major hydrophobic packing and adds glycine flexibility, destabilizing the fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y16P": {
+      "candidate_id": "Y16P",
+      "mutation": "Y16P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Proline in place of a core tyrosine disrupts both hydrophobic interactions and backbone conformation near the N-terminus."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.5,
+          "rationale": "Redundant with stronger neighboring N-terminal candidates (I10P, W17G) and likely partially surface-exposed; dropped to keep the pool diverse."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Redundant with stronger neighboring N-terminal candidates (I10P, W17G) and likely partially surface-exposed; dropped to keep the pool diverse.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G53P": {
+      "candidate_id": "G53P",
+      "mutation": "G53P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Replacing a flexible glycine with rigid proline in a likely loop region may misfold or rigidify the structure, though effect may be milder in a loop."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.45,
+          "rationale": "G53 lies in a likely flexible loop/GG motif where proline is well tolerated and only weakly destabilizing; dropped."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "G53 lies in a likely flexible loop/GG motif where proline is well tolerated and only weakly destabilizing; dropped.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "I33D": {
+      "candidate_id": "I33D",
+      "mutation": "I33D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Placing a charged aspartate at a buried hydrophobic isoleucine should be strongly unfavorable in the core and destabilize folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Burying a charged aspartate in the hydrophobic core is a classic fold-disruption strategy; reranked up."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "I10P": null,
+    "V36P": null,
+    "F40P": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

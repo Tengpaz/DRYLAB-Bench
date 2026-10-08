@@ -1,0 +1,381 @@
+{
+  "unit_id": "glm-5.3__hiv_bg505_antibody_escape__P0__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N279A",
+        "confidence": 0.66,
+        "evidence_refs": [
+          "E00002"
+        ],
+        "decision_summary": "Highest phenotype escape z-score (0.665) among evaluated candidates. Loss of this V3-loop-proximal N-glycan is a known antibody-escape mechanism with generally preserved replication."
+      },
+      {
+        "rank": 2,
+        "mutation": "N384A",
+        "confidence": 0.6,
+        "evidence_refs": [
+          "E00003"
+        ],
+        "decision_summary": "Strong escape evidence (z=0.638) from an inner-domain glycan-deletion event. Removing the N384 glycan shifts the glycan shield while typically retaining fitness."
+      },
+      {
+        "rank": 3,
+        "mutation": "N301A",
+        "confidence": 0.57,
+        "evidence_refs": [
+          "E00001"
+        ],
+        "decision_summary": "Moderate escape signal (z=0.558) at the V3 base glycan. Deletion of N301 is a well-tolerated escape route for several V3-directed antibodies."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Max tool calls and rounds consumed; final Top-3 fixed from accumulated phenotype evidence and domain knowledge."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "budget_exhausted",
+    "detail": "round limit reached"
+  },
+  "candidate_registry": {
+    "N301A": {
+      "candidate_id": "N301A",
+      "mutation": "N301A",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.57,
+      "evidence_refs": [
+        "E00001"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Disrupts an N-linked glycan motif near the V3 base (PNN at 299–301), a common route to escape glycan-dependent V3 bnAbs while retaining core Env folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "N301 lies in the V3 loop base; loss of this N-glycan is a known escape route for V3-glycan-targeting bNAbs while V3 base mutations are often replication-tolerant. Retained pending EVEscape and ESM-1v evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.52,
+          "rationale": "Lowest escape score of the three (0.558) and N301 glycan loss has known folding/processing costs; still a classic PGT128/10-1074 escape node, so retain but downrank."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.53,
+          "rationale": "Decent escape signal (z=0.558) at a V3 glycan; retained pending fitness-plausibility evidence."
+        },
+        {
+          "round": 4,
+          "action": "rerank",
+          "confidence": 0.57,
+          "rationale": "Moderate escape z=0.558; N301 is a V3-loop N-glycan whose removal is escape-relevant but has slightly higher fitness cost uncertainty than N279/N384, keeping it rank 3."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N279A": {
+      "candidate_id": "N279A",
+      "mutation": "N279A",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.66,
+      "evidence_refs": [
+        "E00002"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Glycan site at the CD4bs-proximal loop (278–279 NN) whose removal can reduce neutralization by CD4bs/glycan-dependent antibodies with limited folding impact."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "N279 anchors the 276-glycan hole in BG505 relevant to 10-1074/3BNC117-class N332/V3-glycan supersite escape. Moderate prior; needs phenotype and plausibility evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Highest EVEscape score (0.665) among tested candidates; V3-loop-adjacent glycan loss with moderate fitness cost expected. Retain as current leader but fitness-proxiom evidence still needed."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.66,
+          "rationale": "Highest EVEscape z-score (0.665) among evaluated candidates at a V3-proximal glycan site; glycan loss here is a classic escape mechanism with moderate fitness cost."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.66,
+          "rationale": "Highest EVEscape z-score (0.665) among all measured candidates; N279 glycan loss in the C2/V3 region is a tolerated, fitness-compatible escape mechanism in BG505-like Envs."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N384A": {
+      "candidate_id": "N384A",
+      "mutation": "N384A",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.6,
+      "evidence_refs": [
+        "E00003"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Loss of the V4-loop glycan at position 384, a variable, well-tolerated surface patch where glycan shifts confer escape."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "N384 is near the N386 position but a less-established escape site; down-ranked in favor of N386A. Retained only pending evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "Strong escape score (0.638); N384 is a V1V2-region glycan where loss is often tolerated in tier-2 Envs. Needs plausibility check before finalizing."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "Strong escape signal (z=0.638) at a glycan hole-adjacent site; needs a plausibility check since glycan deletions can reduce fitness."
+        },
+        {
+          "round": 4,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "Strong escape signal (z=0.638) with a small upward adjustment given it removes a glycan adjacent to the V3 glycan canopy without abolishing known folding-critical disulfides."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N337A": {
+      "candidate_id": "N337A",
+      "mutation": "N337A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Glycan at the V3-stem/C3 region (position 337 N); deletion can affect quaternary-antibody recognition with plausible fitness retention."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "N337 is a clade-conserved glycan near the V3 base whose loss often impairs folding and is not a major escape node; deprioritized in favor of N332A."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "N337 is a clade-conserved glycan near the V3 base whose loss often impairs folding and is not a major escape node; deprioritized in favor of N332A.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "D366N": {
+      "candidate_id": "D366N",
+      "mutation": "D366N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.25,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Contact-site mutation in the CD4bs-adjacent loop that can reduce CD4bs-antibody sensitivity, but carries higher replication-fitness risk."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "D366 in the CD4bs rarely mediates high-escape while CD4 contact changes risk entry fitness; weak prior with no supporting evidence."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "D366 in the CD4bs rarely mediates high-escape while CD4 contact changes risk entry fitness; weak prior with no supporting evidence.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 5
+  },
+  "bundle_evidence": {
+    "N279A": 66.48,
+    "N384A": 63.81,
+    "N301A": 55.76
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "N301A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.5576,
+        "normalized": 0.5576,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.558; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N301A",
+          "N279A",
+          "N384A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N279A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.6648,
+        "normalized": 0.6648,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.665; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N301A",
+          "N279A",
+          "N384A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N384A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.6381,
+        "normalized": 0.6381,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.638; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N301A",
+          "N279A",
+          "N384A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 8,
+    "c0_size": 5,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 5,
+    "budget_exhausted": true
+  }
+}

@@ -1,0 +1,114 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in HIV-1 envelope glycoprotein gp160 (BG505), 860 aa.
+
+PRIMARY OBJECTIVE: Increase HIV-1 Env (BG505) antibody immune escape while retaining replication fitness, while preserving overall folding.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MRVMGIQRNCQHLFRWGTMILGMIIICSAAENLWVTVYYGVPVWKDAETTLFCASDAKAYETEKHNVWATHACVPTDPNPQEIHLENVTEEFNMWKNNMVEQMHTDIISLWDQSLKPCVKLTPLCVTLQCTNVTNNITDDMRGELKNCSFNMTTELRDKKQKVYSLFYRLDVVQINENQGNRSNNSNKEYRLINCNTSAITQACPKVSFEPIPIHYCAPAGFAILKCKDKKFNGTGPCPSVSTVQCTHGIKPVVSTQLLLNGSLAEEEVMIRSENITNNAKNILVQFNTPVQINCTRPNNNTRKSIRIGPGQAFYATGDIIGDIRQAHCNVSKATWNETLGKVVKQLRKHFGNNTIIRFANSSGGDLEVTTHSFNCGGEFFYCNTSGLFNSTWISNTSVQGSNSTGSNDSITLPCRIKQIINMWQRIGQAMYAPPIQGVIRCVSNITGLILTRDGGSTNSTTETFRPGGGDMRDNWRSELYKYKVVKIEPLGVAPTRAKRRVVGREKRAVGIGAVFLGFLGAAGSTMGAASMTLTVQARNLLSGIVQQQSNLLRAIEAQQHLLKLTVWGIKQLQARVLAVERYLRDQQLLGIWGCSGKLICTTNVPWNSSWSNRNLSEIWDNMTWLQWDKEISNYTQIIYGLLEESQNQQEKNEQDLLALDKWASLWNWFDISNWLWYIKIFIMIVGGLIGLRIVFAVLSVIHRVRQGYSPLSFQTHTPNPRGLDRPERIEEEDGEQDRGRSTRLVSGFLALAWDDLRSLCLFCYHRLRDFILIAARIVELLGHSSLKGLRLGWEGLKYLWNLLAYWGRELKISAINLFDTIAIAVAEWTDRVIEIGQRLCRAFLHIPRRIRQGLERALL
+```
+NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  R303T  confidence=0.760  rank=1
+  V241N  confidence=0.780  rank=2
+  I411T  confidence=0.730  rank=3
+  G456N  confidence=0.560
+  L284T  confidence=0.550
+  W424T  confidence=0.530
+  I137T  confidence=0.500
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+Changes this round:
+  - R303T retain: Retained as a lead because charge removal in the CD4-binding region may reduce binding without major fitness cost.
+  - I411T rerank: Slight increase in rank due to proximity to CD4bs and moderate side-chain hydrophobicity loss.
+  - V241N rerank: Elevated because introducing Asn may create a new N-linked glycosylation site, adding glycan shield and favoring immune escape.
+  - N178T reject: Rejected because removing the N178 glycan would likely expose V1/V2 epitopes, counteracting the escape objective.
+  - L284T retain: Retained with moderate confidence; hydrophobic to polar change may affect epitope exposure but uncertain.
+  - I137T retain: Retained as it is a conservative mutation but with less clear impact on antibody escape.
+  - W424T retain: Retained; aromatic to polar substitution may disrupt conserved epitopes but may impair fitness.
+  - G456N retain: Retained because adding Asn at a flexible position may yield a new glycosylation motif.
+  - A280T reject: Rejected; alanine to threonine does not directly introduce a glycan and may not meaningfully alter antibody contact.
+  - R477T reject: Rejected; arginine to threonine in the gp41 region likely disrupts fusion function while giving little immune-escape benefit.
+Remaining doubts: The exact positions and downstream sequence context for the proposed glycosylation sites were not independently verified from the sequence string, so actual N-X-T/S motif creation is uncertain.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 1 — respond with a single JSON object, nothing else.

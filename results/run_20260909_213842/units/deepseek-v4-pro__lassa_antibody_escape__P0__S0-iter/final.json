@@ -1,0 +1,408 @@
+{
+  "unit_id": "deepseek-v4-pro__lassa_antibody_escape__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-pro",
+  "scenario_id": "lassa_antibody_escape",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K161N",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "Introduces an N-linked glycan at N161-I162-S163, likely sterically blocking antibody binding while preserving local folding better than charge reversal."
+      },
+      {
+        "rank": 2,
+        "mutation": "N119D",
+        "confidence": 0.75,
+        "evidence_refs": [],
+        "decision_summary": "Removes the N119 glycan and introduces a negative charge, likely disrupting antibody recognition with some cell-entry risk."
+      },
+      {
+        "rank": 3,
+        "mutation": "E151K",
+        "confidence": 0.7,
+        "evidence_refs": [],
+        "decision_summary": "Reverses surface charge in a likely antibody epitope loop to weaken antibody binding without removing a large side-chain feature."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No external evidence is available and further self-review is unlikely to improve the top-3 ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N119D": {
+      "candidate_id": "N119D",
+      "mutation": "N119D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Removes a predicted N-linked glycosylation sequon and alters charge in a known neutralizing epitope loop, likely reducing 37.2D/8.9F binding without grossly disrupting GP1 folding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "Removes the N119 glycan and introduces a negative charge, likely disrupting antibody recognition, though with some cell-entry risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K161N": {
+      "candidate_id": "K161N",
+      "mutation": "K161N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Removes a surface-exposed positive charge in a GP1 loop implicated in 12.1F/8.9F recognition; conservative size change should preserve local structure."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "Creating N161-I162-S163 adds an N-linked glycan, which should sterically block antibody binding while preserving local folding better than charge reversal."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E151K": {
+      "candidate_id": "E151K",
+      "mutation": "E151K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Charge reversal at an exposed GP1 residue likely disrupts antibody electrostatic contacts; may affect receptor binding but is a known escape-like substitution."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Surface charge reversal in a likely antibody epitope loop."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K116E": {
+      "candidate_id": "K116E",
+      "mutation": "K116E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Charge reversal in the same solvent-exposed loop as N119, likely to disrupt 37.2D/8.9F paratope contacts while retaining loop hydrophilicity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.58,
+          "rationale": "Charge reversal may aid escape, but the basic residue could contribute to receptor binding, lowering confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D122N": {
+      "candidate_id": "D122N",
+      "mutation": "D122N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.54,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Removes a negative charge near the N119 glycan site and may alter the epitope surface presented to neutralizing antibodies."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.54,
+          "rationale": "Surface charge loss may modestly alter antibody binding, but no glycan addition and uncertain epitope role."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y150F": {
+      "candidate_id": "Y150F",
+      "mutation": "Y150F",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Conservative aromatic change that may reduce antibody shape complementarity without strongly affecting GP1 folding or receptor contacts."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "Conservative removal of a hydroxyl is unlikely to produce strong antibody escape."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Conservative removal of a hydroxyl is unlikely to produce strong antibody escape.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "M153I": {
+      "candidate_id": "M153I",
+      "mutation": "M153I",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.57,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.57,
+          "rationale": "Hydrophobic substitution in an exposed loop likely alters the 12.1F epitope surface while preserving core packing."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "Hydrophobic conservative substitution is unlikely to strongly alter antibody binding."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Hydrophobic conservative substitution is unlikely to strongly alter antibody binding.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "H115Y": {
+      "candidate_id": "H115Y",
+      "mutation": "H115Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Bulky aromatic substitution at a polar exposed position may sterically interfere with antibody binding in the N119 loop epitope."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "Bulky aromatic substitution may affect receptor binding more than it improves escape."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Bulky aromatic substitution may affect receptor binding more than it improves escape.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "N119K": {
+      "candidate_id": "N119K",
+      "mutation": "N119K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Alternative charge swap at the same glycosylation site; stronger electrostatic disruption but slightly higher folding risk than N119D."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "Adding a positive charge at N119 is likely more disruptive to folding/receptor interaction than beneficial for escape."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Adding a positive charge at N119 is likely more disruptive to folding/receptor interaction than beneficial for escape.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "Q149R": {
+      "candidate_id": "Q149R",
+      "mutation": "Q149R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Introduces a positive charge adjacent to Y150/E151 and may weaken antibody contacts through altered local electrostatics."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "Weak surface charge change with uncertain epitope relevance."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Weak surface charge change with uncertain epitope relevance.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "N119Q": {
+      "candidate_id": "N119Q",
+      "mutation": "N119Q",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.66,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.66,
+          "rationale": "Removes the N119 glycan without introducing a charge, likely preserving entry better than N119D/K while still altering antibody binding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K161E": {
+      "candidate_id": "K161E",
+      "mutation": "K161E",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Charge reversal at K161 may disrupt antibody electrostatics without adding a glycan."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N158D": {
+      "candidate_id": "N158D",
+      "mutation": "N158D",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Nearby surface position; introducing a negative charge may alter the epitope without large side-chain removal."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K161N": null,
+    "N119D": null,
+    "E151K": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 13,
+    "n_rejected": 5,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,132 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the HIV-1 Tat protein (86 aa).
+
+GOAL: Maximize virus replication efficiency via Tat-mediated transactivation.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MEPVDPRLEPWKHPGSQPKTACTNCYCKKCCFHCQVCFMTKALGISYGRKKRRQRRRAHQNSQTHQASLSKQPTSQSRGDPTGPKE
+```
+IMPORTANT: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   No experimental structure is configured for this task — every query returns status = "not_applicable".
+
+4. functional_annotation — curated UniProt features for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide which biological tools (if any) you still need, on which candidates. Do NOT change candidates and do NOT output a STOP decision in this step — only request tools (empty array if you need none).
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+WARM-UP EVIDENCE (read-only preview of every tool over the current candidates — use it only to plan your FIRST tool selection; do NOT modify candidates in this step)
+[evolution_msa] S16A: 0.014493 (mutant frequency of A at position 16 = 0.0145 among 69 homol); K50R: 0.020408 (mutant frequency of R at position 50 = 0.0204 among 49 homol); K28R: 0.0 (mutant frequency of R at position 28 = 0.0000 among 69 homol); S62A: 0.0 (mutant frequency of A at position 62 = 0.0000 among 41 homol); S46A: 0.040816 (mutant frequency of A at position 46 = 0.0408 among 49 homol); E9K: 0.0 (mutant frequency of K at position 9 = 0.0000 among 68 homolo); K51R: 0.020833 (mutant frequency of R at position 51 = 0.0208 among 48 homol); R57K: 0.023256 (mutant frequency of K at position 57 = 0.0233 among 43 homol); P3A: 0.0 (mutant frequency of A at position 3 = 0.0000 among 69 homolo); K41R: 0.150943 (mutant frequency of R at position 41 = 0.1509 among 53 homol)
+[sequence_plm] S16A: 0.0004 (sequence-model mutation plausibility (ESM-1v masked marginal); K50R: 0.0016 (sequence-model mutation plausibility (ESM-1v masked marginal); K28R: 0.0007 (sequence-model mutation plausibility (ESM-1v masked marginal); S62A: 0.0041 (sequence-model mutation plausibility (ESM-1v masked marginal); S46A: 0.0021 (sequence-model mutation plausibility (ESM-1v masked marginal); E9K: 0.0008 (sequence-model mutation plausibility (ESM-1v masked marginal); K51R: 0.0019 (sequence-model mutation plausibility (ESM-1v masked marginal); R57K: 0.0077 (sequence-model mutation plausibility (ESM-1v masked marginal); P3A: 0.0014 (sequence-model mutation plausibility (ESM-1v masked marginal); K41R: 0.0014 (sequence-model mutation plausibility (ESM-1v masked marginal)
+[structure_compatibility] S16A: n/a; K50R: n/a; K28R: n/a; S62A: n/a; S46A: n/a; E9K: n/a; K51R: n/a; R57K: n/a; P3A: n/a; K41R: n/a
+[functional_annotation] S16A: 0.5 (no annotation table available); K50R: 0.5 (no annotation table available); K28R: 0.5 (no annotation table available); S62A: 0.5 (no annotation table available); S46A: 0.5 (no annotation table available); E9K: 0.5 (no annotation table available); K51R: 0.5 (no annotation table available); R57K: 0.5 (no annotation table available); P3A: 0.5 (no annotation table available); K41R: 0.5 (no annotation table available)
+[phenotype] S16A: n/a; K50R: n/a; K28R: n/a; S62A: n/a; S46A: n/a; E9K: n/a; K51R: n/a; R57K: n/a; P3A: n/a; K41R: n/a
+[toxin] S16A: 0.785 (ToxinPred3 toxicity of the mutated 36-aa window = 0.785 (Tox); K50R: 0.54 (ToxinPred3 toxicity of the mutated 41-aa window = 0.540 (Tox); K28R: 0.79 (ToxinPred3 toxicity of the mutated 41-aa window = 0.790 (Tox); S62A: 0.16 (ToxinPred3 toxicity of the mutated 41-aa window = 0.160 (Non); S46A: 0.69 (ToxinPred3 toxicity of the mutated 41-aa window = 0.690 (Tox); E9K: 0.67 (ToxinPred3 toxicity of the mutated 29-aa window = 0.670 (Tox); K51R: 0.4 (ToxinPred3 toxicity of the mutated 41-aa window = 0.400 (Tox); R57K: 0.23 (ToxinPred3 toxicity of the mutated 41-aa window = 0.230 (Non); P3A: 0.315 (ToxinPred3 toxicity of the mutated 23-aa window = 0.315 (Non); K41R: 0.795 (ToxinPred3 toxicity of the mutated 41-aa window = 0.795 (Tox)
+
+Current candidate mutations and predicted values (confidence):
+  S16A  confidence=0.850
+  K50R  confidence=0.820
+  K28R  confidence=0.800
+  S62A  confidence=0.780
+  S46A  confidence=0.750
+  E9K  confidence=0.720
+  K51R  confidence=0.700
+  R57K  confidence=0.680
+  P3A  confidence=0.650
+  K41R  confidence=0.650
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "S2",
+  "round": 1,
+  "next_tool_requests": [
+    {"tool": "evolution_msa | sequence_plm | structure_compatibility | functional_annotation | phenotype",
+     "candidates": ["<WT><POS><MUT>", ...],
+     "question": "one sentence",
+     "reason_for_call": "one sentence"}
+  ]
+}
+Rules: request only tools you still need; each tool call may evaluate at most
+10 active candidates; do not re-request a tool for a candidate already covered
+(a repeated call returns no new information). If you need no further evidence,
+output an EMPTY next_tool_requests array.
+</OUTPUT_SCHEMA>
+
+ROUND 1 — respond with a single JSON object, nothing else.

@@ -1,0 +1,146 @@
+{
+  "unit_id": "gpt-5.6-luna__cbs_lof__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gpt-5.6-luna",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.98,
+        "evidence_refs": [],
+        "decision_summary": "K119 is position-verified and lies in a region expected to be important for PLP-dependent CBS catalysis. Replacing the conserved lysine with alanine is strongly predicted to abolish activity."
+      },
+      {
+        "rank": 2,
+        "mutation": "E201A",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "E201 is position-verified within the catalytic core. Alanine substitution should substantially perturb catalytic electrostatics or local structure, though its direct catalytic role is less certain than K119."
+      },
+      {
+        "rank": 3,
+        "mutation": "C52A",
+        "confidence": 0.86,
+        "evidence_refs": [],
+        "decision_summary": "C52 is position-verified in the N-terminal heme/regulatory region. Cysteine removal may disrupt CBS regulation or structural integrity and thereby reduce activity, but could have a less direct catalytic effect."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No external evidence is available and the current verified pool is sufficient for the requested Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.98,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.98,
+          "rationale": "Lys119 is a strong candidate for the PLP Schiff-base-forming catalytic lysine; replacing it with alanine is expected to directly eliminate catalysis."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.98,
+          "rationale": "Position 119 is confirmed to be lysine, and substitution of a conserved catalytic lysine is strongly expected to disrupt PLP-dependent CBS catalysis."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C52A": {
+      "candidate_id": "C52A",
+      "mutation": "C52A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.86,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.86,
+          "rationale": "Cys52 is positioned in the N-terminal heme-associated region, and alanine substitution is likely to disrupt heme coordination and substantially impair CBS activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.86,
+          "rationale": "Position 52 is confirmed to be cysteine and is plausibly relevant to the N-terminal heme/regulatory region, but this may impair regulation more than directly abolish catalysis."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E201A": {
+      "candidate_id": "E201A",
+      "mutation": "E201A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Glu201 lies in the catalytic core and may contribute to substrate positioning or proton transfer; alanine substitution could strongly compromise enzymatic turnover."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "Position 201 is confirmed to be glutamate and lies within the catalytic core, but its direct catalytic importance is less certain than K119; retain as the second-ranked candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K119A": null,
+    "E201A": null,
+    "C52A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 3,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 2,
+    "c0_size": 3,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

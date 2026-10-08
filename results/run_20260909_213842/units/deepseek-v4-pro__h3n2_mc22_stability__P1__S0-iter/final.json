@@ -1,0 +1,448 @@
+{
+  "unit_id": "deepseek-v4-pro__h3n2_mc22_stability__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-pro",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "G463A",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "Gly to Ala in a loop near Cys466 likely reduces backbone entropy and stabilizes local structure without removing a buried polar interaction."
+      },
+      {
+        "rank": 2,
+        "mutation": "G465A",
+        "confidence": 0.52,
+        "evidence_refs": [],
+        "decision_summary": "Gly to Ala close to G463A likely has a similar loop-rigidifying effect and modest stability benefit."
+      },
+      {
+        "rank": 3,
+        "mutation": "G360A",
+        "confidence": 0.47,
+        "evidence_refs": [],
+        "decision_summary": "Gly to Ala in a surface-exposed loop should reduce unfolding entropy with limited functional risk."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further self-iteration without external evidence is unlikely to improve the ranking of the current candidate pool."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "G463A": {
+      "candidate_id": "G463A",
+      "mutation": "G463A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Gly in the HA2 C-terminal helix is helix-destabilizing; replacement by Ala increases helix propensity and should rigidify the folded trimer."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Gly to Ala in a loop near Cys466 likely reduces backbone entropy and may stabilize local structure without removing a buried polar interaction."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G465A": {
+      "candidate_id": "G465A",
+      "mutation": "G465A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Adjacent Gly in the same C-terminal helix also lowers helix stability; Ala substitution may further stabilize this region without disturbing the trimer interface."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.52,
+          "rationale": "Gly to Ala close to G463A likely has a similar loop-rigidifying effect and modest stability benefit."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G360A": {
+      "candidate_id": "G360A",
+      "mutation": "G360A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.47,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Gly in a likely turn/loop of HA2; reducing main-chain flexibility with Ala can lower the entropy of the unfolded state and improve folding stability."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.47,
+          "rationale": "Gly to Ala in a surface-exposed loop should reduce unfolding entropy with limited functional risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y98F": {
+      "candidate_id": "Y98F",
+      "mutation": "Y98F",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.44,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.44,
+          "rationale": "Buried Tyr in HA1 core may not need its hydroxyl; Phe improves hydrophobic packing if the hydroxyl is not involved in critical H-bonding."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.28,
+          "rationale": "Tyr98 is conserved near the receptor-binding site; removing its hydroxyl may impair HA function more than any stability gain."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Tyr98 is conserved near the receptor-binding site; removing its hydroxyl may impair HA function more than any stability gain.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "E443Q": {
+      "candidate_id": "E443Q",
+      "mutation": "E443Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Charged Glu in a partially hydrophobic HA2 environment may be destabilizing; neutralizing to Gln can reduce desolvation cost while retaining polarity."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "Glu443 may form a salt bridge or hydrogen bond; substituting to Gln risks destabilizing the folded state."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Glu443 may form a salt bridge or hydrogen bond; substituting to Gln risks destabilizing the folded state.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "D441E": {
+      "candidate_id": "D441E",
+      "mutation": "D441E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.38,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "Conservative Asp to Glu extension at HA2 position 112 may allow a more favorable salt bridge or surface interaction in the stem."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "Conservative surface charge change is unlikely to improve stability meaningfully and may alter local electrostatics."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Conservative surface charge change is unlikely to improve stability meaningfully and may alter local electrostatics.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "S400A": {
+      "candidate_id": "S400A",
+      "mutation": "S400A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.43,
+          "rationale": "Ser in an HA2 helical segment is less helix-favorable than Ala; removal of a nonessential polar side chain can improve local helix stability."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "Ser to Ala removes a surface polar group and may slightly improve local packing, but the effect is less certain than Gly to Ala."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G362A": {
+      "candidate_id": "G362A",
+      "mutation": "G362A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.46,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.41,
+          "rationale": "Gly in a potentially flexible loop region; Ala replacement reduces backbone entropy and may stabilize the adjacent folded HA2 structure."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.46,
+          "rationale": "Gly to Ala in the same local loop as G360A; retained as a second moderate-confidence stability candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "M168L": {
+      "candidate_id": "M168L",
+      "mutation": "M168L",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Met to Leu in HA1 may improve hydrophobic core packing if the longer Met side chain creates a cavity or strain."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.22,
+          "rationale": "Conservative hydrophobic substitution has low expected stability benefit and possible packing disruption."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Conservative hydrophobic substitution has low expected stability benefit and possible packing disruption.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G504A": {
+      "candidate_id": "G504A",
+      "mutation": "G504A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Replacing the terminal Gly with Ala slightly reduces C-terminal flexibility and may have a marginal stabilizing effect on the overall fold."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "C-terminal Gly to Ala likely does not affect folded core stability and may not improve environmental persistence."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "C-terminal Gly to Ala likely does not affect folded core stability and may not improve environmental persistence.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G240A": {
+      "candidate_id": "G240A",
+      "mutation": "G240A",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Gly to Ala in a loop reduces backbone flexibility without introducing charge, likely giving a modest stability gain."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G319A": {
+      "candidate_id": "G319A",
+      "mutation": "G319A",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.43,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.43,
+          "rationale": "Gly to Ala at another loop position should provide entropic stabilization with low predicted functional risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G330A": {
+      "candidate_id": "G330A",
+      "mutation": "G330A",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.42,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Gly to Ala in a surface loop likely improves local rigidity and folding stability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G386A": {
+      "candidate_id": "G386A",
+      "mutation": "G386A",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.41,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.41,
+          "rationale": "Gly to Ala in a probable loop region is expected to give mild stabilization with limited functional penalty."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G275A": {
+      "candidate_id": "G275A",
+      "mutation": "G275A",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 10,
+      "current_confidence": 0.38,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "Gly to Ala near a disulfide/Cys may rigidify a disulfide-adjacent loop, but the structural context is less certain."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "G463A": null,
+    "G465A": null,
+    "G360A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 15,
+    "n_rejected": 5,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

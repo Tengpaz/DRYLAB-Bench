@@ -1,0 +1,336 @@
+{
+  "unit_id": "deepseek-v4-pro__hiv_bg505_antibody_escape__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-pro",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N300S",
+        "confidence": 0.7,
+        "evidence_refs": [],
+        "decision_summary": "V3-region glycan-removal substitution likely to alter antibody recognition while the side-chain change is relatively conservative."
+      },
+      {
+        "rank": 2,
+        "mutation": "T302A",
+        "confidence": 0.62,
+        "evidence_refs": [],
+        "decision_summary": "V3-adjacent substitution at a position near the N300 glycan site, chosen to shift local epitope surface without removing a large polar side chain."
+      },
+      {
+        "rank": 3,
+        "mutation": "K160E",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "V2 charge-change candidate that may reduce antibody binding by altering an exposed charged surface while retaining a polar residue."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further self-iteration is unlikely to improve the heuristic Top-3 because no external functional or fitness evidence is available in this condition."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N330S": {
+      "candidate_id": "N330S",
+      "mutation": "N330S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Removes the N330/N332 glycan targeted by V3-glycan bnAbs such as PGT121 and 10-1074; this glycan knockout is well-tolerated in BG505 and strongly increases escape."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.78,
+          "rationale": "WT residue at position 330 is C in the supplied sequence, not N; the candidate is invalid."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "WT residue at position 330 is C in the supplied sequence, not N; the candidate is invalid.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "S332A": {
+      "candidate_id": "S332A",
+      "mutation": "S332A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Abolishes the N330 glycosylation motif by removing the required Ser/Thr at position 332, likely producing similar V3-glycan bnAb escape with slightly less direct Asn perturbation."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.72,
+          "rationale": "WT residue at position 332 is V in the supplied sequence, not S; the candidate is invalid."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "WT residue at position 332 is V in the supplied sequence, not S; the candidate is invalid.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "N300S": {
+      "candidate_id": "N300S",
+      "mutation": "N300S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Removes the N300/N301 V3 glycan, another key contact for V3-glycan bnAbs; expected to increase escape while maintaining the local V3 structure."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Valid glycan-removal candidate in the V3 region; retained."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T302A": {
+      "candidate_id": "T302A",
+      "mutation": "T302A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Eliminates the N300 glycosylation motif by changing the third position; likely escape V3-glycan antibodies, though may modestly alter V3 loop flexibility."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "Valid V3-adjacent substitution; retained."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K160E": {
+      "candidate_id": "K160E",
+      "mutation": "K160E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Reverses a positively charged residue in the V2 apex patch recognized by PG9/PG16-class bnAbs; charge reversal often disrupts antibody binding with limited replication cost."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Valid charge-change candidate in V2; retained."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K162E": {
+      "candidate_id": "K162E",
+      "mutation": "K162E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Disrupts the V2 apex lysine-rich epitope and may escape V2-directed bnAbs while retaining overall Env folding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Valid charge-change candidate in V2; retained."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N132S": {
+      "candidate_id": "N132S",
+      "mutation": "N132S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Removes a V1 glycan that can shield underlying epitopes; glycan loss may increase escape from glycan-dependent antibodies and is often tolerated."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.48,
+          "rationale": "Valid glycan-removal candidate; retained."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N147S": {
+      "candidate_id": "N147S",
+      "mutation": "N147S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Removes a V1 glycan and can alter V1/V2 loop exposure, potentially reducing recognition by V1/V2-directed neutralizing antibodies."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Valid glycan-removal candidate; retained."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N181S": {
+      "candidate_id": "N181S",
+      "mutation": "N181S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.44,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.44,
+          "rationale": "Removes a V2 glycan site, likely shifting the V2 loop glycan shield and reducing binding by some V2-glycan bnAbs."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.44,
+          "rationale": "Valid glycan-removal candidate; retained."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N184S": {
+      "candidate_id": "N184S",
+      "mutation": "N184S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.42,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Removes another V2 glycan, further modulating the V2 loop surface to escape glycan-dependent antibodies while preserving overall gp160 folding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.42,
+          "rationale": "Valid glycan-removal candidate; retained."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "N300S": null,
+    "T302A": null,
+    "K160E": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

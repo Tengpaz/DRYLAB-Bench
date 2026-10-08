@@ -1,0 +1,284 @@
+{
+  "unit_id": "deepseek-v4-pro__hiv_bg505_antibody_escape__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-pro",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N330S",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "Removes the V3/C3 N332-supersite glycan, likely altering neutralization epitopes while preserving core Env folding and replication fitness."
+      },
+      {
+        "rank": 2,
+        "mutation": "T138A",
+        "confidence": 0.64,
+        "evidence_refs": [],
+        "decision_summary": "Abolishes the N136 glycan sequon more conservatively than N136S, reducing antibody recognition while lowering local destabilization risk."
+      },
+      {
+        "rank": 3,
+        "mutation": "N300S",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "Removes a V3 stem glycan, plausibly contributing to antibody escape and likely tolerated for replication."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No external evidence is available and another LLM-only round is unlikely to change the Top-3 glycan-knockout candidates."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N330S": {
+      "candidate_id": "N330S",
+      "mutation": "N330S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Removes the N330/N332-equivalent V3 glycan, likely disrupting PGT121-class antibody binding. Located in a variable surface loop, so replication fitness may be partially retained."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "V3/C3 glycan knockout likely to alter neutralization epitopes while preserving core fitness."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T138A": {
+      "candidate_id": "T138A",
+      "mutation": "T138A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.64,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Eliminates the N136 glycan in V1 by altering the sequon, likely reducing V1/V2 apex antibody recognition while being a conservative loop substitution."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.64,
+          "rationale": "Thr-to-Ala abolishes the N136 sequon more conservatively than removing Asn; rank above N136S."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N151S": {
+      "candidate_id": "N151S",
+      "mutation": "N151S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.56,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Removes a V1/V2 glycan implicated in apex-directed antibody contacts, potentially shifting the local glycan shield without abolishing core folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.56,
+          "rationale": "V1/V2 glycan removal plausible but slightly more likely to affect trimer stability than top candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N136S": {
+      "candidate_id": "N136S",
+      "mutation": "N136S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.57,
+          "rationale": "Directly removes the N136 glycan in V1, likely impairing glycan-dependent antibody binding; the loop location suggests partial fitness tolerance."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.52,
+          "rationale": "Direct Asn removal is redundant with T138A and less conservative; lower priority."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N300S": {
+      "candidate_id": "N300S",
+      "mutation": "N300S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Removes a glycan adjacent to the V3 loop, likely altering the V3 glycan supersite recognized by multiple bnAbs while preserving basic Env structure."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "V3 stem glycan removal likely contributes to escape and is plausible for fitness."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N184S": {
+      "candidate_id": "N184S",
+      "mutation": "N184S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.54,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Removes a V2 loop glycan, potentially modulating V2-dependent antibody epitopes and shifting the glycan shield on a flexible surface region."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.54,
+          "rationale": "V2 glycan knockout may contribute to escape but has moderate fitness uncertainty."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N403S": {
+      "candidate_id": "N403S",
+      "mutation": "N403S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Removes a V4 glycan and may alter the local surface shield, though its contribution to fitness is less certain."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.4,
+          "rationale": "C3-proximal glycan removal is more likely to affect folding/CD4 contact; low confidence not competitive for final top-3."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "C3-proximal glycan removal is more likely to affect folding/CD4 contact; low confidence not competitive for final top-3.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "N408S": {
+      "candidate_id": "N408S",
+      "mutation": "N408S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Removes another V4 glycan, potentially contributing to immune escape by reshaping a variable surface loop."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.4,
+          "rationale": "C3-proximal glycan removal has high fitness/folding risk; low confidence not competitive."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "C3-proximal glycan removal has high fitness/folding risk; low confidence not competitive.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "N330S": null,
+    "T138A": null,
+    "N300S": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 2,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

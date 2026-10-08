@@ -1,0 +1,356 @@
+{
+  "unit_id": "qwen3.8-max__hiv_tat_replication__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "hiv_tat_replication",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "S46A",
+        "confidence": 0.62,
+        "evidence_refs": [],
+        "decision_summary": "S46 phosphorylation may impose a regulatory constraint on Tat conformational dynamics at the core-ARM boundary; alanine substitution removes this potential inhibitory modification, possibly enhancing transactivation efficiency."
+      },
+      {
+        "rank": 2,
+        "mutation": "K50R",
+        "confidence": 0.48,
+        "evidence_refs": [],
+        "decision_summary": "K50R introduces a guanidinium group at the N-terminal edge of the ARM that may form additional specific hydrogen bonds with the TAR bulge, though loss of the K50 acetylation site (important for Tat recycling) introduces uncertainty."
+      },
+      {
+        "rank": 3,
+        "mutation": "K41R",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "K41R introduces a guanidinium group in the core domain that may enhance electrostatic interactions with Cyclin T1 or co-factors, though the mechanistic rationale is less direct than ARM-targeted mutations."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Without external evidence tools, further iteration cannot resolve key uncertainties (e.g., K50 acetylation trade-off, S46 phosphorylation directionality), and the Top-3 ranking is stable."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "S46A": {
+      "candidate_id": "S46A",
+      "mutation": "S46A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "S46 is a CDK2 phosphorylation site in the Tat core region; removing this phosphorylation may prevent inhibitory modulation and enhance transactivation efficiency."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "S46 phosphorylation may be inhibitory to Tat function; alanine substitution removes this potential regulatory constraint, possibly enhancing transactivation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R52K": {
+      "candidate_id": "R52K",
+      "mutation": "R52K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.42,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "R52 makes critical contacts with the TAR RNA bulge; K substitution preserves positive charge while altering side-chain geometry, potentially optimizing TAR binding affinity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.42,
+          "rationale": "Conservative R-to-K in the basic domain likely loses specific guanidinium-TAR hydrogen bonds, making improvement unlikely; confidence reduced."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y47F": {
+      "candidate_id": "Y47F",
+      "mutation": "Y47F",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Y47 lies in the core region adjacent to the TAR-binding interface; F substitution retains aromatic stacking potential while removing a hydroxyl that may not optimally contribute to TAR contacts."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Y47 is critical for Tat-TAR interaction and Cyclin T1 binding; removing the hydroxyl group is well-documented to impair transactivation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Y47 is critical for Tat-TAR interaction and Cyclin T1 binding; removing the hydroxyl group is well-documented to impair transactivation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "R55K": {
+      "candidate_id": "R55K",
+      "mutation": "R55K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "R55 contributes to electrostatic interactions with TAR RNA; conservative K substitution maintains charge and may subtly improve helix-RNA complementarity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "R55 is in the arginine-rich motif critical for TAR binding; R-to-K substitution likely weakens specific RNA contacts."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R56K": {
+      "candidate_id": "R56K",
+      "mutation": "R56K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "R56 makes specific contacts within the TAR major groove; K substitution preserves the positive charge while offering a longer, more flexible side chain that could enhance binding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "Same reasoning as R55K; arginine guanidinium groups form specific bidentate H-bonds with TAR that lysine cannot replicate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R57K": {
+      "candidate_id": "R57K",
+      "mutation": "R57K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.33,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "R57 contributes to the basic arginine-rich motif that docks into TAR; K substitution is conservative and may fine-tune the electrostatic interface."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.33,
+          "rationale": "R57 is at the C-terminal edge of the basic domain; R-to-K may reduce TAR affinity and nuclear localization signal efficiency."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R53K": {
+      "candidate_id": "R53K",
+      "mutation": "R53K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "R53 participates in TAR RNA recognition; K substitution maintains the positive charge density of the basic region while altering hydrogen-bonding geometry."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "R53 is central to the ARM; substitution to lysine likely reduces TAR binding specificity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K41R": {
+      "candidate_id": "K41R",
+      "mutation": "K41R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "K41 is in the core region near the TAR-binding interface; R substitution introduces a guanidinium group that may form additional hydrogen bonds with TAR RNA."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.52,
+          "rationale": "K41R introduces a guanidinium group in the core domain that may enhance electrostatic interactions with TAR or co-factors, slightly improving transactivation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T64A": {
+      "candidate_id": "T64A",
+      "mutation": "T64A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "T64 is in the C-terminal region involved in protein-protein interactions; A substitution removes a potential phosphorylation site and may alter interactions with host factors."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "T64 is a CDK9 phosphorylation site essential for Tat-P-TEFb interaction and transcriptional elongation; ablating it would impair transactivation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "T64 is a CDK9 phosphorylation site essential for Tat-P-TEFb interaction and transcriptional elongation; ablating it would impair transactivation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "H13R": {
+      "candidate_id": "H13R",
+      "mutation": "H13R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "H13 is in the N-terminal transactivation domain; R substitution introduces a positive charge that could modulate P-TEFb recruitment or protein stability."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "H13 is in the N-terminal proline-rich region with unclear functional role; H-to-R is speculative with limited rationale for improvement."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K50R": {
+      "candidate_id": "K50R",
+      "mutation": "K50R",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "K50 is in the basic domain; K-to-R introduces a guanidinium group that may form additional specific hydrogen bonds with TAR bulge, potentially enhancing binding affinity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "S46A": null,
+    "K50R": null,
+    "K41R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 11,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,525 @@
+{
+  "unit_id": "glm-5.3__psae_stability_disruption__P0__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "F60P",
+        "confidence": 0.74,
+        "evidence_refs": [
+          "E00001",
+          "E00004",
+          "E00007"
+        ],
+        "decision_summary": "Fully conserved Phe60 replaced by Pro is evolutionarily intolerable, scored implausible by ESM-1v, and only modestly structurally compatible on the 1PSE backbone. Buried aromatic-to-Pro substitution in the C-terminal core is strongly folding-disruptive."
+      },
+      {
+        "rank": 2,
+        "mutation": "W17P",
+        "confidence": 0.7,
+        "evidence_refs": [
+          "E00010"
+        ],
+        "decision_summary": "Trp17 is fully conserved with zero evolutionary tolerance for substitution; replacing a conserved buried aromatic with proline in the N-terminal hydrophobic core is strongly destabilizing. Lacks PLM/structure evidence, capping confidence slightly below F60P."
+      },
+      {
+        "rank": 3,
+        "mutation": "G31P",
+        "confidence": 0.62,
+        "evidence_refs": [
+          "E00002",
+          "E00005",
+          "E00008"
+        ],
+        "decision_summary": "Gly31→Pro is evolutionarily intolerable, implausible to the PLM, and the most structurally incompatible candidate on the 1PSE backbone. Gly→Pro can occasionally be tolerated in turns, so it ranks third among the disruptive Pro substitutions."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Final round reached and the top three disruptive Pro substitutions are stable and well-supported by converging MSA, PLM, and structure evidence."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "F60P": {
+      "candidate_id": "F60P",
+      "mutation": "F60P",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.74,
+      "evidence_refs": [
+        "E00001",
+        "E00004",
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.66,
+          "rationale": "Phe-to-Pro in the C-terminal region disrupts helix and removes aromatic packing simultaneously."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.74,
+          "rationale": "Proline replacing a buried conserved aromatic is structurally intolerable (zero MSA frequency, ESM-1v ~0, MPNN ΔlogP=-3.31), consistent with helix/core disruption. Slightly less extreme than G31P on the PLM/MPNN dimensions."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.74,
+          "rationale": "Zero evolutionary tolerance and lowest PLM plausibility with mild structural penalty; core aromatic-to-Pro remains the strongest disruption hypothesis."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.74,
+          "rationale": "Conserved buried aromatic replaced by proline; evolution and PLM scores near zero indicate low natural tolerance, consistent with core disruption."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.74,
+          "rationale": "F60 is fully conserved (E00001), ESM-1v scores the substitution as implausible (E00004), and ProteinMPNN shows only modest structural compatibility (E00007), all consistent with a folding-disruptive knockout mutation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W17P": {
+      "candidate_id": "W17P",
+      "mutation": "W17P",
+      "first_seen_round": 1,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "A second conserved aromatic-to-Pro substitution (Trp17 in the N-terminal hydrophobic core) follows the same logic that made F60P disruptive: burying a proline where a large aromatic packs. Needs tool evidence next round."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.66,
+          "rationale": "W17 is conserved (entropy 1.485) with zero Pro among homologs, supporting disruptive potential; still needs PLM and structure evidence to compare with F60P."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "Trp17 is highly conserved per MSA (z=0.000) and a Pro substitution in the N-terminal hydrophobic core should destabilize folding; still needs structure/PLM evidence next round."
+        },
+        {
+          "round": 4,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "E00010 shows zero evolutionary tolerance for Trp17 substitution (mutant-residue frequency ~0), confirming W17 is conserved; a conserved buried aromatic replaced by proline is strongly destabilizing. Confidence nudged up slightly but capped pending PLM/structure evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "F60P": 8.512,
+    "W17P": 0.0,
+    "G31P": 0.624
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "F60P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 60 = 0.0000 among 42 homologs; conservation entropy 1.175 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F60P",
+          "G31P",
+          "P35G"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G31P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 31 = 0.0000 among 42 homologs; conservation entropy 1.299 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F60P",
+          "G31P",
+          "P35G"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "P35G",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.02381,
+        "normalized": 0.02381,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of G at position 35 = 0.0238 among 42 homologs; conservation entropy 1.160 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F60P",
+          "G31P",
+          "P35G"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F60P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F60P",
+          "G31P",
+          "P35G"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G31P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0014,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F60P",
+          "G31P",
+          "P35G"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "P35G",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0004,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F60P",
+          "G31P",
+          "P35G"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F60P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -3.3132,
+        "normalized": 0.240899,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-3.3132)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F60P",
+          "G31P",
+          "P35G"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G31P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -5.3776,
+        "normalized": 0.016266,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-5.3776)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "glm-5.3__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F60P",
+          "G31P",
+          "P35G"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "P35G",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.4551,
+        "normalized": 0.116964,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-4.4551)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "glm-5.3__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F60P",
+          "G31P",
+          "P35G"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W17P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 17 = 0.0000 among 43 homologs; conservation entropy 1.485 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "glm-5.3__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17P"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 2,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 10,
+    "c0_size": 1,
+    "final_novelty": 0.6666666666666666,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

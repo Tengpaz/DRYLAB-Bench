@@ -1,0 +1,306 @@
+{
+  "unit_id": "deepseek-v4-flash__oct1_transport_ablation__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "E454Q",
+        "confidence": 0.76,
+        "evidence_refs": [],
+        "decision_summary": "Removal of the negative charge at a critical acidic residue should disrupt cationic substrate binding while maintaining side-chain volume. This is the most direct approach to abolish transport without major structural destabilization."
+      },
+      {
+        "rank": 2,
+        "mutation": "F160A",
+        "confidence": 0.7,
+        "evidence_refs": [],
+        "decision_summary": "Alanine substitution at this large aromatic residue likely blocks the translocation pathway by reducing hydrophobic bulk. It is expected to preserve overall folding while impairing substrate movement."
+      },
+      {
+        "rank": 3,
+        "mutation": "W216A",
+        "confidence": 0.68,
+        "evidence_refs": [],
+        "decision_summary": "Tryptophan in a hydrophobic gate region may be crucial for substrate passage; replacement with alanine may obstruct the pathway. This mutation is selected for its selectively disruptive effect on transport."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further self-iteration is unlikely to improve the Top-3 given no external evidence and a clear preference for established transport-critical residues."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "F160A": {
+      "candidate_id": "F160A",
+      "mutation": "F160A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "F160 is a conserved aromatic residue likely lining the substrate translocation pore; alanine removal of the aromatic side chain should disrupt cation-pi substrate interactions while being structurally tolerated."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Large aromatic residue in a likely translocation cavity; alanine replacement may block transport without broad misfolding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W216A": {
+      "candidate_id": "W216A",
+      "mutation": "W216A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.64,
+          "rationale": "W216 is positioned near the central transport cavity and likely contributes to broad cation recognition; removing the bulky indole should block substrate accommodation without globally unfolding the protein."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "Tryptophan in a hydrophobic gate region; removal may obstruct the substrate pathway but still retain overall scaffold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E454Q": {
+      "candidate_id": "E454Q",
+      "mutation": "E454Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.76,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "E454 is a transmembrane glutamate whose negative charge may be required for substrate-coupled conformational changes; conservative neutralization to glutamine should preserve fold while abolishing transport."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.76,
+          "rationale": "Charge removal at a likely acidic substrate-binding residue should disrupt cationic ligand recognition while retaining side-chain volume, making it the strongest candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y360A": {
+      "candidate_id": "Y360A",
+      "mutation": "Y360A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Y360 resides in a hydrophobic/aromatic segment of the permeation pathway; deleting its side-chain contacts should impair substrate turnover with minimal disruption of overall helix packing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Aromatic residue may help define the inward-facing cavity; kept as a secondary candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D425A": {
+      "candidate_id": "D425A",
+      "mutation": "D425A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.56,
+          "rationale": "D425 is a buried aspartate that may participate in cation coordination or proton-coupled cycling; replacing it with alanine should remove the essential charge while retaining a small tolerated side chain."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "Another acidic residue that could contribute to cation binding, but loss of side-chain length lowers confidence in folding preservation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y220A": {
+      "candidate_id": "Y220A",
+      "mutation": "Y220A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.54,
+          "rationale": "Y220 projects toward the predicted inward-facing cavity and may contact transported cations; removal of the aromatic hydroxyl group is likely to reduce transport activity while maintaining backbone stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Near W216 and possibly involved in aromatic ligand contacts, but less clearly essential than top candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F243A": {
+      "candidate_id": "F243A",
+      "mutation": "F243A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.44,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "F243 is another conserved aromatic lining the substrate-binding region; truncation to alanine should narrow the cavity and block typical OCT1 substrates without introducing charged or polar destabilization."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.44,
+          "rationale": "Potentially structural rather than substrate-direct; kept for completeness but less likely to selectively abolish transport."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F378A": {
+      "candidate_id": "F378A",
+      "mutation": "F378A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "F378 contributes to the hydrophobic lining of the transport pathway and may be important for conformational reorientation; alanine substitution should reduce transport capacity without severe misfolding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Low confidence; may affect folding more than transport."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R60A": {
+      "candidate_id": "R60A",
+      "mutation": "R60A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.42,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "R60 is located near the extracellular vestibule and may help recruit cationic substrates; alanine replacement could lower transport by reducing initial substrate contact while preserving core structure."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.18,
+          "rationale": "Arginine at N-terminal region appears less likely to participate in cationic substrate binding; risk of non-specific effect outweighs value."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Arginine at N-terminal region appears less likely to participate in cationic substrate binding; risk of non-specific effect outweighs value.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "E454Q": null,
+    "F160A": null,
+    "W216A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 9,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 9,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

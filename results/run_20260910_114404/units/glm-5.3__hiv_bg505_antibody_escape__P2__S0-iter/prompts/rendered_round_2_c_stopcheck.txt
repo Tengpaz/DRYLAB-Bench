@@ -1,0 +1,112 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in HIV-1 envelope glycoprotein gp160 (BG505), 860 aa.
+
+THE DESIGN OBJECTIVE: Increase HIV-1 Env (BG505) antibody immune escape while retaining replication fitness, while preserving overall folding.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MRVMGIQRNCQHLFRWGTMILGMIIICSAAENLWVTVYYGVPVWKDAETTLFCASDAKAYETEKHNVWATHACVPTDPNPQEIHLENVTEEFNMWKNNMVEQMHTDIISLWDQSLKPCVKLTPLCVTLQCTNVTNNITDDMRGELKNCSFNMTTELRDKKQKVYSLFYRLDVVQINENQGNRSNNSNKEYRLINCNTSAITQACPKVSFEPIPIHYCAPAGFAILKCKDKKFNGTGPCPSVSTVQCTHGIKPVVSTQLLLNGSLAEEEVMIRSENITNNAKNILVQFNTPVQINCTRPNNNTRKSIRIGPGQAFYATGDIIGDIRQAHCNVSKATWNETLGKVVKQLRKHFGNNTIIRFANSSGGDLEVTTHSFNCGGEFFYCNTSGLFNSTWISNTSVQGSNSTGSNDSITLPCRIKQIINMWQRIGQAMYAPPIQGVIRCVSNITGLILTRDGGSTNSTTETFRPGGGDMRDNWRSELYKYKVVKIEPLGVAPTRAKRRVVGREKRAVGIGAVFLGFLGAAGSTMGAASMTLTVQARNLLSGIVQQQSNLLRAIEAQQHLLKLTVWGIKQLQARVLAVERYLRDQQLLGIWGCSGKLICTTNVPWNSSWSNRNLSEIWDNMTWLQWDKEISNYTQIIYGLLEESQNQQEKNEQDLLALDKWASLWNWFDISNWLWYIKIFIMIVGGLIGLRIVFAVLSVIHRVRQGYSPLSFQTHTPNPRGLDRPERIEEEDGEQDRGRSTRLVSGFLALAWDDLRSLCLFCYHRLRDFILIAARIVELLGHSSLKGLRLGWEGLKYLWNLLAYWGRELKISAINLFDTIAIAVAEWTDRVIEIGQRLCRAFLHIPRRIRQGLERALL
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  N301A  confidence=0.550  rank=1
+  N300A  confidence=0.450  rank=2
+  N337A  confidence=0.420  rank=3
+  N275A  confidence=0.350  rank=4
+  N184A  confidence=0.280  rank=5
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  - add N300A (round 1): The adjacent N300 forms an alternate glycan site in the NNNT sequon at the V3 base and can partially compensate for N301 loss; its removal could further blunt glycan-dependent bNAb binding. Lower confidence due to redundant glycan occupancy patterns.
+  - add N337A (round 1): N337 (NET at 337-339) is a V3-stem glycan contributing to antibody access in the V3 region; deletion may reduce binding of glycan/V3-directed antibodies. Position is in a variable loop, so folding risk is moderate.
+  - add N275A (round 1): N275 is a conserved C2-region glycan near the CD4bs/loop D; deletion has been reported to reduce VRC01-class sensitivity. However, proximity to conserved structures raises folding/fitness risk.
+  - add N184A (round 1): N184 lies in the V1/V2 region, and altering V2 glycans can affect apex-directed bNAbs. High structural sensitivity of the apex trimer makes this risky for folding and fitness.
+  - add N135A (round 1): N135 is a V1-loop glycan site; V1 glycan changes are a known general escape axis with often-acceptable fitness costs. Low confidence because no specific antibody target at this site in BG505 is recalled.
+Changes this round:
+  - N301A retain: N301 is the V3-loop high-mannose glycan at the 'N301/N332' immunodominant face and is a well-documented bNAb contact; its loss is a plausible escape route with tolerable fitness cost in BG505.
+  - N300A retain: Adjacent sequon glycan can shift occupancy; removing it may destabilize residual glycan shielding of the V3 base after N301 loss, but compensatory occupancy patterns lower confidence.
+  - N337A rerank: V3-stem glycan near the base contributes to glycan-dependent antibody recognition; slight upward adjustment because it is structurally peripheral and likely folding-tolerant.
+  - N275A rerank: N275 removal reduces VRC01-class CD4bs sensitivity, but its conservation near loop D raises fitness risk; modest raise as CD4bs escape is a distinct, valuable escape axis.
+  - N184A retain: V2-apex glycan edits can reduce apex bNAb binding but trimer-apex structural sensitivity keeps confidence low.
+  - N135A reject: No specific antibody-recallable target at N135 in BG505; V1 glycan removal is speculative and unlikely to outperform the V3-base glycan deletions.
+Remaining doubts: Exact numbering and glycan occupancy effects for N300/N337 in this sequence are unverified without tools.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

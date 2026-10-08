@@ -1,0 +1,241 @@
+{
+  "unit_id": "glm-5.3__hiv_bg505_antibody_escape__P2__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N301A",
+        "confidence": 0.46,
+        "evidence_refs": [
+          "E00001",
+          "E00002",
+          "E00003"
+        ],
+        "decision_summary": "N301 glycan deletion in the V3 loop has the strongest direct phenotype evidence (EVEscape z=0.558) matching the escape objective. PLM and MSA are neutral-to-weak, so fitness retention remains uncertain, capping confidence."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Reached round 4 with max_tool_calls=4; additional evidence would not change the Top-3 ordering materially."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N301A": {
+      "candidate_id": "N301A",
+      "mutation": "N301A",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.46,
+      "evidence_refs": [
+        "E00001",
+        "E00002",
+        "E00003",
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "N301 glycan shields the V3 base; deletion is a known escape for V3-glycan bNAbs like 10-1074, though with some fitness cost."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "N301 is a conserved V3 glycan site whose loss confers escape from V3-glycan bNAbs (e.g., PGT121-class) while BG505 retains replication; kept pending tool evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.42,
+          "rationale": "EVEscape score is moderate (0.558) and MSA shows some natural tolerance of Ala at 301, but ESM-1v plausibility is poor (z=0.0), suggesting likely fitness cost from deleting a key V3-loop N-glycosylation site. Lowered confidence; retain as active but no longer certain Top-3."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.46,
+          "rationale": "EVEscape z=0.558 is a moderate escape signal with evolutionary tolerance (z=0.039 slightly supportive); PLM plausibility is neutral rather than negative, so fitness risk seems limited."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.46,
+          "rationale": "EVEscape score (z=0.558) is the dimension closest to the reward and supports the deletion of the N301 glycosylation motif; MSA shows weak evolutionary tolerance and PLM is neutral, so fitness retention is uncertain. Retain as top candidate pending no further evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "N301A": 20.302
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "N301A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.5576,
+        "normalized": 0.5576,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.558; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__hiv_bg505_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N301A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N301A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__hiv_bg505_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N301A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N301A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.039474,
+        "normalized": 0.039474,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.9,
+        "local": 0.844,
+        "reason": "MSA depth 90, Neff 72.42 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.844,
+        "reason": "alignment coverage 76/90 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 301 = 0.0395 among 76 homologs; conservation entropy 1.967 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__hiv_bg505_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N301A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N301A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__hiv_bg505_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N301A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 1,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 25,
+    "c0_size": 1,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

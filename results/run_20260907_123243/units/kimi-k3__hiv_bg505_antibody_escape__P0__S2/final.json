@@ -1,0 +1,1018 @@
+{
+  "unit_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+  "condition": "S2",
+  "model_id": "kimi-k3",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K188E",
+        "confidence": 0.87,
+        "evidence_refs": [],
+        "decision_summary": "Highest EVEscape score (0.974) combined with near-neutral ESM-1v plausibility (0.95), uniquely satisfying both strong antibody escape and preserved replication fitness."
+      },
+      {
+        "rank": 2,
+        "mutation": "K231E",
+        "confidence": 0.7,
+        "evidence_refs": [],
+        "decision_summary": "Very high escape (0.933) with a modestly positive plausibility signal (0.155), the best escape/fitness balance after K188E; charge-reversal in a variable gp120 region is a plausible escape mechanism."
+      },
+      {
+        "rank": 3,
+        "mutation": "N136D",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "Strong escape (0.897) retained as third choice despite low plm (0.022), since its escape gain exceeds all remaining candidates; fitness risk noted but alternatives (T277A, S332T) are worse on escape or equally weak on plausibility."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Escape and fitness-proxy scores already produce a stable top-3 with clear margins; further evidence is unlikely to change the ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 2,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "S332T": {
+      "candidate_id": "S332T",
+      "mutation": "S332T",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00001",
+        "E00009"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Restores the N330 (HXB2 N332) high-mannose glycan sequon absent in BG505; glycan addition is a well-known antibody-shielding escape mechanism with minimal fitness cost."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Position 332 is at the N332 glycan supersite region of gp120; local mutations there plausibly modulate broadly neutralizing antibody binding while typically retaining Env function."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "Escape (0.720) is lower than the top candidates and plm is weak (0.036); demoted."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N136D": {
+      "candidate_id": "N136D",
+      "mutation": "N136D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00002",
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Removes the V1 PNGS (N136-I137-T138), a classic escape route from glycan-dependent bNAbs in the trimer apex region."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "V1 loop Asn substitution can alter glycosylation/antigenic surface; V1 is variable so fitness cost likely modest."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Strong escape (0.897) but very low plm (0.022) raises fitness concerns; retained at rank 3 as the next-best escape option among remaining candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K188E": {
+      "candidate_id": "K188E",
+      "mutation": "K188E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.85,
+      "evidence_refs": [
+        "E00003",
+        "E00011"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Charge reversal in the V2 apex (analogous to HXB2 K169 escape mutations) disrupts PG9/PG16-class quaternary antibody binding while keeping surface exposure."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Surface Lys in V2-proximal region; charge reversal is a classic escape mechanism at antibody contact surfaces."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.85,
+          "rationale": "Highest EVEscape (0.974) combined with near-neutral ESM-1v plausibility (0.95), uniquely satisfying both escape gain and replication-fitness preservation; promoted to rank 1."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T138A": {
+      "candidate_id": "T138A",
+      "mutation": "T138A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00005",
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Alternative removal of the V1 glycan sequon via the +2 Thr, less disruptive to the local backbone than mutating the Asn itself."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "V1 loop Thr→Ala is conservative and may remove local O-glycan/shielding features affecting antibody recognition."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "Lowest escape among mid-tier candidates (0.693) with negligible plm (0.015); dominated on both dimensions."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Lowest escape among mid-tier candidates (0.693) with negligible plm (0.015); dominated on both dimensions.",
+        "evidence_refs": [
+          "E00005",
+          "E00013"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "T277A": {
+      "candidate_id": "T277A",
+      "mutation": "T277A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.4,
+      "evidence_refs": [
+        "E00004",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Disrupts the conserved N275 glycan sequon near the V2/V3 base, altering glycan shielding recognized by apex-directed antibodies."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.52,
+          "rationale": "C2-adjacent surface Thr; conservative Ala swap likely tolerable and sits near neutralization epitopes, so worth prioritizing for phenotype scoring."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "Decent escape (0.817) but near-zero plm (0.008) suggests fitness cost; demoted below N136D."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K231E": {
+      "candidate_id": "K231E",
+      "mutation": "K231E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.62,
+      "evidence_refs": [
+        "E00006",
+        "E00014"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Charge reversal in the lysine-rich V2 strand C region may reduce binding of electrostatics-dependent apex antibodies."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "V2-proximal charge reversal candidate; moderate prior for escape with possible fitness trade-off."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Very high escape (0.933) with modestly positive plm (0.155), the best escape/fitness balance after K188E; promoted to rank 2."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G311E": {
+      "candidate_id": "G311E",
+      "mutation": "G311E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00008",
+        "E00016"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "V3 crown (GPGQ arch) mutation disrupting V3-directed neutralizing antibodies; higher fitness risk, so lower confidence."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Escape 0.805 but plm ~0.0002 is the worst fitness proxy in the pool; a charge-introducing mutation at a Gly with such low plausibility is high-risk."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Escape 0.805 but plm ~0.0002 is the worst fitness proxy in the pool; a charge-introducing mutation at a Gly with such low plausibility is high-risk.",
+        "evidence_refs": [
+          "E00016"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "N196D": {
+      "candidate_id": "N196D",
+      "mutation": "N196D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.4,
+      "evidence_refs": [
+        "E00007",
+        "E00015"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Removes the V2 CNTS glycan sequon; bidirectional escape/shielding effects make outcome uncertain, flagged for tool evidence."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Potential glycan-site modulation in V2 vicinity; Asn→Asp is conservative in size but removes glycosylation motif only if part of NxS/T sequon."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Escape 0.817 matches T277A but plm is essentially zero (0.001); no advantage over retained candidates."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Escape 0.817 matches T277A but plm is essentially zero (0.001); no advantage over retained candidates.",
+        "evidence_refs": [
+          "E00015"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 2,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "K188E": 96.247,
+    "K231E": 56.422,
+    "N136D": 48.257
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "S332T",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.7199,
+        "normalized": 0.7199,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.720; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N136D",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.897,
+        "normalized": 0.897,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.897; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K188E",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.9737,
+        "normalized": 0.9737,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.974; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T277A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.8173,
+        "normalized": 0.8173,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.817; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T138A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.6931,
+        "normalized": 0.6931,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.693; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K231E",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.9326,
+        "normalized": 0.9326,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.933; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N196D",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.8169,
+        "normalized": 0.8169,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.817; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G311E",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.8051,
+        "normalized": 0.8051,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.805; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S332T",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0359,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N136D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0221,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K188E",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.95,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T277A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0077,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T138A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0146,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K231E",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1549,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N196D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0013,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G311E",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0002,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S332T",
+          "N136D",
+          "K188E",
+          "T277A",
+          "T138A",
+          "K231E",
+          "N196D",
+          "G311E"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 2,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "unit_id": "qwen3.8-max__cbs_lof__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.92,
+        "evidence_refs": [],
+        "decision_summary": "K119 is the internal aldimine lysine that forms the Schiff base with PLP; mutation to alanine abolishes cofactor binding and all PLP-dependent catalytic activity."
+      },
+      {
+        "rank": 2,
+        "mutation": "S349A",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "S349 is in the catalytic domain near the active site region; serine residues in PLP-dependent enzymes often participate in substrate positioning or proton transfer, and its mutation may impair catalysis."
+      },
+      {
+        "rank": 3,
+        "mutation": "G139A",
+        "confidence": 0.68,
+        "evidence_refs": [],
+        "decision_summary": "G139 is in the PLP-binding loop region; glycine-to-alanine substitution may disrupt the tight backbone geometry required for proper cofactor binding and active site architecture."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 candidates are well-supported by CBS biochemistry and further self-iteration without external evidence tools is unlikely to improve rankings."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.92,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.92,
+          "rationale": "Lys119 is the conserved PLP-binding lysine in the active site of CBS; mutation to alanine abolishes the Schiff base linkage required for catalysis."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.92,
+          "rationale": "K119 is the internal aldimine lysine that forms the Schiff base with PLP; mutation to alanine abolishes cofactor binding and catalytic activity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G139A": {
+      "candidate_id": "G139A",
+      "mutation": "G139A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Gly139 lies in the catalytic loop near the active site; substitution with alanine may restrict backbone flexibility needed for catalysis."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "G139 is in the PLP-binding loop region; glycine-to-alanine may disrupt local backbone geometry but effect is less certain than direct catalytic residue mutation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H65A": {
+      "candidate_id": "H65A",
+      "mutation": "H65A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "His65 coordinates the PLP cofactor in the active site; alanine substitution removes a key interaction for cofactor stabilization."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "H65 is a conserved histidine in the N-terminal heme domain; mutation may destabilize the heme-binding region and reduce overall enzyme activity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R266A": {
+      "candidate_id": "R266A",
+      "mutation": "R266A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Arg266 is involved in interdomain interactions important for catalytic domain stability; alanine may destabilize the active conformation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.65,
+          "rationale": "R266 is near the active site and may participate in substrate binding or transition-state stabilization; alanine substitution could impair catalysis."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C52A": {
+      "candidate_id": "C52A",
+      "mutation": "C52A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Cys52 is near the N-terminal heme-binding region; alanine substitution may affect heme coordination and allosteric regulation, indirectly reducing activity."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "C52 is in the heme domain but not directly catalytic; mutation unlikely to fully abolish enzyme activity."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "C52 is in the heme domain but not directly catalytic; mutation unlikely to fully abolish enzyme activity.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "S349A": {
+      "candidate_id": "S349A",
+      "mutation": "S349A",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "S349 is in the catalytic domain near the active site; serine residues in PLP-dependent enzymes often participate in substrate positioning or proton transfer."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K119A": null,
+    "S349A": null,
+    "G139A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 6,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 6,
+    "c0_size": 5,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

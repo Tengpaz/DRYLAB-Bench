@@ -1,0 +1,340 @@
+{
+  "unit_id": "deepseek-v4-pro__hiv_tat_replication__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-pro",
+  "scenario_id": "hiv_tat_replication",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K50R",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "Prevents K50 acetylation while preserving positive charge, likely enhancing TAR RNA binding and transactivation."
+      },
+      {
+        "rank": 2,
+        "mutation": "Q54R",
+        "confidence": 0.68,
+        "evidence_refs": [],
+        "decision_summary": "Adds a bidentate Arg at position 54 in the ARM, likely strengthening TAR RNA contacts."
+      },
+      {
+        "rank": 3,
+        "mutation": "K51R",
+        "confidence": 0.62,
+        "evidence_refs": [],
+        "decision_summary": "Conservative Lys-to-Arg substitution may modestly improve RNA phosphate contacts while maintaining overall charge."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No external evidence is available and further self-review is unlikely to improve the current top-ranked candidates."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K50R": {
+      "candidate_id": "K50R",
+      "mutation": "K50R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.63,
+          "rationale": "Arg in the basic domain binds TAR RNA with higher affinity than Lys due to bidentate contacts, potentially enhancing transactivation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "K50 is an inhibitory acetylation site in the basic ARM; K50R preserves positive charge while preventing acetylation, likely increasing TAR-binding and transactivation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K51R": {
+      "candidate_id": "K51R",
+      "mutation": "K51R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.61,
+          "rationale": "Similar to K50R, Arg substitution may strengthen TAR RNA binding while retaining the basic domain charge."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Conservative Lys-to-Arg change in the ARM may improve RNA phosphate contacts, but is likely a more modest gain than K50R or Q54R."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q54R": {
+      "candidate_id": "Q54R",
+      "mutation": "Q54R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Adds a positive charge within the arginine-rich basic domain, likely increasing TAR RNA affinity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "Replacing polar Q in the ARM with Arg adds a positive charge and bidentate guanidinium contacts, which should directly strengthen TAR RNA binding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K28Q": {
+      "candidate_id": "K28Q",
+      "mutation": "K28Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "K28 acetylation is linked to enhanced cyclin T1/CDK9 recruitment; Gln may partially mimic acetylated Lys."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "K28Q removes a basic residue at an acetylation-regulated site and is likely detrimental rather than improving transactivation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "K28Q removes a basic residue at an acetylation-regulated site and is likely detrimental rather than improving transactivation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K41R": {
+      "candidate_id": "K41R",
+      "mutation": "K41R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Conservative charge-preserving substitution in the core domain may improve cyclin T1 interaction or stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "K41 is in the core region and may influence acetylation/cofactor interactions; conservative change is plausible but not mechanistically strong for transactivation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S16A": {
+      "candidate_id": "S16A",
+      "mutation": "S16A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.22,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Removes a potential phosphorylation site in the N-terminus, possibly reducing negative regulation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.22,
+          "rationale": "N-terminal phosphorylation site with no strong direct link to TAR-dependent transactivation gain."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S46A": {
+      "candidate_id": "S46A",
+      "mutation": "S46A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "Removes a potential phosphorylation site in the core domain that might downregulate Tat activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "Possible phosphorylation-regulatory site near the core/ARM boundary, but alanine substitution has uncertain and likely weak benefit."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F38Y": {
+      "candidate_id": "F38Y",
+      "mutation": "F38Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.18,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Conservative aromatic substitution in the core may slightly alter hydrophobic packing and enhance stability."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.18,
+          "rationale": "Conservative aromatic change likely neutral; no clear mechanism for improving Tat transactivation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C37S": {
+      "candidate_id": "C37S",
+      "mutation": "C37S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.2,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.2,
+          "rationale": "Might reduce oxidative inactivation of the cysteine-rich zinc-coordinating domain, though it likely disrupts zinc binding."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "C37 is a conserved zinc-coordinating cysteine; serine substitution likely destabilizes the metal-binding core and impairs function."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "C37 is a conserved zinc-coordinating cysteine; serine substitution likely destabilizes the metal-binding core and impairs function.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "M39L": {
+      "candidate_id": "M39L",
+      "mutation": "M39L",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.18,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.18,
+          "rationale": "Conservative core substitution that may modestly improve folding or stability."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "M39L is likely neutral at best and is not mechanistically linked to improved Tat-mediated transactivation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "M39L is likely neutral at best and is not mechanistically linked to improved Tat-mediated transactivation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K50R": null,
+    "Q54R": null,
+    "K51R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

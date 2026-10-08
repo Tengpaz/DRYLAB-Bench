@@ -1,0 +1,110 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in the human organic cation transporter 1 (OCT1 / SLC22A1, 553 aa).
+
+THE DESIGN OBJECTIVE: Abolish OCT1 substrate transport while preserving protein abundance and folding.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+PTVDDILEQVGESGWFQKQAFLILCLLSAAFAPICVGIVFLGFTPDHHCQSPGVAELSQRCGWSPAEELNYTVPGLGPAGEAFLGQCRRYEVDWNQSALSCVDPLASLATNRSHLPLGPCQDGWVYDTPGSSIVTEFNLVCADSWKLDLFQSCLNAGFLFGSLGVGYFADRFGRKLCLLGTVLVNAVSGVLMAFSPNYMSMLLFRLLQGLVSKGNWMAGYTLITEFVGSGSRRTVAIMYQMAFTVGLVALTGLAYALPHWRWLQLAVSLPTFLFLLYYWCVPESPRWLLSQKRNTEAIKIMDHIAQKNGKLPPADLKMLSLEEDVTEKLSPSFADLFRTPRLRKRTFILMYLWFTDSVLYQGLILHMGATSGNLYLDFLYSALVEIPGAFIALITIDRVGRIYPMAMSNLLAGAACLVMIFISPDLHWLNIIIMCVGRMGITIAIQMICLVNAELYPTFVRNLGVMVCSSLCDIGGIITPFIVFRLREVWQALPLILFAVLGLLAAGVTLLLPETKGVALPETMKDAENLGRKAKPKENTIYLKVQTSEPSGT
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  D473N  confidence=0.840  rank=1
+  W216A  confidence=0.740  rank=3
+  D356N  confidence=0.660  rank=4
+  Y220A  confidence=0.650  rank=5
+  F160A  confidence=0.560  rank=6
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  - drop R438A (round 1): Position 438 is M in the provided sequence, so this mutation violates the required WT-residue numbering.
+  - drop R438K (round 1): Position 438 is M rather than R in the provided sequence, making this candidate invalid.
+Changes this round:
+  - D473N add: D473 is an ionizable residue embedded in a transmembrane transport pathway, making neutralization a strong loss-of-transport hypothesis. The conservative size of Asn may preserve packing and abundance better than alanine or charge reversal.
+  - R438A reconsider: Direct recounting of the provided sequence verifies residue 438 as R, so the previous numbering-based rejection was erroneous. Removing this buried positive charge could disrupt transport energetics while leaving the overall helical scaffold intact.
+  - W216A retain: W216 lies within a transmembrane segment and its aromatic side chain plausibly contributes to substrate recognition. Alanine substitution is likely to impair transport, although loss of a bulky packing group creates some abundance risk.
+  - D356N rerank: D356N remains a conservative neutralization candidate, but its functional importance is less compelling than that of D473 or R438. It is therefore moved below the strongest pathway-centered hypotheses.
+  - Y220A retain: Y220A may disrupt an aromatic substrate-contact region near W216, but simultaneous removal of aromaticity and hydroxyl chemistry may modestly threaten local packing.
+  - F160A rerank: F160 is transmembrane and could affect transport, but there is weaker mechanistic reason to distinguish a specific substrate-pathway role from generic helix packing.
+  - Y278A reject: Y278 is near the end of a highly hydrophobic segment, where alanine substitution may affect membrane-interface packing without reliably abolishing transport. Its objective alignment is weaker than the charged-cavity candidates.
+Remaining doubts: Without experimental abundance or topology evidence, buried-charge mutations could still impair folding rather than selectively abolish transport.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

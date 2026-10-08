@@ -1,0 +1,2061 @@
+{
+  "unit_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+  "condition": "S2",
+  "model_id": "deepseek-v4-pro",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "V38D",
+        "confidence": 0.88,
+        "evidence_refs": [
+          "E00004",
+          "E00014",
+          "E00024"
+        ],
+        "decision_summary": "Buried hydrophobic Val38 changed to Asp has zero evolutionary tolerance, zero ESM-1v plausibility, and very low ProteinMPNN compatibility, strongly supporting folding disruption."
+      },
+      {
+        "rank": 2,
+        "mutation": "F40P",
+        "confidence": 0.86,
+        "evidence_refs": [
+          "E00009",
+          "E00019",
+          "E00029"
+        ],
+        "decision_summary": "Phe40Pro inserts a helix-breaking proline at a hydrophobic position with no natural tolerance and very low structural compatibility."
+      },
+      {
+        "rank": 3,
+        "mutation": "F60D",
+        "confidence": 0.84,
+        "evidence_refs": [
+          "E00008",
+          "E00018",
+          "E00028"
+        ],
+        "decision_summary": "Phe60Asp places a charged residue in a hydrophobic environment; it has zero evolutionary/sequence support and low structural compatibility."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Additional evidence is unlikely to change the final Top-3 because multiple independent evidence dimensions already converge on these disruptive substitutions."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "W17D": {
+      "candidate_id": "W17D",
+      "mutation": "W17D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00001",
+        "E00011",
+        "E00021",
+        "E00036"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Buried tryptophan in the hydrophobic core; substitution to charged Asp should disrupt packing and destabilize folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.65,
+          "rationale": "MSA and sequence-model evidence are favorable for disruption, but ProteinMPNN backbone compatibility is only moderate (0.675), weakening the knockout argument."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "No new actionable evidence; functional_annotation is static contextual with low applicability, so existing ranking is unchanged."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W17G": {
+      "candidate_id": "W17G",
+      "mutation": "W17G",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.74,
+      "evidence_refs": [
+        "E00005",
+        "E00015",
+        "E00025",
+        "E00035"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Replacing the large buried Trp with Gly creates a cavity and removes hydrophobic contacts, likely destabilizing the core."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.74,
+          "rationale": "MSA and PLM agree on poor natural/sequence support, and structural compatibility is moderately low (0.457), retaining it as a viable but not top candidate."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.74,
+          "rationale": "No new actionable evidence; functional_annotation is static contextual with low applicability, so existing ranking is unchanged."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I33D": {
+      "candidate_id": "I33D",
+      "mutation": "I33D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.82,
+      "evidence_refs": [
+        "E00003",
+        "E00013",
+        "E00023"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.82,
+          "rationale": "Central hydrophobic Ile likely buried; introduction of a charged Asp should severely perturb the hydrophobic core."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "ProteinMPNN and ESM-1v both indicate this substitution is highly compatible/plausible, which is opposite to the disruption goal, so it is rejected."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "ProteinMPNN and ESM-1v both indicate this substitution is highly compatible/plausible, which is opposite to the disruption goal, so it is rejected.",
+        "evidence_refs": [
+          "E00013",
+          "E00023"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "I33P": {
+      "candidate_id": "I33P",
+      "mutation": "I33P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.72,
+      "evidence_refs": [
+        "E00007",
+        "E00017",
+        "E00027"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Proline in a predicted beta-strand region can break secondary structure and destabilize folding."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "High structural compatibility (0.912) and some natural P tolerance indicate poor disruption potential, so it is rejected."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "High structural compatibility (0.912) and some natural P tolerance indicate poor disruption potential, so it is rejected.",
+        "evidence_refs": [
+          "E00007",
+          "E00027"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "V38D": {
+      "candidate_id": "V38D",
+      "mutation": "V38D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.88,
+      "evidence_refs": [
+        "E00004",
+        "E00014",
+        "E00024",
+        "E00031"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.76,
+          "rationale": "Buried Val to charged Asp creates an unfavorable charged group in the hydrophobic interior."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.88,
+          "rationale": "Rare in MSA, sequence-implausible, and strongly backbone-incompatible (0.040), making it the best current knockout candidate."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.88,
+          "rationale": "No new actionable evidence; functional_annotation is static contextual with low applicability, so existing ranking is unchanged."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F40D": {
+      "candidate_id": "F40D",
+      "mutation": "F40D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.78,
+      "evidence_refs": [
+        "E00002",
+        "E00012",
+        "E00022",
+        "E00034"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.83,
+          "rationale": "Phenylalanine is a core aromatic residue; replacing it with Asp should disrupt aromatic packing and stability."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "Low PLM and low structural compatibility support disruption, though MSA shows some natural D tolerance (0.19), slightly reducing confidence."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "No new actionable evidence; functional_annotation is static contextual with low applicability, so existing ranking is unchanged."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F40P": {
+      "candidate_id": "F40P",
+      "mutation": "F40P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.86,
+      "evidence_refs": [
+        "E00009",
+        "E00019",
+        "E00029",
+        "E00032"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Proline replacement of a buried aromatic residue alters backbone geometry and likely destabilizes local folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.86,
+          "rationale": "No MSA/PLM support and very low structural compatibility (0.101) indicate strong folding disruption potential."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.86,
+          "rationale": "No new actionable evidence; functional_annotation is static contextual with low applicability, so existing ranking is unchanged."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L55D": {
+      "candidate_id": "L55D",
+      "mutation": "L55D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.6,
+      "evidence_refs": [
+        "E00006",
+        "E00016",
+        "E00026",
+        "E00037"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.74,
+          "rationale": "Leucine likely contributes to hydrophobic packing; charged Asp at this position is expected to be strongly destabilizing."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "MSA is favorable but PLM and backbone compatibility are only weakly disruptive, so confidence is lowered."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "No new actionable evidence; functional_annotation is static contextual with low applicability, so existing ranking is unchanged."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L55P": {
+      "candidate_id": "L55P",
+      "mutation": "L55P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00010",
+        "E00020",
+        "E00030",
+        "E00038"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Proline may distort local secondary structure and remove a hydrophobic contact, disrupting folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "MSA is favorable but PLM and structural compatibility are too high to confidently disrupt folding, so confidence is reduced."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "No new actionable evidence; functional_annotation is static contextual with low applicability, so existing ranking is unchanged."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F60D": {
+      "candidate_id": "F60D",
+      "mutation": "F60D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.84,
+      "evidence_refs": [
+        "E00008",
+        "E00018",
+        "E00028",
+        "E00033"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.71,
+          "rationale": "Phe to Asp introduces a charged residue into a hydrophobic environment and should reduce stability."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.84,
+          "rationale": "Zero MSA frequency, zero PLM plausibility, and low backbone compatibility (0.242) make this a strong knockout candidate."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.84,
+          "rationale": "No new actionable evidence; functional_annotation is static contextual with low applicability, so existing ranking is unchanged."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "V38D": 4.604,
+    "F40P": 6.623,
+    "F60D": 11.301
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "W17D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 17 = 0.0000 among 43 homologs; conservation entropy 1.485 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F40D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.190476,
+        "normalized": 0.190476,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 40 = 0.1905 among 42 homologs; conservation entropy 1.418 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 33 = 0.0000 among 42 homologs; conservation entropy 1.548 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V38D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 38 = 0.0000 among 42 homologs; conservation entropy 1.118 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W17G",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of G at position 17 = 0.0000 among 43 homologs; conservation entropy 1.485 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L55D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 55 = 0.0000 among 42 homologs; conservation entropy 1.493 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.166667,
+        "normalized": 0.166667,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 33 = 0.1667 among 42 homologs; conservation entropy 1.548 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F60D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 60 = 0.0000 among 42 homologs; conservation entropy 1.175 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F40P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 40 = 0.0000 among 42 homologs; conservation entropy 1.418 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L55P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 55 = 0.0000 among 42 homologs; conservation entropy 1.493 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W17D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F40D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.2515,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V38D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W17G",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L55D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1162,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1286,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F60D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F40P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L55P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.2276,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W17D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.8507,
+        "normalized": 0.674671,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-0.8507)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F40D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -3.5095,
+        "normalized": 0.201394,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-3.5095)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 1.2483,
+        "normalized": 0.965143,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=1.2483)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00023",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V38D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -5.1998,
+        "normalized": 0.039504,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-5.1998)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00024",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W17G",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.8884,
+        "normalized": 0.45701,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-1.8884)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00025",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L55D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.0645,
+        "normalized": 0.62897,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-1.0645)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00026",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.5418,
+        "normalized": 0.911696,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=0.5418)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00027",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F60D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -3.2802,
+        "normalized": 0.242448,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-3.2802)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00028",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F40P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.6889,
+        "normalized": 0.100697,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-4.6889)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00029",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L55P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.4549,
+        "normalized": 0.752905,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-0.4549)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00030",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "I33D",
+          "V38D",
+          "W17G",
+          "L55D",
+          "I33P",
+          "F60D",
+          "F40P",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V38D",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00031",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "F40P",
+          "F60D",
+          "F40D",
+          "W17G",
+          "W17D",
+          "L55D",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F40P",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00032",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "F40P",
+          "F60D",
+          "F40D",
+          "W17G",
+          "W17D",
+          "L55D",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F60D",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00033",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "F40P",
+          "F60D",
+          "F40D",
+          "W17G",
+          "W17D",
+          "L55D",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F40D",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00034",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "F40P",
+          "F60D",
+          "F40D",
+          "W17G",
+          "W17D",
+          "L55D",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W17G",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00035",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "F40P",
+          "F60D",
+          "F40D",
+          "W17G",
+          "W17D",
+          "L55D",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W17D",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00036",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "F40P",
+          "F60D",
+          "F40D",
+          "W17G",
+          "W17D",
+          "L55D",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L55D",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00037",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "F40P",
+          "F60D",
+          "F40D",
+          "W17G",
+          "W17D",
+          "L55D",
+          "L55P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L55P",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00038",
+      "run_id": "deepseek-v4-pro__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "F40P",
+          "F60D",
+          "F40D",
+          "W17G",
+          "W17D",
+          "L55D",
+          "L55P"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 2,
+    "budget_exhausted": true
+  }
+}

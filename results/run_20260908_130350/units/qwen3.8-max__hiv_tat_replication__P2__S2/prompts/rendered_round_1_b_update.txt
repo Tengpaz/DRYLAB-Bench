@@ -1,0 +1,142 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in the HIV-1 Tat protein (86 aa).
+
+THE DESIGN OBJECTIVE: Maximize virus replication efficiency via Tat-mediated transactivation.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MEPVDPRLEPWKHPGSQPKTACTNCYCKKCCFHCQVCFMTKALGISYGRKKRRQRRRAHQNSQTHQASLSKQPTSQSRGDPTGPKE
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   No experimental structure is configured for this task — every query returns status = "not_applicable".
+
+4. functional_annotation — curated UniProt features for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Given the evidence (if any) and the current pool, decide the updates: add / modify (rerank) / delete (reject) / re-evaluate candidates, and give your reasoning. Do NOT output a STOP decision in this step. Weigh each tool's evidence by how close its measured dimension is to the REWARD phenotype: a tool whose dimension differs from the reward (or trades off against it) must not be followed blindly.
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  S46D  confidence=0.720
+  K51R  confidence=0.680
+  T64A  confidence=0.620
+  S62A  confidence=0.600
+  H13R  confidence=0.580
+  S16A  confidence=0.550
+  T40A  confidence=0.520
+  L43V  confidence=0.500
+  A58V  confidence=0.480
+  Q63E  confidence=0.450
+BT evidence so far (before this round):
+  (no evidence collected before this round)
+Evidence obtained this round:
+  (no new evidence obtained this round)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+</WORKING_MEMORY>
+
+<NEW_EVIDENCE>
+[]
+</NEW_EVIDENCE>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "candidate_updates": [
+    {"mutation": "<WT><POS><MUT>", "action": "add | retain | rerank | reject | reconsider",
+     "current_confidence": 0.78,
+     "supporting_evidence_ids": ["E00003"],
+     "contradicting_evidence_ids": ["E00021"],
+     "origin": "initial_pool | new_hypothesis_from_evidence",
+     "trigger_evidence_ids": ["E00017"],
+     "decision_rationale": "<= 2 sentences"}
+  ],
+  "active_candidate_ranking": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.78}
+  ],
+  "evidence_assessment": [
+    {"evidence_id": "E00017", "candidate": "<WT><POS><MUT>",
+     "llm_reliability_assessment": "high | medium | low",
+     "effect_on_candidate": "support | weak_against | against",
+     "reason": "<= 2 sentences"}
+  ],
+  "thinking": "<= 3 sentences — the reasoning behind THIS round's changes",
+  "doubts": "<= 1 sentence — remaining uncertainties"
+}
+Rules: if you add/reconsider, give decision_rationale; every supporting/
+contradicting evidence id referenced in updates must appear in evidence_assessment.
+</OUTPUT_SCHEMA>
+
+ROUND 1 — respond with a single JSON object, nothing else.

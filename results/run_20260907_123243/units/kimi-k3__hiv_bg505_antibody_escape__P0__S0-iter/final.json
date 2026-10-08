@@ -1,0 +1,184 @@
+{
+  "unit_id": "kimi-k3__hiv_bg505_antibody_escape__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "kimi-k3",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K281T",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "Creates a new N279-A280-T281 N-linked glycan sequon in V2, adding shielding against V2-directed antibodies with a conservative Lys-to-Thr substitution likely tolerated for folding."
+      },
+      {
+        "rank": 2,
+        "mutation": "N301Q",
+        "confidence": 0.52,
+        "evidence_refs": [],
+        "decision_summary": "Removes the N301 glycan supersite (N301-T302-R303) to escape glycan-dependent V3 antibodies; moderate fitness risk keeps confidence below the glycan-addition candidate."
+      },
+      {
+        "rank": 3,
+        "mutation": "L284S",
+        "confidence": 0.42,
+        "evidence_refs": [],
+        "decision_summary": "Converts N282-I283-L284 into a potential N-linked sequon (N-I-S) for additional V2 shielding, but proximity to conserved packing raises tolerance uncertainty."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "LLM-only condition with no evidence tools; candidate pool already self-reviewed and further rounds would not improve the Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N279Q": {
+      "candidate_id": "N279Q",
+      "mutation": "N279Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Removes the conserved V3-base glycan (verified N279-I280-T281 sequon), a well-established escape route from glycan-dependent bNAbs while preserving Env trimer folding and infectivity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Retain only as a lower-ranked V2 alternative because it may alter local antigenicity, but it conflicts with glycan-addition logic at the same N279 sequon."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N282A": {
+      "candidate_id": "N282A",
+      "mutation": "N282A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Disrupts local glycan/loop presentation at the V3 base to reduce antibody access; uncertain fitness impact at this conserved region lowers confidence."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Reject because N282 is not embedded in a clear N-X-S/T sequon here and Ala substitution lacks a specific escape mechanism while risking V2 perturbation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Reject because N282 is not embedded in a clear N-X-S/T sequon here and Ala substitution lacks a specific escape mechanism while risking V2 perturbation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K281T": {
+      "candidate_id": "K281T",
+      "mutation": "K281T",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "WT K281 supports creating N279-A280-T281, an N-linked glycan sequon that could shield V2 epitopes while using a conservative Thr introduction."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L284S": {
+      "candidate_id": "L284S",
+      "mutation": "L284S",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.42,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "L284S could convert N282-I283-L284 into N282-I283-S284, adding a nearby V2 glycan, but it is close to conserved packing and may be less tolerated."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N301Q": {
+      "candidate_id": "N301Q",
+      "mutation": "N301Q",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "N301 lies in an N301-T302-R303 sequon homologous to the V3 glycan supersite; removal should escape glycan-dependent antibodies but carries moderate fitness/folding risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K281T": null,
+    "N301Q": null,
+    "L284S": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 7,
+    "c0_size": 2,
+    "final_novelty": 1.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

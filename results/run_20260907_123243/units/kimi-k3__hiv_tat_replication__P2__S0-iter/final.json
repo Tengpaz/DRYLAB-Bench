@@ -1,0 +1,292 @@
+{
+  "unit_id": "kimi-k3__hiv_tat_replication__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "kimi-k3",
+  "scenario_id": "hiv_tat_replication",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "H13R",
+        "confidence": 0.5,
+        "evidence_refs": [],
+        "decision_summary": "Position 13 is in the N-terminal activation region outside the Cys-rich zinc-finger core; adding a basic residue may aid cofactor (P-TEFb) recruitment with low structural risk. Confidence is moderate given heuristic-only evidence."
+      },
+      {
+        "rank": 2,
+        "mutation": "S46K",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "S46 lies just N-terminal of the arginine-rich motif in the core domain; a basic substitution could strengthen TAR/P-TEFb interactions without directly altering the essential ARM residues."
+      },
+      {
+        "rank": 3,
+        "mutation": "Q60R",
+        "confidence": 0.4,
+        "evidence_refs": [],
+        "decision_summary": "Q60 is C-terminal to the ARM in a flexible region; an extra Arg may modestly enhance RNA/cofactor association with low folding risk, though benefit is expected to be small."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Candidate pool has converged under domain-based heuristics; additional self-iteration without evidence tools would not improve the Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "Q54R": {
+      "candidate_id": "Q54R",
+      "mutation": "Q54R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Adds positive charge within the basic RNA-binding domain (49-57), potentially strengthening TAR binding; conservative substitution of a non-essential Gln."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "Q54 lies inside the arginine-rich RNA-binding motif (residues 49-57); substituting it risks disrupting TAR binding specificity, lowering confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S46K": {
+      "candidate_id": "S46K",
+      "mutation": "S46K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Increases basicity immediately adjacent to the core arginine-rich domain, which may improve TAR/P-TEFb interactions without disrupting essential residues."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "S46 sits just N-terminal of the ARM in the core domain; a basic substitution may strengthen TAR/P-TEFb interactions without touching the essential motif."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H13R": {
+      "candidate_id": "H13R",
+      "mutation": "H13R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Proline-rich region mutation increasing positive charge; H13 is not essential for transactivation, and added charge may aid nuclear localization/TAR interaction."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Position 13 is in the N-terminal activation region adjacent to the Cys-rich core but outside the zinc-finger residues, so an added basic residue could plausibly aid cofactor recruitment with low structural risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q60R": {
+      "candidate_id": "Q60R",
+      "mutation": "Q60R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Extends the basic patch C-terminal to the core domain, potentially enhancing RNA binding while avoiding essential Cys/core residues."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Q60 is C-terminal to the ARM in a flexible region; an extra Arg could modestly enhance RNA/cofactor association with low folding risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N24K": {
+      "candidate_id": "N24K",
+      "mutation": "N24K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Cysteine-rich domain flanking residue; adding charge may stabilize zinc-finger folding and CycT1 interaction, but moderate risk to activation domain structure."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "N24 lies within the cysteine-rich zinc-finger region (C22-C37) essential for folding and CycT1 binding; charge insertion here is high risk."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "N24 lies within the cysteine-rich zinc-finger region (C22-C37) essential for folding and CycT1 binding; charge insertion here is high risk.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "A42P": {
+      "candidate_id": "A42P",
+      "mutation": "A42P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "RIG motif region; proline substitution could rigidify the linker between core and basic domains, though effect on transactivation is uncertain."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Proline insertion in the core domain near the ARM risks disrupting local conformation required for TAR recognition."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Proline insertion in the core domain near the ARM risks disrupting local conformation required for TAR recognition.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "T23S": {
+      "candidate_id": "T23S",
+      "mutation": "T23S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.25,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Very conservative change in the Cys-rich region; low risk but likely only marginal gain in transactivation."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "T23 is inside the Cys-rich core; even conservative changes there are poorly tolerated."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "T23 is inside the Cys-rich core; even conservative changes there are poorly tolerated.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "Q66P": {
+      "candidate_id": "Q66P",
+      "mutation": "Q66P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.25,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "C-terminal region variation is well tolerated across HIV isolates; may fine-tune folding without harming viability."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Proline at position 66 in the second exon region offers no clear transactivation benefit and could distort local structure."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Proline at position 66 in the second exon region offers no clear transactivation benefit and could distort local structure.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "H13R": null,
+    "S46K": null,
+    "Q60R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 4,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

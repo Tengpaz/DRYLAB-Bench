@@ -1,0 +1,191 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in the HIV-1 Tat protein (86 aa).
+
+THE DESIGN OBJECTIVE: Maximize virus replication efficiency via Tat-mediated transactivation.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MEPVDPRLEPWKHPGSQPKTACTNCYCKKCCFHCQVCFMTKALGISYGRKKRRQRRRAHQNSQTHQASLSKQPTSQSRGDPTGPKE
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   No experimental structure is configured for this task — every query returns status = "not_applicable".
+
+4. functional_annotation — curated UniProt features for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  T40K  confidence=0.850  rank=1
+  S77R  confidence=0.450  rank=2
+  K41R  confidence=0.350  rank=3
+  Q54R  confidence=0.300  rank=4
+  T40R  confidence=0.300  rank=5
+  Q54K  confidence=0.300  rank=6
+  S46R  confidence=0.300  rank=7
+  T64K  confidence=0.200  rank=8
+  Q66R  confidence=0.200  rank=9
+  K71R  confidence=0.200  rank=10
+BT evidence so far:
+  E00001 evolution_msa(Q54R): z=0.022, app=0.67
+  E00002 evolution_msa(T40K): z=0.352, app=0.78
+  E00003 evolution_msa(K41R): z=0.151, app=0.77
+  E00004 evolution_msa(L43I): z=0.000, app=0.71
+  E00005 evolution_msa(A58K): z=0.000, app=0.62
+  E00006 evolution_msa(S62R): z=0.000, app=0.59
+  E00007 evolution_msa(T64K): z=0.000, app=0.59
+  E00008 evolution_msa(Q66R): z=0.000, app=0.58
+  E00009 evolution_msa(S77R): z=0.026, app=0.56
+  E00010 evolution_msa(K71R): z=0.000, app=0.56
+  E00011 sequence_plm(Q54R): z=0.004, app=0.90
+  E00012 sequence_plm(T40K): z=1.000, app=0.90
+  E00013 sequence_plm(K41R): z=0.001, app=0.90
+  E00014 sequence_plm(L43I): z=0.000, app=0.90
+  E00015 sequence_plm(A58K): z=0.002, app=0.90
+  E00016 sequence_plm(S62R): z=0.009, app=0.90
+  E00017 sequence_plm(T64K): z=0.005, app=0.90
+  E00018 sequence_plm(Q66R): z=0.001, app=0.90
+  E00019 sequence_plm(S77R): z=0.053, app=0.90
+  E00020 sequence_plm(K71R): z=0.003, app=0.90
+  E00021 functional_annotation(Q54R): z=0.500, app=0.20
+  E00022 functional_annotation(T40K): z=0.500, app=0.20
+  E00023 functional_annotation(K41R): z=0.500, app=0.20
+  E00024 functional_annotation(L43I): z=0.500, app=0.20
+  E00025 functional_annotation(A58K): z=0.500, app=0.20
+  E00026 functional_annotation(S62R): z=0.500, app=0.20
+  E00027 functional_annotation(T64K): z=0.500, app=0.20
+  E00028 functional_annotation(Q66R): z=0.500, app=0.20
+  E00029 functional_annotation(S77R): z=0.500, app=0.20
+  E00030 functional_annotation(K71R): z=0.500, app=0.20
+  E00031 toxin(T40K): z=0.745, app=0.70
+  E00032 toxin(K41R): z=0.795, app=0.70
+  E00033 toxin(S77R): z=0.095, app=0.70
+  E00034 toxin(Q54R): z=0.360, app=0.70
+  E00035 toxin(L43I): z=0.700, app=0.70
+  E00036 toxin(A58K): z=0.185, app=0.70
+  E00037 toxin(S62R): z=0.165, app=0.70
+  E00038 toxin(T64K): z=0.175, app=0.70
+  E00039 toxin(Q66R): z=0.195, app=0.70
+  E00040 toxin(K71R): z=0.135, app=0.70
+Change history:
+  - drop L43I (round 3): No PLM/MSA support and high absolute toxicity (0.7) indicate likely harmful or neutral; remove to make room for better candidates.
+  - drop A58K (round 3): Negligible PLM/MSA and small toxicity increase; no functional rationale to retain.
+  - drop S62R (round 3): Zero MSA and near-zero PLM, plus increased toxicity; no evidence for any benefit.
+  - add T40R (round 3): T40K's high PLM suggests positive residues at this core position are favorable; arginine provides a similar charge and may also enhance transactivation.
+  - add Q54K (round 3): Adding a positive charge in the basic region (Q54K) might improve nuclear localization and transactivation; Q54R had weak but non-toxic evidence, and lysine could be better.
+  - add S46R (round 3): Core region (38-48) is critical for transactivation; S46R adds positive charge and could improve function, though no direct evidence yet.
+Changes this round:
+  - T40K retain: Strong ESM-1v plausibility and positive MSA support a basic substitution at a core transactivation residue; toxicity is a safety-side signal but does not override the strong PLM evidence.
+  - S77R retain: ESM and MSA evidence is only weakly positive, but the very low toxicity signal and possible basicity benefit keep this candidate second.
+  - K41R retain: MSA shows some tolerance for arginine at this conserved lysine, but PLM support is negligible and toxicity is high; retained only for its modest evolutionary signal.
+  - Q54R retain: Weak MSA and PLM support in the basic region plus moderate toxicity leave this candidate speculative but not rejected.
+  - T40R retain: Arginine at T40 may mimic the strong T40K PLM benefit with a similar positive charge; no direct scores are available yet, so confidence remains moderate-low.
+  - Q54K retain: Q54K adds positive charge in the basic region and is a plausible alternative to Q54R, but without direct evidence it stays speculative.
+  - S46R retain: Positive charge in a core region may improve transactivation, but no current evidence directly evaluates this change.
+  - T64K retain: No meaningful MSA or PLM support and no clear functional rationale; retained only because active pool capacity remains.
+  - Q66R retain: Evidence is essentially neutral; this is a low-priority placeholder candidate.
+  - K71R retain: Minimal sequence or MSA support; retained only to fill the active set while awaiting more informative evidence.
+Remaining doubts: Direct phenotype prediction is unavailable, so the main uncertainty is whether PLM/MSA plausibility of positive-charge mutations translates into improved Tat-mediated transactivation.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 4 — respond with a single JSON object, nothing else.

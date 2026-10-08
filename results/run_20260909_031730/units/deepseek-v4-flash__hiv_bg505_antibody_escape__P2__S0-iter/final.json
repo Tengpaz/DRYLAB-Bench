@@ -1,0 +1,348 @@
+{
+  "unit_id": "deepseek-v4-flash__hiv_bg505_antibody_escape__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "S410N",
+        "confidence": 0.7,
+        "evidence_refs": [],
+        "decision_summary": "Adds an N-linked glycan in a surface loop near V4, likely reducing exposure of neutralizing epitopes while preserving overall Env folding."
+      },
+      {
+        "rank": 2,
+        "mutation": "V241N",
+        "confidence": 0.65,
+        "evidence_refs": [],
+        "decision_summary": "Introduces a potentially tolerated glycan site in C2, expanding the glycan shield at a solvent-exposed position with moderate fitness impact."
+      },
+      {
+        "rank": 3,
+        "mutation": "K206N",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "Adds a glycan in the V1/V2 loop, a key neutralization target, balancing immune escape benefits with likely acceptable replication fitness."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The top-3 candidates are already selected and additional self-iteration is unlikely to improve confidence without external evidence."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "S410N": {
+      "candidate_id": "S410N",
+      "mutation": "S410N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Creates NIT sequon in V4, filling a local glycan hole and increasing shielding of neutralization epitopes. V4 is tolerant to glycan insertion, so this should preserve envelope folding and function while reducing antibody access."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Strong potential to add an N-linked glycan in a surface loop near V4, likely to shield neutralizing epitopes without major folding disruption."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V241N": {
+      "candidate_id": "V241N",
+      "mutation": "V241N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Introduces NST in the C2 periphery near the CD4-binding site, adding glycan shielding without directly mutating conserved receptor-contact residues. This is likely to reduce bnAb binding while retaining Env function."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.65,
+          "rationale": "Creates a new N-glycan site in C2; likely to increase glycan shield while being tolerated, given its solvent exposure."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K206N": {
+      "candidate_id": "K206N",
+      "mutation": "K206N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Adds an NVS glycosylation sequon in an exposed C2 surface loop, likely masking adjacent antibody epitopes. The mutation is conservative in terms of Env architecture and should have moderate fitness cost."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "Adds a glycan in V1/V2, a major target of neutralizing antibodies; good balance between immune escape and fitness."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R169Q": {
+      "candidate_id": "R169Q",
+      "mutation": "R169Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Disrupts a key V2 apex antibody contact while retaining the overall polarization and structure of the V1/V2 loop. This should reduce V2-directed neutralization sensitivity while preserving trimer assembly."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "No clear glycan-shielding effect and limited direct relevance to immune escape; also potential charge rebalancing may impact stability."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "No clear glycan-shielding effect and limited direct relevance to immune escape; also potential charge rebalancing may impact stability.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "F389N": {
+      "candidate_id": "F389N",
+      "mutation": "F389N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.46,
+          "rationale": "Generates an NNS sequon in the V4/C3 region, increasing glycan occupancy at a potential vulnerability. This position is exposed and likely tolerates glycan addition with minimal core disruption."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "Potential glycan in V4, contributing to shielding of diverse epitopes, with likely acceptable fitness cost."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V254N": {
+      "candidate_id": "V254N",
+      "mutation": "V254N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.44,
+          "rationale": "Forms an NST motif in the gp120 outer domain, adding a glycan that can shield CD4bs-directed antibodies. It is exposed but near packing elements, so a moderate fitness penalty is possible."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Adds a glycan in C2 that may improve immune escape, though slightly less optimal than higher-ranked sites."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T462N": {
+      "candidate_id": "T462N",
+      "mutation": "T462N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.42,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Creates a NET sequon near the CD4-binding-site periphery, potentially occluding bnAb footprints without removing essential gp120-CD4 contacts. The mutation is placed on a loop and should partially preserve receptor binding."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "Located near the gp120-gp41 interface, adding a glycan could disrupt trimer stability and reduce fitness."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Located near the gp120-gp41 interface, adding a glycan could disrupt trimer stability and reduce fitness.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K333N": {
+      "candidate_id": "K333N",
+      "mutation": "K333N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Introduces an NAT glycan sequon near the V3/C3 interface, adding local shielding of V3-class and V3-glycan antibodies. Proximity to existing glycans may slightly reduce tolerance, but the loop region is surface-exposed."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "In V3 loop, important for co-receptor binding; adding glycan likely impairs viral entry and fitness."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "In V3 loop, important for co-receptor binding; adding glycan likely impairs viral entry and fitness.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "E368N": {
+      "candidate_id": "E368N",
+      "mutation": "E368N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.32,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.32,
+          "rationale": "Adds an NVT sequon inside the CD4-binding loop, likely reducing CD4bs-antibody recognition. This target is functionally sensitive, so the fitness cost may be substantial; included as a lower-confidence escape strategy."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "Too close to CD4 binding site; adding a glycan may block CD4 binding and severely impair viral entry."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Too close to CD4 binding site; adding a glycan may block CD4 binding and severely impair viral entry.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "R303N": {
+      "candidate_id": "R303N",
+      "mutation": "R303N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.38,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "Creates an NKS sequon near the V3 stem, potentially shielding V3-directed antibodies with a new glycan. This is an exposed region, although the introduced glycan may affect the conserved V3 base and require careful tolerability."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "Also in V3 loop, high risk of disrupting CCR5/CXCR4 interaction and reducing replication fitness."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Also in V3 loop, high risk of disrupting CCR5/CXCR4 interaction and reducing replication fitness.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "S410N": null,
+    "V241N": null,
+    "K206N": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 5,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

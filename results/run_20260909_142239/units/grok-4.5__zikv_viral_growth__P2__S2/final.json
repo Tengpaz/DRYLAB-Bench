@@ -1,0 +1,351 @@
+{
+  "unit_id": "grok-4.5__zikv_viral_growth__P2__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "zikv_viral_growth",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D200N",
+        "confidence": 0.62,
+        "evidence_refs": [
+          "E00002",
+          "E00004",
+          "E00006"
+        ],
+        "decision_summary": "Best balance of PLM plausibility, structure compatibility on experimental backbone, and MSA tolerance among evaluated options."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Proxies indicate these three as top candidates for maximizing replication fitness; no further evidence expected to alter final Top-3"
+    },
+    "remaining_budget": {
+      "tool_calls": 1,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "V50I": {
+      "candidate_id": "V50I",
+      "mutation": "V50I",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00001",
+        "E00003",
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Position 50 lies in the conserved stem-loop of domain II. V to I substitution preserves hydrophobicity while potentially strengthening interactions that stabilize the pre-fusion conformation, thereby supporting efficient membrane fusion and higher replication fitness."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "No new evidence obtained this round to alter initial candidate pool."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.65,
+          "rationale": "MSA shows zero observed frequency of I at position 50 (z=0.0) vs D200N (z=0.04), indicating lower evolutionary tolerance; structure and PLM scores also inferior"
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "MSA shows zero observed frequency of I at position 50 (z=0.0) vs D200N (z=0.04), indicating lower evolutionary tolerance; structure and PLM scores also inferior",
+        "evidence_refs": [
+          "E00001"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "D200N": {
+      "candidate_id": "D200N",
+      "mutation": "D200N",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.62,
+      "evidence_refs": [
+        "E00002",
+        "E00004",
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "D200 resides in domain II near the stem region. Neutralizing the charge could reduce electrostatic repulsion and increase structural flexibility, facilitating the rearrangements required for fusion and elevating viral fitness."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "No new evidence obtained this round to alter initial candidate pool."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Consistently highest normalized scores across MSA, PLM, and structure tools (0.91 structure delta)"
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "Retained as top candidate due to balanced high PLM plausibility, strong structure compatibility on experimental backbone, and acceptable MSA tolerance"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 3,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "D200N": 57.498
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "V50I",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.74,
+        "local": 1.0,
+        "reason": "MSA depth 74, Neff 24.33 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 74/74 homologs"
+      },
+      "interpretation": "mutant frequency of I at position 50 = 0.0000 among 74 homologs; conservation entropy 1.628 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__zikv_viral_growth__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V50I",
+          "D200N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D200N",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.040541,
+        "normalized": 0.040541,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.74,
+        "local": 1.0,
+        "reason": "MSA depth 74, Neff 24.33 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 74/74 homologs"
+      },
+      "interpretation": "mutant frequency of N at position 200 = 0.0405 among 74 homologs; conservation entropy 1.862 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__zikv_viral_growth__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V50I",
+          "D200N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V50I",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5467,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__zikv_viral_growth__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V50I",
+          "D200N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D200N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.718,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__zikv_viral_growth__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V50I",
+          "D200N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V50I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.4161,
+        "normalized": 0.787181,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.555,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 44.54"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=-0.4161)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "grok-4.5__zikv_viral_growth__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V50I",
+          "D200N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D200N",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.5559,
+        "normalized": 0.910398,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.579,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 42.06"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=0.5559)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "grok-4.5__zikv_viral_growth__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V50I",
+          "D200N"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 2,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 7,
+    "c0_size": 2,
+    "final_novelty": 0.0,
+    "tool_calls_used": 3,
+    "rounds_used": 3,
+    "budget_exhausted": false
+  }
+}

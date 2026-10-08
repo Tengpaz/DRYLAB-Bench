@@ -1,0 +1,167 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in the Zika virus envelope glycoprotein E (504 aa).
+
+THE DESIGN OBJECTIVE: Maximize viral replication fitness.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+IRCIGVSNRDFVEGMSGGTWVDVVLEHGGCVTVMAQDKPTVDIELVTTTVSNMAEVRSYCYEASISDMASDSRCPTQGEAYLDKQSDTQYVCKRTLVDRGWGNGCGLFGKGSLVTCAKFTCSKKMTGKSIQPENLEYRIMLSVHGSQHSGMIVNDTGYETDENRAKVEVTPNSPRAEATLGGFGSLGLDCEPRTGLDFSDLYYLTMNNKHWLVHKEWFHDIPLPWHAGADTGTPHWNNKEALVEFKDAHAKRQTVVVLGSQEGAVHTALAGALEAEMDGAKGKLFSGHLKCRLKMDKLRLKGVSYSLCTAAFTFTKVPAETLHGTVTVEVQYAGTDGPCKIPVQMAVDMQTLTPVGRLITANPVITESTENSKMMLELDPPFGDSYIVIGVGDKKITHHWHRSGSTIGKAFEATVRGAKRMAVLGDTAWDFGSVGGVFNSLGKGIHQIFGAAFKSLFGGMSWFSQILIGTLLVWLGLNTKNGSISLTCLALGGVMIFLSTAVSA
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   For THIS task the backbone is PDB 6CO8 chain A — 99% of this sequence's residues have experimental coordinates (resolution 3.1 Å).
+
+4. functional_annotation — curated UniProt features for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  Q350K  confidence=0.550  rank=1
+  T369A  confidence=0.520  rank=2
+  M349V  confidence=0.500  rank=3
+  T156A  confidence=0.420  rank=4
+  K316R  confidence=0.350  rank=5
+  T335A  confidence=0.250  rank=6
+BT evidence so far:
+  E00001 evolution_msa(V473M): z=0.041, app=1.00
+  E00002 evolution_msa(N154Q): z=0.029, app=0.46
+  E00003 evolution_msa(T156A): z=0.235, app=0.92
+  E00004 evolution_msa(L472F): z=0.000, app=1.00
+  E00005 evolution_msa(Q350K): z=0.068, app=1.00
+  E00006 evolution_msa(M349V): z=0.095, app=1.00
+  E00007 evolution_msa(T335A): z=0.042, app=0.97
+  E00008 evolution_msa(K316R): z=0.014, app=1.00
+  E00009 evolution_msa(T369A): z=0.196, app=0.76
+  E00010 sequence_plm(V473M): z=0.129, app=0.90
+  E00011 sequence_plm(N154Q): z=1.000, app=0.90
+  E00012 sequence_plm(T156A): z=1.000, app=0.90
+  E00013 sequence_plm(L472F): z=0.251, app=0.90
+  E00014 sequence_plm(Q350K): z=1.000, app=0.90
+  E00015 sequence_plm(M349V): z=1.000, app=0.90
+  E00016 sequence_plm(T335A): z=1.000, app=0.90
+  E00017 sequence_plm(K316R): z=0.718, app=0.90
+  E00018 sequence_plm(T369A): z=1.000, app=0.90
+  E00019 structure_compatibility(V473M): z=?, app=0.00
+  E00020 structure_compatibility(N154Q): z=0.511, app=1.00
+  E00021 structure_compatibility(T156A): z=0.742, app=1.00
+  E00022 structure_compatibility(L472F): z=0.878, app=1.00
+  E00023 structure_compatibility(Q350K): z=0.875, app=1.00
+  E00024 structure_compatibility(M349V): z=0.725, app=1.00
+  E00025 structure_compatibility(T335A): z=0.507, app=1.00
+  E00026 structure_compatibility(K316R): z=0.824, app=1.00
+  E00027 structure_compatibility(T369A): z=0.755, app=1.00
+Change history:
+  - drop V473M (round 1): Very poor sequence-model plausibility (0.129) and no structure evidence available (WT mismatch); evolutionary frequency is low, so viability is doubtful.
+  - drop N154Q (round 1): Removes a glycosylation-sequon Asn and has weak evolutionary support with low coverage plus only moderate structural compatibility, despite high sequence-plausibility prior.
+  - drop L472F (round 1): Phe is never observed among homologs (frequency 0.0) and sequence-model plausibility is very low; structural compatibility alone is insufficient for a non-conservative aromatic substitution.
+Changes this round:
+  - Q350K retain: Functional annotation returned only a static fallback with applicability 0.2 and no per-position effect, so confidence is unchanged.
+  - T369A retain: No per-position annotation was available; the contextual signal does not discriminate this candidate, so confidence is unchanged.
+  - M349V retain: Static domain-level evidence has low applicability and provides no mutation-specific information, so confidence is unchanged.
+  - T156A retain: Functional annotation added no per-position signal; retained at lower confidence because it may perturb the N154 glycosylation sequon, a viability risk.
+  - K316R retain: Static annotation provides no per-position constraint, so no confidence change is warranted.
+  - T335A retain: No informative functional evidence was returned, so the candidate remains low-ranked but retained.
+Remaining doubts: No per-position functional constraints are available, so domain-specific or glycosylation effects remain uncertain.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

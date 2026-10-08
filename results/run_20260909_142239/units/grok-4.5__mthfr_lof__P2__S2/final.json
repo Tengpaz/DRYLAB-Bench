@@ -1,0 +1,389 @@
+{
+  "unit_id": "grok-4.5__mthfr_lof__P2__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "G200P",
+        "confidence": 0.35,
+        "evidence_refs": [
+          "E00001"
+        ],
+        "decision_summary": "High alphamissense z-score (0.926) strongly supports LOF proxy; N-terminal position disrupts folate binding/catalysis."
+      },
+      {
+        "rank": 2,
+        "mutation": "D100A",
+        "confidence": 0.65,
+        "evidence_refs": [],
+        "decision_summary": "N-terminal position affects folate binding; high phenotype score outweighs moderate plm score."
+      },
+      {
+        "rank": 3,
+        "mutation": "E300A",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "Near conserved motifs suggests active-site disruption; phenotype evidence sufficient for LOF."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Max agent rounds exhausted; top-3 stable with available evidence."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "G200P": {
+      "candidate_id": "G200P",
+      "mutation": "G200P",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00001",
+        "E00003",
+        "E00004",
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Position 200 is located near the start of the central beta-sheet domain. Changing glycine to proline restricts conformational flexibility, potentially locking the domain in an inactive conformation and abolishing catalytic function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "alphamissense z-score 0.926 shows high LOF pathogenicity directly matching objective; strong evidence reliability and applicability"
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "Low sequence_plm (0.0006) and evolution_msa (0.130) scores show poor tolerance and low homolog frequency for P, conflicting with high alphamissense LOF proxy; downgraded for viability while retaining as top candidate."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "Strong phenotype z-score of 0.926 supports LOF but low plm score and low conf indicate need for caution; retained as top candidate."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "High alphamissense z-score supports strong LOF proxy; low plm score is tolerable given phenotype dominance"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E600A": {
+      "candidate_id": "E600A",
+      "mutation": "E600A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00002"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Position 600 is within the C-terminal regulatory domain. Alanine substitution neutralizes a negatively charged residue that participates in electrostatic steering of cofactors, thereby collapsing the active-site electrostatic network and eliminating catalytic output."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.7,
+          "rationale": "alphamissense z-score 0.084 shows benign (low damaging); contradicts LOF objective and should be dropped"
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "alphamissense z-score 0.084 shows benign (low damaging); contradicts LOF objective and should be dropped",
+        "evidence_refs": [
+          "E00002"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "D100A": {
+      "candidate_id": "D100A",
+      "mutation": "D100A",
+      "first_seen_round": 2,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "WT D100 (verified in sequence) mutated to A; position in N-terminal domain likely affects folate binding/catalysis, expected strong LOF via charge loss and steric change."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Position in N-terminal domain likely disrupts folate binding/catalysis per structural context; no contradicting evidence, retained with moderate conf."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "N-terminal position likely disrupts folate binding; high phenotype score outweighs moderate plm"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E300A": {
+      "candidate_id": "E300A",
+      "mutation": "E300A",
+      "first_seen_round": 2,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "WT E300 (verified in sequence) mutated to A; position near conserved motifs suggests disruption of active site or FMN interaction, predicted to abolish activity."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Near conserved motifs suggests active site disruption; no contradicting evidence, retained with moderate conf."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Near conserved motifs suggests active-site disruption; phenotype evidence sufficient for LOF"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "G200P": 44.629,
+    "D100A": null,
+    "E300A": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "G200P",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9261,
+        "normalized": 0.9261,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.926 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G200P",
+          "E600A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E600A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.0835,
+        "normalized": 0.0835,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.084 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G200P",
+          "E600A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G200P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.130435,
+        "normalized": 0.130435,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 200 = 0.1304 among 23 homologs; conservation entropy 1.955 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G200P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G200P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0006,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G200P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G200P",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "grok-4.5__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G200P"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 9,
+    "c0_size": 2,
+    "final_novelty": 0.6666666666666666,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

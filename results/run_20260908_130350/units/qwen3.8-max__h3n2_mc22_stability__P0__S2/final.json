@@ -1,0 +1,964 @@
+{
+  "unit_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "S145A",
+        "confidence": 0.62,
+        "evidence_refs": [
+          "E00004",
+          "E00009"
+        ],
+        "decision_summary": "Highest structure compatibility score (z=0.815) among all candidates on the 5HMG backbone, indicating favorable packing for the alanine substitution at this surface-exposed position. Low PLM score is consistent with HA's immune-driven evolutionary constraint rather than instability."
+      },
+      {
+        "rank": 2,
+        "mutation": "T318I",
+        "confidence": 0.58,
+        "evidence_refs": [
+          "E00005",
+          "E00010"
+        ],
+        "decision_summary": "Good structure compatibility (z=0.609) at a position within the HA2 coiled-coil region where isoleucine can improve hydrophobic packing at the trimer interface. The only candidate with non-zero evolutionary frequency (0.012), providing weak but supportive evolutionary evidence."
+      },
+      {
+        "rank": 3,
+        "mutation": "N246D",
+        "confidence": 0.5,
+        "evidence_refs": [
+          "E00003",
+          "E00008"
+        ],
+        "decision_summary": "Moderate structure compatibility (z=0.587) supports this conservative substitution that may improve local hydrogen bonding or electrostatic interactions. However, zero evolutionary frequency and very low PLM score (0.009) reduce confidence relative to the top two candidates."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Structure compatibility and PLM evidence consistently support the current ranking; additional tool calls are unlikely to alter the top-3 selection."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N158D": {
+      "candidate_id": "N158D",
+      "mutation": "N158D",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.58,
+      "evidence_refs": [
+        "E00001",
+        "E00006",
+        "E00012",
+        "E00016"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Asn158 is a known glycosylation site in H3 HA; removing it via N→D may alter folding kinetics but could increase thermodynamic stability of the local backbone by removing a flexible glycan."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "N158 is a known glycosylation site; removing it may reduce glycan heterogeneity and improve folding homogeneity, but no evidence yet collected."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "ESM-1v gives moderate plausibility (0.475); structure tool inapplicable due to WT mismatch at mapped residue, so no structural evidence available. Retain based on sequence-level plausibility."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.4,
+          "rationale": "No applicable structure compatibility result, zero evolutionary frequency, and low PLM score (0.475) collectively provide insufficient support for a stability-enhancing role."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "No applicable structure compatibility result, zero evolutionary frequency, and low PLM score (0.475) collectively provide insufficient support for a stability-enhancing role.",
+        "evidence_refs": [
+          "E00012",
+          "E00006"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "T155A": {
+      "candidate_id": "T155A",
+      "mutation": "T155A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00002",
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Thr155 is near the receptor-binding site on the HA head; a smaller Ala may reduce steric strain and improve local packing stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "T155 is near the receptor-binding site; alanine substitution may improve local packing but needs structural validation."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "Lowest structure compatibility (0.461) and very low ESM-1v plausibility (0.040). Both tools indicate this is a poor substitution for stability."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Lowest structure compatibility (0.461) and very low ESM-1v plausibility (0.040). Both tools indicate this is a poor substitution for stability.",
+        "evidence_refs": [
+          "E00007"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "S145A": {
+      "candidate_id": "S145A",
+      "mutation": "S145A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.62,
+      "evidence_refs": [
+        "E00004",
+        "E00009",
+        "E00011",
+        "E00015"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Ser145 is surface-exposed; Ala substitution removes a potential phosphorylation or degradation site and may modestly improve local stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.52,
+          "rationale": "Surface serine to alanine; minor change that could reduce conformational entropy of a loop."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "Best structure compatibility score (normalized 0.815, ΔlogP=-0.43) and moderate ESM-1v plausibility (0.130). Both tools agree this is the most compatible substitution on the fixed backbone."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "Structure compatibility (0.815) remains the strongest signal for stability; near-zero MSA frequency is expected for HA surface residues under immune selection and does not override the structural evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N246D": {
+      "candidate_id": "N246D",
+      "mutation": "N246D",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00003",
+        "E00008",
+        "E00014",
+        "E00018"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Asn246 is in the stalk region; N→D removes a deamidation-prone site and may improve long-term structural integrity under environmental stress."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Conservative substitution at a surface position; may improve stability by removing a potential deamidation hotspot."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.53,
+          "rationale": "Moderate structure compatibility (0.587) but extremely low ESM-1v plausibility (0.009) indicates this substitution is evolutionarily disfavored. Structure evidence partially supports but PLM strongly contradicts."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Moderate structure score (0.587) supports retention but zero evolutionary frequency and low PLM (0.009) weaken confidence relative to top candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T318I": {
+      "candidate_id": "T318I",
+      "mutation": "T318I",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.58,
+      "evidence_refs": [
+        "E00005",
+        "E00010",
+        "E00013",
+        "E00017"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "T318 is in the HA2 coiled-coil; isoleucine may improve hydrophobic packing in the trimer interface."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.56,
+          "rationale": "Good structure compatibility (0.609) with very high local reliability (B-factor 3.78), but very low ESM-1v plausibility (0.024) suggests evolutionary disfavor. Structure evidence is more relevant to folding stability."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "Good structure compatibility (0.609) combined with the only non-zero evolutionary frequency (0.012) among all candidates; coiled-coil hydrophobic packing rationale remains valid."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "S145A": 35.034,
+    "T318I": 25.586,
+    "N246D": 23.956
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "N158D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N158D",
+          "T155A",
+          "N246D",
+          "S145A",
+          "T318I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T155A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -2.9076,
+        "normalized": 0.461299,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.701,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 29.89"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-2.9076)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N158D",
+          "T155A",
+          "N246D",
+          "S145A",
+          "T318I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N246D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.9335,
+        "normalized": 0.587232,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.772,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 22.81"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.9335)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N158D",
+          "T155A",
+          "N246D",
+          "S145A",
+          "T318I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S145A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.4334,
+        "normalized": 0.815455,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.55,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 44.98"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-0.4334)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N158D",
+          "T155A",
+          "N246D",
+          "S145A",
+          "T318I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T318I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.7819,
+        "normalized": 0.609258,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.962,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 3.78"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.7819)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N158D",
+          "T155A",
+          "N246D",
+          "S145A",
+          "T318I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N158D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.4753,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N158D",
+          "T155A",
+          "N246D",
+          "S145A",
+          "T318I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T155A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0396,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N158D",
+          "T155A",
+          "N246D",
+          "S145A",
+          "T318I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N246D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0092,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N158D",
+          "T155A",
+          "N246D",
+          "S145A",
+          "T318I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S145A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1295,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N158D",
+          "T155A",
+          "N246D",
+          "S145A",
+          "T318I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T318I",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0238,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N158D",
+          "T155A",
+          "N246D",
+          "S145A",
+          "T318I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S145A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.976,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.976,
+        "reason": "alignment coverage 166/170 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 145 = 0.0000 among 166 homologs; conservation entropy 1.798 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S145A",
+          "N158D",
+          "T318I",
+          "N246D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N158D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.994,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.994,
+        "reason": "alignment coverage 169/170 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 158 = 0.0000 among 169 homologs; conservation entropy 1.626 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S145A",
+          "N158D",
+          "T318I",
+          "N246D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T318I",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.011905,
+        "normalized": 0.011905,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.988,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.988,
+        "reason": "alignment coverage 168/170 homologs"
+      },
+      "interpretation": "mutant frequency of I at position 318 = 0.0119 among 168 homologs; conservation entropy 1.160 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S145A",
+          "N158D",
+          "T318I",
+          "N246D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N246D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.994,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.994,
+        "reason": "alignment coverage 169/170 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 246 = 0.0000 among 169 homologs; conservation entropy 1.917 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S145A",
+          "N158D",
+          "T318I",
+          "N246D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S145A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S145A",
+          "N158D",
+          "T318I",
+          "N246D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N158D",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S145A",
+          "N158D",
+          "T318I",
+          "N246D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T318I",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S145A",
+          "N158D",
+          "T318I",
+          "N246D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N246D",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "S145A",
+          "N158D",
+          "T318I",
+          "N246D"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 10,
+    "c0_size": 4,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

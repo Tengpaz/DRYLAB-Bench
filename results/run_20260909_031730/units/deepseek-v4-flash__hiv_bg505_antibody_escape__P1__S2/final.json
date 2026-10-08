@@ -1,0 +1,569 @@
+{
+  "unit_id": "deepseek-v4-flash__hiv_bg505_antibody_escape__P1__S2",
+  "condition": "S2",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N337A",
+        "confidence": 0.8,
+        "evidence_refs": [
+          "E00004"
+        ],
+        "decision_summary": "Known glycan-site mutation with high EVEscape score (z=0.783) and high tolerance in Env, preserving fitness while reducing antibody binding."
+      },
+      {
+        "rank": 2,
+        "mutation": "R325A",
+        "confidence": 0.73,
+        "evidence_refs": [
+          "E00007"
+        ],
+        "decision_summary": "V3 loop neutralization epitope alteration with strong escape potential (z=0.726); loop flexibility mitigates fitness cost."
+      },
+      {
+        "rank": 3,
+        "mutation": "D366A",
+        "confidence": 0.63,
+        "evidence_refs": [
+          "E00006"
+        ],
+        "decision_summary": "CD4 binding site adjacent mutation with moderate escape score (z=0.630); likely impairs antibody contacts while retaining some core stability."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "All four allowed tool calls have been used; further evidence cannot be gathered within the budget."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N337A": {
+      "candidate_id": "N337A",
+      "mutation": "N337A",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.78,
+      "evidence_refs": [
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Known glycan-site mutation in gp120 that may affect antibody binding; add for evaluation of escape-fitness trade-off."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "Highest EVEscape phenotype score among tested; known glycan-site mutation likely to reduce antibody binding while being structurally tolerated."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "High EVEscape score suggests strong antibody-escape potential; known glycan-site mutation is often tolerated in Env, supporting fitness retention."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E368A": {
+      "candidate_id": "E368A",
+      "mutation": "E368A",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.48,
+      "evidence_refs": [
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Residue in CD4 binding site, likely to affect antibody recognition while preserving some function; add for further testing."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.48,
+          "rationale": "Weakest EVEscape among current pool; retain only as low-priority fallback."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.48,
+          "rationale": "Lowest escape score among candidates; retained as a backup, but unlikely to be in final top-3."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D366A": {
+      "candidate_id": "D366A",
+      "mutation": "D366A",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.6,
+      "evidence_refs": [
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Adjacent to CD4 binding site; proposed to reduce antibody binding with moderate fitness cost."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Moderate escape signal near CD4 binding site; retains rank as backup, not yet top-three."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Adjacent to CD4 binding site; moderate escape score and potential for antibody interference while retaining some structural integrity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R325A": {
+      "candidate_id": "R325A",
+      "mutation": "R325A",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.72,
+      "evidence_refs": [
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Located in V3 loop, a key neutralization epitope; potential escape via loop alteration while retaining core fitness."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Strong EVEscape signal in V3 loop; key neutralization epitope, plausible escape with moderate fitness impact."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "V3 loop is a major neutralization epitope; high escape score and loop flexibility suggest moderate fitness cost while perturbing antibody binding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G377A": {
+      "candidate_id": "G377A",
+      "mutation": "G377A",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Near CD4 binding site, proposed to alter antibody contacts with possible moderate fitness implications."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Low EVEscape score; deemphasize in favor of higher escape candidates."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Lower escape score but near CD4bs; kept as a lower-confidence alternative pending further evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T370R": {
+      "candidate_id": "T370R",
+      "mutation": "T370R",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "High EVEscape score from earlier round; despite lower sequence_plm plausibility, its escape potential warrants keeping it as top-tier candidate pending fitness checks."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Despite high escape score, the very low sequence plausibility (z=0.003) indicates poor replication fitness, conflicting with the requirement to retain fitness."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Despite high escape score, the very low sequence plausibility (z=0.003) indicates poor replication fitness, conflicting with the requirement to retain fitness.",
+        "evidence_refs": [
+          "E00002"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "N337A": 78.28,
+    "R325A": 72.64,
+    "D366A": 63.05
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "T370R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.013699,
+        "normalized": 0.013699,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.9,
+        "local": 0.811,
+        "reason": "MSA depth 90, Neff 72.42 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.811,
+        "reason": "alignment coverage 73/90 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 370 = 0.0137 among 73 homologs; conservation entropy 2.017 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "deepseek-v4-flash__hiv_bg505_antibody_escape__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "T370R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T370R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0025,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "deepseek-v4-flash__hiv_bg505_antibody_escape__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "T370R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T370R",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.767,
+        "normalized": 0.767,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.767; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "deepseek-v4-flash__hiv_bg505_antibody_escape__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "T370R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N337A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.7828,
+        "normalized": 0.7828,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.783; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "deepseek-v4-flash__hiv_bg505_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N337A",
+          "E368A",
+          "D366A",
+          "R325A",
+          "G377A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E368A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.5206,
+        "normalized": 0.5206,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.521; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "deepseek-v4-flash__hiv_bg505_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N337A",
+          "E368A",
+          "D366A",
+          "R325A",
+          "G377A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D366A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.6305,
+        "normalized": 0.6305,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.630; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "deepseek-v4-flash__hiv_bg505_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N337A",
+          "E368A",
+          "D366A",
+          "R325A",
+          "G377A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R325A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.7264,
+        "normalized": 0.7264,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.726; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "deepseek-v4-flash__hiv_bg505_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N337A",
+          "E368A",
+          "D366A",
+          "R325A",
+          "G377A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G377A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.5439,
+        "normalized": 0.5439,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.544; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "deepseek-v4-flash__hiv_bg505_antibody_escape__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N337A",
+          "E368A",
+          "D366A",
+          "R325A",
+          "G377A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 6,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 10,
+    "c0_size": 0,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

@@ -1,0 +1,143 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the human organic cation transporter 1 (OCT1 / SLC22A1, 553 aa).
+
+PRIMARY OBJECTIVE: Abolish OCT1 substrate transport while preserving protein abundance and folding.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+PTVDDILEQVGESGWFQKQAFLILCLLSAAFAPICVGIVFLGFTPDHHCQSPGVAELSQRCGWSPAEELNYTVPGLGPAGEAFLGQCRRYEVDWNQSALSCVDPLASLATNRSHLPLGPCQDGWVYDTPGSSIVTEFNLVCADSWKLDLFQSCLNAGFLFGSLGVGYFADRFGRKLCLLGTVLVNAVSGVLMAFSPNYMSMLLFRLLQGLVSKGNWMAGYTLITEFVGSGSRRTVAIMYQMAFTVGLVALTGLAYALPHWRWLQLAVSLPTFLFLLYYWCVPESPRWLLSQKRNTEAIKIMDHIAQKNGKLPPADLKMLSLEEDVTEKLSPSFADLFRTPRLRKRTFILMYLWFTDSVLYQGLILHMGATSGNLYLDFLYSALVEIPGAFIALITIDRVGRIYPMAMSNLLAGAACLVMIFISPDLHWLNIIIMCVGRMGITIAIQMICLVNAELYPTFVRNLGVMVCSSLCDIGGIITPFIVFRLREVWQALPLILFAVLGLLAAGVTLLLPETKGVALPETMKDAENLGRKAKPKENTIYLKVQTSEPSGT
+```
+NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   No experimental structure is configured for this task — every query returns status = "not_applicable".
+
+4. functional_annotation — curated UniProt features for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'pathogenicity (LOF proxy)' via alphamissense — predictions are AVAILABLE for this task.. Higher = more of that phenotype.
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  D473A  confidence=0.860  rank=1
+  D473R  confidence=0.820  rank=2
+  D473N  confidence=0.780  rank=3
+  Y220A  confidence=0.580  rank=4
+  F158A  confidence=0.550  rank=5
+  E385Q  confidence=0.500  rank=6
+  W216A  confidence=0.450  rank=7
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  - drop F243A (round 1): Buried TM aromatic with no specific substrate-binding evidence; Ala substitution risks destabilization (loss of abundance) rather than clean transport loss.
+  - drop R438A (round 1): R438 is not an established substrate-contact residue and is likely peripheral; dropped to free slots for the higher-prior D473/E385 series.
+Changes this round:
+  - D473A rerank: D473 (canonical hOCT1 D474, TM11) is the classic cation-coordinating aspartate; Ala removes the charge with minimal steric/packing burden, and AlphaMissense (0.80, pathogenic) plus a near-zero ESM-1v ratio indicate strong functional disruption. The 12.6% Ala frequency in homologs is a mild caution but comes from low-coverage (app 0.36) paralogs with different substrate specificity.
+  - D473R rerank: Highest LOF proxy in the pool (AM 0.907) with zero homolog frequency and the lowest ESM-1v plausibility, consistent with complete transport ablation via charge reversal in the cation site. Promoted above D473N, but held below D473A because a buried charge reversal carries the largest residual risk to folding/abundance.
+  - D473N retain: Isosteric charge neutralization is the mechanistically cleanest way to kill cation binding while preserving packing and abundance, and N is absent from homologs at this position with near-zero ESM-1v plausibility. Slightly demoted because its AlphaMissense score (0.589) is the lowest of the D473 series, suggesting a somewhat milder predicted impact.
+  - Y220A retain: Binding-cleft aromatic (rat Oct1 Y222 equivalent) with a high LOF proxy (0.756) and very low ESM-1v plausibility, kept as the best non-D473 backup. Small Ala tolerance among homologs (4.3%) and the literature pattern that aromatic-pocket Ala mutants often shift affinity rather than abolish transport keep it below the D473 series.
+  - F158A retain: High AM (0.789) and negligible ESM-1v plausibility, but the well-covered MSA (app 0.87) shows Ala at ~9.5% of homologs, so ablation is less certain and destabilization risk (abundance loss) is non-trivial.
+  - E385Q rerank: Consistent evidence (AM 0.72, zero homolog Q frequency, near-zero ESM-1v) supports disruption, but the position lacks direct substrate-contact evidence, so it stays a mid-pool alternate.
+  - W216A rerank: Lowest LOF proxy among the pocket mutants (0.635) and ~9.5% Ala frequency in a well-covered alignment weaken the ablation case; removing a large Trp also raises folding/abundance risk.
+  - D397N reject: AlphaMissense classifies it benign (0.26) and it has the highest ESM-1v plausibility in the pool (0.032), so it is the least likely to abolish transport despite sitting near the MFS DRxGR motif.
+Remaining doubts: None of the tools distinguish 'dead but well-expressed' from 'misfolded/degraded', so the charge-reversal D473R remains the main abundance risk in the top-3.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

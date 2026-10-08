@@ -1,0 +1,198 @@
+{
+  "unit_id": "deepseek-v4-flash__hiv_bg505_antibody_escape__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K206N",
+        "confidence": 0.66,
+        "evidence_refs": [],
+        "decision_summary": "Introduces an N-V-S sequon in C2, likely shielding CD4 binding-site accessibility while remaining outside conserved core contacts."
+      },
+      {
+        "rank": 2,
+        "mutation": "V163N",
+        "confidence": 0.65,
+        "evidence_refs": [],
+        "decision_summary": "Creates an N-Y-S sequon in the exposed V2 loop, potentially reducing antibody recognition without disrupting trimer integrity."
+      },
+      {
+        "rank": 3,
+        "mutation": "V241N",
+        "confidence": 0.61,
+        "evidence_refs": [],
+        "decision_summary": "Adds an N-S-T sequon in C2, providing an additional glycan shield with likely minimal structural perturbation."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further self-iteration is unlikely to improve confidence without experimental evidence; final candidates are based on structural rationale and sequence-validated glycosylation sites."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "V163N": {
+      "candidate_id": "V163N",
+      "mutation": "V163N",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Introduces an N-linked glycosylation sequon (N-Y-S) in the V2 loop, potentially shielding a key neutralization epitope without disrupting conserved cysteines."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.65,
+          "rationale": "V2-loop glycan is well placed to shield neutralization epitopes and is flexible; raise confidence above redundant C2 candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A199N": {
+      "candidate_id": "A199N",
+      "mutation": "A199N",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.56,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Adds a glycan (N-I-T) just after V2, likely affecting antibody access to the CD4 binding site while maintaining structural integrity."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.56,
+          "rationale": "Retain but at lower confidence; may create a glycan near V2 but potential steric clash with conserved core cannot be ruled out."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K206N": {
+      "candidate_id": "K206N",
+      "mutation": "K206N",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.66,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.66,
+          "rationale": "Creates a sequon (N-V-S) in C2, a conserved region near the V2 loop, potentially increasing glycan shielding without affecting core contacts."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.66,
+          "rationale": "Retain as top candidate; the C2-loop glycan likely reduces CD4 binding site accessibility without disrupting conserved contacts."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S240N": {
+      "candidate_id": "S240N",
+      "mutation": "S240N",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Forms an N-V-S motif in C2, adding a bulky glycan that may reduce antibody binding while remaining distal to functional hot spots."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "Retain with slightly reduced confidence; adjacent to V241N and may have overlapping effect."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V241N": {
+      "candidate_id": "V241N",
+      "mutation": "V241N",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.61,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.61,
+          "rationale": "Generates an N-S-T sequon in C2, similar to S240N but at an adjacent residue, offering an alternative site for glycan shielding."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.61,
+          "rationale": "Retain at moderate confidence; C2 glycan may have redundant effect with S240N but adds alternative surface shielding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "K206N": null,
+    "V163N": null,
+    "V241N": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 9,
+    "c0_size": 0,
+    "final_novelty": 1.0,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

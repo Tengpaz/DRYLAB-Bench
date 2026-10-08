@@ -1,0 +1,711 @@
+{
+  "unit_id": "deepseek-v4-pro__mthfr_lof__P1__S2",
+  "condition": "S2",
+  "model_id": "deepseek-v4-pro",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "C130Y",
+        "confidence": 0.85,
+        "evidence_refs": [
+          "alphamissense"
+        ],
+        "decision_summary": "Highest Alphamissense pathogenicity score (0.938) among candidates, strongly consistent with loss of MTHFR function."
+      },
+      {
+        "rank": 2,
+        "mutation": "H127Y",
+        "confidence": 0.82,
+        "evidence_refs": [
+          "alphamissense"
+        ],
+        "decision_summary": "Alphamissense score 0.927 supports a pathogenic loss-of-function effect at a nearby active-site region residue."
+      },
+      {
+        "rank": 3,
+        "mutation": "W59A",
+        "confidence": 0.8,
+        "evidence_refs": [
+          "alphamissense"
+        ],
+        "decision_summary": "Alphamissense score 0.895 indicates strong likely pathogenicity, with tryptophan-to-alanine likely disrupting structure/function."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Current Top-3 candidates have sufficiently high and concordant support from the available Alphamissense LOF proxy; further tool calls are unlikely to change the ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 3,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R157Q": {
+      "candidate_id": "R157Q",
+      "mutation": "R157Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.66,
+      "evidence_refs": [
+        "E00001"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Known severe MTHFR deficiency variant in the catalytic domain; likely disrupts substrate/FAD interactions and strongly impairs activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.66,
+          "rationale": "Alphamissense score 0.629 supports LOF but is lower than top candidates; confidence reduced from 0.85 to 0.66."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T227M": {
+      "candidate_id": "T227M",
+      "mutation": "T227M",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.68,
+      "evidence_refs": [
+        "E00002"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Reported severe deficiency substitution in a conserved catalytic region; expected to perturb active-site geometry and cofactor use."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "Score 0.671 is pathogenic but modest; confidence lowered from 0.85 to 0.68."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W339C": {
+      "candidate_id": "W339C",
+      "mutation": "W339C",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.78,
+      "evidence_refs": [
+        "E00003"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.83,
+          "rationale": "Known severe MTHFR deficiency variant; likely destabilizes the catalytic/regulatory interface and abolishes function."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "Score 0.876 strongly supports LOF; confidence adjusted to 0.78 reflecting proxy uncertainty."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R183Q": {
+      "candidate_id": "R183Q",
+      "mutation": "R183Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.8,
+      "evidence_refs": [
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Conserved positively charged residue in the catalytic domain; substitution likely disrupts FAD or folate binding."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "Alphamissense score 0.144 is benign, contradicting the initial high confidence; candidate removed from active pool."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Alphamissense score 0.144 is benign, contradicting the initial high confidence; candidate removed from active pool.",
+        "evidence_refs": [
+          "E00004"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "W59A": {
+      "candidate_id": "W59A",
+      "mutation": "W59A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.8,
+      "evidence_refs": [
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Tryptophan in the N-terminal FAD-binding region; replacement may disrupt FAD stacking and cofactor binding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.8,
+          "rationale": "Score 0.895 strongly supports LOF; raised confidence from 0.70 to 0.80."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C130Y": {
+      "candidate_id": "C130Y",
+      "mutation": "C130Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.85,
+      "evidence_refs": [
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Cysteine in a conserved active-site loop; bulky substitution likely distorts local structure and activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.85,
+          "rationale": "Highest alphamissense score 0.938; raised confidence from 0.60 to 0.85."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H127Y": {
+      "candidate_id": "H127Y",
+      "mutation": "H127Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.82,
+      "evidence_refs": [
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Conserved histidine near the catalytic center; substitution may alter proton transfer or local active-site packing."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.82,
+          "rationale": "Score 0.927 strongly supports LOF; raised confidence from 0.58 to 0.82."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G149D": {
+      "candidate_id": "G149D",
+      "mutation": "G149D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.75,
+      "evidence_refs": [
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Glycine in a conserved region near the active site; introducing a charged side chain likely disrupts conformation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.75,
+          "rationale": "Score 0.775 supports LOF; raised confidence from 0.55 to 0.75."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q147P": {
+      "candidate_id": "Q147P",
+      "mutation": "Q147P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.4,
+      "evidence_refs": [
+        "E00009"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Proline substitution near conserved active-site residues may break secondary structure and impair activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "Score 0.476 is ambiguous, lowering confidence from 0.50 to 0.40 and keeping only as a weak backup."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 1,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "C130Y": 93.76,
+    "H127Y": 92.74,
+    "W59A": 89.45
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "R157Q",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6287,
+        "normalized": 0.6287,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.629 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "deepseek-v4-pro__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "W339C",
+          "R183Q",
+          "W59A",
+          "C130Y",
+          "H127Y",
+          "G149D",
+          "Q147P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T227M",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6706,
+        "normalized": 0.6706,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.671 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "deepseek-v4-pro__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "W339C",
+          "R183Q",
+          "W59A",
+          "C130Y",
+          "H127Y",
+          "G149D",
+          "Q147P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W339C",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.8761,
+        "normalized": 0.8761,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.876 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "deepseek-v4-pro__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "W339C",
+          "R183Q",
+          "W59A",
+          "C130Y",
+          "H127Y",
+          "G149D",
+          "Q147P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R183Q",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1436,
+        "normalized": 0.1436,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.144 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "deepseek-v4-pro__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "W339C",
+          "R183Q",
+          "W59A",
+          "C130Y",
+          "H127Y",
+          "G149D",
+          "Q147P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W59A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.8945,
+        "normalized": 0.8945,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.894 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "deepseek-v4-pro__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "W339C",
+          "R183Q",
+          "W59A",
+          "C130Y",
+          "H127Y",
+          "G149D",
+          "Q147P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C130Y",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9376,
+        "normalized": 0.9376,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.938 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "deepseek-v4-pro__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "W339C",
+          "R183Q",
+          "W59A",
+          "C130Y",
+          "H127Y",
+          "G149D",
+          "Q147P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H127Y",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9274,
+        "normalized": 0.9274,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.927 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "deepseek-v4-pro__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "W339C",
+          "R183Q",
+          "W59A",
+          "C130Y",
+          "H127Y",
+          "G149D",
+          "Q147P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G149D",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.7752,
+        "normalized": 0.7752,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.775 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "deepseek-v4-pro__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "W339C",
+          "R183Q",
+          "W59A",
+          "C130Y",
+          "H127Y",
+          "G149D",
+          "Q147P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q147P",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.4764,
+        "normalized": 0.4764,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.476 (class ambiguous); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "deepseek-v4-pro__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "W339C",
+          "R183Q",
+          "W59A",
+          "C130Y",
+          "H127Y",
+          "G149D",
+          "Q147P"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 9,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 9,
+    "final_novelty": 0.0,
+    "tool_calls_used": 1,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

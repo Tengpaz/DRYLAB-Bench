@@ -1,0 +1,166 @@
+{
+  "unit_id": "kimi-k3__hiv_bg505_antibody_escape__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "kimi-k3",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N300D",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "N300 sits in the N300-N301-T302 glycan sequon at the V3 base; removing this glycan is a classic escape route from glycan-dependent bNAbs (N301/N332 supersite) with modest expected fitness cost."
+      },
+      {
+        "rank": 2,
+        "mutation": "N301Q",
+        "confidence": 0.52,
+        "evidence_refs": [],
+        "decision_summary": "N301 is the central glycan attachment site of the supersite; N-to-Q removes the glycan while keeping a similar-sized polar residue, likely minimizing folding/fitness penalty relative to N300D."
+      },
+      {
+        "rank": 3,
+        "mutation": "G311D",
+        "confidence": 0.48,
+        "evidence_refs": [],
+        "decision_summary": "G311 lies at the V3 crown GPG tip, a well-known escape determinant for V3-crown antibodies; some fitness risk at the conserved tip keeps confidence moderate."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Pool converged under LLM-only self-review; additional rounds without evidence tools would not improve the Top-3 ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N300D": {
+      "candidate_id": "N300D",
+      "mutation": "N300D",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "N300 sits in the N299-N300-N301 stretch at the V3 base and forms a glycan sequon (N300-N301-T302); removing this glycan is a classic escape route from glycan-dependent bNAbs (N301/N332-supersite class). Surface-exposed, single-residue change with modest expected fitness cost."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Glycan sequon removal at the V3 base (N300-N301-T302) is a well-established escape route from glycan-dependent bNAbs with modest fitness cost; remains top candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G311D": {
+      "candidate_id": "G311D",
+      "mutation": "G311D",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "G311 is in the V3 crown tip (I308-G309-P310-G311-Q312); substitutions at the GPG-tip are well-known escape routes from V3-crown antibodies. Some fitness risk at the conserved tip, so confidence is moderate."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "V3 crown GPG-tip substitution disrupts V3-crown antibody binding; retained despite some fitness risk at the conserved tip."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K304E": {
+      "candidate_id": "K304E",
+      "mutation": "K304E",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "K304 is a surface-exposed basic residue at the V3 base (N301-T302-R303-K304); charge reversal is a common antibody-escape mechanism at V3-base epitopes, but carries some risk of fitness/folding perturbation."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Charge reversal at a surface-exposed V3-base residue is a plausible escape mechanism; kept at moderate confidence due to potential fitness cost."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N301Q": {
+      "candidate_id": "N301Q",
+      "mutation": "N301Q",
+      "first_seen_round": 2,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "N301 in the N300-N301-T302 sequon is itself a key glycan attachment site at the N301/N332 supersite; N-to-Q removes the glycan while keeping a similar-sized polar residue, likely lowering folding/fitness penalty relative to N300D. It complements N300D as an alternative sequon-disruption strategy."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "N300D": null,
+    "N301Q": null,
+    "G311D": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 9,
+    "c0_size": 0,
+    "final_novelty": 1.0,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,340 @@
+{
+  "unit_id": "claude-opus-5__mthfr_lof__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "claude-opus-5",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "R157W",
+        "confidence": 0.9,
+        "evidence_refs": [],
+        "decision_summary": "Verified R at 157 inside the strictly conserved A155-L156-R157-G158-D159 catalytic-loop motif of the FAD-binding barrel; Arg->Trp introduces a bulky aromatic that disrupts this loop and is a canonical severe MTHFR-deficiency allele with near-null residual activity."
+      },
+      {
+        "rank": 2,
+        "mutation": "T227M",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "Verified T at 227 in the conserved catalytic-domain strand G221-A222-D223-F224-I225-I226-T227-Q228; the bulky Met substitution is reported as a severe (not merely thermolabile) loss-of-function change, distinct from the mild A222V polymorphism."
+      },
+      {
+        "rank": 3,
+        "mutation": "R335C",
+        "confidence": 0.75,
+        "evidence_refs": [],
+        "decision_summary": "Verified R at 335; loss of this buried conserved arginine removes key salt-bridge/packing interactions in the catalytic barrel, and Arg->Cys here is associated with severe enzyme deficiency. Chosen over the designed catalytic knockout D159A because its inactivating effect relies less on unverified catalytic-residue assignment."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Without evidence tools, additional rounds cannot resolve the remaining structural uncertainties, and the Top-3 is stable across reranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R157W": {
+      "candidate_id": "R157W",
+      "mutation": "R157W",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.88,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.88,
+          "rationale": "Arg157 sits in the strictly conserved A-L-R-G-D catalytic/FAD-proximal motif (A155-L156-R157-G158-D159) of the TIM-barrel domain, and R157W is a classically reported severe MTHFR-deficiency allele. Bulky Trp at this buried, charge-critical position should abolish catalysis."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.88,
+          "rationale": "Position 157 is R in the given sequence and sits in the strictly conserved A155-L156-R157-G158-D159 catalytic/FAD-proximal motif; Arg->Trp there is a classic severe MTHFR-deficiency change."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T227M": {
+      "candidate_id": "T227M",
+      "mutation": "T227M",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.84,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.84,
+          "rationale": "Thr227 (verified T at 227 in GADFIIT) lies in the conserved barrel β-strand region near the FAD/folate pocket; T227M is a documented severe loss-of-function homocystinuria allele. Bulky hydrophobic Met disrupts local packing and cofactor binding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.84,
+          "rationale": "Verified T at 227 within the conserved catalytic-domain beta5 region (A223-D223-F224-I225-I226-T227-Q228); reported as a severe loss-of-function substitution rather than a mild thermolabile one."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D159A": {
+      "candidate_id": "D159A",
+      "mutation": "D159A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.82,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.76,
+          "rationale": "Asp159 is the conserved aspartate of the ALRGD motif corresponding to the catalytic Asp of bacterial MetF that protonates N5 of methyltetrahydrofolate. Removing the carboxylate (Ala) should eliminate catalytic proton transfer while leaving the fold largely intact."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.82,
+          "rationale": "Alignment with bacterial MetF shows the ALRGD motif Asp is the catalytic acid/base, so D159A should abolish turnover while keeping the fold; promoted above R335C."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E63A": {
+      "candidate_id": "E63A",
+      "mutation": "E63A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Glu63 in the absolutely conserved EFFPPRT motif aligns with E. coli MetF Glu28, the catalytic acid/base of the reaction. Charge removal should abolish turnover with minimal global destabilization."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "E63 begins the strictly conserved E63-F-F-P-P-R-T69 FAD/substrate motif, but alanine at a solvent-facing motif start may be only partially inactivating."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R335C": {
+      "candidate_id": "R335C",
+      "mutation": "R335C",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Arg335 (verified R at 335) is a reported severe MTHFR-deficiency substitution site in the catalytic domain/linker region; loss of the arginine plus a free cysteine is expected to strongly impair folding and activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Verified R at 335; buried conserved Arg loss is strongly destabilizing/inactivating, but slightly below the catalytic-motif candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G158R": {
+      "candidate_id": "G158R",
+      "mutation": "G158R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.64,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Gly158 in the conserved LRGD turn requires backbone flexibility with no side chain; introducing a large charged Arg should sterically block the active-site loop and abolish activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.64,
+          "rationale": "Gly158 in the tight ALRGD turn has no side-chain room; Arg insertion should break the catalytic loop, though folding collapse (rather than a clean LoF) is possible."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "P66L": {
+      "candidate_id": "P66L",
+      "mutation": "P66L",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Pro66 in the invariant EFFPPRT loop shapes the substrate-binding entrance of the barrel; replacing it with Leu removes the conformational constraint and is predicted to disorganize the active site."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "Although in the EFFPPRT motif, a Pro->Leu in a loop is often partially tolerated and it is weaker than the catalytic-motif candidates now occupying the pool."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Although in the EFFPPRT motif, a Pro->Leu in a loop is often partially tolerated and it is weaker than the catalytic-motif candidates now occupying the pool.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "L323P": {
+      "candidate_id": "L323P",
+      "mutation": "L323P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Leu323 lies in the conserved HFYTLNR active-site helix; a proline substitution should break this helix and disrupt the FAD/folate pocket, a generic but potent loss-of-function mechanism."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.58,
+          "rationale": "L323 lies in the conserved H319-F-Y-T-L323-N-R325 folate-binding element and proline should break the secondary structure, but the exact backbone context is unverified."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A222V": {
+      "candidate_id": "A222V",
+      "mutation": "A222V",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "A222V (C677T) is the best-validated activity-reducing variant, causing FAD loss and thermolability, but it only lowers activity ~50-70% rather than abolishing it. Included as a high-reliability but sub-maximal LoF anchor."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "A222V is the common thermolabile polymorphism that only partially lowers activity (retains substantial function), so it does not meet the 'abolish activity' objective."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "A222V is the common thermolabile polymorphism that only partially lowers activity (retains substantial function), so it does not meet the 'abolish activity' objective.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "R183Q": {
+      "candidate_id": "R183Q",
+      "mutation": "R183Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.42,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Arg183 (verified R at 183) is a conserved surface/interface arginine in the catalytic barrel reported among MTHFR deficiency alleles; charge neutralization may disrupt cofactor/substrate positioning, though evidence is weaker than for R157W."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "Surface-exposed Arg->Gln with no clear catalytic or packing role; conservative charge-neutral change is likely tolerated."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Surface-exposed Arg->Gln with no clear catalytic or packing role; conservative charge-neutral change is likely tolerated.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "R157W": null,
+    "T227M": null,
+    "R335C": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

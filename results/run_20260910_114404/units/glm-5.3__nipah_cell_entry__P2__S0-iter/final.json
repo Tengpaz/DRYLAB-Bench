@@ -1,0 +1,100 @@
+{
+  "unit_id": "glm-5.3__nipah_cell_entry__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "glm-5.3",
+  "scenario_id": "nipah_cell_entry",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "W503F",
+        "confidence": 0.38,
+        "evidence_refs": [],
+        "decision_summary": "W503 is a verifiable aromatic residue near the C-terminal receptor-binding surface; a conservative Phe retains aromatic packing while trimming steric bulk at the ephrinB2/B3 interface. Purely hypothesis-driven with no external evidence, hence low confidence."
+      },
+      {
+        "rank": 2,
+        "mutation": "E509K",
+        "confidence": 0.32,
+        "evidence_refs": [],
+        "decision_summary": "E509 sits on a surface-exposed loop of the G head; a charge reversal could shift electrostatic complementarity toward the receptor surface, a common affinity-modulating mechanism. No evidence available, so confidence is weak."
+      },
+      {
+        "rank": 3,
+        "mutation": "D512N",
+        "confidence": 0.28,
+        "evidence_refs": [],
+        "decision_summary": "D512 lies just C-terminal to the proposed binding loop; neutralizing this negative charge via Asn may reduce repulsion at the receptor interface while preserving backbone conformation. Fully speculative given the LLM-only condition."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further rounds of self-reflection without any evidence tool would not meaningfully improve candidate ranking, so the pool is finalized at round 1."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "I502L": {
+      "candidate_id": "I502L",
+      "mutation": "I502L",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Conservative hydrophobic substitution within the C-terminal receptor-binding module that could improve hydrophobic packing against the ephrin G-H loop without destabilizing the fold."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "Manual sequence verification shows position 502 is K (…NKIWCISLVE…, block 491-500 ends K500, block 501-510 is NKIWCISLVE), so the cited WT residue I is incorrect and the candidate is invalid."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Manual sequence verification shows position 502 is K (…NKIWCISLVE…, block 491-500 ends K500, block 501-510 is NKIWCISLVE), so the cited WT residue I is incorrect and the candidate is invalid.",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "W503F": null,
+    "E509K": null,
+    "D512N": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 1,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 13,
+    "c0_size": 1,
+    "final_novelty": 1.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

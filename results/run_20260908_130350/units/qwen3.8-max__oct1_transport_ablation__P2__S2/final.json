@@ -1,0 +1,273 @@
+{
+  "unit_id": "qwen3.8-max__oct1_transport_ablation__P2__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "F160D",
+        "confidence": 0.62,
+        "evidence_refs": [
+          "E00001",
+          "E00002",
+          "E00003"
+        ],
+        "decision_summary": "Introducing a charged Asp at position 160 in TM4 should strongly disrupt the hydrophobic substrate-binding environment and abolish transport. The more aggressive substitution compared to F160A (which showed low LOF phenotype score of 0.127) is expected to more effectively eliminate substrate translocation while the TM helix backbone remains intact."
+      },
+      {
+        "rank": 3,
+        "mutation": "F160A",
+        "confidence": 0.45,
+        "evidence_refs": [
+          "E00001",
+          "E00002",
+          "E00003"
+        ],
+        "decision_summary": "Conservative removal of the aromatic side chain at position 160 preserves fold (high PLM plausibility z=1.0) but alphamissense LOF proxy was low (z=0.127), suggesting incomplete transport abolition. Included as a safer option that definitely preserves abundance but may only partially reduce transport."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Maximum agent rounds (4) reached; final selection made based on accumulated evidence and mechanistic reasoning."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "F160A": {
+      "candidate_id": "F160A",
+      "mutation": "F160A",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.52,
+      "evidence_refs": [
+        "E00001",
+        "E00002",
+        "E00003",
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Phe160 in TM3 is part of the substrate-binding cavity; alanine substitution removes a key hydrophobic contact for substrate recognition."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "AlphaMissense score of 0.127 is classified as benign, suggesting this mutation is unlikely to cause loss-of-function. Since our goal is to abolish transport (LOF), a benign prediction is counter to our objective."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.52,
+          "rationale": "ESM-1v plausibility is neutral (1.0), suggesting the protein tolerates this substitution for folding/abundance. However, the very low phenotype score (z=0.127) and low evolutionary frequency of A at this position (0.067) suggest F160A is unlikely to strongly abolish transport function."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.52,
+          "rationale": "F160A has high PLM plausibility (z=1.0) suggesting the protein tolerates this substitution structurally, but low phenotype score (z=0.127) and low evolutionary tolerance (z=0.067) suggest it may not effectively abolish transport. Retaining as a baseline but not promoting."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.52,
+          "rationale": "F160A has high PLM plausibility but very low phenotype (LOF proxy) and low evolutionary tolerance, suggesting it may not effectively abolish transport. Retaining but lowering confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F160D": {
+      "candidate_id": "F160D",
+      "mutation": "F160D",
+      "first_seen_round": 4,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 4,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "F160 is in a transmembrane domain critical for substrate binding; replacing with charged Asp should disrupt substrate interaction more aggressively than Ala while potentially preserving fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "F160D": null,
+    "F160A": 32.987
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "F160A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1272,
+        "normalized": 0.1272,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.127 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__oct1_transport_ablation__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F160A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.066986,
+        "normalized": 0.066986,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.864,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.864,
+        "reason": "alignment coverage 209/242 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 160 = 0.0670 among 209 homologs; conservation entropy 2.784 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "qwen3.8-max__oct1_transport_ablation__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "F160A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F160A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "qwen3.8-max__oct1_transport_ablation__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "F160A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F160A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "qwen3.8-max__oct1_transport_ablation__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "F160A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 2,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 21,
+    "c0_size": 1,
+    "final_novelty": 0.5,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

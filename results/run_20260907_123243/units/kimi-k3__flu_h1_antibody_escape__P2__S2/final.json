@@ -1,0 +1,1538 @@
+{
+  "unit_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+  "condition": "S2",
+  "model_id": "kimi-k3",
+  "scenario_id": "flu_h1_antibody_escape",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K157E",
+        "confidence": 0.8,
+        "evidence_refs": [
+          "E00002",
+          "E00012"
+        ],
+        "decision_summary": "Highest escape signal (z=0.964) in a known antigenic (Ca2) site with a positive PLM plausibility score supporting retained replication fitness."
+      },
+      {
+        "rank": 2,
+        "mutation": "D172N",
+        "confidence": 0.78,
+        "evidence_refs": [
+          "E00004",
+          "E00014"
+        ],
+        "decision_summary": "Strong escape (z=0.881) combined with the best PLM score in the pool (z=1.000), suggesting good fitness retention; adds potential glycan-shield escape."
+      },
+      {
+        "rank": 3,
+        "mutation": "S158N",
+        "confidence": 0.75,
+        "evidence_refs": [
+          "E00001",
+          "E00011"
+        ],
+        "decision_summary": "Good escape (z=0.786) in the Sa antigenic region with positive structure compatibility from a prior round, introducing a glycosylation-site-like escape mechanism."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 ranking is stable across escape, PLM, and structure evidence; further evidence is unlikely to alter the final selection."
+    },
+    "remaining_budget": {
+      "tool_calls": 1,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "S158N": {
+      "candidate_id": "S158N",
+      "mutation": "S158N",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.78,
+      "evidence_refs": [
+        "E00001",
+        "E00011",
+        "E00023"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Position 158 lies in the Sa antigenic site of the H1 head; S158N-type changes are classic antigenic drift mutations that add a potential glycan and disrupt antibody binding while remaining surface-exposed and structurally tolerated."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "Sa-site antigenic residue; S158N introduces a potential glycosylation sequon (158-NST) known to shield antibody epitopes while being a naturally occurring H1 variation."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Good escape (0.786) but weak ESM-1v plausibility (0.185); retained as third-best balanced candidate."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "Only top candidate with positive structure compatibility (z=0.928) plus good escape (0.786); adds a glycosylation-site-like escape mechanism, raising confidence toward the top two."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K157E": {
+      "candidate_id": "K157E",
+      "mutation": "K157E",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.82,
+      "evidence_refs": [
+        "E00002",
+        "E00012",
+        "E00021"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Charge reversal at Sa-site residue 157 is a known H1 escape mechanism; the position is surface-exposed on the globular head, so folding/replication cost is expected to be low."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Charge reversal at the Sa antigenic site should disrupt antibody binding; surface-exposed so fitness cost likely moderate."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.82,
+          "rationale": "Highest EVEscape score (0.964) in the pool with moderate sequence plausibility (0.378); best escape-per-plausibility trade-off."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.82,
+          "rationale": "Highest escape z (0.964) with positive PLM (0.378); structure evidence is not applicable (WT mismatch), so it neither confirms nor refutes folding, and PLM serves as the replication proxy."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S159T": {
+      "candidate_id": "S159T",
+      "mutation": "S159T",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00005",
+        "E00015"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Residue 159 is a recurrent drift position in the Sa antigenic site; a conservative Ser-to-Thr change alters local epitope chemistry with minimal structural perturbation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Conservative Ser-to-Thr in the Sa site; changes epitope surface chemistry with minimal structural risk."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "Moderate escape (0.619) with very low plausibility (0.014); poor on both axes relative to alternatives."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Moderate escape (0.619) with very low plausibility (0.014); poor on both axes relative to alternatives.",
+        "evidence_refs": [
+          "E00005",
+          "E00015"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "D172N": {
+      "candidate_id": "D172N",
+      "mutation": "D172N",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.8,
+      "evidence_refs": [
+        "E00004",
+        "E00014",
+        "E00022"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.66,
+          "rationale": "Position 172 sits in the Ca1 antigenic region; Asp-to-Asn removes a charged epitope contact and can introduce glycosylation context, a common natural escape route."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.66,
+          "rationale": "Antigenic-site Asp to Asn removes a negative charge on a surface loop; conservative size change should preserve folding."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.8,
+          "rationale": "Strong escape (0.881) combined with the maximal plausibility signal (1.0), i.e. escape gain with essentially no predicted fitness cost."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "Strong escape (0.881) and the best PLM score in the pool (1.000); structure not applicable, but PLM strongly supports viability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K187N": {
+      "candidate_id": "K187N",
+      "mutation": "K187N",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.68,
+      "evidence_refs": [
+        "E00003",
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Residue 187 is in the Sb antigenic site and is historically involved in H1 antigenic drift; Lys-to-Asn neutralizes the positive charge at a key antibody contact."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "Sb-site residue; Lys-to-Asn at 187 changes electrostatics of an antigenic loop with modest structural perturbation."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.4,
+          "rationale": "Escape (0.783) is similar to S158N but plausibility (0.018) is far worse; dominated by S158N."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Escape (0.783) is similar to S158N but plausibility (0.018) is far worse; dominated by S158N.",
+        "evidence_refs": [
+          "E00013"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "E188D": {
+      "candidate_id": "E188D",
+      "mutation": "E188D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00009",
+        "E00019"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Conservative acidic swap at Sb-site 188 can subtly remodel epitope electrostatics while being nearly neutral for folding and receptor function."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "Very conservative Glu-to-Asp may yield little escape; downgraded pending evidence."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.33,
+          "rationale": "Low escape (0.587) and low plausibility (0.058); dominated."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Low escape (0.587) and low plausibility (0.058); dominated.",
+        "evidence_refs": [
+          "E00019"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "R224K": {
+      "candidate_id": "R224K",
+      "mutation": "R224K",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00006",
+        "E00016",
+        "E00025"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Position 224 is in the Ca2 antigenic site near the receptor-binding pocket; R224K preserves positive charge (fitness-friendly) while altering antibody recognition."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "Conservative Arg-to-Lys swap near the Ca antigenic region; low fitness risk but possibly limited escape gain."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Best plausibility among mid candidates (0.510) but lowest escape (0.558); kept as fitness-safe fallback outside Top-3."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Excellent structure (0.972) and PLM (0.510) but escape is the weakest in the pool (0.558); viable but not reward-aligned enough for top-3."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T227N": {
+      "candidate_id": "T227N",
+      "mutation": "T227N",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.6,
+      "evidence_refs": [
+        "E00007",
+        "E00017"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Ca2-site residue 227 is surface exposed; Thr-to-Asn can create a new N-linked glycosylation motif (N-X-S/T) that shields the epitope, a strong escape mechanism."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Surface Thr to Asn could alter local glycosylation potential and epitope recognition in the Ca region."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "Escape (0.614) and plausibility (0.075) both weak."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Escape (0.614) and plausibility (0.075) both weak.",
+        "evidence_refs": [
+          "E00017"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "S153N": {
+      "candidate_id": "S153N",
+      "mutation": "S153N",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.58,
+      "evidence_refs": [
+        "E00008",
+        "E00018"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Sa-site 153 is a drift position; Ser-to-Asn modifies local epitope surface with low structural cost, and may support glycan masking depending on motif context."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "Sa-site Ser-to-Asn; does not form a glycosylation sequon alone but perturbs epitope surface."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "Escape (0.677) below top tier and plausibility (0.023) very low."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Escape (0.677) below top tier and plausibility (0.023) very low.",
+        "evidence_refs": [
+          "E00018"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "H154Q": {
+      "candidate_id": "H154Q",
+      "mutation": "H154Q",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00010",
+        "E00020",
+        "E00024"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Sa-site 154 histidine is surface-exposed; His-to-Gln changes side-chain chemistry and pH-dependent charge, potentially reducing antibody binding with modest fitness impact."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.52,
+          "rationale": "His-to-Gln near the Sa site is plausible but histidine may be structurally involved; downgraded pending evidence."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Good escape (0.824) but very low PLM (0.025) and no structure check; remains a backup, not top-3."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 3,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "K157E": 68.663,
+    "D172N": 93.753,
+    "S158N": 70.99
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "S158N",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.7863,
+        "normalized": 0.7863,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.786; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K157E",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.9643,
+        "normalized": 0.9643,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.964; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K187N",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.7834,
+        "normalized": 0.7834,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.783; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D172N",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.8813,
+        "normalized": 0.8813,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.881; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S159T",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.6193,
+        "normalized": 0.6193,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.619; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R224K",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.5585,
+        "normalized": 0.5585,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.558; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T227N",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.6139,
+        "normalized": 0.6139,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.614; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S153N",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.6775,
+        "normalized": 0.6775,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.677; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E188D",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.5865,
+        "normalized": 0.5865,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.587; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H154Q",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.8242,
+        "normalized": 0.8242,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.824; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S158N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1851,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K157E",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.3781,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K187N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0178,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D172N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S159T",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0139,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R224K",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5098,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T227N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0749,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S153N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0231,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E188D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.058,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H154Q",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0252,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "S158N",
+          "K157E",
+          "K187N",
+          "D172N",
+          "S159T",
+          "R224K",
+          "T227N",
+          "S153N",
+          "E188D",
+          "H154Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K157E",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "K157E",
+          "D172N",
+          "S158N",
+          "H154Q",
+          "R224K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D172N",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "K157E",
+          "D172N",
+          "S158N",
+          "H154Q",
+          "R224K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S158N",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.1107,
+        "normalized": 0.927648,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.061,
+        "reason": "PDB 1RUZ at 2.9 A; residue B-factor 93.86"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1RUZ:H (ΔlogP=-0.1107)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00023",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "K157E",
+          "D172N",
+          "S158N",
+          "H154Q",
+          "R224K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H154Q",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00024",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "K157E",
+          "D172N",
+          "S158N",
+          "H154Q",
+          "R224K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R224K",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.8293,
+        "normalized": 0.972291,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.0,
+        "reason": "PDB 1RUZ at 2.9 A; residue B-factor 101.12"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1RUZ:H (ΔlogP=0.8293)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00025",
+      "run_id": "kimi-k3__flu_h1_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "K157E",
+          "D172N",
+          "S158N",
+          "H154Q",
+          "R224K"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 5,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 3,
+    "rounds_used": 3,
+    "budget_exhausted": false
+  }
+}

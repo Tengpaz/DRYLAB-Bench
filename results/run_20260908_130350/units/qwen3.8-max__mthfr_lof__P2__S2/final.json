@@ -1,0 +1,387 @@
+{
+  "unit_id": "qwen3.8-max__mthfr_lof__P2__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D342N",
+        "confidence": 0.65,
+        "evidence_refs": [
+          "E00002"
+        ],
+        "decision_summary": "D342 showed the highest AlphaMissense pathogenicity score among tested positions (z=0.173 for D342A). The conservative D342N substitution disrupts a critical aspartate likely involved in catalysis or metal coordination while preserving structural viability."
+      },
+      {
+        "rank": 2,
+        "mutation": "D342A",
+        "confidence": 0.62,
+        "evidence_refs": [
+          "E00002"
+        ],
+        "decision_summary": "D342A directly demonstrated the highest pathogenicity score (z=0.173) among all tested mutations, indicating strong potential for loss-of-function at this catalytically important aspartate residue."
+      },
+      {
+        "rank": 3,
+        "mutation": "E429K",
+        "confidence": 0.6,
+        "evidence_refs": [
+          "E00001"
+        ],
+        "decision_summary": "Charge reversal at E429 in the catalytic domain is highly disruptive to local electrostatics and likely abolishes enzymatic activity. E429A showed low pathogenicity (z=0.082), but the more drastic charge reversal to lysine is expected to be more deleterious."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "All 4 tool calls and 4 agent rounds have been used; no further evidence can be gathered."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "G170A": {
+      "candidate_id": "G170A",
+      "mutation": "G170A",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00005",
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "G170 is in the glycine-rich loop involved in NADPH binding. Substitution with alanine may disrupt the backbone conformation needed for cofactor binding, reducing enzyme activity."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "AlphaMissense pathogenicity score of 0.084 is very low (benign class), strongly contradicting the LOF objective. G170A is unlikely to abolish MTHFR activity."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "AlphaMissense pathogenicity score of 0.084 is very low (benign class), strongly contradicting the LOF objective. G170A is unlikely to abolish MTHFR activity.",
+        "evidence_refs": [
+          "E00005"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "D342N": {
+      "candidate_id": "D342N",
+      "mutation": "D342N",
+      "first_seen_round": 3,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "D342 showed highest pathogenicity among tested positions. Conservative substitution to asparagine may disrupt metal coordination or hydrogen bonding critical for catalysis while being more likely to be classified as pathogenic."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "D342A showed the highest AlphaMissense pathogenicity z-score (0.173) among all tested positions. D342N is a conservative substitution that may disrupt catalytic function while being more likely to be classified as pathogenic."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E429K": {
+      "candidate_id": "E429K",
+      "mutation": "E429K",
+      "first_seen_round": 3,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Charge reversal at E429 (catalytic domain) is more disruptive than alanine substitution and more likely to be classified as pathogenic by AlphaMissense, potentially abolishing activity."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "E429A had low pathogenicity (z=0.082), but E429K is a charge reversal that is more disruptive and more likely to be classified as pathogenic by AlphaMissense."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D342A": {
+      "candidate_id": "D342A",
+      "mutation": "D342A",
+      "first_seen_round": 4,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 4,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "D342A directly showed the highest AlphaMissense pathogenicity score among tested positions (z=0.173), making it a strong LOF candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 5
+  },
+  "bundle_evidence": {
+    "D342N": null,
+    "D342A": 21.946,
+    "E429K": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "E429A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.0816,
+        "normalized": 0.0816,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.082 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "E429A",
+          "D342A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D342A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1727,
+        "normalized": 0.1727,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.173 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "qwen3.8-max__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "E429A",
+          "D342A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E429A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "qwen3.8-max__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "E429A",
+          "D342A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D342A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "qwen3.8-max__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "E429A",
+          "D342A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G170A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.0842,
+        "normalized": 0.0842,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.084 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "qwen3.8-max__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G170A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G170A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "qwen3.8-max__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G170A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 20,
+    "c0_size": 0,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 5,
+    "budget_exhausted": true
+  }
+}

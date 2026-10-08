@@ -1,0 +1,426 @@
+{
+  "unit_id": "glm-5.3__flu_h1_antibody_escape__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "glm-5.3",
+  "scenario_id": "flu_h1_antibody_escape",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K157E",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "Charge-reversal in the Sa antigenic site is a classic escape mechanism with tolerable structural impact. Retained as the strongest candidate."
+      },
+      {
+        "rank": 2,
+        "mutation": "E203K",
+        "confidence": 0.5,
+        "evidence_refs": [],
+        "decision_summary": "Charge flip within the Ca2 antigenic region plausibly disrupts antibody binding while preserving backbone chemistry and folding."
+      },
+      {
+        "rank": 3,
+        "mutation": "Q205R",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "Surface-exposed, structurally conservative Gln-to-Arg adds positive charge adjacent to an escape hotspot, modestly raising confidence."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Candidate pool converged after self-review; additional rounds without external evidence would not improve the Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K157E": {
+      "candidate_id": "K157E",
+      "mutation": "K157E",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "K157 sits in the Ca antigenic 140s loop near the receptor binding site; a charge flip is a classic antibody-escape mechanism while preserving fold."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Position 157 lies in the Sa/Sb-proximal head region near known antigenic residues; charge change likely alters antibody contact without disrupting folding. Retained as top candidate with slight confidence boost."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "K157 is in Sa antigenic site; charge reversal is a classic escape mechanism with modest fitness cost in H1 literature knowledge."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Charge-reversal in the Sa antigenic site is a classic escape mechanism with tolerable structural impact; no new evidence contradicts it."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E203K": {
+      "candidate_id": "E203K",
+      "mutation": "E203K",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Position 203 (mature ~188, antigenic site Sb/Ca2 boundary adjacent to the RBS) — reversing charge disrupts antibody binding with low structural risk."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.48,
+          "rationale": "Position 203 sits near the Sb antigenic site loop around residues 190-200; charge reversal is a classic antigenic-drift-type change with typically tolerated fitness cost."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Ca2 site residue with charge-flip escape potential; retains folding since it is surface-exposed."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Charge flip within the Ca2/antigenic region plausibly disrupts antibody binding while preserving local backbone chemistry."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q205R": {
+      "candidate_id": "Q205R",
+      "mutation": "Q205R",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.42,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "The 190-helix region around position 205 is a well-known antigenic escape hotspot in H1; adding positive charge typically reduces antibody recognition."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.42,
+          "rationale": "Adjacent to E203 in an exposed head loop; arginine adds positive charge and potential N-glycosylation-independent steric change."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "Adjacent to E203; overlapping escape value with E203K, so lower independent value if both cannot be combined."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.42,
+          "rationale": "Gln-to-Arg adds a positive charge adjacent to E203K-like escape hotspots; slight confidence raise given it is surface-exposed and structurally conservative."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D202N": {
+      "candidate_id": "D202N",
+      "mutation": "D202N",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.36,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "Neutralizing an acidic surface residue in the Sb region can alter local epitope topography without perturbing the HA fold."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.36,
+          "rationale": "Neutralization of acidic charge in antigenic region is a mild, fold-safe change, but effect size on escape is likely smaller than charge-reversal options."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.36,
+          "rationale": "Neutralizing an acidic Ca2-site residue may reduce antibody binding with low structural disruption."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.36,
+          "rationale": "Charge-neutralizing substitution in an antigenic loop is a moderate, low-risk escape strategy."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N179K": {
+      "candidate_id": "N179K",
+      "mutation": "N179K",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Position 179 lies in the Sa antigenic site; introducing a positive charge can block Sa-directed antibodies while remaining solvent-exposed."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "Surface head position; conservative-ish charge gain, moderate escape potential."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "Sb-site glycan-adjacent residue; moderate escape potential, mild fitness risk."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "Retained as a fallback Sa-loop candidate; moderate escape potential with mild fitness uncertainty."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R155S": {
+      "candidate_id": "R155S",
+      "mutation": "R155S",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.28,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.32,
+          "rationale": "Removing a charged arginine in the Ca loop changes epitope surface chemistry; conservative enough to retain folding and receptor binding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.28,
+          "rationale": "Loss of a charged residue may reduce fitness cost from antibody-independent effects but is a relatively weak escape change; reranked downward."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Loss of a large charged contact residue risks destabilizing the Sa loop conformation; poorly justified without external evidence."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Loss of a large charged contact residue risks destabilizing the Sa loop conformation; poorly justified without external evidence.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "N210D": {
+      "candidate_id": "N210D",
+      "mutation": "N210D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Mature ~195 in site Sb; an N-to-D substitution locally alters epitope chemistry with minimal impact on HA structure or replication."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Adding an acidic residue near a glycosylation-relevant region risks disrupting local glycan interactions; low expected escape value."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Adding an acidic residue near a glycosylation-relevant region risks disrupting local glycan interactions; low expected escape value.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "Y208H": {
+      "candidate_id": "Y208H",
+      "mutation": "Y208H",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.22,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.28,
+          "rationale": "A conservative aromatic-to-his substitution in the Sb loop can subtly shift antibody contact geometry at low fitness cost."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.22,
+          "rationale": "Aromatic-to-small substitution may destabilize a hydrophobic pocket; lowered confidence on fold preservation."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.12,
+          "rationale": "Aromatic-to-small substitution in receptor-proximal region may impair local packing; low confidence escape benefit."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Aromatic-to-small substitution in receptor-proximal region may impair local packing; low confidence escape benefit.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K176N": {
+      "candidate_id": "K176N",
+      "mutation": "K176N",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.25,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Position 176 (mature ~161, Sa site boundary) — introducing a potential glycosylation-adjacent residue may shield a nearby epitope."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.25,
+          "rationale": "Potential N-glycosylation motif creation could shield antibodies, but risk of improper glycosylation affecting folding."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Charge loss near glycosylation region is a weak, indirect escape strategy with uncertain folding effects."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Charge loss near glycosylation region is a weak, indirect escape strategy with uncertain folding effects.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "S180N": {
+      "candidate_id": "S180N",
+      "mutation": "S180N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.22,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.22,
+          "rationale": "Adding a polar side chain in the Sa antigenic site may create steric/glycosylation-adjacent shielding; modest structural risk."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.12,
+          "rationale": "Modest glycosylation-motif effect with uncertain folding impact and weak escape signal; removing to make room for better candidates."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Modest glycosylation-motif effect with uncertain folding impact and weak escape signal; removing to make room for better candidates.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "K157E": null,
+    "E203K": null,
+    "Q205R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 5,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 3,
+    "budget_exhausted": false
+  }
+}

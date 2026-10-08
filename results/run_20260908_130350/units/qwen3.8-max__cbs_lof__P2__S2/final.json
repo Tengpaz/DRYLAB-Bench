@@ -1,0 +1,1218 @@
+{
+  "unit_id": "qwen3.8-max__cbs_lof__P2__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.93,
+        "evidence_refs": [
+          "E00001",
+          "E00007",
+          "E00013"
+        ],
+        "decision_summary": "K119 is the catalytic lysine that forms the internal aldimine with PLP; its mutation to alanine abolishes the Schiff base linkage essential for all CBS catalytic steps. AlphaMissense 0.987, MSA entropy 0.056, and ESM-1v 0.000 all converge on extreme functional disruption."
+      },
+      {
+        "rank": 2,
+        "mutation": "C52A",
+        "confidence": 0.83,
+        "evidence_refs": [
+          "E00003",
+          "E00009",
+          "E00015"
+        ],
+        "decision_summary": "C52 is a heme axial ligand in the regulatory domain; its mutation disrupts heme binding, destabilizing the N-terminal domain and impairing the conformational activation required for catalysis. AlphaMissense 0.951 and ESM-1v 0.0004 confirm strong disruption."
+      },
+      {
+        "rank": 3,
+        "mutation": "R266A",
+        "confidence": 0.81,
+        "evidence_refs": [
+          "E00004",
+          "E00010",
+          "E00016"
+        ],
+        "decision_summary": "R266 resides in the catalytic core and participates in substrate binding/stabilization of the PLP-substrate complex. AlphaMissense 0.929, MSA conservation 0.083, and ESM-1v 0.0002 all support severe functional impairment."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "All three evidence dimensions converge on the same top-3 ranking with no remaining ambiguity; further tool calls would not alter the outcome."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.93,
+      "evidence_refs": [
+        "E00001",
+        "E00007",
+        "E00013",
+        "E00019"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Lys119 is the catalytic lysine that forms the internal aldimine with PLP; mutation to alanine abolishes Schiff base formation and thus all CBS enzymatic activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "K119 is the catalytic lysine that forms the internal aldimine with PLP; mutation to alanine abolishes the Schiff base linkage essential for CBS activity."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.92,
+          "rationale": "Highest AlphaMissense LOF score (0.987) combined with very low evolutionary tolerance (freq 0.056) at the PLP-binding lysine makes this the strongest LOF candidate."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.93,
+          "rationale": "ESM-1v score of 0.000 confirms extreme implausibility, fully consistent with LOF at the catalytic lysine. All three orthogonal evidence dimensions (AlphaMissense 0.987, MSA 0.056, PLM 0.000) converge strongly."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G116A": {
+      "candidate_id": "G116A",
+      "mutation": "G116A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.66,
+      "evidence_refs": [
+        "E00002",
+        "E00008",
+        "E00014",
+        "E00023"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Gly116 is in the PLP-binding motif (Gly-rich loop); substitution with alanine may distort the cofactor-binding pocket and impair PLP coordination."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "G116 is in the PLP-binding pocket; glycine-to-alanine may disrupt local backbone conformation needed for cofactor binding."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Moderate phenotype score (0.771) and low evolutionary tolerance support LOF but weaker than top candidates."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.66,
+          "rationale": "ESM-1v score of 0.0001 confirms disruption, but AlphaMissense 0.771 is the weakest among active candidates, keeping it at rank 5."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C52A": {
+      "candidate_id": "C52A",
+      "mutation": "C52A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.83,
+      "evidence_refs": [
+        "E00003",
+        "E00009",
+        "E00015",
+        "E00020"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Cys52 is a conserved cysteine in the N-terminal heme-binding region; mutation may disrupt heme coordination and allosteric regulation, contributing to loss of function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "C52 coordinates the heme iron in the N-terminal regulatory domain; loss may destabilize the heme and indirectly affect catalytic domain conformation."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.82,
+          "rationale": "Very high phenotype score (0.951) supports LOF, but MSA shows 22% homolog frequency for Ala at this position, suggesting some evolutionary tolerance; net still strongly supports LOF."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.83,
+          "rationale": "ESM-1v score of 0.0004 confirms extreme disruption at heme-ligand C52. Combined with AlphaMissense 0.951, this remains a strong LOF candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R266A": {
+      "candidate_id": "R266A",
+      "mutation": "R266A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.81,
+      "evidence_refs": [
+        "E00004",
+        "E00010",
+        "E00016",
+        "E00021"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Arg266 is involved in substrate (homocysteine) recognition; alanine substitution removes a key electrostatic interaction for substrate binding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "R266 is near the active site and may participate in substrate binding or transition-state stabilization."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.8,
+          "rationale": "High phenotype score (0.929) and low evolutionary tolerance (freq 0.083) in the catalytic core domain strongly support LOF."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.81,
+          "rationale": "ESM-1v score of 0.0002 confirms extreme implausibility. AlphaMissense 0.929 and MSA 0.083 both support strong functional disruption at this catalytic domain residue."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E131A": {
+      "candidate_id": "E131A",
+      "mutation": "E131A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00006",
+        "E00012",
+        "E00018"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Glu131 participates in PLP binding and active-site architecture; alanine substitution may weaken cofactor affinity and destabilize the active conformation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "E131 may participate in the hydrogen-bond network around the PLP-binding site."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "AlphaMissense score of 0.219 classifies this as benign, directly contradicting the LOF objective."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "AlphaMissense score of 0.219 classifies this as benign, directly contradicting the LOF objective.",
+        "evidence_refs": [
+          "E00006"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "H65A": {
+      "candidate_id": "H65A",
+      "mutation": "H65A",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.74,
+      "evidence_refs": [
+        "E00005",
+        "E00011",
+        "E00017",
+        "E00022"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "H65 is a heme axial ligand; its mutation may destabilize the regulatory heme domain and indirectly impair catalysis."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "High phenotype score (0.845) and lowest evolutionary tolerance (freq 0.046) support LOF via heme domain disruption, but slightly lower phenotype than top-3 candidates."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.74,
+          "rationale": "ESM-1v score of 0.072 is the highest among candidates, indicating slightly less disruption than others, but still supports LOF. AlphaMissense 0.845 is adequate but lower than top-3."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "K119A": 35.628,
+    "C52A": 39.252,
+    "R266A": 33.29
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "K119A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9873,
+        "normalized": 0.9873,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.987 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G116A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.7712,
+        "normalized": 0.7712,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.771 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C52A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9506,
+        "normalized": 0.9506,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.951 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R266A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9291,
+        "normalized": 0.9291,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.929 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H65A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.8454,
+        "normalized": 0.8454,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.845 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E131A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.2193,
+        "normalized": 0.2193,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.219 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K119A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.055556,
+        "normalized": 0.055556,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.87,
+        "local": 0.828,
+        "reason": "MSA depth 87, Neff 71.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.828,
+        "reason": "alignment coverage 72/87 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 119 = 0.0556 among 72 homologs; conservation entropy 2.468 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G116A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0625,
+        "normalized": 0.0625,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.87,
+        "local": 0.92,
+        "reason": "MSA depth 87, Neff 71.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.92,
+        "reason": "alignment coverage 80/87 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 116 = 0.0625 among 80 homologs; conservation entropy 2.305 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C52A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.218391,
+        "normalized": 0.218391,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.87,
+        "local": 1.0,
+        "reason": "MSA depth 87, Neff 71.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 87/87 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 52 = 0.2184 among 87 homologs; conservation entropy 2.285 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R266A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.083333,
+        "normalized": 0.083333,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.87,
+        "local": 0.966,
+        "reason": "MSA depth 87, Neff 71.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.966,
+        "reason": "alignment coverage 84/87 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 266 = 0.0833 among 84 homologs; conservation entropy 2.321 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H65A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.045977,
+        "normalized": 0.045977,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.87,
+        "local": 1.0,
+        "reason": "MSA depth 87, Neff 71.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 87/87 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 65 = 0.0460 among 87 homologs; conservation entropy 2.369 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E131A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.085366,
+        "normalized": 0.085366,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.87,
+        "local": 0.943,
+        "reason": "MSA depth 87, Neff 71.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.943,
+        "reason": "alignment coverage 82/87 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 131 = 0.0854 among 82 homologs; conservation entropy 2.545 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K119A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G116A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C52A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R266A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H65A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E131A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "G116A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "E131A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K119A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "G116A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C52A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0004,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "G116A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R266A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0002,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "G116A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H65A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0718,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "G116A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G116A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0001,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00023",
+      "run_id": "qwen3.8-max__cbs_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "K119A",
+          "C52A",
+          "R266A",
+          "H65A",
+          "G116A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 6,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 7,
+    "c0_size": 5,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

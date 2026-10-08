@@ -1,0 +1,1241 @@
+{
+  "unit_id": "grok-4.5__psae_stability_disruption__P1__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "I2P",
+        "confidence": 0.76,
+        "evidence_refs": [
+          "E00001",
+          "E00009",
+          "E00017"
+        ],
+        "decision_summary": "I2P shows strongest combined destabilization via low structure compatibility and zero evolutionary tolerance, preserving core viability."
+      },
+      {
+        "rank": 2,
+        "mutation": "L11P",
+        "confidence": 0.73,
+        "evidence_refs": [
+          "E00002",
+          "E00010",
+          "E00018"
+        ],
+        "decision_summary": "L11P ranks second with solid structure delta and low msa frequency, indicating effective folding disruption."
+      },
+      {
+        "rank": 3,
+        "mutation": "I10P",
+        "confidence": 0.71,
+        "evidence_refs": [
+          "E00003",
+          "E00011",
+          "E00019"
+        ],
+        "decision_summary": "I10P completes the top-3 with moderate compatibility score and zero msa tolerance, suitable for targeted destabilization."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Max agent rounds and tool calls reached; no further evidence expected to modify Top-3 given current signals."
+    },
+    "remaining_budget": {
+      "tool_calls": 1,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "I2P": {
+      "candidate_id": "I2P",
+      "mutation": "I2P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.76,
+      "evidence_refs": [
+        "E00001",
+        "E00009",
+        "E00017"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Isoleucine at position 2 is likely part of a hydrophobic core or helix; substituting with proline introduces a rigid kink that can disrupt secondary structure and folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.75,
+          "rationale": "Lowest structure delta (0.082) combined with zero msa frequency maximizes disruption potential."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "Highest sequence_plm score among pool (0.012) still low but relatively supportive of destabilization; structure z-score remains favorable for disruption"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I10P": {
+      "candidate_id": "I10P",
+      "mutation": "I10P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.71,
+      "evidence_refs": [
+        "E00003",
+        "E00011",
+        "E00019"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Isoleucine at position 10 is in a potential alpha-helical region; proline substitution creates a helix breaker that destabilizes the overall fold."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Moderate structure delta with zero msa frequency provides strong disruption evidence."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Pro substitution at helix-prone site likely destabilizes; low plm consistent with goal"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L11P": {
+      "candidate_id": "L11P",
+      "mutation": "L11P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.73,
+      "evidence_refs": [
+        "E00002",
+        "E00010",
+        "E00018"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Leucine at position 11 contributes to hydrophobic packing; changing to proline introduces a kink likely to cause misfolding or loss of tertiary contacts."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Low structure delta but minor msa tolerance (0.023) slightly reduces suitability for complete knockout."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "Strong Pro-induced kink potential for folding disruption; low plm score reinforces non-tolerance"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G5E": {
+      "candidate_id": "G5E",
+      "mutation": "G5E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": null,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00008",
+        "E00016",
+        "E00022"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Glycine at position 5 is often in flexible turns; substituting with glutamic acid introduces a charged residue that can cause electrostatic repulsion or repulsion with nearby side chains, destabilizing the structure."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Charged substitution risks local disruption; low plm aligns with destabilization"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V21D": {
+      "candidate_id": "V21D",
+      "mutation": "V21D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": null,
+      "current_confidence": 0.68,
+      "evidence_refs": [
+        "E00006",
+        "E00014",
+        "E00021"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Valine at position 21 is hydrophobic; changing to aspartic acid adds a negative charge that may disrupt folding by creating unfavorable interactions in the core or interface."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "Charge introduction may destabilize; low plm indicates poor tolerance"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I27P": {
+      "candidate_id": "I27P",
+      "mutation": "I27P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00004",
+        "E00012",
+        "E00020"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Isoleucine at position 27 is likely in a helical segment; proline substitution breaks the helix and introduces flexibility that can prevent proper folding of the subunit."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Low plm score supports disruption; Pro kink expected to affect folding"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I32P": {
+      "candidate_id": "I32P",
+      "mutation": "I32P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.68,
+      "evidence_refs": [
+        "E00007",
+        "E00015"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Isoleucine at position 32 is in a conserved hydrophobic stretch; proline change disrupts helical integrity and likely leads to unfolding."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.68,
+          "rationale": "High structure compatibility (normalized 0.867) despite zero msa frequency shows the mutation does not sufficiently disrupt."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "High structure compatibility (normalized 0.867) despite zero msa frequency shows the mutation does not sufficiently disrupt.",
+        "evidence_refs": [
+          "E00007",
+          "E00015"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "I33P": {
+      "candidate_id": "I33P",
+      "mutation": "I33P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00005",
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Isoleucine at position 33 contributes to packing; proline substitution creates a kink that destabilizes the local structure and propagates to global fold disruption."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.7,
+          "rationale": "High structure compatibility (normalized 0.911) and msa mutant frequency (0.167) indicate the mutation is tolerated, contradicting destabilization goal."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "High structure compatibility (normalized 0.911) and msa mutant frequency (0.167) indicate the mutation is tolerated, contradicting destabilization goal.",
+        "evidence_refs": [
+          "E00005",
+          "E00013"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 3,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "I2P": 3.308,
+    "L11P": 4.459,
+    "I10P": 7.885
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "I2P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.8337,
+        "normalized": 0.082107,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-4.8337)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L11P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.6289,
+        "normalized": 0.106894,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-4.6289)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I10P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -3.4198,
+        "normalized": 0.224632,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-3.4198)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I27P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -3.5279,
+        "normalized": 0.198296,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-3.5279)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.5418,
+        "normalized": 0.911696,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=0.5418)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V21D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -3.5525,
+        "normalized": 0.194423,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-3.5525)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I32P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.1332,
+        "normalized": 0.86677,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=0.1332)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G5E",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -3.8936,
+        "normalized": 0.161115,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-3.8936)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I2P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 2 = 0.0000 among 43 homologs; conservation entropy 1.703 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L11P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.023256,
+        "normalized": 0.023256,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 11 = 0.0233 among 43 homologs; conservation entropy 1.019 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I10P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 10 = 0.0000 among 43 homologs; conservation entropy 1.437 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I27P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 27 = 0.0000 among 42 homologs; conservation entropy 1.413 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.166667,
+        "normalized": 0.166667,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 33 = 0.1667 among 42 homologs; conservation entropy 1.548 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V21D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 21 = 0.0000 among 43 homologs; conservation entropy 1.339 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I32P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.953,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.953,
+        "reason": "alignment coverage 41/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 32 = 0.0000 among 41 homologs; conservation entropy 1.428 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G5E",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of E at position 5 = 0.0000 among 43 homologs; conservation entropy 1.237 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "I33P",
+          "V21D",
+          "I32P",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I2P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0123,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "V21D",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L11P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0002,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "V21D",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I10P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0001,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "V21D",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I27P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0006,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "V21D",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V21D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0031,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "V21D",
+          "G5E"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G5E",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.001,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "grok-4.5__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "I2P",
+          "L11P",
+          "I10P",
+          "I27P",
+          "V21D",
+          "G5E"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 3,
+    "rounds_used": 3,
+    "budget_exhausted": false
+  }
+}

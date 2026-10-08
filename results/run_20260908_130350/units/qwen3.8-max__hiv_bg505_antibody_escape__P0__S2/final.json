@@ -1,0 +1,451 @@
+{
+  "unit_id": "qwen3.8-max__hiv_bg505_antibody_escape__P0__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N301A",
+        "confidence": 0.68,
+        "evidence_refs": [
+          "E00001",
+          "E00003"
+        ],
+        "decision_summary": "Highest EVEscape phenotype score (z=0.558) among all candidates; removes the N301 glycosylation site which is a well-established antibody escape mechanism in HIV Env, though PLM score of 0 raises some fitness concern."
+      },
+      {
+        "rank": 2,
+        "mutation": "N301Q",
+        "confidence": 0.55,
+        "evidence_refs": [
+          "E00007",
+          "E00008"
+        ],
+        "decision_summary": "Moderate escape score (z=0.537) with conservative N-to-Q substitution that removes the glycosylation site; similar PLM concerns as N301A but slightly lower escape potential."
+      },
+      {
+        "rank": 3,
+        "mutation": "N301S",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "Preserves the N-X-S glycosylation motif while potentially altering glycan processing; lacks direct phenotype evidence but is biologically plausible as a subtle immune escape mechanism."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "All 4 tool calls have been used and additional evidence is unlikely to change the ranking given consistent phenotype and PLM signals."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N301A": {
+      "candidate_id": "N301A",
+      "mutation": "N301A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00001",
+        "E00003",
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "N301 is a glycan in the outer domain near the CD4bs; loss can confer escape from certain bNAb classes while maintaining structural integrity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "Moderate escape score (0.558) but ESM-1v plausibility is 0.0, suggesting the mutation is poorly tolerated by the sequence model, which undermines replication fitness. Reduced confidence due to the tension between escape and fitness."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "N301A shows the highest EVEscape score (0.558) among tested candidates, supporting antibody escape. However, ESM-1v plausibility is 0.0, suggesting potential fitness cost; retained but confidence capped."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "N301A has the highest phenotype escape score (z=0.558) and removes the N301 glycosylation site, a well-known mechanism for antibody escape in HIV Env. The zero PLM score is concerning for fitness but N301A is observed in nature and the glycan shield is dispensable at individual sites."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N301S": {
+      "candidate_id": "N301S",
+      "mutation": "N301S",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "N301 is a known N-linked glycosylation site (N-X-T/S motif); N301S preserves the glycosylation motif while potentially altering glycan processing, which could affect antibody recognition differently than N301A."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "N301S preserves the glycosylation motif but may alter glycan processing; however, without direct phenotype or PLM evidence for this specific variant, confidence remains moderate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N301D": {
+      "candidate_id": "N301D",
+      "mutation": "N301D",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "N301D is a conservative substitution that removes the glycosylation site while maintaining similar physicochemical properties; may preserve local structure while disrupting glycan shield."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "N301D removes the glycosylation site while maintaining similar size; however, the charge change may affect local folding and no direct evidence supports this variant."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "N301A": 38.455,
+    "N301Q": 28.274,
+    "N301S": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "N301A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.5576,
+        "normalized": 0.5576,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.558; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__hiv_bg505_antibody_escape__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "N301A",
+          "I420R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I420R",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.5523,
+        "normalized": 0.5523,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.552; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "qwen3.8-max__hiv_bg505_antibody_escape__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "N301A",
+          "I420R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N301A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "qwen3.8-max__hiv_bg505_antibody_escape__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "N301A",
+          "I420R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I420R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "qwen3.8-max__hiv_bg505_antibody_escape__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "N301A",
+          "I420R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N301A",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.5576,
+        "normalized": 0.5576,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.558; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "qwen3.8-max__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N301A",
+          "I420R",
+          "N301Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I420R",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.5523,
+        "normalized": 0.5523,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.552; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "qwen3.8-max__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N301A",
+          "I420R",
+          "N301Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N301Q",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.5372,
+        "normalized": 0.5372,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.537; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "qwen3.8-max__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N301A",
+          "I420R",
+          "N301Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N301Q",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "qwen3.8-max__hiv_bg505_antibody_escape__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N301Q"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 3,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 13,
+    "c0_size": 1,
+    "final_novelty": 0.6666666666666666,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

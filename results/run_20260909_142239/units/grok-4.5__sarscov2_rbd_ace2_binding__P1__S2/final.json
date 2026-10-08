@@ -1,0 +1,484 @@
+{
+  "unit_id": "grok-4.5__sarscov2_rbd_ace2_binding__P1__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "sarscov2_rbd_ace2_binding",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N130Y",
+        "confidence": 0.65,
+        "evidence_refs": [
+          "E00001",
+          "E00003"
+        ],
+        "decision_summary": "N130Y (N501Y) known to increase ACE2 affinity in variants while preserving stability."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 mutations identified; no further evidence expected to change ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N130Y": {
+      "candidate_id": "N130Y",
+      "mutation": "N130Y",
+      "first_seen_round": 1,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00001",
+        "E00003"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "N501Y (N130Y) is a known mutation that increases ACE2 binding affinity in SARS-CoV-2 variants while maintaining stability."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Moderate MSA support (z=0.125) plus reasonable PLM score aligns with known binding-enhancing substitutions while preserving function."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "N130Y (N501Y) has prior evidence of increased ACE2 binding affinity while maintaining stability; no new contradicting evidence."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Known to increase ACE2 binding affinity while maintaining stability per variant data."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N92Y": {
+      "candidate_id": "N92Y",
+      "mutation": "N92Y",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00002",
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "N440Y is a mutation that can improve binding, though less characterized than N501Y."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.45,
+          "rationale": "Evolution_msa z=0.000 with zero mutant frequency indicates no natural tolerance, strongly against viability and phenotype improvement."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Evolution_msa z=0.000 with zero mutant frequency indicates no natural tolerance, strongly against viability and phenotype improvement.",
+        "evidence_refs": [
+          "E00002"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "N24Y": {
+      "candidate_id": "N24Y",
+      "mutation": "N24Y",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [
+        "E00005",
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "WT N at position 24; added as alternative N-to-Y substitution to explore binding enhancement per primary objective."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "Evolution_msa z=0.000 with zero mutant frequency shows no natural tolerance, against viability and binding improvement."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Evolution_msa z=0.000 with zero mutant frequency shows no natural tolerance, against viability and binding improvement.",
+        "evidence_refs": [
+          "E00005",
+          "E00007"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "N40Y": {
+      "candidate_id": "N40Y",
+      "mutation": "N40Y",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [
+        "E00006",
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "WT N at position 40; added as alternative N-to-Y substitution to explore binding enhancement per primary objective."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "Evolution_msa z=0.125 combined with low sequence_plm (0.34) indicate poor plausibility and tolerance for N40Y."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Evolution_msa z=0.125 combined with low sequence_plm (0.34) indicate poor plausibility and tolerance for N40Y.",
+        "evidence_refs": [
+          "E00006",
+          "E00008"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "N130Y": 43.216
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "N130Y",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.125,
+        "normalized": 0.125,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 1.0,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 8/8 homologs"
+      },
+      "interpretation": "mutant frequency of Y at position 130 = 0.1250 among 8 homologs; conservation entropy 1.213 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N130Y",
+          "N92Y"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N92Y",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 0.875,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.875,
+        "reason": "alignment coverage 7/8 homologs"
+      },
+      "interpretation": "mutant frequency of Y at position 92 = 0.0000 among 7 homologs; conservation entropy 0.410 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N130Y",
+          "N92Y"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N130Y",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.4818,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N130Y",
+          "N92Y"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N92Y",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N130Y",
+          "N92Y"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N24Y",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 1.0,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 8/8 homologs"
+      },
+      "interpretation": "mutant frequency of Y at position 24 = 0.0000 among 8 homologs; conservation entropy 1.386 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "N24Y",
+          "N40Y"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N40Y",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.125,
+        "normalized": 0.125,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 1.0,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 8/8 homologs"
+      },
+      "interpretation": "mutant frequency of Y at position 40 = 0.1250 among 8 homologs; conservation entropy 1.073 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "N24Y",
+          "N40Y"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N24Y",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5238,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "N24Y",
+          "N40Y"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N40Y",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.3409,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "N24Y",
+          "N40Y"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 8,
+    "c0_size": 0,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

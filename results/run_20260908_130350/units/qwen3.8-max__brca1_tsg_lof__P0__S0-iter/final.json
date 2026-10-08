@@ -1,0 +1,322 @@
+{
+  "unit_id": "qwen3.8-max__brca1_tsg_lof__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "brca1_tsg_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "H41R",
+        "confidence": 0.93,
+        "evidence_refs": [],
+        "decision_summary": "H41 is a zinc-coordinating histidine in the BRCA1 RING domain. Substitution to arginine disrupts zinc coordination, abolishing E3 ligase activity and BARD1 interaction while the rest of the protein folds normally."
+      },
+      {
+        "rank": 2,
+        "mutation": "C24S",
+        "confidence": 0.89,
+        "evidence_refs": [],
+        "decision_summary": "C24 is a zinc-coordinating cysteine in zinc site 1 of the RING domain. Serine substitution removes the thiol required for zinc coordination, disrupting RING structure and function locally."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 candidates verified against sequence, targeting distinct zinc-coordinating residues across both RING domain zinc sites; further iteration unlikely to improve."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "C61G": {
+      "candidate_id": "C61G",
+      "mutation": "C61G",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.92,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.92,
+          "rationale": "C61 is a critical zinc-coordinating residue in the N-terminal RING domain; mutation to glycine disrupts zinc binding and abolishes E3 ubiquitin ligase activity essential for BRCA1 tumor suppressor function."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "Position 61 in the provided sequence is Proline (P), not Cysteine. The WT residue is incorrect, making this an invalid mutation designation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 61 in the provided sequence is Proline (P), not Cysteine. The WT residue is incorrect, making this an invalid mutation designation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C64R": {
+      "candidate_id": "C64R",
+      "mutation": "C64R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.9,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "C64 is another zinc-coordinating cysteine in the RING domain; substitution with arginine disrupts the zinc-binding fold and E3 ligase activity while the overall protein scaffold remains intact."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "Position 64 in the provided sequence is Lysine (K), not Cysteine. The WT residue is incorrect, making this an invalid mutation designation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 64 in the provided sequence is Lysine (K), not Cysteine. The WT residue is incorrect, making this an invalid mutation designation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "H41R": {
+      "candidate_id": "H41R",
+      "mutation": "H41R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.93,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "H41 is a histidine involved in zinc coordination in the RING domain; mutation to arginine disrupts the zinc-binding site and impairs BRCA1 function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.93,
+          "rationale": "H41 is a verified zinc-coordinating residue in the BRCA1 RING domain (zinc site 1). Substitution to Arginine disrupts zinc coordination, abolishing E3 ligase activity and BARD1 interaction while the remaining 1800+ residues fold normally."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C24S": {
+      "candidate_id": "C24S",
+      "mutation": "C24S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.89,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.82,
+          "rationale": "C24 is one of the zinc-coordinating cysteines in the RING domain; serine substitution removes the thiol needed for zinc coordination, disrupting E3 ligase activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.89,
+          "rationale": "C24 is a verified zinc-coordinating cysteine in the BRCA1 RING domain (zinc site 1). Serine substitution removes the thiol needed for zinc coordination, disrupting RING structure and function locally while preserving global fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C61S": {
+      "candidate_id": "C61S",
+      "mutation": "C61S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.88,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.88,
+          "rationale": "C61 is a key zinc-coordinating cysteine in the RING domain; serine substitution is a conservative change that specifically disrupts zinc coordination without major structural disruption elsewhere."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "Position 61 is Proline (P), not Cysteine. Invalid WT residue assignment."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 61 is Proline (P), not Cysteine. Invalid WT residue assignment.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C64G": {
+      "candidate_id": "C64G",
+      "mutation": "C64G",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.87,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.87,
+          "rationale": "C64 is a zinc-coordinating cysteine in the RING domain; glycine substitution disrupts zinc binding and E3 ligase activity."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "Position 64 is Lysine (K), not Cysteine. Invalid WT residue assignment."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 64 is Lysine (K), not Cysteine. Invalid WT residue assignment.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "I26A": {
+      "candidate_id": "I26A",
+      "mutation": "I26A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "I26 is a hydrophobic core residue in the RING domain; alanine substitution may destabilize the local fold and impair BARD1 interaction."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "I26 is not a zinc-coordinating residue and is unlikely to significantly disrupt RING domain function or DNA repair activity. Low impact on target phenotype."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "I26 is not a zinc-coordinating residue and is unlikely to significantly disrupt RING domain function or DNA repair activity. Low impact on target phenotype.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C61A": {
+      "candidate_id": "C61A",
+      "mutation": "C61A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.86,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.86,
+          "rationale": "C61 zinc-coordinating residue mutated to alanine; removes the sulfur atom required for zinc coordination, abolishing RING domain function."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "Position 61 is Proline (P), not Cysteine. Invalid WT residue assignment."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 61 is Proline (P), not Cysteine. Invalid WT residue assignment.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C64S": {
+      "candidate_id": "C64S",
+      "mutation": "C64S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.84,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.84,
+          "rationale": "C64 is a zinc-coordinating cysteine; serine substitution disrupts zinc binding in the RING domain and impairs E3 ligase activity."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "Position 64 is Lysine (K), not Cysteine. Invalid WT residue assignment."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 64 is Lysine (K), not Cysteine. Invalid WT residue assignment.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "H41R": null,
+    "C24S": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 9,
+    "n_rejected": 7,
+    "n_reconsidered": 0,
+    "n_invalid": 2,
+    "c0_size": 9,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,428 @@
+{
+  "unit_id": "deepseek-v4-flash__flu_h5_stability_dual__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "flu_h5_stability_dual",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "A150V",
+        "confidence": 0.38,
+        "evidence_refs": [],
+        "decision_summary": "Conservative Val substitution at a buried HA1 site is predicted to enhance hydrophobic packing with low functional risk."
+      },
+      {
+        "rank": 2,
+        "mutation": "V411I",
+        "confidence": 0.34,
+        "evidence_refs": [],
+        "decision_summary": "Conservative Ile addition in HA2 core likely increases hydrophobic stabilization without disrupting HA2 fold."
+      },
+      {
+        "rank": 3,
+        "mutation": "V397I",
+        "confidence": 0.28,
+        "evidence_refs": [],
+        "decision_summary": "Val to Ile in HA2 stalk adds buried hydrophobic surface and should maintain stability."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further self-iteration without external evidence is unlikely to meaningfully improve the top-3 candidate confidence."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "A150V": {
+      "candidate_id": "A150V",
+      "mutation": "A150V",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.38,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.34,
+          "rationale": "Fills a potential interior cavity in HA1 with a more hydrophobic residue, improving local packing without altering surface charge."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.38,
+          "rationale": "Conservative Val substitution likely increases hydrophobic packing in a conserved region."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.38,
+          "rationale": "Conservative hydrophobic substitution in a likely buried position; no competing evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V411I": {
+      "candidate_id": "V411I",
+      "mutation": "V411I",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.34,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Adds a methyl group in a conserved HA2 helical interface, enhancing hydrophobic core packing and thermostability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.33,
+          "rationale": "Adding a methyl group to a Val in a hydrophobic environment should enhance core stability."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.34,
+          "rationale": "Adds methyl bulk in HA2 core, plausible stabilizer with low functional risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G350A": {
+      "candidate_id": "G350A",
+      "mutation": "G350A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.26,
+          "rationale": "Replaces a flexible glycine with alanine in the HA2 region, reducing backbone entropy and modestly stabilizing the folded state."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.3,
+          "rationale": "Gly→Ala reduces main-chain entropy, often stabilizing helices and packed regions."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "Invalid mutation: position 350 is Ala in the provided sequence, not Gly."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Invalid mutation: position 350 is Ala in the provided sequence, not Gly.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G240A": {
+      "candidate_id": "G240A",
+      "mutation": "G240A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.18,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.22,
+          "rationale": "Removes an unconstrained glycine in HA1, potentially rigidifying a loop while retaining the same side-chain polarity class."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.26,
+          "rationale": "Same rationale as G350A; likely beneficial if the position tolerates a methyl group."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.18,
+          "rationale": "Gly-to-Ala may rigidify a loop, but location near functional regions lowers confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "M404I": {
+      "candidate_id": "M404I",
+      "mutation": "M404I",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.24,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.2,
+          "rationale": "Substitutes a beta-branched isoleucine for methionine in HA2, which can improve side-chain entropy compensation in a buried core."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.22,
+          "rationale": "Isoleucine provides a similarly sized hydrophobic side chain with less conformational flexibility."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.24,
+          "rationale": "Removes flexible sulfur-containing side chain while maintaining hydrophobicity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V397I": {
+      "candidate_id": "V397I",
+      "mutation": "V397I",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.28,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.18,
+          "rationale": "Conservative valine-to-isoleucine mutation likely enhances hydrophobic contact in the HA2 trimer interface."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.2,
+          "rationale": "Conservative Val→Ile substitution likely improves hydrophobic packing without electrostatic penalty."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.28,
+          "rationale": "Conservative helix-compatible substitution in HA2; improves hydrophobic packing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L418I": {
+      "candidate_id": "L418I",
+      "mutation": "L418I",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.26,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.17,
+          "rationale": "Minor hydrophobic core adjustment in HA2 that could increase packing while maintaining the general side-chain size."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.18,
+          "rationale": "Leu→Ile preserves hydrophobicity with slightly altered geometry; could improve packing if cavity exists."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.26,
+          "rationale": "Both aliphatic hydrophobic residues; reasonable packing improvement."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y173F": {
+      "candidate_id": "Y173F",
+      "mutation": "Y173F",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.15,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.15,
+          "rationale": "Removes a surface-exposed hydroxyl while preserving the aromatic ring, potentially reducing desolvation penalty in a nearby clustered environment."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "Removing the tyrosine hydroxyl could disrupt hydrogen bonds; low confidence and likely destabilizing."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Removing the tyrosine hydroxyl could disrupt hydrogen bonds; low confidence and likely destabilizing.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "T218A": {
+      "candidate_id": "T218A",
+      "mutation": "T218A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.12,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.12,
+          "rationale": "Deletes a small polar side chain without perturbing backbone geometry, which may mildly improve buried hydrophobic packing."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.04,
+          "rationale": "Threonine often participates in hydrogen bonding; losing the hydroxyl may reduce stability."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Threonine often participates in hydrogen bonding; losing the hydroxyl may reduce stability.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "V322I": {
+      "candidate_id": "V322I",
+      "mutation": "V322I",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.2,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.14,
+          "rationale": "Adds a methyl group in a likely HA1 stem hydrophobic patch, potentially promoting HA0 folding stability at elevated temperatures."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.16,
+          "rationale": "Same rationale as V397I; modest core-stabilizing potential."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.2,
+          "rationale": "Conservative Val-to-Ile in HA1 near stalk; moderate stability rationale."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V445I": {
+      "candidate_id": "V445I",
+      "mutation": "V445I",
+      "first_seen_round": 2,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.22,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.22,
+          "rationale": "Conservative Val-to-Ile in HA2 likely buried; adds hydrophobic surface without changing charge or polarity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L471I": {
+      "candidate_id": "L471I",
+      "mutation": "L471I",
+      "first_seen_round": 2,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.19,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.19,
+          "rationale": "Leu-to-Ile retains hydrophobic character and may improve packing in the HA2 stalk region."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "A150V": null,
+    "V411I": null,
+    "V397I": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 12,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

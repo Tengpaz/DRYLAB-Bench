@@ -1,0 +1,84 @@
+{
+  "unit_id": "qwen3.8-max__hiv_bg505_antibody_escape__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 2,
+        "mutation": "N301A",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "N301 is a key outer-domain glycosylation site whose removal can disrupt recognition by multiple bNAbs including those targeting the glycan shield around the CD4 binding site, while preserving overall folding."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The top-3 glycan removal mutations are well-established in the literature for conferring immune escape while preserving Env function; further iteration without external tools is unlikely to change the ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N301A": {
+      "candidate_id": "N301A",
+      "mutation": "N301A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "The N301 glycan is important for several bnAb classes (e.g., 2G12, some V3-glycan antibodies); its loss is a known escape route that can be accommodated."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "N301 is a key N-linked glycosylation site in the outer domain of gp120; removing this glycan can disrupt broadly neutralizing antibody (bNAb) epitopes while often preserving Env folding and function."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "N301 is a key N-linked glycosylation site in the outer domain; removal of this glycan can alter antibody access to the glycan shield while preserving overall fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "N301A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 1,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 27,
+    "c0_size": 1,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

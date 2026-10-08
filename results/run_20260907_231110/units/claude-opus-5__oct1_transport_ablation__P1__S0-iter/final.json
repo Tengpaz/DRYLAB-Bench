@@ -1,0 +1,340 @@
+{
+  "unit_id": "claude-opus-5__oct1_transport_ablation__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "claude-opus-5",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D473A",
+        "confidence": 0.88,
+        "evidence_refs": [],
+        "decision_summary": "Verified D at 473 (…L471-C472-D473-I-G-G…), the single conserved acidic residue of the OCT1 central cation-binding cavity (canonical Asp474) whose neutralization abolishes organic-cation binding and translocation. The small, chemically neutral Ala substitution minimally perturbs helix packing, so folding and membrane abundance are expected to be retained."
+      },
+      {
+        "rank": 2,
+        "mutation": "W353A",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "Verified W at 353 (…F347-I-L-M-Y-L-W353-F-T-D-S-V…), a pocket-lining tryptophan (canonical Trp354) providing cation-π/aromatic-box contacts for substrate recognition. Removing the indole should eliminate productive substrate binding while leaving the MFS bundle intact and well expressed."
+      },
+      {
+        "rank": 3,
+        "mutation": "D473N",
+        "confidence": 0.75,
+        "evidence_refs": [],
+        "decision_summary": "Isosteric charge-neutralizing substitution at the same essential binding aspartate: side-chain volume and H-bonding capacity are conserved, maximizing the chance of normal folding/abundance, while the loss of negative charge removes the electrostatic driver of organic-cation binding. Kept over more speculative pocket mutants (E385A, Q446A, Y360A) because the mechanistic requirement for the D473 carboxylate is the strongest hypothesis in the pool."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The candidate pool has converged and, without access to structural or functional evidence tools, additional self-review rounds are unlikely to alter the ranked Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "D473A": {
+      "candidate_id": "D473A",
+      "mutation": "D473A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.87,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.87,
+          "rationale": "Position 473 (D in TM11 'LCDIGG', equivalent to the canonical OCT1 Asp474) is the key acidic residue that coordinates the positive charge of organic cations; charge removal to Ala should abolish substrate translocation while an Asp->Ala change in a buried helix is generally well tolerated for folding/trafficking."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.87,
+          "rationale": "Verified D at 473 (LCD-IGG context); this is the conserved acidic residue of the central cation-binding cavity (canonical Asp474), whose neutralization abolishes organic cation binding while the small Ala substitution is unlikely to perturb the MFS fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D473N": {
+      "candidate_id": "D473N",
+      "mutation": "D473N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.76,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Isosteric neutralization of the critical cation-coordinating Asp473 (canonical D474) removes the electrostatic anchor for substrates with minimal steric/packing perturbation, favoring retained membrane abundance."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.76,
+          "rationale": "Isosteric charge-neutralizing substitution at the same key binding aspartate; preserves side-chain volume/H-bonding so folding and abundance are very likely retained while the cation-attracting negative charge is removed."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D473E": {
+      "candidate_id": "D473E",
+      "mutation": "D473E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Conservative charge-preserving change at the essential Asp473 that shifts carboxylate geometry by one methylene; reported to alter selectivity/strongly reduce turnover in OCT orthologs, but may retain partial transport."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Conservative Asp→Glu keeps the negative charge and typically only shifts substrate affinity rather than abolishing transport, which is orthogonal to the reward phenotype."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Conservative Asp→Glu keeps the negative charge and typically only shifts substrate affinity rather than abolishing transport, which is orthogonal to the reward phenotype.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "W353A": {
+      "candidate_id": "W353A",
+      "mutation": "W353A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Trp353 (canonical W354) lies in the TM7 substrate-binding cleft and provides cation-pi/aromatic stacking for organic cations; Ala substitution should eliminate substrate recognition, though loss of a large buried aromatic carries some folding risk."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.8,
+          "rationale": "Verified W at 353 (…MYLW353FTDSV…), a pocket-lining tryptophan (canonical Trp354) repeatedly implicated in substrate recognition; promoted because loss of the aromatic cation-π contact should kill transport without global destabilization of the TM bundle."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R398A": {
+      "candidate_id": "R398A",
+      "mutation": "R398A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 10,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Arg398 belongs to the conserved MFS 'A-motif' (D397-R398-V-G-R401) in the C-terminal half, whose salt-bridge network gates the rocker-switch conformational cycle; charge loss typically freezes transport while the protein still folds and reaches the membrane."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Verified R at 398 within the conserved cytoplasmic D397-R398-x-G-R motif that gates conformational cycling; demoted because motif-A/C-type charge-pair disruption frequently causes ER retention, conflicting with the abundance-preservation requirement."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D397N": {
+      "candidate_id": "D397N",
+      "mutation": "D397N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Neutralizing the A-motif aspartate (D397 of DRxGR) breaks the inter-helical salt bridge required for alternating-access cycling; isosteric Asn minimizes destabilization so surface expression is likely preserved."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "Redundant with R398A at the same intracellular DRxGR motif and, being only mildly perturbing, is more likely to give partial rather than null transport; dropped to make room for binding-site diversification."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Redundant with R398A at the same intracellular DRxGR motif and, being only mildly perturbing, is more likely to give partial rather than null transport; dropped to make room for binding-site diversification.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "R174A": {
+      "candidate_id": "R174A",
+      "mutation": "R174A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Arg174 is the second arginine of the N-terminal A-motif (D170-R171-F-G-R174) that couples TM bundle movements; its removal should block the conformational cycle without grossly unfolding the transporter."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "R174 lies in the MFS motif-A GRK element (G173-R174-K175) whose disruption predominantly destabilizes the fold and trafficking, violating the preserve-abundance constraint."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "R174 lies in the MFS motif-A GRK element (G173-R174-K175) whose disruption predominantly destabilizes the fold and trafficking, violating the preserve-abundance constraint.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "Q446A": {
+      "candidate_id": "Q446A",
+      "mutation": "Q446A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Gln446 in TM10 faces the central cavity and is the human counterpart of the rat OCT1 affinity-determining Gln; truncation to Ala should remove a substrate hydrogen-bonding contact with modest structural cost."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.52,
+          "rationale": "Verified Q at 446 (…IAIQ446MICL…), corresponding to the rodent Oct1 pocket glutamine implicated in substrate selectivity; plausible affinity-abolishing but more likely to shift than eliminate transport."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F243A": {
+      "candidate_id": "F243A",
+      "mutation": "F243A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Phe243 (canonical F244) contributes aromatic surface to the central binding pocket in OCT1 models; Ala substitution enlarges/deactivates the pocket and is a common way to kill binding while keeping the fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Verified F at 243 (…MAF243TVGLV…), a cavity-lining aromatic; Ala substitution may only enlarge the pocket rather than abolish translocation, so it stays mid-rank."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W216A": {
+      "candidate_id": "W216A",
+      "mutation": "W216A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "Trp216 (canonical W217) is a conserved cavity-lining aromatic implicated in cation binding in rat OCT1 mutagenesis; Ala removes the interaction but the large cavity created gives a moderate risk of reduced stability/abundance."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Verified W at 216 (…KGNW216MAGY…), the TM4 pocket tryptophan homologous to the rat Oct1 binding-site Trp; promoted from 0.38 because aromatic-box removal is a classic transport-null, expression-competent lesion."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "D473A": null,
+    "W353A": null,
+    "D473N": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

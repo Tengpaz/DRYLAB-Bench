@@ -1,0 +1,100 @@
+{
+  "unit_id": "qwen3.8-max__oct1_transport_ablation__P1__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D473A",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "D473 is a conserved aspartate in TM11 of OCT1, likely critical for substrate coordination or proton coupling; alanine substitution abolishes the charged side chain needed for transport without disrupting the helix backbone."
+      },
+      {
+        "rank": 2,
+        "mutation": "G400A",
+        "confidence": 0.68,
+        "evidence_refs": [],
+        "decision_summary": "G400 in TM9 provides backbone flexibility required for the conformational changes of the MFS transport cycle; introducing a methyl group restricts the phi/psi space and impedes the rocker-switch motion."
+      },
+      {
+        "rank": 3,
+        "mutation": "F481A",
+        "confidence": 0.58,
+        "evidence_refs": [],
+        "decision_summary": "F481 is a bulky aromatic residue in TM11 that likely lines the substrate translocation pathway; replacing it with alanine removes a key hydrophobic/aromatic interaction surface for substrate passage."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Maximum tool calls and agent rounds have been reached; no further evidence can be collected."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "budget_exhausted",
+    "detail": "round limit reached"
+  },
+  "candidate_registry": {
+    "G400A": {
+      "candidate_id": "G400A",
+      "mutation": "G400A",
+      "first_seen_round": 2,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "G400 is in TM9; glycine-to-alanine introduces a methyl group that may restrict backbone flexibility needed for transport conformational changes."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "No new evidence this round; retaining based on structural reasoning that G400 in TM9 is critical for conformational dynamics."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "G400 is in TM9; glycine-to-alanine introduces a methyl group that may restrict backbone flexibility needed for transport conformational changes. No new evidence this round; retaining based on structural reasoning."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 5
+  },
+  "bundle_evidence": {
+    "D473A": null,
+    "G400A": null,
+    "F481A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 1,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 42,
+    "c0_size": 0,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 5,
+    "budget_exhausted": true
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "unit_id": "kimi-k3__h3n2_mc22_stability__P2__S2",
+  "condition": "S2",
+  "model_id": "kimi-k3",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "E494K",
+        "confidence": 0.24,
+        "evidence_refs": [
+          "E00004"
+        ],
+        "decision_summary": "Charge-swap on the HA2 stem surface near the acidic 485-494 segment could add a stabilizing salt bridge; the only direct evidence (MSA) is non-negative but at low coverage, keeping confidence modest."
+      },
+      {
+        "rank": 2,
+        "mutation": "G465A",
+        "confidence": 0.21,
+        "evidence_refs": [],
+        "decision_summary": "Minimal conservative alanine addition at G465 tests small hydrophobic packing without proline's backbone constraint; the prior strongly negative evidence was proline-specific and does not transfer directly, but confirming data is absent."
+      },
+      {
+        "rank": 3,
+        "mutation": "E494R",
+        "confidence": 0.17,
+        "evidence_refs": [
+          "E00004"
+        ],
+        "decision_summary": "Arginine is an alternative basic substitution at the verified surface Glu 494 that could form a longer-range salt bridge, but its larger side chain and the same low-coverage MSA signal place it third."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Final agent round reached and candidate ranking is stable; no additional evidence calls remain that would plausibly reorder the Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "G465P": {
+      "candidate_id": "G465P",
+      "mutation": "G465P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00001",
+        "E00002",
+        "E00003"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Gly 465 in the stalk loop; proline rigidification could stabilize the stalk, though overlap with 464 makes this an alternative rather than an additive pick."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "All three evidence streams are strongly negative: zero proline frequency among 163 homologs at entropy 1.365, ESM-1v plausibility ~0, and a large unfavorable ProteinMPNN delta (-5.59) on 5HMG. Proline here likely disrupts local backbone geometry rather than stabilizing it."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "All three evidence streams are strongly negative: zero proline frequency among 163 homologs at entropy 1.365, ESM-1v plausibility ~0, and a large unfavorable ProteinMPNN delta (-5.59) on 5HMG. Proline here likely disrupts local backbone geometry rather than stabilizing it.",
+        "evidence_refs": [
+          "E00001",
+          "E00002",
+          "E00003"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "E494K": {
+      "candidate_id": "E494K",
+      "mutation": "E494K",
+      "first_seen_round": 1,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.24,
+      "evidence_refs": [
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Charge-swap on the surface of the HA2 stem helix near the C-terminal region could introduce a favorable salt bridge with nearby acidic residues (E/D-rich segment ~485-494), modestly stabilizing the trimer coiled-coil. Needs evidence screening."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.24,
+          "rationale": "The lysine substitution remains chemically plausible for a surface salt-bridge in the HA2 stem, but K is rare among the limited homologs and coverage is low, so confidence should stay modest rather than lead."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.24,
+          "rationale": "Only candidate with any direct evidence; MSA shows slight mutant tolerance (z=0.019) but applicability is low (0.32), so confidence stays modest pending PLM/MPNN screening."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.24,
+          "rationale": "Only candidate with any direct evidence, and MSA at position 494 shows a non-negative signal for the lysine substitution (z=0.019), though homolog coverage is low (app=0.32) so confidence stays modest."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G465A": {
+      "candidate_id": "G465A",
+      "mutation": "G465A",
+      "first_seen_round": 2,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.21,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.21,
+          "rationale": "The prior rejection was specifically for proline at G465, whose backbone restriction likely caused the strongly negative PLM/MPNN signals; alanine is a minimal conservative side-chain addition that may test whether small hydrophobic packing is tolerated without imposing proline geometry."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.21,
+          "rationale": "Minimal alanine substitution avoids the proline backbone problem that doomed G465P; untested by tools yet, so held at prior confidence."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.21,
+          "rationale": "Conservative alanine at G465 is a minimal packing perturbation in the HA2 stem; the prior negative evidence was specific to proline's backbone constraint and does not directly transfer to alanine, but absent confirming data it ranks below E494K."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E494R": {
+      "candidate_id": "E494R",
+      "mutation": "E494R",
+      "first_seen_round": 2,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.17,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.17,
+          "rationale": "Arginine offers an alternative basic residue at the same verified surface Glu site that could form a longer-range salt bridge, though the same low-coverage MSA signal cautions against high confidence."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.17,
+          "rationale": "Alternative basic residue at the same surface Glu site; shares E494K's salt-bridge rationale but arginine is a larger perturbation, justifying lower confidence."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.17,
+          "rationale": "Alternative basic substitution at the same surface Glu; plausible for salt-bridge-mediated stabilization but larger side chain and low-coverage MSA signal keep it as the third choice."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "E494K": 1.852,
+    "G465A": null,
+    "E494R": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "G465P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.959,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.959,
+        "reason": "alignment coverage 163/170 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 465 = 0.0000 among 163 homologs; conservation entropy 1.365 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G465P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G465P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0006,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G465P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G465P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -5.5869,
+        "normalized": 0.019537,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.84,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 15.99"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-5.5869)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G465P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E494K",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.018519,
+        "normalized": 0.018519,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.318,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.318,
+        "reason": "alignment coverage 54/170 homologs"
+      },
+      "interpretation": "mutant frequency of K at position 494 = 0.0185 among 54 homologs; conservation entropy 0.768 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "E494K"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 9,
+    "c0_size": 1,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

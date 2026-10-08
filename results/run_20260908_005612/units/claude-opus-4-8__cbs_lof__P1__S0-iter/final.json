@@ -1,0 +1,280 @@
+{
+  "unit_id": "claude-opus-4-8__cbs_lof__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "claude-opus-4-8",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.9,
+        "evidence_refs": [],
+        "decision_summary": "K119 forms the internal aldimine with the PLP cofactor; removing its side chain should abolish catalysis while leaving the fold largely intact."
+      },
+      {
+        "rank": 2,
+        "mutation": "K119R",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "Arg preserves positive charge but cannot form the correct PLP aldimine, so catalytic activity is likely lost; slightly riskier than Ala due to possible partial cofactor coordination."
+      },
+      {
+        "rank": 3,
+        "mutation": "G307P",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "Proline substitution at a conserved glycine rigidifies the backbone and can strongly destabilize the fold, plausibly abolishing activity through structural disruption."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No external evidence available and the catalytic-lysine hypothesis is strong enough that additional LLM-only rounds add little value."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.9,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.92,
+          "rationale": "K119 is the catalytic PLP Schiff-base lysine in human CBS; substitution to Ala eliminates the internal aldimine and abolishes catalysis."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.9,
+          "rationale": "K119 is the catalytic PLP Schiff-base lysine (conserved TSGNTG motif region); removing the side chain that forms the internal aldimine should abolish activity. Kept top."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119R": {
+      "candidate_id": "K119R",
+      "mutation": "K119R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Arg preserves charge but cannot form the essential PLP Schiff base at the reactive position, blocking cofactor-based catalysis."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Arg preserves positive charge but cannot form the correct PLP aldimine geometry; likely LOF but slightly riskier than Ala since bulky Arg may still partially coordinate. Slightly reduced."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T257A": {
+      "candidate_id": "T257A",
+      "mutation": "T257A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "T257 (part of the highly conserved TSGN PLP-binding/glycine-rich loop) contributes to cofactor and substrate positioning; disruption likely severely impairs activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Ala substitution at a possible active-site/interface residue; plausible but weaker mechanistic basis than the catalytic lysine."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N149A": {
+      "candidate_id": "N149A",
+      "mutation": "N149A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "This conserved Asn in the substrate-binding region contacts substrate/cofactor; Ala substitution should reduce catalytic competence."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "N149 near PLP-binding region could disrupt cofactor coordination; moderate confidence LOF."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G259P": {
+      "candidate_id": "G259P",
+      "mutation": "G259P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.66,
+          "rationale": "Glycine in the conserved TSGNTG cofactor loop provides backbone flexibility; a rigid proline disrupts the PLP-binding loop conformation and likely inactivates the enzyme."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "GTGGT motif glycine; Pro likely disrupts the glycine-rich loop but structural criticality less certain than G307."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R266E": {
+      "candidate_id": "R266E",
+      "mutation": "R266E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Conserved active-site arginine implicated in substrate carboxylate binding; charge reversal should disrupt substrate recognition and catalysis."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Charge reversal may disrupt local interactions but surface Arg substitutions often tolerated; kept as lower-tier."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G307P": {
+      "candidate_id": "G307P",
+      "mutation": "G307P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Glycine in a conserved GTGG active-site motif provides flexibility; proline substitution should perturb the catalytic loop and reduce activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "Gly-to-Pro backbone rigidification at a conserved glycine can strongly destabilize the fold and abolish activity; promoted above other Gly/Thr-to-Pro candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T262P": {
+      "candidate_id": "T262P",
+      "mutation": "T262P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Introducing proline near the conserved PLP-binding loop is likely to distort catalytic geometry and impair cofactor function."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.4,
+          "rationale": "Redundant with the stronger G259P/G307P Pro-insertion hypotheses and weaker mechanistic rationale; dropped to focus the pool."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Redundant with the stronger G259P/G307P Pro-insertion hypotheses and weaker mechanistic rationale; dropped to focus the pool.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K119A": null,
+    "K119R": null,
+    "G307P": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 2,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

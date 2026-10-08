@@ -1,0 +1,721 @@
+{
+  "unit_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "S145P",
+        "confidence": 0.6,
+        "evidence_refs": [
+          "E00001"
+        ],
+        "decision_summary": "ProteinMPNN conditional log-probability delta is positive (+0.316), the only structure-favorable candidate, indicating the backbone prefers proline at this flexible loop site. Proline-mediated loop rigidification is a classic folding-stability strategy, offsetting weak negative sequence/MSA signals since the objective is stability rather than evolutionary likelihood."
+      },
+      {
+        "rank": 2,
+        "mutation": "Y100F",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "Conservative Tyr-to-Phe substitution with moderate positive signals across all tools (PLM 0.17, MSA 0.04, structure 0.49) and no contradictions. Aromatic-to-aromatic replacement preserves core packing while removing a polar OH, a stability-safe design."
+      },
+      {
+        "rank": 3,
+        "mutation": "L59I",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "Highest evolutionary tolerance (I at 21% homolog frequency) indicates viability, though structure compatibility is poor (0.24). Retained as third choice with reduced confidence given the stability objective's reliance on the structure signal."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Additional tool calls are unlikely to change the Top-3 ranking given no phenotype predictor exists and evidence dimensions have converged on a stable ordering."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "V20I": {
+      "candidate_id": "V20I",
+      "mutation": "V20I",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.4,
+      "evidence_refs": [
+        "E00003",
+        "E00007",
+        "E00011"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Hydrophobic N-terminal HA1 region; isoleucine may improve core packing without altering polarity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Hydrophobic-conservative core/stem substitution plausibly stabilizing; no evidence collected yet."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "Good PLM (0.37) and structure (0.64) scores, but zero homologs carry I at position 20, suggesting the site may be under functional constraint beyond folding. Confidence reduced pending functional annotation check."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L59I": {
+      "candidate_id": "L59I",
+      "mutation": "L59I",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00004",
+        "E00008",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Interior hydrophobic residue in the HA1 stem-proximal region; conservative substitution could enhance packing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.48,
+          "rationale": "Conservative hydrophobic substitution; retains pool position pending structural and evolutionary evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Highest evolutionary tolerance (I at 21% frequency among homologs) but poor structure compatibility (0.24) and weak PLM. The high MSA frequency indicates viability, but the structure penalty lowers confidence for a stability objective."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y100F": {
+      "candidate_id": "Y100F",
+      "mutation": "Y100F",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00002",
+        "E00006",
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Aromatic-to-aromatic Tyr→Phe retains ring stacking while removing the polar hydroxyl, often mildly stabilizing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Conservative aromatic substitution removing an oxidation-prone OH; no evidence yet, pending PLM and structure scores."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "Moderate, consistent positive signals across all three tools (PLM 0.17, MSA 0.04, structure 0.49) with no contradictions; conservative aromatic-to-aromatic change is a classic stability-safe design. Retained at high rank due to balanced evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T135I": {
+      "candidate_id": "T135I",
+      "mutation": "T135I",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00001"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Hydrophobic substitution in a β-strand region that may improve packing, though it sits near the receptor-binding region."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Structure tool reports a WT residue mismatch at the mapped position, meaning T135 is inconsistent with the provided sequence/backbone mapping. The mutation cannot be validated against the stated WT residue, so it is unsafe to propose."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Structure tool reports a WT residue mismatch at the mapped position, meaning T135 is inconsistent with the provided sequence/backbone mapping. The mutation cannot be validated against the stated WT residue, so it is unsafe to propose.",
+        "evidence_refs": [
+          "E00001"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "S145P": {
+      "candidate_id": "S145P",
+      "mutation": "S145P",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.6,
+      "evidence_refs": [
+        "E00005",
+        "E00009",
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Replacing the rejected T135I with a new stabilizing hypothesis: proline in a solvent-exposed loop region can rigidify the backbone and improve folding stability while avoiding the numbering issue that invalidated T135I."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "ProteinMPNN gives a positive conditional log-prob delta (+0.316), the only structure-favorable candidate, suggesting the backbone strongly prefers proline at this flexible loop site (B-factor 44.98). Sequence and MSA signals are negative but weakly weighted since the reward is folding stability, not evolutionary likelihood."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "S145P": 36.048,
+    "Y100F": 24.038,
+    "L59I": 19.687
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "T135I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "T135I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y100F",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1715,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y100F",
+          "V20I",
+          "L59I",
+          "S145P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V20I",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.3746,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y100F",
+          "V20I",
+          "L59I",
+          "S145P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L59I",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0824,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y100F",
+          "V20I",
+          "L59I",
+          "S145P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S145P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0308,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y100F",
+          "V20I",
+          "L59I",
+          "S145P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y100F",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.04142,
+        "normalized": 0.04142,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.994,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.994,
+        "reason": "alignment coverage 169/170 homologs"
+      },
+      "interpretation": "mutant frequency of F at position 100 = 0.0414 among 169 homologs; conservation entropy 1.679 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y100F",
+          "V20I",
+          "L59I",
+          "S145P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V20I",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 1.0,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 170/170 homologs"
+      },
+      "interpretation": "mutant frequency of I at position 20 = 0.0000 among 170 homologs; conservation entropy 1.892 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y100F",
+          "V20I",
+          "L59I",
+          "S145P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L59I",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.213018,
+        "normalized": 0.213018,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.994,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.994,
+        "reason": "alignment coverage 169/170 homologs"
+      },
+      "interpretation": "mutant frequency of I at position 59 = 0.2130 among 169 homologs; conservation entropy 1.065 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y100F",
+          "V20I",
+          "L59I",
+          "S145P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S145P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.976,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.976,
+        "reason": "alignment coverage 166/170 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 145 = 0.0000 among 166 homologs; conservation entropy 1.798 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y100F",
+          "V20I",
+          "L59I",
+          "S145P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y100F",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -2.698,
+        "normalized": 0.487556,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.847,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 15.3"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-2.698)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y100F",
+          "V20I",
+          "L59I",
+          "S145P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V20I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.5711,
+        "normalized": 0.641488,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.852,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 14.76"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.5711)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y100F",
+          "V20I",
+          "L59I",
+          "S145P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L59I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.6502,
+        "normalized": 0.240169,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.845,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 15.49"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-4.6502)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y100F",
+          "V20I",
+          "L59I",
+          "S145P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S145P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.316,
+        "normalized": 0.909532,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.55,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 44.98"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=0.316)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y100F",
+          "V20I",
+          "L59I",
+          "S145P"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 6,
+    "c0_size": 4,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 4,
+    "rounds_used": 2,
+    "budget_exhausted": true
+  }
+}

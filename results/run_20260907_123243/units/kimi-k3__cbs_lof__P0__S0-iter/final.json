@@ -1,0 +1,292 @@
+{
+  "unit_id": "kimi-k3__cbs_lof__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "kimi-k3",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.93,
+        "evidence_refs": [],
+        "decision_summary": "K119 is the conserved PLP-binding lysine of CBS; removing the Schiff-base anchor abolishes catalytic activity with minimal risk of a structurally disruptive charge change."
+      },
+      {
+        "rank": 2,
+        "mutation": "K119E",
+        "confidence": 0.9,
+        "evidence_refs": [],
+        "decision_summary": "Charge reversal at the PLP-binding lysine should abolish cofactor binding and catalysis, with a small risk of misfolding rather than clean loss-of-function."
+      },
+      {
+        "rank": 3,
+        "mutation": "G307S",
+        "confidence": 0.86,
+        "evidence_refs": [],
+        "decision_summary": "G307S is the classic pathogenic CBS mutation in the substrate-binding GTGG motif and severely compromises activity; some residual activity/misfolding is possible."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 are strongly supported by mechanistic reasoning and further iteration without tools offers no expected gain."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.93,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.93,
+          "rationale": "K119 is the catalytic lysine that forms the internal Schiff base with the PLP cofactor; replacing it with alanine abolishes PLP binding and catalytic activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.93,
+          "rationale": "K119 is the conserved PLP-binding lysine in CBS; removing the PLP-Schiff-base anchor abolishes catalysis."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119E": {
+      "candidate_id": "K119E",
+      "mutation": "K119E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.9,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "Charge reversal at the PLP-binding lysine should fully disrupt cofactor anchoring and catalysis."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.9,
+          "rationale": "Charge reversal at the PLP-binding lysine is even more disruptive than alanine, but carries slightly more risk of aggregation rather than pure LoF."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C52A": {
+      "candidate_id": "C52A",
+      "mutation": "C52A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "C52 is a heme axial ligand in the N-terminal domain; its loss destabilizes heme binding and impairs CBS folding/activity."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.4,
+          "rationale": "C52 lies in the N-terminal region outside the catalytic core and is unlikely to abolish enzymatic activity by itself."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "C52 lies in the N-terminal region outside the catalytic core and is unlikely to abolish enzymatic activity by itself.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "H65A": {
+      "candidate_id": "H65A",
+      "mutation": "H65A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "H65 is the second heme-coordinating residue; mutating it disrupts heme ligation essential for proper CBS function."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "H65 is the heme ligand; heme loss affects redox sensing/regulation but not necessarily catalytic turnover, so it is not a reliable LoF mutation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "H65 is the heme ligand; heme loss affects redox sensing/regulation but not necessarily catalytic turnover, so it is not a reliable LoF mutation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "I278T": {
+      "candidate_id": "I278T",
+      "mutation": "I278T",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "I278T is the most common pathogenic homocystinuria allele, causing severe loss of CBS activity via misfolding."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.5,
+          "rationale": "The I278T polymorphism is associated with B6-responsive mild disease and retains partial activity, so it does not abolish function."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "The I278T polymorphism is associated with B6-responsive mild disease and retains partial activity, so it does not abolish function.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G307S": {
+      "candidate_id": "G307S",
+      "mutation": "G307S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.84,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.84,
+          "rationale": "G307S is a well-characterized pathogenic missense mutation in the catalytic core causing loss of function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.84,
+          "rationale": "G307S is the classic pathogenic CBS mutation in the substrate-binding GTGG motif; it severely compromises activity, though residual activity and folding defects are concerns."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R266K": {
+      "candidate_id": "R266K",
+      "mutation": "R266K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "R266 is near the substrate entrance of the catalytic domain; pathogenic variants at this region reduce CBS activity, though less completely than catalytic-site mutations."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.45,
+          "rationale": "Conservative Arg-to-Lys substitution is unlikely to abolish activity even at an active-site-adjacent residue."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Conservative Arg-to-Lys substitution is unlikely to abolish activity even at an active-site-adjacent residue.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "Y223A": {
+      "candidate_id": "Y223A",
+      "mutation": "Y223A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.88,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.82,
+          "rationale": "Y223 is a conserved active-site residue contributing to substrate orientation in the PLP domain; its removal should strongly impair catalysis."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.88,
+          "rationale": "Y223 is a conserved catalytic-domain tyrosine that hydrogen-bonds to PLP and is a known pathogenic-site region; its removal should abolish activity while the side chain is not structurally load-bearing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K119A": null,
+    "K119E": null,
+    "G307S": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 4,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

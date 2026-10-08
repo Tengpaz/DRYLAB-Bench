@@ -1,0 +1,336 @@
+{
+  "unit_id": "claude-opus-5__oct1_transport_ablation__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "claude-opus-5",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D473N",
+        "confidence": 0.9,
+        "evidence_refs": [],
+        "decision_summary": "Position 473 is verified as Asp and corresponds to the conserved OCT1 TM11 aspartate that electrostatically coordinates cationic substrates; Asn is isosteric and charge-neutral, so binding/translocation should be abolished with minimal impact on folding or membrane abundance."
+      },
+      {
+        "rank": 2,
+        "mutation": "D473A",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "Complete removal of the essential carboxylate at the verified D473 site should eliminate cation coordination; the small cavity created lies in a solvent-accessible translocation pathway and is unlikely to destabilize the transporter."
+      },
+      {
+        "rank": 3,
+        "mutation": "D473C",
+        "confidence": 0.77,
+        "evidence_refs": [],
+        "decision_summary": "Cys substitution at the same critical aspartate is a classic SCAM-style replacement that typically preserves folding and surface expression while ablating function; ranked third because thiol chemistry leaves a small chance of partial residual coordination."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Additional LLM-only rounds cannot add new information beyond the already mechanistically converged D473 (canonical D474) binding-site set."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "D473N": {
+      "candidate_id": "D473N",
+      "mutation": "D473N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.92,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "This Asp (canonical OCT1 D474, offset by one because the sequence given starts at Pro2) is the key cation-coordinating carboxylate in the TM11 central binding site; Asn is isosteric so charge is neutralized with minimal folding/expression penalty."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.92,
+          "rationale": "Position 473 in this (Met-less) numbering equals canonical hOCT1 D474, the conserved TM11 aspartate that coordinates the cationic substrate; Asn is isosteric and charge-neutral, so it should abolish cation binding with minimal folding/abundance penalty."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D473A": {
+      "candidate_id": "D473A",
+      "mutation": "D473A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.86,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Complete removal of the essential negative charge in the substrate cavity should abolish organic-cation binding/translocation; Ala is well tolerated sterically in a buried helix and unlikely to block trafficking."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.86,
+          "rationale": "Removes the essential carboxylate entirely; small cavity created is likely tolerated in a solvent-accessible translocation pathway, so transport loss with retained expression is probable."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D473C": {
+      "candidate_id": "D473C",
+      "mutation": "D473C",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.76,
+          "rationale": "Cys substitution at this critical Asp is a classical loss-of-transport mutation in OCT1 cysteine-scanning work while the transporter remains membrane-inserted."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "Cys substitution at this aspartate is a classic SCAM-type replacement that is well folded but non-functional; slightly lower confidence than Asn/Ala due to possible partial residual coordination/reactivity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E385Q": {
+      "candidate_id": "E385Q",
+      "mutation": "E385Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.74,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Glu385 (canonical E386) lines the central cation-binding cleft and contributes an anionic contact; Gln neutralizes charge conservatively, likely killing transport without destabilizing the fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.74,
+          "rationale": "E385 here corresponds to canonical E386, the second acidic pocket residue proposed to bind organic cations; Gln is isosteric and neutralizing, giving loss of function at low folding risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E385A": {
+      "candidate_id": "E385A",
+      "mutation": "E385A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 10,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Alanine deletes both charge and side-chain bulk at this binding-site glutamate, giving a stronger functional knockout, with modestly higher risk of altered helix packing than E385Q."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "Kept as a backup to E385Q but demoted because Ala is less isosteric and largely redundant with the Gln variant at the same site."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W216A": {
+      "candidate_id": "W216A",
+      "mutation": "W216A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Trp216 (canonical W217) is a core aromatic of the OCT1 substrate cage providing cation-pi contacts; truncation to Ala should eliminate substrate recognition, though the cavity-facing location keeps folding risk moderate."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "W216 (canonical W217) is a core cation-π pocket residue; Trp→Ala should abolish substrate binding, though the large cavity carries some destabilization/abundance risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R438A": {
+      "candidate_id": "R438A",
+      "mutation": "R438A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.64,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.66,
+          "rationale": "Arg438 (canonical R439) forms the conserved salt-bridge/charge pair with the binding-site Asp and is needed for the alternating-access cycle; charge removal should block translocation while the protein still traffics."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.64,
+          "rationale": "R438 (canonical R439) likely forms an intramolecular ion pair supporting the acidic binding site and the conformational cycle; neutralization should block transport but its network role adds folding uncertainty."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y360A": {
+      "candidate_id": "Y360A",
+      "mutation": "Y360A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.56,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Tyr360 (canonical Y361) contributes an aromatic/hydroxyl contact in the substrate pocket; Ala removes both interactions and is expected to strongly impair transport with limited stability cost."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.56,
+          "rationale": "Y360 (canonical Y361) lines the cavity, but loss of a large aromatic in a TM bundle may reduce stability/abundance, so it is ranked below isosteric pocket edits."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F158A": {
+      "candidate_id": "F158A",
+      "mutation": "F158A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Phe158 (canonical F159) is a pocket-lining aromatic that packs against the substrate; loss of this bulky side chain should disrupt binding, though it is more buried and carries some misfolding risk."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "F158 sits in a packed TM region; Phe→Ala there is a stronger candidate for misfolding/reduced abundance than for a clean transport-null phenotype."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "F158 sits in a packed TM region; Phe→Ala there is a stronger candidate for misfolding/reduced abundance than for a clean transport-null phenotype.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G400S": {
+      "candidate_id": "G400S",
+      "mutation": "G400S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Corresponds to the natural OCT1 G401S loss-of-function variant in the conserved MFS A-motif/DRVGR region, which reduces transport while the protein is still expressed; likely only partial rather than complete abolition."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.28,
+          "rationale": "This corresponds to the natural G401S loss-of-function variant, whose defect is reported to include impaired trafficking/surface expression, conflicting with the requirement to preserve abundance."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "This corresponds to the natural G401S loss-of-function variant, whose defect is reported to include impaired trafficking/surface expression, conflicting with the requirement to preserve abundance.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "D473N": null,
+    "D473A": null,
+    "D473C": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

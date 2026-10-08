@@ -1,0 +1,308 @@
+{
+  "unit_id": "gpt-5.6-terra__brca1_tsg_lof__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gpt-5.6-terra",
+  "scenario_id": "brca1_tsg_lof",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "M1775R",
+        "confidence": 0.84,
+        "evidence_refs": [],
+        "decision_summary": "M1775R replaces the verified C-terminal BRCT-region methionine with a charged residue, likely disrupting the functional recognition surface while preserving the overall full-length protein scaffold."
+      },
+      {
+        "rank": 2,
+        "mutation": "K1702M",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "K1702M removes a charged side chain at a verified BRCT functional-region position and is expected to impair BRCT-mediated interactions with comparatively limited global folding risk."
+      },
+      {
+        "rank": 3,
+        "mutation": "R1699W",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "R1699W introduces a bulky hydrophobic residue at a verified BRCT-region arginine, making strong loss of BRCT-dependent repair function plausible, though with greater local structural risk."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The candidate set already prioritizes plausible function-selective BRCT disruptions, and no external evidence is available to resolve the remaining uncertainty."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "M1775R": {
+      "candidate_id": "M1775R",
+      "mutation": "M1775R",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.84,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.84,
+          "rationale": "M1775 lies in the C-terminal BRCT region and a charged arginine substitution is expected to strongly disrupt the phosphopeptide-binding surface required for DNA-damage signaling. This localized substitution is more likely to preserve global full-length protein production than truncation-like changes."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.84,
+          "rationale": "This C-terminal BRCT-region substitution is prioritized as a likely strong functional disruption that can retain a substantial folded protein scaffold."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.84,
+          "rationale": "M1775 is in the C-terminal BRCT region, making a charged substitution at this hydrophobic position a strong hypothesis for disabling critical repair-associated molecular recognition while retaining the full-length polypeptide."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.84,
+          "rationale": "M1775 is in the C-terminal BRCT region, and a charged substitution at this position is expected to strongly disrupt partner/phosphopeptide recognition while retaining a full-length protein scaffold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K1702M": {
+      "candidate_id": "K1702M",
+      "mutation": "K1702M",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "K1702 is a conserved basic residue in the BRCT phosphopeptide-recognition region; replacing it with methionine removes a key positive side-chain interaction. The substitution targets repair-signaling function without directly deleting a domain."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "K1702M is retained as a potentially structure-tolerant alteration in the BRCT region that may impair repair-relevant interactions."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "K1702M targets the BRCT-region functional surface and is a plausible separation-of-function-like lesion with less direct risk of globally disrupting the protein than truncating or zinc-ligand mutations."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "K1702 lies in the BRCT functional region; replacing its charged side chain with methionine is a plausible interface-disrupting change with lower expected global-folding cost than disruptive cysteine substitutions."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R1699W": {
+      "candidate_id": "R1699W",
+      "mutation": "R1699W",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "R1699W introduces a bulky hydrophobic residue in the BRCT domain and is expected to impair functional ligand recognition and/or inter-BRCT geometry. It may retain substantial overall protein structure while substantially reducing BRCA1 repair activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "The bulky aromatic replacement is expected to strongly perturb a functionally important BRCT-region surface while remaining a single-residue change."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "Replacing R1699 with bulky hydrophobic tryptophan is likely to impair BRCT-domain function and interactions, although its local structural impact remains uncertain."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "R1699W remains a strong loss-of-function hypothesis in the BRCT region, but the bulky hydrophobic substitution may impose more local structural risk than M1775R or K1702M."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C61G": {
+      "candidate_id": "C61G",
+      "mutation": "C61G",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.74,
+          "rationale": "C61 is a RING-domain cysteine; glycine substitution should disrupt RING zinc coordination and BRCA1-BARD1 E3-associated activity. This is a compact single-site loss-of-function strategy, although local RING stability may be affected."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.74,
+          "rationale": "Although likely highly disruptive to BRCA1 activity, removal of a RING-region cysteine may compromise local zinc-dependent domain integrity and is therefore ranked below C-terminal candidates."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "C61G is likely strongly loss-of-function because it removes a RING-region cysteine, but likely disruption of local zinc-dependent folding is less aligned with preserving folding."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.5,
+          "rationale": "C61 is a cysteine within the N-terminal RING-like region; glycine substitution is likely to damage local metal-coordinated structural integrity, conflicting with preservation of folding."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "C61 is a cysteine within the N-terminal RING-like region; glycine substitution is likely to damage local metal-coordinated structural integrity, conflicting with preservation of folding.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C64G": {
+      "candidate_id": "C64G",
+      "mutation": "C64G",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.63,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "C64 is another cysteine in the N-terminal RING domain, and substitution with glycine is expected to compromise RING coordination-dependent function. The perturbation is confined to the N-terminal domain but could reduce its local folding stability."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "This is similarly expected to disrupt the RING region, but the potential for local unfolding makes it less aligned with preservation of overall folding."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.63,
+          "rationale": "C64G similarly offers a high likelihood of RING impairment but carries a substantial local-folding risk due to loss of a cysteine in the N-terminal RING region."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.45,
+          "rationale": "Like C61G, C64G likely compromises the structurally constrained N-terminal RING-like region rather than selectively eliminating a functional interaction."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Like C61G, C64G likely compromises the structurally constrained N-terminal RING-like region rather than selectively eliminating a functional interaction.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "I26A": {
+      "candidate_id": "I26A",
+      "mutation": "I26A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.57,
+          "rationale": "I26 is within the N-terminal RING region, and alanine substitution may weaken interaction surfaces involved in BRCA1 RING complex activity while avoiding direct cysteine coordination loss. Its expected phenotype is less complete than BRCT-disrupting candidates."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.57,
+          "rationale": "I26A may offer a comparatively fold-conservative way to weaken N-terminal RING-associated function, but its likelihood of fully abolishing repair is uncertain."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.52,
+          "rationale": "I26A is structurally conservative relative to cysteine-ligand substitutions, but its likelihood of fully abolishing BRCA1 repair function is comparatively uncertain."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.38,
+          "rationale": "I26A may alter an N-terminal interaction surface but is less likely to reliably abolish the broad DNA-repair and tumor-suppressor functions required by the objective."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "I26A may alter an N-terminal interaction surface but is less likely to reliably abolish the broad DNA-repair and tumor-suppressor functions required by the objective.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "M1775R": null,
+    "K1702M": null,
+    "R1699W": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 6,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 6,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 3,
+    "budget_exhausted": false
+  }
+}

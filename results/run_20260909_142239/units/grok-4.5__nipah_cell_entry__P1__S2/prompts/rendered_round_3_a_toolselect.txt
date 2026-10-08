@@ -1,0 +1,142 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the Nipah virus attachment glycoprotein G (532 aa).
+
+PRIMARY OBJECTIVE: Maximize G-mediated cell-entry efficiency (together with the F fusion machinery).
+
+SEQUENCE (full-length exactly as numbered below):
+```
+QNYTRSTDNQAVIKDALQGIQQQIKGLADKIGTEIGPKVSLIDTSSTITIPANIGLLGSKISQSTASINENVNEKCKFTLPPLKIHECNISCPNPLPFREYRPQTEGVSNLVGLPNNICLQKTSNQILKPKLISYTLPVVGQSGTCITDPLLAMDEGYFAYSHLERIGSCSRGVSKQRIIGVGEVLDRGDEVPSLFMTNVWTPPNPNTVYHCSAVYNNEFYYVLCAVSTVGDPILNSTYWSGSLMMTRLAVKPKSNGGGYNQHQLALRSIEKGRYDKVMPYGPSGIKQGDTLYFPAVGFLVRTEFKYNDSNCPITKCQYSKPENCRLSMGIRPNSHYILRSGLLKYNLSDGENPKVVFIEISDQRLSIGSPSKIYDSLGQPVFYQASFSWDTMIKFGDVLTVNPLVVNWRNNTVISRPGQSQCPRFNTCPEICWEGVYNDAFLIDRINWISAGVFLDSNQTAENPVFTVFKDNEILYRAQLASEDTNAQKTITNCFLLKNKIWCISLVEIYDTGDNVIRPKLFAVKIPEQCT
+```
+NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   For THIS task the backbone is PDB 3D11 chain A — 80% of this sequence's residues have experimental coordinates (resolution 2.31 Å). Positions OUTSIDE the structure return status = "not_applicable" (no score).
+
+4. functional_annotation — curated UniProt features (accession Q9IH62) for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide which biological tools (if any) you still need, on which candidates. Do NOT change candidates and do NOT output a STOP decision in this step — only request tools (empty array if you need none).
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  N125S  confidence=0.650  rank=1
+  I127V  confidence=0.550  rank=2
+  L128M  confidence=0.400  rank=3
+BT evidence so far:
+  E00001 evolution_msa(S124N): z=0.000, app=1.00
+  E00002 evolution_msa(N125S): z=0.190, app=1.00
+  E00003 evolution_msa(Q126R): z=0.000, app=1.00
+  E00004 evolution_msa(I127V): z=0.048, app=1.00
+  E00005 evolution_msa(L128M): z=0.048, app=1.00
+  E00006 sequence_plm(S124N): z=0.938, app=0.90
+  E00007 sequence_plm(N125S): z=1.000, app=0.90
+  E00008 sequence_plm(Q126R): z=0.727, app=0.90
+  E00009 sequence_plm(I127V): z=0.789, app=0.90
+  E00010 sequence_plm(L128M): z=0.111, app=0.90
+  E00011 structure_compatibility(S124N): z=0.914, app=1.00
+  E00012 structure_compatibility(N125S): z=0.648, app=1.00
+  E00013 structure_compatibility(Q126R): z=0.671, app=1.00
+  E00014 structure_compatibility(I127V): z=0.777, app=1.00
+  E00015 structure_compatibility(L128M): z=0.430, app=1.00
+  E00016 functional_annotation(S124N): z=0.500, app=0.60
+  E00017 functional_annotation(N125S): z=0.500, app=0.60
+  E00018 functional_annotation(Q126R): z=0.500, app=0.60
+  E00019 functional_annotation(I127V): z=0.500, app=0.60
+  E00020 functional_annotation(L128M): z=0.500, app=0.60
+Change history:
+  - drop S124N (round 2): Evolution MSA shows z=0 with no N observed at conserved position 124, indicating low natural tolerance and risk to viability.
+  - drop Q126R (round 2): z=0 evolutionary support and low plm=0.73 indicate poor tolerance and lack of benefit for receptor interface.
+  - add S124N (round 1): Position 124 (S) lies in the G head domain near the ephrin receptor interface; N substitution may improve polar contacts for cell entry while remaining conservative.
+  - add N125S (round 1): Position 125 (N) is surface-exposed in binding region; S change could enhance H-bonding with ephrin-B2/3 for higher entry efficiency.
+  - add Q126R (round 1): Position 126 (Q) is in receptor-contact zone; R introduces positive charge that may strengthen electrostatic interaction with negatively charged ephrin residues.
+  - add I127V (round 1): Position 127 (I) is hydrophobic core of head domain; V substitution maintains volume but may optimize packing for fusion-competent conformation.
+  - add L128M (round 1): Position 128 (L) is at interface; M change slightly increases hydrophobicity, potentially stabilizing G-F complex for improved entry.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "S2",
+  "round": 1,
+  "next_tool_requests": [
+    {"tool": "evolution_msa | sequence_plm | structure_compatibility | functional_annotation | phenotype",
+     "candidates": ["<WT><POS><MUT>", ...],
+     "question": "one sentence",
+     "reason_for_call": "one sentence"}
+  ]
+}
+Rules: request only tools you still need; each tool call may evaluate at most
+10 active candidates; do not re-request a tool for a candidate already covered
+(a repeated call returns no new information). If you need no further evidence,
+output an EMPTY next_tool_requests array.
+</OUTPUT_SCHEMA>
+
+ROUND 3 — respond with a single JSON object, nothing else.

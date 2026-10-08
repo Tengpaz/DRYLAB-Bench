@@ -1,0 +1,334 @@
+{
+  "unit_id": "glm-5.3__flu_h5_stability_dual__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "glm-5.3",
+  "scenario_id": "flu_h5_stability_dual",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "T318I",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "Thr-to-Ile in the HA1 body removes a polar hydroxyl in favor of a hydrophobic side chain, a commonly stabilizing substitution pattern away from receptor-binding residues. Low expected impact on cell entry."
+      },
+      {
+        "rank": 2,
+        "mutation": "N330D",
+        "confidence": 0.63,
+        "evidence_refs": [],
+        "decision_summary": "Asn-to-Asp near the head/trimer interface may enable new salt-bridge pairing, plausibly increasing trimer thermostability. Some risk of altered surface chemistry near glycosylation-adjacent regions."
+      },
+      {
+        "rank": 3,
+        "mutation": "T156A",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "Conservative polar-to-hydrophobic change in a surface loop that reduces solvent-entropy cost of folding with minimal entry risk. Expected stability gain is modest."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No external evidence is available and further self-iteration is unlikely to change the Top-3 ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "T318I": {
+      "candidate_id": "T318I",
+      "mutation": "T318I",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Position 318 (HA numbering; T in 'TSTLNQ' region near receptor-binding site periphery) — Thr-to-Ile stabilizes hydrophobic packing in the head domain without altering receptor-binding residues, a common stabilizing substitution in HA thermostability engineering."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "Thr-to-Ile removes a polar hydroxyl in the HA1 body, a common stabilizing substitution pattern in group-1/HA stem-adjacent regions without altering receptor-binding residues."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N330D": {
+      "candidate_id": "N330D",
+      "mutation": "N330D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.66,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Replacing an Asn near the 320-loop reduces local flexibility and removes a potential deamidation site; acidic residue formation of stabilizing salt bridges in HA head domain has been reported to raise thermal tolerance."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.66,
+          "rationale": "Position 330 sits in HA1 head near the trimer interface; N-to-D may improve salt-bridge pairing but risks changing glycosylation-adjacent surface chemistry, so confidence slightly lowered pending structure-based reasoning."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T156A": {
+      "candidate_id": "T156A",
+      "mutation": "T156A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "HA1 Thr156 near a glycosylation-adjacent loop; Thr→Ala is small and mildly helix-stabilizing; documented that HA1 loop rigidification improves heat stability without affecting receptor binding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Conservative polar-to-hydrophobic substitution in a surface loop; removing Thr OH reduces solvent-entropy cost but is away from known folding nuclei, so impact is modest."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V123P": {
+      "candidate_id": "V123P",
+      "mutation": "V123P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Introducing Pro at a loop position in HA1 could rigidify a flexible loop; however, Pro can also destabilize helices so this is lower confidence pending structural considerations."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "Proline insertion into a β-strand/loop region (site 123 lies in the vestigial esterase subdomain) is more likely to disrupt local structure than stabilize it."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Proline insertion into a β-strand/loop region (site 123 lies in the vestigial esterase subdomain) is more likely to disrupt local structure than stabilize it.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "D225E": {
+      "candidate_id": "D225E",
+      "mutation": "D225E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Conservative Asp→Glu retains charge while improving side-chain packing/salt-bridge geometry near the 220-loop; low risk to receptor binding (position 225 is adjacent to, not within, key RBS contacts)."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.58,
+          "rationale": "Residue 225 is near the 220-loop receptor-binding region; any change here risks altering cell entry (α2,3 specificity), so the trade-off penalizes confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S223N": {
+      "candidate_id": "S223N",
+      "mutation": "S223N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Adding a consensus-adjacent glycosylation-adjacent Asn-type residue near the 220 loop; changes in this loop are risky for receptor specificity so this is a moderate-confidence candidate for stability via local consensus restoration."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "223 is immediately adjacent to the receptor-binding 220-loop; adding a bulky N-linked-glycosylation-competent Asn near RBS is high risk for cell entry."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "223 is immediately adjacent to the receptor-binding 220-loop; adding a bulky N-linked-glycosylation-competent Asn near RBS is high risk for cell entry.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "I338V": {
+      "candidate_id": "I338V",
+      "mutation": "I338V",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Conservative Ile→Val at a buried head-domain core-adjacent position; consensus-restoring substitutions in HA core consistently improve folding stability with minimal functional impact."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "Very conservative hydrophobic core-adjacent substitution; low risk to folding/entry but also low expected stability gain."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E89D": {
+      "candidate_id": "E89D",
+      "mutation": "E89D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.57,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Conservative Glu→Asp in HA1 improves side-chain fit for salt-bridge formation at pH-neutral folding conditions; small functional risk."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.57,
+          "rationale": "Conservative acidic residue shortening; plausible small helix-stabilizing effect with minimal entry risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A567V": {
+      "candidate_id": "A567V",
+      "mutation": "A567V",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "C-terminal HA2 position; adding a hydrophobic residue at the transmembrane-adjacent region could enhance membrane-proximal stability, but functional risk near the TM domain warrants moderate-low confidence."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Position 567 is in the transmembrane domain near the cytoplasmic boundary; a Val here is entry-neutral but contributes little to heat stability of the ectodomain, which is the relevant dimension."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 567 is in the transmembrane domain near the cytoplasmic boundary; a Val here is entry-neutral but contributes little to heat stability of the ectodomain, which is the relevant dimension.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "E237K": {
+      "candidate_id": "E237K",
+      "mutation": "E237K",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "New hypothesis: a surface Glu-to-Lys at 237 can form an inter- or intramolecular salt-bridge network in the head domain and is distal to the receptor-binding pocket, a common route to thermostable HA."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "T318I": null,
+    "N330D": null,
+    "T156A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 9,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

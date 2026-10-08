@@ -1,0 +1,1173 @@
+{
+  "unit_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+  "condition": "S2",
+  "model_id": "gpt-6-astra",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "Y18P",
+        "confidence": 0.79,
+        "evidence_refs": [
+          "E00003",
+          "E00010",
+          "E00017"
+        ],
+        "decision_summary": "Low fixed-backbone compatibility and evolutionary and sequence intolerance support this backbone-perturbing substitution. These signals favor destabilization but do not establish unfolding or knockout."
+      },
+      {
+        "rank": 2,
+        "mutation": "F40D",
+        "confidence": 0.72,
+        "evidence_refs": [
+          "E00002",
+          "E00009",
+          "E00016"
+        ],
+        "decision_summary": "Structural incompatibility and low sequence plausibility support replacing this aromatic residue with an acidic residue. Its effect on folding, rather than assembly or function alone, remains unmeasured."
+      },
+      {
+        "rank": 3,
+        "mutation": "W17D",
+        "confidence": 0.65,
+        "evidence_refs": [
+          "E00001",
+          "E00008",
+          "E00015"
+        ],
+        "decision_summary": "Evolutionary and sequence intolerance support this chemically disruptive aromatic-to-acidic substitution. Moderate fixed-backbone compatibility limits confidence relative to the two higher-ranked candidates."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Additional available evidence is unlikely to change the Top-3, and no available tool directly establishes folding disruption."
+    },
+    "remaining_budget": {
+      "tool_calls": 1,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "W17D": {
+      "candidate_id": "W17D",
+      "mutation": "W17D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00001",
+        "E00008",
+        "E00015"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.79,
+          "rationale": "Replacing a bulky aromatic residue with a charged aspartate could strongly disrupt hydrophobic packing if W17 is buried. This is an initial folding-disruption hypothesis, not a validated knockout."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.65,
+          "rationale": "Move to third and reduce confidence because the structural penalty is modest rather than severe. Replacing tryptophan with an acidic residue and extremely low sequence plausibility still support a disruptive hypothesis."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Extreme sequence implausibility supports retaining this chemically disruptive substitution, but moderate backbone compatibility limits confidence. No new evidence justifies moving it above F40D."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y18P": {
+      "candidate_id": "Y18P",
+      "mutation": "Y18P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.79,
+      "evidence_refs": [
+        "E00003",
+        "E00010",
+        "E00017"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.74,
+          "rationale": "Proline removes aromatic packing potential and restricts backbone geometry while eliminating a backbone hydrogen-bond donor. These changes could disrupt local secondary structure."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.79,
+          "rationale": "Promote to first: the strongest negative backbone-conditioned delta supports disruption, and proline can alter backbone geometry as well as remove aromatic packing. Very low sequence plausibility provides secondary support, not proof of unfolding."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.79,
+          "rationale": "Retain first place: low fixed-backbone compatibility supports disruption, and introducing proline could perturb backbone geometry. This is evidence for destabilization, not proof of unfolding or knockout."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I33D": {
+      "candidate_id": "I33D",
+      "mutation": "I33D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.32,
+      "evidence_refs": [
+        "E00004",
+        "E00011",
+        "E00018"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.73,
+          "rationale": "Introducing aspartate into the hydrophobic segment around I33 could destabilize folding through lost packing and an unfavorable buried charge. The effect depends on actual solvent exposure."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.32,
+          "rationale": "Demote to last because ProteinMPNN favors the mutant over WT on the experimental backbone. Evolutionary absence alone does not overcome this counterevidence for the specific folding-disruption objective."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.32,
+          "rationale": "Retain last because high fixed-backbone compatibility argues against the intended structural disruption. Evolutionary intolerance alone cannot resolve whether any impairment would reflect folding or another function."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F40D": {
+      "candidate_id": "F40D",
+      "mutation": "F40D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.72,
+      "evidence_refs": [
+        "E00002",
+        "E00009",
+        "E00016"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.76,
+          "rationale": "Replacing phenylalanine with aspartate combines loss of aromatic packing with introduction of charge. This could strongly destabilize PsaE if F40 participates in the folded core."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Retain second because the substantial negative structural delta supports incompatibility with the WT fold. Aspartate occurs in approximately 19% of aligned homologs, limiting confidence that this substitution necessarily disrupts folding in this sequence."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "Retain second place because the structural score disfavors this aromatic-to-acidic substitution. Its effect on folding remains unmeasured."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F48D": {
+      "candidate_id": "F48D",
+      "mutation": "F48D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.48,
+      "evidence_refs": [
+        "E00005",
+        "E00012",
+        "E00019"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "An aromatic-to-acidic substitution could disrupt a hydrophobic anchor in this glycine-rich region. Confidence is limited until its packing environment is assessed."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.48,
+          "rationale": "Demote because the near-neutral structural delta gives little support for substantial fold disruption. Low sequence plausibility cannot establish that folding, rather than another selective constraint, is affected."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.48,
+          "rationale": "Retain below the leading alternatives; existing structural compatibility tempers the disruptive chemical hypothesis. No new evidence warrants reranking."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L55P": {
+      "candidate_id": "L55P",
+      "mutation": "L55P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.44,
+      "evidence_refs": [
+        "E00006",
+        "E00013",
+        "E00020"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Introducing proline could distort local backbone geometry and weaken secondary-structure hydrogen bonding. Its destabilizing potential depends on whether L55 occupies a structured segment rather than a loop."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.44,
+          "rationale": "Demote because the small structural penalty weakens the original proline-disruption hypothesis. Retain as a lower-priority candidate because fixed-backbone scoring cannot fully evaluate proline-induced rearrangements."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.44,
+          "rationale": "Retain as a lower-confidence backbone-perturbation hypothesis. Proline introduction alone does not establish folding disruption."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V67D": {
+      "candidate_id": "V67D",
+      "mutation": "V67D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.61,
+      "evidence_refs": [
+        "E00007",
+        "E00014",
+        "E00021"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.64,
+          "rationale": "Replacing the penultimate hydrophobic residue with aspartate could weaken terminal packing if this segment contributes to the folded core. Terminal solvent exposure could instead make the mutation relatively tolerable."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.61,
+          "rationale": "Move to fourth because its structural penalty exceeds that of several initially higher-ranked candidates. Its terminal location leaves uncertainty about whether incompatibility propagates to global unfolding."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.61,
+          "rationale": "Retain as the leading alternative without changing confidence because no new evidence was obtained. Existing evolutionary coverage is limited."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 3,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "Y18P": 4.573,
+    "F40D": 12.771,
+    "W17D": 23.673
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "W17D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.8507,
+        "normalized": 0.674671,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-0.8507)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F40D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -3.5095,
+        "normalized": 0.201394,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-3.5095)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y18P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.2538,
+        "normalized": 0.130132,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-4.2538)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 1.2483,
+        "normalized": 0.965143,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=1.2483)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F48D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.2217,
+        "normalized": 0.801704,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-0.2217)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L55P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.4549,
+        "normalized": 0.752905,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-0.4549)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V67D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.536,
+        "normalized": 0.536793,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-1.536)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W17D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 17 = 0.0000 among 43 homologs; conservation entropy 1.485 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F40D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.190476,
+        "normalized": 0.190476,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 40 = 0.1905 among 42 homologs; conservation entropy 1.418 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y18P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 18 = 0.0000 among 43 homologs; conservation entropy 1.613 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 33 = 0.0000 among 42 homologs; conservation entropy 1.548 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F48D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.465,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.465,
+        "reason": "alignment coverage 20/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 48 = 0.0000 among 20 homologs; conservation entropy 1.566 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L55P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 55 = 0.0000 among 42 homologs; conservation entropy 1.493 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V67D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.535,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.535,
+        "reason": "alignment coverage 23/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 67 = 0.0000 among 23 homologs; conservation entropy 1.167 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W17D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F40D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y18P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0002,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.2515,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F48D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0121,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L55P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.2276,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V67D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0053,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "gpt-6-astra__psae_stability_disruption__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W17D",
+          "F40D",
+          "Y18P",
+          "I33D",
+          "F48D",
+          "L55P",
+          "V67D"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 7,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 7,
+    "final_novelty": 0.0,
+    "tool_calls_used": 3,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

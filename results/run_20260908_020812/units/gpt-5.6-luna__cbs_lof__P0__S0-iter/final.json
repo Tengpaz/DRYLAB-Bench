@@ -1,0 +1,172 @@
+{
+  "unit_id": "gpt-5.6-luna__cbs_lof__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gpt-5.6-luna",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.98,
+        "evidence_refs": [],
+        "decision_summary": "Lys119 is the catalytic PLP Schiff-base-forming residue; alanine substitution should directly eliminate PLP linkage and catalytic activity."
+      },
+      {
+        "rank": 2,
+        "mutation": "K119E",
+        "confidence": 0.97,
+        "evidence_refs": [],
+        "decision_summary": "Replacing the verified catalytic lysine at position 119 with glutamate removes the required lysine chemistry and alters local charge."
+      },
+      {
+        "rank": 3,
+        "mutation": "C52A",
+        "confidence": 0.96,
+        "evidence_refs": [],
+        "decision_summary": "Cys52 is in the N-terminal heme-associated region; alanine substitution is expected to disrupt cofactor association or protein function."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The strongest mechanistically distinct candidates have been identified, and additional unaided iteration is unlikely to improve the ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "C52A": {
+      "candidate_id": "C52A",
+      "mutation": "C52A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.96,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.96,
+          "rationale": "Cys52 is positioned in the N-terminal heme-associated region, so replacing it with alanine is likely to disrupt essential cofactor coordination and abolish activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.96,
+          "rationale": "Cys52 is an N-terminal heme-associated residue in CBS; alanine substitution is predicted to destabilize or functionally disable the enzyme, making it a strong loss-of-function candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.98,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.98,
+          "rationale": "Lys119 is a highly plausible PLP-Schiff-base-forming catalytic lysine; alanine substitution should directly eliminate catalysis while strongly impairing enzyme function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.98,
+          "rationale": "K119 is the expected PLP Schiff-base-forming lysine in CBS, so alanine substitution is highly likely to abolish catalysis while being a single-site loss-of-function perturbation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119E": {
+      "candidate_id": "K119E",
+      "mutation": "K119E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.97,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.97,
+          "rationale": "Replacing the catalytic lysine with a negatively charged residue should prevent PLP covalent attachment and introduce an unfavorable charge at the active site."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.97,
+          "rationale": "Replacing the catalytic lysine at verified position 119 with glutamate should disrupt PLP linkage and catalytic chemistry through both loss of lysine reactivity and charge alteration."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H65A": {
+      "candidate_id": "H65A",
+      "mutation": "H65A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "His65 lies near the heme-associated N-terminal domain and may contribute to local cofactor or active-site organization; alanine substitution could substantially impair activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "His65 lies near the N-terminal regulatory/heme-associated region and may affect structural or cofactor-dependent function, but its direct impact on catalysis is less certain than the top three candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K119A": null,
+    "K119E": null,
+    "C52A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 3,
+    "c0_size": 4,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

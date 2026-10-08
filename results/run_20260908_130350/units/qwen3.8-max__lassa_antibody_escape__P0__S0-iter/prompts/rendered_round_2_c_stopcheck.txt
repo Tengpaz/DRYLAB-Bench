@@ -1,0 +1,118 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the Lassa virus glycoprotein complex GPC (Josiah strain, 491 aa).
+
+GOAL: Maximize antibody immune escape from neutralizing antibodies (12.1F/37.2D/8.9F, the Arevirumab-3 cocktail) while preserving cell entry.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MGQIVTFFQEVPHVIEEVMNIVLIALSVLAVLKGLYNFATCGLVGLVTFLLLCGRSCTTSLYKGVYELQTLELNMETLNMTMPLSCTKNNSHHYIMVGNETGLELTLTNTSIINHKFCNLSDAHKKNLYDHALMSIISTFHLSIPNFNQYEAMSCDFNGGKISVQYNLSHSYAGDAANHCGTVANGVLQTFMRMAWGGSYIALDSGRGNWDCIMTSYQYLIIQNTTWEDHCQFSRPSPIGYLGLLSQRTRDIYISRRLLGTFTWTLSDSEGKDTPGGYCLTRWMLIEAELKCFGNTAVAKCNEKHDEEFCDMLRLFDFNKQAIQRLKAEAQMSIQLINKAVNALINDQLIMKNHLRDIMGIPYCNYSKYWYLNHTTTGRTSLPKCWLVSNGSYLNETHFSDDIEQQADNMITEMLQKEYMERQGKTPLGLVDLFVFSTSFYLISIFLHLVKIPTHRHIVGKSCPKPHRLNHMGICSCGLYKQPGVPVKWKR
+```
+IMPORTANT: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  K259A  confidence=0.720  rank=1
+  F260A  confidence=0.680  rank=2
+  D258A  confidence=0.650  rank=3
+  Y256A  confidence=0.630  rank=4
+  R251A  confidence=0.610  rank=5
+  N255A  confidence=0.600  rank=6
+  Y256F  confidence=0.590  rank=7
+  L257A  confidence=0.580  rank=8
+  S254A  confidence=0.550  rank=9
+  I253A  confidence=0.520  rank=10
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  - drop T252A (round 1): T252 is less likely to be a direct antibody contact residue and may be more important for structural integrity.
+  - drop G261A (round 1): G261 is a glycine; mutation to alanine may disrupt backbone flexibility needed for proper folding rather than specifically disrupting antibody binding.
+Changes this round:
+  - K259A retain: K259 sits within the receptor-binding region of GP1 and is a charged residue likely involved in antibody contacts; alanine substitution removes the side chain without disrupting backbone.
+  - F260A retain: F260 is adjacent to K259 in the epitope region; aromatic residues are common antibody contact points and alanine substitution disrupts hydrophobic/aromatic interactions.
+  - D258A retain: D258 is a charged residue in the same epitope cluster; removal of the carboxylate side chain likely disrupts electrostatic antibody contacts.
+  - Y256A retain: Y256 is an aromatic residue that may participate in antibody paratope interactions; alanine substitution removes the hydroxyl and aromatic ring.
+  - N255A retain: N255 is a polar residue that could form hydrogen bonds with antibody CDRs; alanine substitution removes this capability.
+  - L257A retain: L257 is a hydrophobic residue that may contribute to antibody binding through van der Waals contacts.
+  - S254A retain: S254 is a small polar residue that may form hydrogen bonds with antibody CDRs.
+  - I253A retain: I253 is a hydrophobic residue that may contribute to antibody binding through shape complementarity.
+  - R251A add: R251 is a charged residue immediately upstream of the epitope cluster; arginine's long side chain often forms salt bridges with antibody CDRs, and alanine substitution would disrupt this.
+  - Y256F add: Y256F is a conservative mutation that removes the hydroxyl group while preserving the aromatic ring, potentially disrupting specific hydrogen bonds with antibodies while maintaining structural integrity.
+Remaining doubts: Without structural data or experimental escape data, the exact epitope boundaries and which residues are true contact residues versus bystanders remain uncertain.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

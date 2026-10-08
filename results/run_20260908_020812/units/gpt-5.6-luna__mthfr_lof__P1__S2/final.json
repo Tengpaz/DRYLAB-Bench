@@ -1,0 +1,1219 @@
+{
+  "unit_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+  "condition": "S2",
+  "model_id": "gpt-5.6-luna",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "W95A",
+        "confidence": 0.95,
+        "evidence_refs": [
+          "E00004",
+          "E00010",
+          "E00016"
+        ],
+        "decision_summary": "W95A has a very high phenotype damaging score supporting activity loss. Its low PLM plausibility suggests substantial structural perturbation, so confidence is high for LOF but not maximal for preserved viability."
+      },
+      {
+        "rank": 2,
+        "mutation": "G196D",
+        "confidence": 0.94,
+        "evidence_refs": [
+          "E00006",
+          "E00012",
+          "E00018"
+        ],
+        "decision_summary": "G196D has a phenotype damaging score matching the top candidate and is absent or highly disfavored in evolutionary and PLM evidence. The nonconservative change may impair folding, but it is strongly prioritized for abolishing activity."
+      },
+      {
+        "rank": 3,
+        "mutation": "R157Q",
+        "confidence": 0.7,
+        "evidence_refs": [
+          "E00001",
+          "E00007",
+          "E00013"
+        ],
+        "decision_summary": "R157Q shows a substantial loss-of-function proxy signal and is strongly disfavored by evolutionary and PLM evidence. Its phenotype score is lower than the top two, yielding moderate confidence."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The available evidence sufficiently separates the top three candidates and further evidence is unlikely to change the final ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "W95A": {
+      "candidate_id": "W95A",
+      "mutation": "W95A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.95,
+      "evidence_refs": [
+        "E00004",
+        "E00010",
+        "E00016",
+        "E00019"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Aromatic-to-small substitution in the N-terminal catalytic region may disrupt local packing or substrate/FAD-associated interactions. The WT residue at position 95 is W."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.93,
+          "rationale": "W95A has a very high LOF-proxy phenotype score, while the MSA indicates that alanine is tolerated at this position, supporting viability with impaired activity. The low PLM plausibility is a secondary concern because sequence plausibility is not the target phenotype."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.95,
+          "rationale": "W95A has a very high phenotype-tool damaging score, directly aligned with the loss-of-function objective. Its low PLM plausibility is consistent with a disruptive substitution, while the weak evolutionary tolerance signal does not outweigh the phenotype evidence."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.95,
+          "rationale": "W95A has a very high phenotype damaging score, directly supporting the loss-of-function objective. Its low PLM plausibility and only moderate evolutionary support raise viability uncertainty but do not outweigh the phenotype evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D100A": {
+      "candidate_id": "D100A",
+      "mutation": "D100A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.38,
+      "evidence_refs": [
+        "E00002",
+        "E00008",
+        "E00014",
+        "E00023"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.74,
+          "rationale": "Removal of a conserved acidic side chain near the catalytic-domain core could impair electrostatic interactions or catalytic geometry. The WT residue at position 100 is D."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.42,
+          "rationale": "D100A is conserved and has very low sequence-model plausibility, but its phenotype score is only ambiguous-to-low for the requested LOF objective. It is retained as a lower-ranked backup."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.38,
+          "rationale": "D100A remains active but ranks below D191A because its LOF-proxy score is low. Its evolutionary absence and low PLM plausibility are nonspecific indicators of destabilization rather than direct evidence of activity abolition."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.38,
+          "rationale": "D100A remains active only as a lower-priority backup because its phenotype signal is modest. Evolutionary absence and low PLM plausibility support perturbation but do not establish strong functional loss."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R134C": {
+      "candidate_id": "R134C",
+      "mutation": "R134C",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00005",
+        "E00011",
+        "E00017"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Replacing a basic residue with cysteine in the structured catalytic domain is likely to perturb charge-dependent interactions and folding. The WT residue at position 134 is R."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.12,
+          "rationale": "Although R134C is evolutionarily absent and has low PLM plausibility, the phenotype tool predicts it as benign with a very low damaging score. Because the primary objective is activity abolition, this candidate is removed."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Although R134C is evolutionarily absent and has low PLM plausibility, the phenotype tool predicts it as benign with a very low damaging score. Because the primary objective is activity abolition, this candidate is removed.",
+        "evidence_refs": [
+          "E00005"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "R157Q": {
+      "candidate_id": "R157Q",
+      "mutation": "R157Q",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00001",
+        "E00007",
+        "E00013",
+        "E00021"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.76,
+          "rationale": "This charge-neutralizing substitution lies within the catalytic domain and could disrupt conserved binding or structural contacts. The WT residue at position 157 is R."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "R157Q has a moderately strong LOF-proxy score and is absent among the available homologs, consistent with functional importance at this position. Its extremely low PLM plausibility supports disruption but also raises some concern about structural viability."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "R157Q has a moderately strong phenotype-tool score and remains preferable to the lower-scoring alternatives. Its complete evolutionary absence and very low PLM plausibility support disruption but also increase uncertainty about basic viability."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "R157Q has the third-highest phenotype damaging score among the active candidates and is evolutionarily absent with negligible PLM plausibility. It remains below W95A and G196D because its phenotype signal is substantially weaker."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D191A": {
+      "candidate_id": "D191A",
+      "mutation": "D191A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.43,
+      "evidence_refs": [
+        "E00003",
+        "E00009",
+        "E00015",
+        "E00022"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.73,
+          "rationale": "A nonconservative loss of acidic charge in the catalytic-domain sequence may alter active-site architecture or ligand interactions. The WT residue at position 191 is D."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.48,
+          "rationale": "D191A is strongly conserved and highly implausible by the PLM, suggesting it may disrupt the protein, but its phenotype score is only ambiguous. It remains a backup candidate rather than a final Top-3 choice."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.43,
+          "rationale": "D191A is retained as a backup because its phenotype score is substantially weaker than those of the leading candidates. Evolutionary absence and near-zero PLM plausibility suggest structural disruption, but neither directly establishes LOF magnitude."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.43,
+          "rationale": "D191A is retained as a backup because its phenotype score supports some likelihood of loss of function and both evolutionary and PLM evidence indicate an atypical substitution. Its damaging score is lower than the top three."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G196D": {
+      "candidate_id": "G196D",
+      "mutation": "G196D",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.94,
+      "evidence_refs": [
+        "E00006",
+        "E00012",
+        "E00018",
+        "E00020"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Introducing a bulky charged residue at a glycine in a structured catalytic-region motif may impose steric strain and reduce activity. The WT residue at position 196 is G."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.91,
+          "rationale": "G196D receives a very high LOF-proxy phenotype score and is a chemically disruptive glycine-to-aspartate substitution. Partial evolutionary occurrence of aspartate and very low PLM plausibility introduce uncertainty but do not outweigh the direct phenotype proxy."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.94,
+          "rationale": "G196D matches W95A on the strongest available LOF-proxy signal and is predicted implausible by both evolutionary and PLM evidence. It remains a top candidate despite the absence of position-specific functional annotation."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.94,
+          "rationale": "G196D matches W95A with a very high phenotype damaging score and is therefore strongly prioritized for activity loss. Evolutionary absence and very low PLM plausibility suggest possible structural disruption, which is acceptable for the stated objective but reduces confidence in preserved viability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "W95A": 51.269,
+    "G196D": 47.756,
+    "R157Q": 29.984
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "R157Q",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6287,
+        "normalized": 0.6287,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.629 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D100A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.3958,
+        "normalized": 0.3958,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.396 (class ambiguous); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D191A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.3746,
+        "normalized": 0.3746,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.375 (class ambiguous); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W95A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9843,
+        "normalized": 0.9843,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.984 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R134C",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.0842,
+        "normalized": 0.0842,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.084 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G196D",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9842,
+        "normalized": 0.9842,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.984 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R157Q",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of Q at position 157 = 0.0000 among 23 homologs; conservation entropy 2.017 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D100A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 0.913,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.913,
+        "reason": "alignment coverage 21/23 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 100 = 0.0000 among 21 homologs; conservation entropy 2.112 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D191A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 191 = 0.0000 among 23 homologs; conservation entropy 1.832 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W95A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.391304,
+        "normalized": 0.391304,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 95 = 0.3913 among 23 homologs; conservation entropy 1.914 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R134C",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of C at position 134 = 0.0000 among 23 homologs; conservation entropy 2.140 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G196D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.173913,
+        "normalized": 0.173913,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 196 = 0.1739 among 23 homologs; conservation entropy 1.960 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R157Q",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0001,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D100A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0002,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D191A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0018,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W95A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R134C",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.079,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G196D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "D100A",
+          "D191A",
+          "W95A",
+          "R134C",
+          "G196D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W95A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95A",
+          "G196D",
+          "R157Q",
+          "D191A",
+          "D100A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G196D",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95A",
+          "G196D",
+          "R157Q",
+          "D191A",
+          "D100A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R157Q",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95A",
+          "G196D",
+          "R157Q",
+          "D191A",
+          "D100A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D191A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95A",
+          "G196D",
+          "R157Q",
+          "D191A",
+          "D100A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D100A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00023",
+      "run_id": "gpt-5.6-luna__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W95A",
+          "G196D",
+          "R157Q",
+          "D191A",
+          "D100A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 6,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 4,
+    "c0_size": 6,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

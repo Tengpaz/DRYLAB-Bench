@@ -1,0 +1,313 @@
+{
+  "unit_id": "grok-4.5__brca1_tsg_lof__P0__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "brca1_tsg_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "C24S",
+        "confidence": 0.998,
+        "evidence_refs": [
+          "phenotype"
+        ],
+        "decision_summary": "Max LOF proxy via AlphaMissense at zinc-coordinating RING residue; low homolog S freq confirms intolerance without folding disruption"
+      },
+      {
+        "rank": 2,
+        "mutation": "C27S",
+        "confidence": 0.994,
+        "evidence_refs": [
+          "phenotype"
+        ],
+        "decision_summary": "Near-max LOF at critical RING metal-binding site; evolutionary conservation supports function loss while basic fold preserved"
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 final mutations identified after verification and evidence integration"
+    },
+    "remaining_budget": {
+      "tool_calls": 2,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "C47S": {
+      "candidate_id": "C47S",
+      "mutation": "C47S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Position 47 is a conserved cysteine in the RING domain critical for zinc binding and E3 ubiquitin ligase activity. Mutation to serine is likely to abolish DNA repair function while not severely destabilizing the fold."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.8,
+          "rationale": "WT residue at position 47 is I (Isoleucine) per direct sequence lookup; C47S is invalid and must be rejected before any tool evaluation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "WT residue at position 47 is I (Isoleucine) per direct sequence lookup; C47S is invalid and must be rejected before any tool evaluation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C24S": {
+      "candidate_id": "C24S",
+      "mutation": "C24S",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.9983,
+      "evidence_refs": [
+        "E00001",
+        "E00003"
+      ],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Position 24 (C) lies in RING domain essential for BRCA1 E3 ligase activity and tumor suppression. C24S disrupts zinc coordination likely causing LOF without major folding disruption."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.9983,
+          "rationale": "Phenotype evidence shows near-maximal LOF pathogenicity while MSA frequency of S is low, confirming intolerance at conserved RING position without major folding disruption."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C27S": {
+      "candidate_id": "C27S",
+      "mutation": "C27S",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.9941,
+      "evidence_refs": [
+        "E00002",
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Position 27 (C) in RING domain critical for BRCA1 function. Substitution to S expected to abolish DNA repair/tumor suppressor activity via loss of metal binding."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.9941,
+          "rationale": "Phenotype evidence shows near-maximal LOF pathogenicity while MSA frequency of S is low, confirming intolerance at conserved RING position without major folding disruption."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C39S": {
+      "candidate_id": "C39S",
+      "mutation": "C39S",
+      "first_seen_round": 3,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Position 39 (C) also lies in RING domain; substitution to S expected to disrupt zinc coordination and abolish function per task objective."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 2,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "C24S": 40.991,
+    "C27S": 38.086
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "C24S",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9983,
+        "normalized": 0.9983,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.998 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__brca1_tsg_lof__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "C24S",
+          "C27S"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C27S",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9941,
+        "normalized": 0.9941,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.994 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__brca1_tsg_lof__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "C24S",
+          "C27S"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C24S",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.056872,
+        "normalized": 0.056872,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 1.0,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 211/211 homologs"
+      },
+      "interpretation": "mutant frequency of S at position 24 = 0.0569 among 211 homologs; conservation entropy 2.574 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__brca1_tsg_lof__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "C24S",
+          "C27S"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C27S",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.009569,
+        "normalized": 0.009569,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.991,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.991,
+        "reason": "alignment coverage 209/211 homologs"
+      },
+      "interpretation": "mutant frequency of S at position 27 = 0.0096 among 209 homologs; conservation entropy 2.406 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__brca1_tsg_lof__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "C24S",
+          "C27S"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 10,
+    "c0_size": 1,
+    "final_novelty": 1.0,
+    "tool_calls_used": 2,
+    "rounds_used": 3,
+    "budget_exhausted": false
+  }
+}

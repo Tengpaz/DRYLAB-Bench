@@ -1,0 +1,1352 @@
+{
+  "unit_id": "glm-5.3__hiv_tat_replication__P0__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "hiv_tat_replication",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "Q63E",
+        "confidence": 0.6,
+        "evidence_refs": [
+          "E00005",
+          "E00014"
+        ],
+        "decision_summary": "ESM-1v strongly supports Q63E (z=0.615) and E63 appears in ~10% of homologs, indicating evolutionary tolerance. A negative charge near the basic region can modulate TAR-binding without disrupting the transactivation core."
+      },
+      {
+        "rank": 2,
+        "mutation": "K51R",
+        "confidence": 0.5,
+        "evidence_refs": [
+          "E00002",
+          "E00011"
+        ],
+        "decision_summary": "K→R preserves positive charge in the essential RKKRR basic domain with modest PLM support. Weak homolog tolerance (~2%) limits confidence but functional charge-preservation logic supports retention."
+      },
+      {
+        "rank": 3,
+        "mutation": "Y47H",
+        "confidence": 0.42,
+        "evidence_refs": [
+          "E00001",
+          "E00010"
+        ],
+        "decision_summary": "Y47H introduces a protonatable histidine adjacent to the basic domain with plausible ESM-1v support. Low homolog frequency of H (~2%) argues it is not an evolutionarily favored solution."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Candidate pool has converged after two evidence rounds; remaining tools are either not applicable or would return identical cached evidence."
+    },
+    "remaining_budget": {
+      "tool_calls": 1,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "Y47H": {
+      "candidate_id": "Y47H",
+      "mutation": "Y47H",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.42,
+      "evidence_refs": [
+        "E00001",
+        "E00010",
+        "E00021"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Position 47 sits at the start of the Arg-rich core/basic domain; a His substitution retains positive charge and may fine-tune TAR RNA binding affinity while preserving overall charge distribution."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "Core domain aromatic position; His may retain intercalation into TAR base triple while adding pH-tunable interaction. Needs PLM and MSA validation."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Biological prior for Tyr47His in the core transactivation domain is strong, but ESM-1v plausibility is near zero (0.008). Keep but lower rank; sequence prior conflicts with functional prior."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.42,
+          "rationale": "Y47H gains a protonatable histidine adjacent to the basic domain but homologs rarely carry H (2%), arguing it is not an evolutionary favored solution. Demoted below K51R."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K51R": {
+      "candidate_id": "K51R",
+      "mutation": "K51R",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00002",
+        "E00011",
+        "E00020"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Conservative swap within the RKKRRQRRR basic domain that maintains RNA-binding cationic character and is a naturally tolerated exchange in lentiviral Tat homologs."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Basic region residue contacting TAR phosphate backbone; Arg extends reach and often strengthens RNA binding. Conservative substitution with plausible gain."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Conservative basic-domain substitution with a plausible functional rationale (enhanced TAR/arginine chemistry), despite weak ESM-1v support (0.002); model prior is weak for arginine-rich motifs, so discount it."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "K→R preserves positive charge in the essential RKKRR basic domain and has good PLM support, but homolog frequency of R at 51 is only ~2%, indicating weak evolutionary tolerance. Retain as rank 2 given functional logic of charge preservation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S16R": {
+      "candidate_id": "S16R",
+      "mutation": "S16R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.42,
+      "evidence_refs": [
+        "E00003",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Within the acidic activation/PVDPRLEPW region; added positive charge near the activation domain boundary may strengthen LTR coactivator interactions without disrupting essential acidic residues."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.42,
+          "rationale": "Acidic-proximal region; phosphorylation at nearby Ser/Thr modulates transactivation, but direct gain here is speculative."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "Near-zero ESM-1v plausibility and phosphorylation-site disruption in the acidic N-terminal region likely harms transactivation."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Near-zero ESM-1v plausibility and phosphorylation-site disruption in the acidic N-terminal region likely harms transactivation.",
+        "evidence_refs": [
+          "E00003"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "R53K": {
+      "candidate_id": "R53K",
+      "mutation": "R53K",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [
+        "E00007",
+        "E00016",
+        "E00022"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Conservative lysine substitution in the core RKKRRQRRR motif preserves TAR-binding charge while slightly altering side-chain flexibility, potentially improving binding kinetics."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "R53 is deeply conserved in the arginine-rich motif; Lys may weaken the critical nucleotide-base contact. Lowered pending evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "Moderate ESM-1v plausibility (0.043) and a conservative R->K in the core arginine-rich region; retained but below the functional candidates."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "Despite ~6% homolog tolerance, ESM-1v plausibility is near-zero and R53 sits in the core RKKRR motif where weakening arginine fidelity risks reduced TAR binding. Safer to reject in favor of K51R."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Despite ~6% homolog tolerance, ESM-1v plausibility is near-zero and R53 sits in the core RKKRR motif where weakening arginine fidelity risks reduced TAR binding. Safer to reject in favor of K51R.",
+        "evidence_refs": [
+          "E00007"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "L43P": {
+      "candidate_id": "L43P",
+      "mutation": "L43P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.25,
+      "evidence_refs": [
+        "E00006",
+        "E00015"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Core-region proline could rigidify the kink between cysteine-rich and basic domains, a conformational feature important for TAR recognition."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.25,
+          "rationale": "Proline in the flexible linker may disrupt transactivation conformation; low prior."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "Proline insertion in the essential helical core region has near-zero plausibility and high risk of disrupting the transactivation domain."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Proline insertion in the essential helical core region has near-zero plausibility and high risk of disrupting the transactivation domain.",
+        "evidence_refs": [
+          "E00006"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "F38H": {
+      "candidate_id": "F38H",
+      "mutation": "F38H",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [
+        "E00004",
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.33,
+          "rationale": "End of the conserved Cys-rich FHCQVCF motif; histidine at this position occurs in some HIV-1 variants and may improve stability of the Zn-coordination-like core."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.3,
+          "rationale": "Alternative to Y47H at the core try stack; keep as comparitor pending ESM-1v scoring."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "Loss of the conserved aromatic Phe in the core domain is poorly supported (0.0001) and likely destabilizing to TAR interaction."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Loss of the conserved aromatic Phe in the core domain is poorly supported (0.0001) and likely destabilizing to TAR interaction.",
+        "evidence_refs": [
+          "E00004"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "Q63E": {
+      "candidate_id": "Q63E",
+      "mutation": "Q63E",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.6,
+      "evidence_refs": [
+        "E00005",
+        "E00014",
+        "E00019"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Second turret candidate in the HQNSQ stretch; glutamate substitutions here are associated with increased processive transcription in literature on Tat turret mutations."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.28,
+          "rationale": "Gln-rich region affects transactivation; charge change is speculative."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "ESM-1v gives by far the strongest plausibility (0.615) among all candidates, and it is a conservative substitution in the variable second exon/regulatory region. Raise confidence, but phenotype is not directly measured."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "E63 is present in ~10% of homologs and ESM-1v strongly supports the substitution (z=0.615); a negative charge near the basic region can modulate TAR-binding affinity without core disruption. Best combined evidence across tools."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R56K": {
+      "candidate_id": "R56K",
+      "mutation": "R56K",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.22,
+      "evidence_refs": [
+        "E00008",
+        "E00017"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.28,
+          "rationale": "Another conservative basic-domain exchange; preserves arginine-guanidinium chemistry only partially, so lower prior on net gain."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.22,
+          "rationale": "Similar concern as R53K; RKKRR motif is highly conserved for TAR binding."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.12,
+          "rationale": "Weakening a key arginine in the RKKRR core with K is riskier than K51R and has no PLM support."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Weakening a key arginine in the RKKRR core with K is riskier than K51R and has no PLM support.",
+        "evidence_refs": [
+          "E00008"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "T23A": {
+      "candidate_id": "T23A",
+      "mutation": "T23A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.18,
+      "evidence_refs": [
+        "E00009",
+        "E00018"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Removes a phosphorylation-acceptor Thr near the cysteine-rich domain that could reduce negative regulation by host kinases, a plausible but speculative gain."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.18,
+          "rationale": "Cysteine-cluster region T23 is far from known transactivation determinants; low relevance."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "Cysteine-region-adjacent Thr to Ala offers no transactivation benefit and near-zero model support."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Cysteine-region-adjacent Thr to Ala offers no transactivation benefit and near-zero model support.",
+        "evidence_refs": [
+          "E00009"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 3,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "Q63E": 39.27,
+    "K51R": 5.668,
+    "Y47H": 5.9
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "Y47H",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0081,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K51R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0019,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S16R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0001,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F38H",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0001,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q63E",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.6154,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L43P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0001,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R53K",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0427,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R56K",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0013,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T23A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0007,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y47H",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K51R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S16R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F38H",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q63E",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L43P",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R53K",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R56K",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T23A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y47H",
+          "K51R",
+          "S16R",
+          "F38H",
+          "Q63E",
+          "L43P",
+          "R53K",
+          "R56K",
+          "T23A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q63E",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.097561,
+        "normalized": 0.097561,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.69,
+        "local": 0.594,
+        "reason": "MSA depth 69, Neff 13.6 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.594,
+        "reason": "alignment coverage 41/69 homologs"
+      },
+      "interpretation": "mutant frequency of E at position 63 = 0.0976 among 41 homologs; conservation entropy 1.058 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "Q63E",
+          "K51R",
+          "Y47H",
+          "R53K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K51R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.020833,
+        "normalized": 0.020833,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.69,
+        "local": 0.696,
+        "reason": "MSA depth 69, Neff 13.6 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.696,
+        "reason": "alignment coverage 48/69 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 51 = 0.0208 among 48 homologs; conservation entropy 0.485 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "Q63E",
+          "K51R",
+          "Y47H",
+          "R53K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y47H",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.020408,
+        "normalized": 0.020408,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.69,
+        "local": 0.71,
+        "reason": "MSA depth 69, Neff 13.6 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.71,
+        "reason": "alignment coverage 49/69 homologs"
+      },
+      "interpretation": "mutant frequency of H at position 47 = 0.0204 among 49 homologs; conservation entropy 0.565 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "Q63E",
+          "K51R",
+          "Y47H",
+          "R53K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R53K",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.06383,
+        "normalized": 0.06383,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.69,
+        "local": 0.681,
+        "reason": "MSA depth 69, Neff 13.6 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.681,
+        "reason": "alignment coverage 47/69 homologs"
+      },
+      "interpretation": "mutant frequency of K at position 53 = 0.0638 among 47 homologs; conservation entropy 1.036 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "glm-5.3__hiv_tat_replication__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "Q63E",
+          "K51R",
+          "Y47H",
+          "R53K"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 9,
+    "n_rejected": 6,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 9,
+    "final_novelty": 0.0,
+    "tool_calls_used": 3,
+    "rounds_used": 3,
+    "budget_exhausted": false
+  }
+}

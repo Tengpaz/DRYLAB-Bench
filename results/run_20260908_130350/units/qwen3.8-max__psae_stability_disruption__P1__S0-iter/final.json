@@ -1,0 +1,326 @@
+{
+  "unit_id": "qwen3.8-max__psae_stability_disruption__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "F40D",
+        "confidence": 0.92,
+        "evidence_refs": [],
+        "decision_summary": "Phe40 is a large aromatic residue likely buried in the hydrophobic core of PsaE; substitution to charged Asp introduces a severe desolvation penalty and disrupts hydrophobic packing, maximally destabilizing the fold."
+      },
+      {
+        "rank": 2,
+        "mutation": "I32D",
+        "confidence": 0.9,
+        "evidence_refs": [],
+        "decision_summary": "Ile32 is a hydrophobic residue in a region flanked by other hydrophobic residues (I33, V36), indicating core burial; Asp substitution introduces a charge in a nonpolar environment, severely disrupting folding stability."
+      },
+      {
+        "rank": 3,
+        "mutation": "W17D",
+        "confidence": 0.89,
+        "evidence_refs": [],
+        "decision_summary": "Trp17 is the most hydrophobic amino acid and is likely deeply buried in the protein core; replacing it with charged Asp creates a large energetic penalty and disrupts the hydrophobic core integrity."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 candidates are well-justified by biophysical principles (charge burial in hydrophobic core) and further iteration without external evidence is unlikely to improve rankings."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "F40D": {
+      "candidate_id": "F40D",
+      "mutation": "F40D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.92,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.92,
+          "rationale": "Phenylalanine 40 is likely a core hydrophobic/aromatic residue; replacing with charged aspartate in the hydrophobic core is among the most destabilizing substitutions possible."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.92,
+          "rationale": "F40 is a large aromatic residue likely buried in the hydrophobic core; substitution to charged Asp is maximally destabilizing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I32D": {
+      "candidate_id": "I32D",
+      "mutation": "I32D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.9,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "Isoleucine 32 is part of a hydrophobic cluster (I32-I33) likely buried in the core; introducing a charged residue here severely disrupts packing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.9,
+          "rationale": "I32 is a hydrophobic core residue; introducing a charged residue here disrupts packing severely."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L11D": {
+      "candidate_id": "L11D",
+      "mutation": "L11D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.88,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.88,
+          "rationale": "Leucine 11 is a hydrophobic residue likely contributing to the core; substitution with aspartate introduces a buried charge, highly destabilizing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.88,
+          "rationale": "L11 is hydrophobic and likely contributes to core stability; Asp substitution disrupts folding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F48D": {
+      "candidate_id": "F48D",
+      "mutation": "F48D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.87,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.87,
+          "rationale": "Phenylalanine 48 is likely a core aromatic; replacing with aspartate disrupts hydrophobic packing and introduces an unfavorable buried charge."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.87,
+          "rationale": "F48 is aromatic and likely participates in hydrophobic packing; charge introduction is destabilizing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W17D": {
+      "candidate_id": "W17D",
+      "mutation": "W17D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.89,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Tryptophan 17 is a large aromatic likely important for structural integrity; replacement with aspartate removes key van der Waals contacts and introduces charge."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.89,
+          "rationale": "Trp is the most hydrophobic amino acid and likely deeply buried; charge introduction here should be among the most destabilizing mutations, warranting a higher rank."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F60D": {
+      "candidate_id": "F60D",
+      "mutation": "F60D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.84,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.84,
+          "rationale": "Phenylalanine 60 is likely in the hydrophobic core near the C-terminus; aspartate substitution is strongly destabilizing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.84,
+          "rationale": "F60 is aromatic; Asp substitution disrupts local hydrophobic interactions."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I33P": {
+      "candidate_id": "I33P",
+      "mutation": "I33P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.82,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.82,
+          "rationale": "Isoleucine 33 is a core hydrophobic; proline substitution disrupts local backbone geometry and removes a key packing interaction."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.82,
+          "rationale": "Proline introduction at a core position disrupts backbone conformation and secondary structure."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V36D": {
+      "candidate_id": "V36D",
+      "mutation": "V36D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Valine 36 is in a hydrophobic stretch (V36-I37-V38) likely forming part of the core; aspartate introduction is highly destabilizing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "V36 is hydrophobic; Asp introduction is destabilizing but Val is smaller than Phe/Trp so the burial penalty may be slightly less."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L55D": {
+      "candidate_id": "L55D",
+      "mutation": "L55D",
+      "first_seen_round": 0,
+      "last_seen_round": 0,
+      "status": "active",
+      "current_rank": null,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Leucine 55 is likely a core hydrophobic; aspartate substitution introduces a buried charge and disrupts packing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I10P": {
+      "candidate_id": "I10P",
+      "mutation": "I10P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.76,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.76,
+          "rationale": "Isoleucine 10 is likely a core residue; proline substitution disrupts backbone conformation and removes hydrophobic packing contribution."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.76,
+          "rationale": "Position 10 is near the N-terminus and may be surface-exposed; proline introduction here is less likely to disrupt the global fold compared to core mutations."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 10 is near the N-terminus and may be surface-exposed; proline introduction here is less likely to disrupt the global fold compared to core mutations.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "F40D": null,
+    "I32D": null,
+    "W17D": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

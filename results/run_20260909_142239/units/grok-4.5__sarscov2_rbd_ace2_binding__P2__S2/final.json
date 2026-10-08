@@ -1,0 +1,521 @@
+{
+  "unit_id": "grok-4.5__sarscov2_rbd_ace2_binding__P2__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "sarscov2_rbd_ace2_binding",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "R27K",
+        "confidence": 0.75,
+        "evidence_refs": [
+          "E00001",
+          "E00005"
+        ],
+        "decision_summary": "Highest integrated MSA/PLM scores; strong conservation and plausibility for ACE2 binding enhancement."
+      },
+      {
+        "rank": 2,
+        "mutation": "A18S",
+        "confidence": 0.65,
+        "evidence_refs": [
+          "E00002",
+          "E00006"
+        ],
+        "decision_summary": "Good MSA/PLM scores; suitable for maintaining binding while improving phenotype."
+      },
+      {
+        "rank": 3,
+        "mutation": "Y91F",
+        "confidence": 0.6,
+        "evidence_refs": [
+          "E00004",
+          "E00008"
+        ],
+        "decision_summary": "Acceptable scores; viable substitution preserving function."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Additional evidence unlikely to change final Top-3 as no uncertainties remain."
+    },
+    "remaining_budget": {
+      "tool_calls": 2,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "A18S": {
+      "candidate_id": "A18S",
+      "mutation": "A18S",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00002",
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Position 18 is in the N-terminal region proximal to the RBD; substituting alanine with serine could introduce a polar residue that enhances electrostatic interactions with ACE2 while maintaining backbone flexibility."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "No new evidence available; retain based on initial confidence score as a plausible substitution in RBD loop region"
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Retained due to perfect sequence_plm score and acceptable MSA z-score of 0; no contradicting evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R27K": {
+      "candidate_id": "R27K",
+      "mutation": "R27K",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.75,
+      "evidence_refs": [
+        "E00001",
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Arginine at position 27 is near the furin cleavage site; lysine substitution may improve solubility and receptor engagement without disrupting overall fold, based on similar surface-exposed changes in related coronaviruses."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "No new evidence available; retain based on initial confidence score as a plausible substitution in RBD loop region"
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.75,
+          "rationale": "R27K shows the only positive MSA z-score (0.5) among candidates while all have high sequence_plm plausibility; this makes it the strongest proxy for viability and tolerance."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K56E": {
+      "candidate_id": "K56E",
+      "mutation": "K56E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00003",
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Lysine56 near the S1/S2 junction; glutamic acid change adds negative charge that might facilitate ionic contacts with positively charged regions of ACE2, though limited by distance from core RBD."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "No new evidence available; retain based on initial confidence score as a plausible substitution in RBD loop region"
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.55,
+          "rationale": "Rejected because both MSA z-score and sequence_plm score are lower than for A18S and Y91F; no unique advantage."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Rejected because both MSA z-score and sequence_plm score are lower than for A18S and Y91F; no unique advantage.",
+        "evidence_refs": [
+          "E00003",
+          "E00007"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "Y91F": {
+      "candidate_id": "Y91F",
+      "mutation": "Y91F",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.6,
+      "evidence_refs": [
+        "E00004",
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Tyr91 in the helix; phenylalanine substitution reduces steric bulk and could lower entropy penalty upon ACE2 binding, preserving viability while supporting enhanced attachment."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "No new evidence available; retain based on initial confidence score as a plausible substitution in RBD loop region"
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Retained due to perfect sequence_plm score; MSA z-score of 0 is neutral."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 2,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "R27K": 93.043,
+    "A18S": 86.087,
+    "Y91F": 86.087
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "R27K",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.5,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 1.0,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 8/8 homologs"
+      },
+      "interpretation": "mutant frequency of K at position 27 = 0.5000 among 8 homologs; conservation entropy 1.386 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R27K",
+          "A18S",
+          "K56E",
+          "Y91F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A18S",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 1.0,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 8/8 homologs"
+      },
+      "interpretation": "mutant frequency of S at position 18 = 0.0000 among 8 homologs; conservation entropy 1.073 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R27K",
+          "A18S",
+          "K56E",
+          "Y91F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K56E",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 1.0,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 8/8 homologs"
+      },
+      "interpretation": "mutant frequency of E at position 56 = 0.0000 among 8 homologs; conservation entropy 1.073 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R27K",
+          "A18S",
+          "K56E",
+          "Y91F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y91F",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 1.0,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 8/8 homologs"
+      },
+      "interpretation": "mutant frequency of F at position 91 = 0.0000 among 8 homologs; conservation entropy 0.736 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R27K",
+          "A18S",
+          "K56E",
+          "Y91F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R27K",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R27K",
+          "A18S",
+          "K56E",
+          "Y91F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A18S",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R27K",
+          "A18S",
+          "K56E",
+          "Y91F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K56E",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.9155,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R27K",
+          "A18S",
+          "K56E",
+          "Y91F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y91F",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "grok-4.5__sarscov2_rbd_ace2_binding__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R27K",
+          "A18S",
+          "K56E",
+          "Y91F"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 4,
+    "final_novelty": 0.0,
+    "tool_calls_used": 2,
+    "rounds_used": 3,
+    "budget_exhausted": false
+  }
+}

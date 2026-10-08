@@ -1,0 +1,507 @@
+{
+  "unit_id": "grok-4.5__mthfr_lof__P0__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "A222P",
+        "confidence": 0.95,
+        "evidence_refs": [
+          "E00002"
+        ],
+        "decision_summary": "Top-ranked with highest pathogenicity z-score; functional annotation adds no conflict for LOF goal."
+      },
+      {
+        "rank": 2,
+        "mutation": "L400P",
+        "confidence": 0.69,
+        "evidence_refs": [
+          "E00004"
+        ],
+        "decision_summary": "Solid phenotype support for LOF; functional annotation low-applicability and non-contradictory."
+      },
+      {
+        "rank": 3,
+        "mutation": "D100A",
+        "confidence": 0.4,
+        "evidence_refs": [
+          "E00001"
+        ],
+        "decision_summary": "Moderate phenotype support retained after drop of lower-scoring E300K; functional annotation non-conflicting."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 stabilized by phenotype evidence; no expected change from unused tools within remaining budget."
+    },
+    "remaining_budget": {
+      "tool_calls": 2,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "D100A": {
+      "candidate_id": "D100A",
+      "mutation": "D100A",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.4,
+      "evidence_refs": [
+        "E00001",
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Asp100 is located in the N-terminal catalytic region of MTHFR. Replacing it with Ala eliminates a negatively charged residue that likely participates in substrate coordination or electrostatic interactions essential for enzyme activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": ""
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Moderate score (0.396) still better than rejected option; retains as third option for diversity."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Lowest of top-3 but still positive phenotype signal (0.396); retained as marginal option pending further rounds."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "New functional_annotation evidence has low applicability (0.2) and static nature; does not contradict moderate phenotype support for LOF."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A222P": {
+      "candidate_id": "A222P",
+      "mutation": "A222P",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.95,
+      "evidence_refs": [
+        "E00002",
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Ala222 sits within the folate-binding domain. Introducing a proline creates a structural kink that can destabilize the local fold and impair cofactor binding required for MTHFR function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": ""
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.95,
+          "rationale": "Highest alphamissense LOF-proxy score (0.953) among pool; directly supports goal of abolishing activity while maintaining viability signals from prior ranks."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.95,
+          "rationale": "Highest phenotype z-score (0.953) directly supports LOF goal; no new evidence to alter ranking."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.95,
+          "rationale": "New functional_annotation evidence has low applicability (0.2) and static nature; does not contradict high phenotype support for LOF."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E300K": {
+      "candidate_id": "E300K",
+      "mutation": "E300K",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.6,
+      "evidence_refs": [
+        "E00003"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Glu300 is positioned in a loop near the active site. Switching to lysine reverses the charge, which can disrupt ionic interactions with the substrate and abolish enzymatic activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": ""
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.17,
+          "rationale": "Lowest score (0.173) provides no support for LOF phenotype; rejected to focus pool on higher-potential candidates."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Lowest score (0.173) provides no support for LOF phenotype; rejected to focus pool on higher-potential candidates.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "L400P": {
+      "candidate_id": "L400P",
+      "mutation": "L400P",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.69,
+      "evidence_refs": [
+        "E00004",
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Leu400 lies in the central domain. Proline introduces a helix breaker, which can misalign key catalytic residues and lead to a non-functional enzyme conformation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": ""
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.69,
+          "rationale": "Strong second-highest score (0.691) indicating good LOF potential; retains high rank from initial pool."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.69,
+          "rationale": "Strong second-place phenotype score (0.691) maintains viability for top-3; no contradictory evidence."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.69,
+          "rationale": "New functional_annotation evidence has low applicability (0.2) and static nature; does not contradict high phenotype support for LOF."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 2,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "A222P": 88.803,
+    "L400P": 66.389,
+    "D100A": 41.069
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "D100A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.3958,
+        "normalized": 0.3958,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.396 (class ambiguous); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__mthfr_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D100A",
+          "A222P",
+          "E300K",
+          "L400P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222P",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9527,
+        "normalized": 0.9527,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.953 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__mthfr_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D100A",
+          "A222P",
+          "E300K",
+          "L400P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E300K",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1725,
+        "normalized": 0.1725,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.172 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__mthfr_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D100A",
+          "A222P",
+          "E300K",
+          "L400P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L400P",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6912,
+        "normalized": 0.6912,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.691 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__mthfr_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D100A",
+          "A222P",
+          "E300K",
+          "L400P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222P",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "grok-4.5__mthfr_lof__P0__S2",
+      "round": 4,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "L400P",
+          "D100A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L400P",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "grok-4.5__mthfr_lof__P0__S2",
+      "round": 4,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "L400P",
+          "D100A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D100A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "grok-4.5__mthfr_lof__P0__S2",
+      "round": 4,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "L400P",
+          "D100A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 4,
+    "final_novelty": 0.0,
+    "tool_calls_used": 2,
+    "rounds_used": 4,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,423 @@
+{
+  "unit_id": "glm-5.3__oct1_transport_ablation__P2__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "Y351A",
+        "confidence": 0.62,
+        "evidence_refs": [
+          "E00002",
+          "E00004",
+          "E00006"
+        ],
+        "decision_summary": "Highest phenotype (LOF proxy) score observed (0.622) at a conserved substrate-pathway position, with moderate evolutionary tolerance and ESM-1v plausibility. Best candidate for abolishing transport while retaining abundance."
+      },
+      {
+        "rank": 2,
+        "mutation": "F160Y",
+        "confidence": 0.55,
+        "evidence_refs": [
+          "E00001",
+          "E00003",
+          "E00005"
+        ],
+        "decision_summary": "Conservative aromatic substitution at a putative substrate-interacting position; highly plausible per ESM-1v and moderately deleterious per alphamissense (0.465), suggesting transport disruption without misfolding."
+      },
+      {
+        "rank": 3,
+        "mutation": "R60C",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "Known naturally occurring OCT1 loss-of-function variant (R61C in legacy numbering) that reduces transport while the carrier remains expressed. Added without direct tool evidence due to budget exhaustion; lowest confidence accordingly."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "All four tool calls and four rounds have been used; the candidate pool is stable and further evidence cannot be gathered."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "F160Y": {
+      "candidate_id": "F160Y",
+      "mutation": "F160Y",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00001",
+        "E00003",
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Binding-site aromatic position; hydroxyl addition perturbs cation-pi binding geometry while preserving aromatic packing."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "Conservative aromatic substitution yields ambiguous pathogenicity (0.465) and near-zero plausibility; unlikely to abolish transport while it may be structurally tolerated."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Moderate phenotype score (0.465) and good evolutionary/PLM plausibility; a conservative substitution that may partially impair transport while preserving folding."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Conserved aromatic in the substrate pore with high MSA tolerance and high PLM plausibility, so folding is likely preserved. However the phenotype proxy (0.465) is only moderate, so it stays mid-ranked pending better alternatives."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Conservative aromatic substitution at a putative substrate-interacting position; ESM-1v finds it highly plausible (0.90 applicability) and alphamissense gives a moderately deleterious score (0.465) without implying misfolding. Retained but ranks below Y351A due to weaker LOF signal."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F160A": {
+      "candidate_id": "F160A",
+      "mutation": "F160A",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "A more disruptive alternative at the suspected substrate-interacting aromatic position 160; may achieve LOF with less structural strain than F160Y, needs phenotype confirmation."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "alphamissense scores F160A as benign (0.127), suggesting this change is unlikely to abolish transport; the hypothesized disruptive effect is not supported by the phenotype proxy."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "alphamissense scores F160A as benign (0.127), suggesting this change is unlikely to abolish transport; the hypothesized disruptive effect is not supported by the phenotype proxy.",
+        "evidence_refs": [
+          "E00007"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "R60C": {
+      "candidate_id": "R60C",
+      "mutation": "R60C",
+      "first_seen_round": 4,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 4,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Known naturally occurring OCT1 loss-of-function variant residue (R61C in legacy numbering) that reduces transport while leaving the carrier expressed, matching the abundance-plus-LOF objective. Added as third candidate since evidence budget is exhausted and phenotype-proxy for F160A failed."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "Y351A": 27.669,
+    "F160Y": 15.102,
+    "R60C": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "F160Y",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.019139,
+        "normalized": 0.019139,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.864,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.864,
+        "reason": "alignment coverage 209/242 homologs"
+      },
+      "interpretation": "mutant frequency of Y at position 160 = 0.0191 among 209 homologs; conservation entropy 2.784 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__oct1_transport_ablation__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160Y",
+          "Y351A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y351A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.138686,
+        "normalized": 0.138686,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.566,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.566,
+        "reason": "alignment coverage 137/242 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 351 = 0.1387 among 137 homologs; conservation entropy 2.397 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__oct1_transport_ablation__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160Y",
+          "Y351A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F160Y",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0004,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__oct1_transport_ablation__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160Y",
+          "Y351A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y351A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0158,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__oct1_transport_ablation__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160Y",
+          "Y351A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F160Y",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.4652,
+        "normalized": 0.4652,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.465 (class ambiguous); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__oct1_transport_ablation__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160Y",
+          "Y351A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y351A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6221,
+        "normalized": 0.6221,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.622 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__oct1_transport_ablation__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160Y",
+          "Y351A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F160A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1272,
+        "normalized": 0.1272,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.127 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__oct1_transport_ablation__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "F160A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 3,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 15,
+    "c0_size": 1,
+    "final_novelty": 0.6666666666666666,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

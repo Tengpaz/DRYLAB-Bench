@@ -1,0 +1,380 @@
+{
+  "unit_id": "gpt-5.6-terra__brca1_tsg_lof__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gpt-5.6-terra",
+  "scenario_id": "brca1_tsg_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "R1699W",
+        "confidence": 0.79,
+        "evidence_refs": [],
+        "decision_summary": "R1699W is a strongly nonconservative substitution in the C-terminal BRCT region, expected to severely impair a critical BRCA1 repair-function surface while retaining the remainder of the full-length protein."
+      },
+      {
+        "rank": 2,
+        "mutation": "S1655F",
+        "confidence": 0.75,
+        "evidence_refs": [],
+        "decision_summary": "S1655F locally perturbs the BRCT phospho-ligand recognition region and is expected to compromise repair-signaling interactions without a direct global-folding lesion."
+      },
+      {
+        "rank": 3,
+        "mutation": "K1702A",
+        "confidence": 0.74,
+        "evidence_refs": [],
+        "decision_summary": "K1702A is a comparatively conservative BRCT functional-interface mutation expected to weaken essential repair-associated binding while limiting risk of broad structural destabilization."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The leading candidates consistently target the same localized C-terminal functional module, and further LLM-only iteration cannot resolve their remaining stability-versus-knockout uncertainty."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "C61G": {
+      "candidate_id": "C61G",
+      "mutation": "C61G",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.82,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.82,
+          "rationale": "C61 is a zinc-coordinating residue in the N-terminal RING domain; replacing it with glycine should strongly disable BRCA1 RING-dependent function. The alteration is localized and is compatible with retention of the remainder of the full-length protein."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.82,
+          "rationale": "Targets a conserved N-terminal RING zinc-coordinating cysteine, making loss of BRCA1 E3-associated repair function highly plausible despite likely preservation of full-length protein production."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "Removing a RING-domain cysteine is likely to disrupt zinc coordination and domain integrity, conflicting with the requirement to preserve overall folding."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Removing a RING-domain cysteine is likely to disrupt zinc coordination and domain integrity, conflicting with the requirement to preserve overall folding.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "I26A": {
+      "candidate_id": "I26A",
+      "mutation": "I26A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.56,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "I26 lies in the BRCA1 RING-domain surface involved in E2 enzyme engagement. Alanine substitution is expected to reduce ubiquitin-ligase-associated BRCA1 activity while being less globally destabilizing than disrupting zinc ligands."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.61,
+          "rationale": "A conservative core-region substitution could impair RING-domain activity with lower risk than zinc-ligand removal, but its functional effect is less certain than C-terminal interface candidates."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.56,
+          "rationale": "Lowered because N-terminal RING-domain functional perturbation may not abolish all tumor-suppressor activities and could have a less direct relationship to the requested phenotype than BRCT substitutions."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S1655F": {
+      "candidate_id": "S1655F",
+      "mutation": "S1655F",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.79,
+          "rationale": "S1655 is a key phosphopeptide-recognition residue in the C-terminal BRCT region. A phenylalanine replacement should impair recruitment of phosphorylated repair partners while retaining a compact folded BRCT-domain scaffold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.73,
+          "rationale": "A bulky hydrophobic replacement near the BRCT region could impair function, but the absence of direct evidence leaves its balance of functional loss versus local destabilization unclear."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.75,
+          "rationale": "This substitution can alter a functional polar surface without directly removing a zinc ligand or forcing a backbone-breaking residue, but its exact repair consequence is uncertain."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "Retained as a localized BRCT-domain perturbation with a plausible high likelihood of disabling phospho-ligand-dependent repair functions."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K1702A": {
+      "candidate_id": "K1702A",
+      "mutation": "K1702A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.84,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.77,
+          "rationale": "K1702 contributes to the BRCT phosphopeptide-binding interface. Removing its charged side chain is expected to compromise repair-complex assembly with comparatively limited impact on overall BRCT folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.8,
+          "rationale": "A conservative loss of a C-terminal BRCT-region basic side chain may preferentially impair repair-partner/phosphopeptide interactions while avoiding the gross structural disruption expected from zinc-ligand substitutions."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.84,
+          "rationale": "A charge-removing substitution at this C-terminal functional-domain residue is expected to disrupt repair-relevant molecular recognition while being less intrinsically fold-disruptive than cysteine-coordination or proline substitutions."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.84,
+          "rationale": "Retained as a conservative substitution at a C-terminal BRCT functional-interface residue, expected to impair repair signaling without directly destabilizing the full-length protein."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "M1775R": {
+      "candidate_id": "M1775R",
+      "mutation": "M1775R",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "M1775 is in the second BRCT repeat and mutation to arginine is expected to substantially disrupt BRCT-mediated repair interactions. This candidate is potent but carries a greater local domain-stability risk than interface-directed substitutions."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.77,
+          "rationale": "This C-terminal BRCT substitution is expected to strongly compromise a key BRCA1 functional interaction surface, although its impact on local domain stability remains uncertain."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "The large hydrophobic-to-charged change is likely functionally deleterious, but it has elevated risk of destabilizing the C-terminal domain and is therefore deprioritized."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "Retained as a strong C-terminal functional knockout candidate, although its more disruptive side-chain change creates some local-folding risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L1407P": {
+      "candidate_id": "L1407P",
+      "mutation": "L1407P",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "L1407 is within the central coiled-coil region that supports PALB2-associated homologous-recombination activity. Proline should disrupt this interaction-prone helical segment and reduce repair function without directly damaging the terminal folded domains."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.52,
+          "rationale": "Proline is likely to perturb local secondary structure, making it less aligned with preserving overall folding despite possible functional impairment."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.36,
+          "rationale": "Rejected because proline in a likely helical/coiled-coil region risks structural disruption rather than a selective loss of repair function."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Rejected because proline in a likely helical/coiled-coil region risks structural disruption rather than a selective loss of repair function.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C64G": {
+      "candidate_id": "C64G",
+      "mutation": "C64G",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "C64 is another RING-domain zinc-coordinating cysteine. Its replacement should strongly impair RING-domain function, though it may locally destabilize the RING fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "A second RING cysteine substitution provides a mechanistically distinct but similarly strong route to disable RING-dependent BRCA1 activity."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.28,
+          "rationale": "As with C61G, loss of a cysteine in the N-terminal zinc-binding region carries excessive risk of global local-domain unfolding rather than a selective functional knockout."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "As with C61G, loss of a cysteine in the N-terminal zinc-binding region carries excessive risk of global local-domain unfolding rather than a selective functional knockout.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "R1699W": {
+      "candidate_id": "R1699W",
+      "mutation": "R1699W",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.79,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.66,
+          "rationale": "R1699 lies in the BRCT region and a bulky tryptophan substitution is expected to compromise BRCT-dependent repair signaling. It is included as a high-impact option with moderate risk of local structural perturbation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.71,
+          "rationale": "The mutation lies in the C-terminal functional region and is a plausible repair-defective variant, but replacement with bulky tryptophan may impose greater local structural risk than K1702A."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.79,
+          "rationale": "Replacing a conserved charged residue with tryptophan is a strong candidate for disabling a C-terminal recognition interface, although its bulky nature creates some stability risk."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.79,
+          "rationale": "Retained because this nonconservative BRCT-domain substitution is likely to strongly compromise a critical functional surface while leaving the rest of BRCA1 intact."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "M1411T": {
+      "candidate_id": "M1411T",
+      "mutation": "M1411T",
+      "first_seen_round": 3,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.64,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.64,
+          "rationale": "Added as a comparatively conservative coiled-coil-region substitution intended to disrupt a BRCA1 repair-partner interaction while avoiding the broad destabilization expected from a helix-breaking mutation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "R1699W": null,
+    "S1655F": null,
+    "K1702A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 9,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 3,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,2188 @@
+{
+  "unit_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+  "condition": "S2",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "brca1_tsg_lof",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "C64R",
+        "confidence": 0.95,
+        "evidence_refs": [
+          "E00002",
+          "E00012",
+          "E00022",
+          "E00032"
+        ],
+        "decision_summary": "AlphaMissense z=0.997 (top) and conserved RING zinc-coordinating cysteine; strong established LOF driver."
+      },
+      {
+        "rank": 2,
+        "mutation": "C61G",
+        "confidence": 0.94,
+        "evidence_refs": [
+          "E00001",
+          "E00011",
+          "E00021",
+          "E00031"
+        ],
+        "decision_summary": "AlphaMissense z=0.990, known pathogenic BRCA1 RING mutation; LOF confidence high despite low sequence plausibility."
+      },
+      {
+        "rank": 3,
+        "mutation": "C39Y",
+        "confidence": 0.93,
+        "evidence_refs": [
+          "E00006",
+          "E00016",
+          "E00026",
+          "E00036"
+        ],
+        "decision_summary": "AlphaMissense z=0.993 in RING zinc-binding site; slightly better sequence plausibility than C47G, so retained over it."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "All 4 tool calls used (phenotype, evolution, sequence_plm, functional for the 10 candidate pool); no further evidence budget remains."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "C61G": {
+      "candidate_id": "C61G",
+      "mutation": "C61G",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.94,
+      "evidence_refs": [
+        "E00001",
+        "E00011",
+        "E00021",
+        "E00031"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.95,
+          "rationale": "C61 is a conserved zinc-coordinating cysteine in the RING domain; mutation to glycine disrupts the zinc-finger fold and abrogates E3 ubiquitin ligase activity, a canonical driver of BRCA1 LOF."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.95,
+          "rationale": "No new evidence; retain based on prior functional importance."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.94,
+          "rationale": "AlphaMissense 0.990 pathogenic; Cys in RING zinc-binding, mutation disrupts E3 ligase. Low PLM accepted as likely loss-of-function contribution."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.94,
+          "rationale": "AlphaMissense z=0.990 and known pathogenic BRCA1 RING mutation; strong LOF signal despite low sequence PLM."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C64R": {
+      "candidate_id": "C64R",
+      "mutation": "C64R",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.95,
+      "evidence_refs": [
+        "E00002",
+        "E00012",
+        "E00022",
+        "E00032"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.93,
+          "rationale": "C64 is another conserved zinc-binding cysteine; replacement with arginine breaks metal coordination and destabilizes the RING domain, causing loss of tumor suppressor function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.93,
+          "rationale": "No new evidence; retain based on prior functional importance."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.95,
+          "rationale": "Top AlphaMissense score 0.997; known pathogenic RING mutation. Very low PLM is overridden by strong phenotype signal."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.95,
+          "rationale": "AlphaMissense z=0.997 with full applicability; highly pathogenic LOF and conserved RING cysteine, so top final candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H41R": {
+      "candidate_id": "H41R",
+      "mutation": "H41R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.91,
+      "evidence_refs": [
+        "E00004",
+        "E00014",
+        "E00024",
+        "E00034"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "H41 is a zinc-ligating histidine in the RING finger; arginine substitution disrupts the zinc-binding site, impairing protein stability and function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.9,
+          "rationale": "No new evidence; retain based on prior functional importance."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.91,
+          "rationale": "AlphaMissense 0.982 pathogenic; PLM 0.267 is best among top RING mutants, suggesting better folding retention."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C39Y": {
+      "candidate_id": "C39Y",
+      "mutation": "C39Y",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.93,
+      "evidence_refs": [
+        "E00006",
+        "E00016",
+        "E00026",
+        "E00036"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.88,
+          "rationale": "C39 is a conserved RING domain cysteine; conversion to tyrosine abolishes zinc coordination and is clinically associated with breast cancer risk."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.88,
+          "rationale": "No new evidence; retain based on prior functional importance."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.93,
+          "rationale": "AlphaMissense 0.993 pathogenic, RING Cys; MSA shows very low mutant frequency (0.01) supporting functional importance."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.93,
+          "rationale": "AlphaMissense z=0.993; large aromatic substitution in RING zinc-coordination site, likely disruptive with acceptable folding plausibility."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R1699Q": {
+      "candidate_id": "R1699Q",
+      "mutation": "R1699Q",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00003",
+        "E00013",
+        "E00023",
+        "E00033"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.91,
+          "rationale": "R1699 is a critical BRCT-domain residue involved in phosphopeptide recognition; glutamine disrupts the salt bridge network and blocks DNA repair signaling."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.91,
+          "rationale": "No new evidence; retain based on prior functional importance."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "AlphaMissense 0.735 pathogenic but lower than RING mutants; BRCT site, moderate plausibility 0.333, but low MSA coverage limits evolutionary evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A1708E": {
+      "candidate_id": "A1708E",
+      "mutation": "A1708E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.87,
+      "evidence_refs": [
+        "E00005",
+        "E00015",
+        "E00025",
+        "E00035"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.89,
+          "rationale": "A1708 lies in the BRCT repeat interface; mutation to glutamic acid destabilizes the domain fold and impairs protein-protein interactions required for tumor suppression."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.89,
+          "rationale": "No new evidence; retain based on prior functional importance."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.87,
+          "rationale": "AlphaMissense 0.971 pathogenic in BRCT region; moderate PLM 0.1, plausible folding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "P1749R": {
+      "candidate_id": "P1749R",
+      "mutation": "P1749R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.8,
+      "evidence_refs": [
+        "E00007",
+        "E00017",
+        "E00027",
+        "E00037"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "P1749 is a conserved proline in the BRCT domain; substitution to arginine likely disrupts the beta-turn and compromises the phosphopeptide-binding pocket."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "No new evidence; retain based on prior functional importance."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.8,
+          "rationale": "AlphaMissense 0.941 pathogenic; moderate PLM 0.087, decent."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C47G": {
+      "candidate_id": "C47G",
+      "mutation": "C47G",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.93,
+      "evidence_refs": [
+        "E00008",
+        "E00018",
+        "E00028",
+        "E00038"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.82,
+          "rationale": "C47 is a zinc-coordinating cysteine in the RING domain; replacement with glycine removes a metal ligand, potentially abolishing ubiquitin ligase activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.82,
+          "rationale": "No new evidence; retain based on prior functional importance."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.93,
+          "rationale": "AlphaMissense 0.9925 pathogenic, RING Cys; low PLM accepted for damaging mutation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S1715C": {
+      "candidate_id": "S1715C",
+      "mutation": "S1715C",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.78,
+      "evidence_refs": [
+        "E00009",
+        "E00019",
+        "E00029",
+        "E00039"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "S1715 is a conserved BRCT residue adjacent to the phosphopeptide-binding site; cysteine substitution may alter hydrogen-bonding and reduce phosphopeptide affinity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "No new evidence; retain based on prior functional importance."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.4,
+          "rationale": "AlphaMissense 0.478 ambiguous, insufficient evidence for loss-of-function; remove to focus on stronger candidates."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "AlphaMissense 0.478 ambiguous, insufficient evidence for loss-of-function; remove to focus on stronger candidates.",
+        "evidence_refs": [
+          "E00009"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "M18A": {
+      "candidate_id": "M18A",
+      "mutation": "M18A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.8,
+      "evidence_refs": [
+        "E00010",
+        "E00020",
+        "E00030",
+        "E00040"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "M18 is a hydrophobic residue in the N-terminal region; alanine substitution may mildly perturb protein stability but is a plausible LOF candidate if it affects RING-domain packing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "No new evidence; retain based on prior functional importance."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.8,
+          "rationale": "AlphaMissense 0.928 pathogenic; PLM 0.2, better folding plausibility."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "C64R": 47.903,
+    "C61G": 38.913,
+    "C39Y": 35.51
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "C61G",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9904,
+        "normalized": 0.9904,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.990 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C64R",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9965,
+        "normalized": 0.9965,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.997 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R1699Q",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.7345,
+        "normalized": 0.7345,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.735 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H41R",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9824,
+        "normalized": 0.9824,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.982 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A1708E",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9712,
+        "normalized": 0.9712,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.971 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C39Y",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9926,
+        "normalized": 0.9926,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.993 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "P1749R",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9406,
+        "normalized": 0.9406,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.941 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C47G",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9925,
+        "normalized": 0.9925,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.993 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S1715C",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.4778,
+        "normalized": 0.4778,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.478 (class ambiguous); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M18A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.928,
+        "normalized": 0.928,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.928 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C61G",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.035503,
+        "normalized": 0.035503,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.801,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.801,
+        "reason": "alignment coverage 169/211 homologs"
+      },
+      "interpretation": "mutant frequency of G at position 61 = 0.0355 among 169 homologs; conservation entropy 2.678 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C64R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.21519,
+        "normalized": 0.21519,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.749,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.749,
+        "reason": "alignment coverage 158/211 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 64 = 0.2152 among 158 homologs; conservation entropy 2.523 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R1699Q",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.043,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.043,
+        "reason": "alignment coverage 9/211 homologs"
+      },
+      "interpretation": "mutant frequency of Q at position 1699 = 0.0000 among 9 homologs; conservation entropy -0.000 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H41R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.014851,
+        "normalized": 0.014851,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.957,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.957,
+        "reason": "alignment coverage 202/211 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 41 = 0.0149 among 202 homologs; conservation entropy 2.633 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A1708E",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.043,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.043,
+        "reason": "alignment coverage 9/211 homologs"
+      },
+      "interpretation": "mutant frequency of E at position 1708 = 0.0000 among 9 homologs; conservation entropy -0.000 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C39Y",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.01005,
+        "normalized": 0.01005,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.943,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.943,
+        "reason": "alignment coverage 199/211 homologs"
+      },
+      "interpretation": "mutant frequency of Y at position 39 = 0.0100 among 199 homologs; conservation entropy 2.614 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "P1749R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.043,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.043,
+        "reason": "alignment coverage 9/211 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 1749 = 0.0000 among 9 homologs; conservation entropy -0.000 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C47G",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.036082,
+        "normalized": 0.036082,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.919,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.919,
+        "reason": "alignment coverage 194/211 homologs"
+      },
+      "interpretation": "mutant frequency of G at position 47 = 0.0361 among 194 homologs; conservation entropy 2.467 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S1715C",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.043,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.043,
+        "reason": "alignment coverage 9/211 homologs"
+      },
+      "interpretation": "mutant frequency of C at position 1715 = 0.0000 among 9 homologs; conservation entropy -0.000 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M18A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.004854,
+        "normalized": 0.004854,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.976,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.976,
+        "reason": "alignment coverage 206/211 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 18 = 0.0049 among 206 homologs; conservation entropy 2.547 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C61G",
+      "tool": "sequence_plm",
+      "tool_version": "rules_sequence_plausibility_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.02,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.3,
+        "local": 0.3,
+        "reason": "rules-based fallback (ESM-1v cache unavailable)"
+      },
+      "applicability": {
+        "value": 0.8,
+        "reason": "sequence-level plausibility is always computable"
+      },
+      "interpretation": "rule-based sequence plausibility (BLOSUM62 + hydrophobicity)",
+      "limitations": [
+        "ESM-1v unavailable in this run — rules fallback, NOT paper-grade",
+        "not specific to the requested target phenotype"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C64R",
+      "tool": "sequence_plm",
+      "tool_version": "rules_sequence_plausibility_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.3,
+        "local": 0.3,
+        "reason": "rules-based fallback (ESM-1v cache unavailable)"
+      },
+      "applicability": {
+        "value": 0.8,
+        "reason": "sequence-level plausibility is always computable"
+      },
+      "interpretation": "rule-based sequence plausibility (BLOSUM62 + hydrophobicity)",
+      "limitations": [
+        "ESM-1v unavailable in this run — rules fallback, NOT paper-grade",
+        "not specific to the requested target phenotype"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R1699Q",
+      "tool": "sequence_plm",
+      "tool_version": "rules_sequence_plausibility_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.3333,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.3,
+        "local": 0.3,
+        "reason": "rules-based fallback (ESM-1v cache unavailable)"
+      },
+      "applicability": {
+        "value": 0.8,
+        "reason": "sequence-level plausibility is always computable"
+      },
+      "interpretation": "rule-based sequence plausibility (BLOSUM62 + hydrophobicity)",
+      "limitations": [
+        "ESM-1v unavailable in this run — rules fallback, NOT paper-grade",
+        "not specific to the requested target phenotype"
+      ],
+      "evidence_id": "E00023",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H41R",
+      "tool": "sequence_plm",
+      "tool_version": "rules_sequence_plausibility_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.2667,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.3,
+        "local": 0.3,
+        "reason": "rules-based fallback (ESM-1v cache unavailable)"
+      },
+      "applicability": {
+        "value": 0.8,
+        "reason": "sequence-level plausibility is always computable"
+      },
+      "interpretation": "rule-based sequence plausibility (BLOSUM62 + hydrophobicity)",
+      "limitations": [
+        "ESM-1v unavailable in this run — rules fallback, NOT paper-grade",
+        "not specific to the requested target phenotype"
+      ],
+      "evidence_id": "E00024",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A1708E",
+      "tool": "sequence_plm",
+      "tool_version": "rules_sequence_plausibility_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.3,
+        "local": 0.3,
+        "reason": "rules-based fallback (ESM-1v cache unavailable)"
+      },
+      "applicability": {
+        "value": 0.8,
+        "reason": "sequence-level plausibility is always computable"
+      },
+      "interpretation": "rule-based sequence plausibility (BLOSUM62 + hydrophobicity)",
+      "limitations": [
+        "ESM-1v unavailable in this run — rules fallback, NOT paper-grade",
+        "not specific to the requested target phenotype"
+      ],
+      "evidence_id": "E00025",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C39Y",
+      "tool": "sequence_plm",
+      "tool_version": "rules_sequence_plausibility_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0567,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.3,
+        "local": 0.3,
+        "reason": "rules-based fallback (ESM-1v cache unavailable)"
+      },
+      "applicability": {
+        "value": 0.8,
+        "reason": "sequence-level plausibility is always computable"
+      },
+      "interpretation": "rule-based sequence plausibility (BLOSUM62 + hydrophobicity)",
+      "limitations": [
+        "ESM-1v unavailable in this run — rules fallback, NOT paper-grade",
+        "not specific to the requested target phenotype"
+      ],
+      "evidence_id": "E00026",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "P1749R",
+      "tool": "sequence_plm",
+      "tool_version": "rules_sequence_plausibility_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0867,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.3,
+        "local": 0.3,
+        "reason": "rules-based fallback (ESM-1v cache unavailable)"
+      },
+      "applicability": {
+        "value": 0.8,
+        "reason": "sequence-level plausibility is always computable"
+      },
+      "interpretation": "rule-based sequence plausibility (BLOSUM62 + hydrophobicity)",
+      "limitations": [
+        "ESM-1v unavailable in this run — rules fallback, NOT paper-grade",
+        "not specific to the requested target phenotype"
+      ],
+      "evidence_id": "E00027",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C47G",
+      "tool": "sequence_plm",
+      "tool_version": "rules_sequence_plausibility_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.02,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.3,
+        "local": 0.3,
+        "reason": "rules-based fallback (ESM-1v cache unavailable)"
+      },
+      "applicability": {
+        "value": 0.8,
+        "reason": "sequence-level plausibility is always computable"
+      },
+      "interpretation": "rule-based sequence plausibility (BLOSUM62 + hydrophobicity)",
+      "limitations": [
+        "ESM-1v unavailable in this run — rules fallback, NOT paper-grade",
+        "not specific to the requested target phenotype"
+      ],
+      "evidence_id": "E00028",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S1715C",
+      "tool": "sequence_plm",
+      "tool_version": "rules_sequence_plausibility_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.14,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.3,
+        "local": 0.3,
+        "reason": "rules-based fallback (ESM-1v cache unavailable)"
+      },
+      "applicability": {
+        "value": 0.8,
+        "reason": "sequence-level plausibility is always computable"
+      },
+      "interpretation": "rule-based sequence plausibility (BLOSUM62 + hydrophobicity)",
+      "limitations": [
+        "ESM-1v unavailable in this run — rules fallback, NOT paper-grade",
+        "not specific to the requested target phenotype"
+      ],
+      "evidence_id": "E00029",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M18A",
+      "tool": "sequence_plm",
+      "tool_version": "rules_sequence_plausibility_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.2,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.3,
+        "local": 0.3,
+        "reason": "rules-based fallback (ESM-1v cache unavailable)"
+      },
+      "applicability": {
+        "value": 0.8,
+        "reason": "sequence-level plausibility is always computable"
+      },
+      "interpretation": "rule-based sequence plausibility (BLOSUM62 + hydrophobicity)",
+      "limitations": [
+        "ESM-1v unavailable in this run — rules fallback, NOT paper-grade",
+        "not specific to the requested target phenotype"
+      ],
+      "evidence_id": "E00030",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C61G",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00031",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C64R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00032",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R1699Q",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00033",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H41R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00034",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A1708E",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00035",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C39Y",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00036",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "P1749R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00037",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C47G",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00038",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S1715C",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00039",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M18A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00040",
+      "run_id": "deepseek-v4-flash__brca1_tsg_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64R",
+          "R1699Q",
+          "H41R",
+          "A1708E",
+          "C39Y",
+          "P1749R",
+          "C47G",
+          "S1715C",
+          "M18A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

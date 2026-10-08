@@ -1,0 +1,533 @@
+{
+  "unit_id": "glm-5.3__psae_stability_disruption__P1__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "V38D",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "Buried hydrophobic position never tolerating D in 42 homologs, with the pool's most negative ProteinMPNN delta (-5.2), indicating a strong folding disruption of a core residue."
+      },
+      {
+        "rank": 2,
+        "mutation": "F60D",
+        "confidence": 0.66,
+        "evidence_refs": [],
+        "decision_summary": "Aromatic-to-charged substitution in the hydrophobic core with zero homolog frequency and strongly negative structure compatibility (-3.3), a reliable destabilizer."
+      },
+      {
+        "rank": 3,
+        "mutation": "V38P",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "Proline at the strongly disfavored buried position 38 provides a backbone-level disruption mechanism complementary to V38D, compromising local conformation and packing."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Evidence from MSA conservation and structure compatibility is sufficient and convergent; no further rounds would plausibly change the Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 2,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "V38D": {
+      "candidate_id": "V38D",
+      "mutation": "V38D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.72,
+      "evidence_refs": [
+        "E00001",
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Hydrophobic core Val to charged Asp is a classic folding-destabilizing charge-in-core mutation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "Buried valine-to-aspartate in the hydrophobic core should strongly destabilize the fold; retained pending structural and evolutionary evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Never observed in 42 homologs and ProteinMPNN finds D at 38 highly incompatible with the backbone (ΔlogP=-5.2), the lowest compatibility of the pool — exactly the disruption signature we want for a core residue."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F60D": {
+      "candidate_id": "F60D",
+      "mutation": "F60D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.66,
+      "evidence_refs": [
+        "E00003",
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Aromatic Phe to charged Asp in the core/last strand region destabilizes hydrophobic packing and the terminal structural element."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Aromatic-to-charged substitution in a likely buried region is a plausible folding disruptor; retained pending evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.66,
+          "rationale": "Zero homolog frequency and strongly negative structure compatibility (ΔlogP=-3.3) for an aromatic-to-charged core substitution make it a strong destabilizer."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I33D": {
+      "candidate_id": "I33D",
+      "mutation": "I33D",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.42,
+      "evidence_refs": [
+        "E00002",
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.555,
+          "rationale": "I33 in the hydrophobic core; charged substitution should compromise packing and folding."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.42,
+          "rationale": "Despite never being observed in homologs, ProteinMPNN finds D at 33 well tolerated (ΔlogP=+1.25), suggesting the backbone can accommodate it and weakening the disruption hypothesis."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y18A": {
+      "candidate_id": "Y18A",
+      "mutation": "Y18A",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.58,
+      "evidence_refs": [
+        "E00004",
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Removing the bulky aromatic side chain at Y18 should open a core cavity and destabilize the fold without extreme charge repulsion."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "Zero MSA frequency and moderately low structural compatibility; cavity-creating but less aggressive than charge burial."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I33P": {
+      "candidate_id": "I33P",
+      "mutation": "I33P",
+      "first_seen_round": 2,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Since D is surprisingly tolerated at 33, a proline at this core position should break the local backbone conformation and packing more reliably while remaining a single substitution."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V38P": {
+      "candidate_id": "V38P",
+      "mutation": "V38P",
+      "first_seen_round": 2,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Proline at the strongly disfavored buried position 38 offers an alternative backbone-level disruption mechanism to complement V38D."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 2,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "V38D": 2.147,
+    "F60D": 13.175,
+    "V38P": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "V38D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 38 = 0.0000 among 42 homologs; conservation entropy 1.118 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "I33D",
+          "F60D",
+          "Y18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 33 = 0.0000 among 42 homologs; conservation entropy 1.548 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "I33D",
+          "F60D",
+          "Y18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F60D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.977,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.977,
+        "reason": "alignment coverage 42/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 60 = 0.0000 among 42 homologs; conservation entropy 1.175 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "I33D",
+          "F60D",
+          "Y18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y18A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 18 = 0.0000 among 43 homologs; conservation entropy 1.613 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "I33D",
+          "F60D",
+          "Y18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V38D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -5.1998,
+        "normalized": 0.039504,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-5.1998)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "I33D",
+          "F60D",
+          "Y18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I33D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 1.2483,
+        "normalized": 0.965143,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=1.2483)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "I33D",
+          "F60D",
+          "Y18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F60D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -3.2802,
+        "normalized": 0.242448,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-3.2802)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "I33D",
+          "F60D",
+          "Y18A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y18A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.086,
+        "normalized": 0.627421,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-1.086)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "glm-5.3__psae_stability_disruption__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V38D",
+          "I33D",
+          "F60D",
+          "Y18A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 6,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 11,
+    "c0_size": 2,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 2,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

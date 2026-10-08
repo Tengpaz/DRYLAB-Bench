@@ -1,0 +1,226 @@
+{
+  "unit_id": "kimi-k3__flu_h5_stability_dual__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "kimi-k3",
+  "scenario_id": "flu_h5_stability_dual",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "T318I",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "Thr->Ile in the HA2 stem near the fusion-peptide interface adds hydrophobic packing, a strategy consistent with known HA stem stabilization, with minimal risk to the receptor-binding head."
+      },
+      {
+        "rank": 2,
+        "mutation": "E374V",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "Glu->Val in the HA2 helical region may improve hydrophobic core packing and stability, though buried charge removal carries moderate folding risk, lowering confidence."
+      },
+      {
+        "rank": 3,
+        "mutation": "L520I",
+        "confidence": 0.35,
+        "evidence_refs": [],
+        "decision_summary": "Conservative Leu->Ile near the transmembrane-proximal stem could modestly tighten packing with very low risk to entry, but the expected stability effect is small."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "LLM-only condition with no evidence tools; additional iteration would not improve the speculative Top-3 ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "T318I": {
+      "candidate_id": "T318I",
+      "mutation": "T318I",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "HA2 stem region substitution; Thr->Ile in the HA2 core is a classic stabilizing change that increases thermostability in influenza HA by improving hydrophobic packing of the trimer stem."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Position 318 lies in HA2 near the fusion-peptide/stem interface; Thr→Ile adds hydrophobic packing consistent with known stem-stabilizing substitutions, unlikely to affect receptor binding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E374V": {
+      "candidate_id": "E374V",
+      "mutation": "E374V",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Surface-exposed acidic residue in HA2; replacing Glu with hydrophobic Val may reduce surface charge and improve packing/stability at the stem interface without disrupting fusion peptide function."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Glu→Val in the HA2 helical region could improve hydrophobic packing, but buried charge removal carries some folding risk, so modest confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A123P": {
+      "candidate_id": "A123P",
+      "mutation": "A123P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Rigidifying a solvent-exposed loop position with proline can raise thermostability; Ala->Pro is conservative for secondary structure in a loop context."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "A123 sits in the HA1 globular head near the receptor-binding region; introducing Pro risks disrupting local backbone geometry and receptor binding."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "A123 sits in the HA1 globular head near the receptor-binding region; introducing Pro risks disrupting local backbone geometry and receptor binding.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "N154D": {
+      "candidate_id": "N154D",
+      "mutation": "N154D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Removing a potential glycosylation sequon near the head could alter stability, but may also affect antigenicity and folding; moderate-low confidence."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "N154 is in the head antigenic/receptor region and part of a glycosylation sequon context; mutation risks entry function more than stability gain."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "N154 is in the head antigenic/receptor region and part of a glycosylation sequon context; mutation risks entry function more than stability gain.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "L520I": {
+      "candidate_id": "L520I",
+      "mutation": "L520I",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Hydrophobic-to-hydrophobic substitution in the transmembrane/cytoplasmic-adjacent region; likely neutral-to-stabilizing with minimal risk to entry function."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "Conservative Leu→Ile near the transmembrane-proximal stem may tighten packing with minimal risk, but effect size is likely small."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I441V": {
+      "candidate_id": "I441V",
+      "mutation": "I441V",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Conservative hydrophobe swap in the HA2 stem region could fine-tune core packing; verify WT residue is Ile at 441 before use."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "T318I": null,
+    "E374V": null,
+    "L520I": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 6,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 5,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

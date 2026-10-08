@@ -1,0 +1,114 @@
+{
+  "unit_id": "glm-5.3__psae_stability_disruption__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "glm-5.3",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "W17A",
+        "confidence": 0.8,
+        "evidence_refs": [],
+        "decision_summary": "Trp17 (the sequence's WYGD motif) is the largest buried hydrophobic residue in the PsaE SH3-like fold; W17A strips core packing and strongly destabilizes the domain. Position verified: residue 17 = W."
+      },
+      {
+        "rank": 2,
+        "mutation": "P35L",
+        "confidence": 0.62,
+        "evidence_refs": [],
+        "decision_summary": "Pro35 sits in the IIYPVIV turn region; substituting leucine removes the conformational constraint and introduces a bulky residue, perturbing backbone geometry. Position verified: residue 35 = P."
+      },
+      {
+        "rank": 3,
+        "mutation": "G53V",
+        "confidence": 0.58,
+        "evidence_refs": [],
+        "decision_summary": "Gly53 lies in the conserved GSGAGG loop where backbone dihedrals require glycine; valine causes steric clash and local loop disruption. Position verified: residue 53 = G."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Positions re-verified against the provided sequence and candidate pool stabilized; no external evidence is available to further refine rankings."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "E62K": {
+      "candidate_id": "E62K",
+      "mutation": "E62K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Glu62 may form a conserved surface salt bridge; a charge reversal could disrupt a stabilizing ionic network and PSI docking interactions."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "E62K only swaps a surface-exposed charged residue; it is unlikely to destabilize the fold enough to knock out PsaE, so it is demoted in ranking."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G54V": {
+      "candidate_id": "G54V",
+      "mutation": "G54V",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Gly54 lies in the conserved SGSG motif where phi/psi angles require glycine; Val substitution should locally break the loop structure."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "W17A": null,
+    "P35L": null,
+    "G53V": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 2,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 13,
+    "c0_size": 1,
+    "final_novelty": 1.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

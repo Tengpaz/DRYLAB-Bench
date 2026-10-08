@@ -1,0 +1,412 @@
+{
+  "unit_id": "deepseek-v4-flash__lassa_antibody_escape__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "lassa_antibody_escape",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K116E",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "Charge reversal at a GP1 epitope residue disrupts antibody binding while likely preserving entry."
+      },
+      {
+        "rank": 2,
+        "mutation": "N114A",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "Alanine substitution at a surface residue in the same epitope reduces antibody contact with minimal structural impact."
+      },
+      {
+        "rank": 3,
+        "mutation": "Q165R",
+        "confidence": 0.5,
+        "evidence_refs": [],
+        "decision_summary": "Introducing arginine at a loop position may alter the antibody-recognized conformation and improve escape."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Sufficient candidate quality reached without external evidence; further self-iteration would not meaningfully improve the ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K116E": {
+      "candidate_id": "K116E",
+      "mutation": "K116E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Surface-exposed GP1 residue in a likely antibody-contact loop; charge reversal can disrupt mAb binding while retaining the local backbone context."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "Charge reversal at a surface-exposed GP1 residue likely disrupts antibody binding while retaining hydrogen-bonding capacity to preserve function."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Charge-reversal at a key GP1 epitope residue is likely to disrupt antibody binding without severely compromising entry."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N114A": {
+      "candidate_id": "N114A",
+      "mutation": "N114A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "GP1 polar residue near a neutralizing epitope and adjacent to the N109 glycan; truncating the side chain removes potential antibody contacts with low structural perturbation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Alanine substitution removes a potential antibody contact without major structural perturbation; position likely resides in a neutralizing epitope."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Alanine substitution at a surface residue in the same epitope region may reduce antibody contact while preserving core structure."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y150A": {
+      "candidate_id": "Y150A",
+      "mutation": "Y150A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.15,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "Aromatic GP1 surface residue likely contacted by neutralizing antibodies; alanine substitution removes the bulky side chain and may reduce affinity without disrupting the fold."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.15,
+          "rationale": "Large aromatic to alanine may destabilize the protein core and compromise cell entry, making it less favorable for improving the phenotype."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "Large hydrophobic to alanine may disrupt local packing without clear antibody escape benefit; lower priority than new glycosylation-site mutation."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Large hydrophobic to alanine may disrupt local packing without clear antibody escape benefit; lower priority than new glycosylation-site mutation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "S154V": {
+      "candidate_id": "S154V",
+      "mutation": "S154V",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Small GP1 surface residue in an antigenic stretch; valine introduces a beta-branched steric clash for antibody engagement while preserving a tolerated hydrophobic mutation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "Serine to valine alters side-chain shape and hydrophobicity, likely affecting epitope recognition while being conservative enough to preserve folding."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "Hydrophobic substitution may perturb antibody binding while retaining overall fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H170D": {
+      "candidate_id": "H170D",
+      "mutation": "H170D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "GP1 histidine on a solvent-exposed potential antibody epitope; charge reversal can sterically/electrostatically impair binding without altering the receptor-binding core."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "Histidine to aspartate changes charge and hydrogen-bonding pattern, potentially affecting antibody recognition with moderate risk to stability."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Charge change at a nearby epitope residue adds diversity to escape potential."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q165R": {
+      "candidate_id": "Q165R",
+      "mutation": "Q165R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.36,
+          "rationale": "Exposed GP1 polar residue; introducing a large cationic side chain can block the antibody interface while retaining overall surface compatibility."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Introduction of a positively charged side chain may alter antigenic surface while the polar nature of glutamine to arginine is tolerated in loop regions."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Introducing a charged residue at position 165 could alter the antibody-recognized loop conformation, favoring escape."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R248E": {
+      "candidate_id": "R248E",
+      "mutation": "R248E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.33,
+          "rationale": "GP1 C-terminal surface residue near the GP1/GP2 interface; charge flip can affect a cocktail antibody contact without disturbing the furin-cleavage RRLL motif."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "Arginine to glutamate changes charge significantly; may affect antibody binding but could also impact interface stability."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.3,
+          "rationale": "Charge flip may disrupt an antibody contact at the GP1/GP2 interface."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T261A": {
+      "candidate_id": "T261A",
+      "mutation": "T261A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 10,
+      "current_confidence": 0.2,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.39,
+          "rationale": "GP2 N-terminal exposed residue in a fusion-proximal antibody contact; conservative removal of the threonine hydroxyl may reduce antibody binding with modest fusion-function risk."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.2,
+          "rationale": "Conservative alanine substitution likely has limited effect on epitope recognition and may be insufficient to achieve escape."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.2,
+          "rationale": "Conservative substitution in GP2; lower priority."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E289K": {
+      "candidate_id": "E289K",
+      "mutation": "E289K",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Surface GP2 helical residue likely bound by one cocktail component; charge inversion can impair antibody recognition while maintaining helical propensity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "Charge inversion in GP2 may disrupt epitope for antibodies targeting that region; moderate conservation due to surface location."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "Potential contact for neutralizing antibodies in the GP2 fusion subunit; moderate confidence given entry concerns."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R314E": {
+      "candidate_id": "R314E",
+      "mutation": "R314E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.25,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "GP2 surface loop residue in a potential neutralizing-antibody footprint; charge inversion may disrupt mAb contacts but carries a moderate viability risk."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.25,
+          "rationale": "Charge swap in GP2 might interfere with antibody binding but carries a higher risk of disrupting fusion or trimer contacts."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.25,
+          "rationale": "GP2 mutation with uncertain effect on fusion; kept as backup."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N119A": {
+      "candidate_id": "N119A",
+      "mutation": "N119A",
+      "first_seen_round": 2,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "N119 is an N-linked glycosylation site in the GP1 epitope region; removal may disrupt antibody binding while potentially retaining entry."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "K116E": null,
+    "N114A": null,
+    "Q165R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 11,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

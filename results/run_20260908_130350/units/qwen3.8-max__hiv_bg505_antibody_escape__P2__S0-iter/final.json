@@ -1,0 +1,114 @@
+{
+  "unit_id": "qwen3.8-max__hiv_bg505_antibody_escape__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 3,
+        "mutation": "N301A",
+        "confidence": 0.65,
+        "evidence_refs": [],
+        "decision_summary": "N301 is a V3 loop glycosylation site; its removal can alter epitopes targeted by V3-directed neutralizing antibodies while generally maintaining replication competence."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 candidates are well-supported by known glycan-escape biology and further self-iteration without external evidence tools would not meaningfully improve confidence."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N301A": {
+      "candidate_id": "N301A",
+      "mutation": "N301A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "N301 glycan is important for binding of several bnAbs including 2G12 and some V3-glycan antibodies; its removal can provide escape from multiple antibody lineages."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "N301 is a well-known N-linked glycosylation site on gp120; removing it can disrupt glycan shield epitopes recognized by broadly neutralizing antibodies (e.g., PGT121-class), promoting immune escape while typically retaining folding."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "N301 is a known N-linked glycosylation site in the V3 loop region; removing this glycan can expose or alter epitopes recognized by neutralizing antibodies, potentially increasing immune escape."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I420A": {
+      "candidate_id": "I420A",
+      "mutation": "I420A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "I420 is in the CD4 binding loop and mutations here can affect CD4bs antibody binding; however, this position is more conserved and may carry higher fitness cost."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "I420 is in the CD4 binding site region; mutation here risks impairing CD4 binding and replication fitness, which conflicts with the design objective."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "I420 is in the CD4 binding site region; mutation here risks impairing CD4 binding and replication fitness, which conflicts with the design objective.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "N301A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 2,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 18,
+    "c0_size": 2,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

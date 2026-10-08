@@ -1,0 +1,941 @@
+{
+  "unit_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "Y360A",
+        "confidence": 0.854,
+        "evidence_refs": [
+          "E00004"
+        ],
+        "decision_summary": "Highest alphamissense LOF proxy (0.854) among retained candidates; retains viability signals from prior plm/evolution tools."
+      },
+      {
+        "rank": 2,
+        "mutation": "F172A",
+        "confidence": 0.524,
+        "evidence_refs": [
+          "E00003"
+        ],
+        "decision_summary": "Strong second-highest LOF proxy (0.524); functional_annotation uninformative but no viability red flags."
+      },
+      {
+        "rank": 3,
+        "mutation": "G123A",
+        "confidence": 0.335,
+        "evidence_refs": [
+          "E00005"
+        ],
+        "decision_summary": "Lowest LOF proxy but still top-3; structure data unavailable to confirm folding preservation."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No further evidence expected to change final Top-3 given unavailable structure tool and budget limits"
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R60A": {
+      "candidate_id": "R60A",
+      "mutation": "R60A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00002"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Position 60 is in early extracellular loop near TM1; R to A removes positive charge likely involved in substrate interaction, abolishing transport. Conservative change should preserve folding and abundance."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.65,
+          "rationale": "Low LOF proxy (0.193) contradicts transport abolition goal"
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Low LOF proxy (0.193) contradicts transport abolition goal",
+        "evidence_refs": [
+          "E00002"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "R88A": {
+      "candidate_id": "R88A",
+      "mutation": "R88A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00001"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Position 88 in TM2; arginine side chain may coordinate substrate. R to A disrupts binding pocket without helix-breaking effects, maintaining viability."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.7,
+          "rationale": "Low LOF proxy (0.198) contradicts transport abolition goal"
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Low LOF proxy (0.198) contradicts transport abolition goal",
+        "evidence_refs": [
+          "E00001"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "G123A": {
+      "candidate_id": "G123A",
+      "mutation": "G123A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.335,
+      "evidence_refs": [
+        "E00005",
+        "E00010",
+        "E00013",
+        "E00016"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Position 123 in TM3; glycine often flexible for conformation. G to A reduces flexibility, impairing transport cycle while conservative and non-disruptive to structure."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.335,
+          "rationale": "Moderate LOF proxy (0.335) still above threshold for retention"
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.335,
+          "rationale": "Acceptable LOF proxy (0.335) for task; secondary tool outputs do not override due to limited relevance to abundance/folding preservation"
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.335,
+          "rationale": "Lowest LOF proxy (0.335) but still retained as top-3; functional_annotation uninformative"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F172A": {
+      "candidate_id": "F172A",
+      "mutation": "F172A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.524,
+      "evidence_refs": [
+        "E00003",
+        "E00009",
+        "E00012",
+        "E00015"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Position 172 in TM4; aromatic residue in pore. F to A removes pi-stacking or hydrophobic contacts for substrate, abolishing function without major folding impact."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.524,
+          "rationale": "Strong second-highest LOF proxy (0.524) supporting transport abolition"
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.524,
+          "rationale": "Solid LOF proxy (0.524) aligns with goal; new MSA/PLM evidence weak/against but low reliability and not phenotype-direct"
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.524,
+          "rationale": "Second-highest LOF proxy (0.524); functional_annotation adds no new signal"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S200A": {
+      "candidate_id": "S200A",
+      "mutation": "S200A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Position 200 in TM5; serine may H-bond substrate. S to A eliminates polar interaction, blocking transport. Small side-chain change preserves overall fold and expression."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.5,
+          "rationale": "Very low LOF proxy (0.074) contradicts transport abolition goal"
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Very low LOF proxy (0.074) contradicts transport abolition goal",
+        "evidence_refs": [
+          "E00006"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "T234A": {
+      "candidate_id": "T234A",
+      "mutation": "T234A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Position 234 in TM6; threonine in binding region. T to A removes OH group for H-bonding, abolishing substrate binding. Conservative, non-disruptive to helices."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.45,
+          "rationale": "Very low LOF proxy (0.084) contradicts transport abolition goal"
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Very low LOF proxy (0.084) contradicts transport abolition goal",
+        "evidence_refs": [
+          "E00007"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "Y360A": {
+      "candidate_id": "Y360A",
+      "mutation": "Y360A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.854,
+      "evidence_refs": [
+        "E00004",
+        "E00008",
+        "E00011",
+        "E00014"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Position 360 in TM8; tyrosine in pore. Y to A eliminates aromatic interactions with substrate. Conservative substitution avoids folding disruption."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.854,
+          "rationale": "Highest alphamissense LOF proxy score (0.854) directly matches goal of abolishing transport"
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.854,
+          "rationale": "Highest LOF proxy (0.854) from alphamissense directly supports transport abolition goal; MSA/PLM scores low but secondary tools with low applicability and not core to phenotype"
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.854,
+          "rationale": "Highest alphamissense LOF proxy (0.854) among active candidates; functional_annotation provides zero discriminatory value"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "Y360A": 34.368,
+    "F172A": 21.416,
+    "G123A": 15.565
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "R88A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1979,
+        "normalized": 0.1979,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.198 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R88A",
+          "R60A",
+          "F172A",
+          "Y360A",
+          "G123A",
+          "S200A",
+          "T234A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R60A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.193,
+        "normalized": 0.193,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.193 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R88A",
+          "R60A",
+          "F172A",
+          "Y360A",
+          "G123A",
+          "S200A",
+          "T234A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F172A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.5238,
+        "normalized": 0.5238,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.524 (class ambiguous); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R88A",
+          "R60A",
+          "F172A",
+          "Y360A",
+          "G123A",
+          "S200A",
+          "T234A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y360A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.8541,
+        "normalized": 0.8541,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.854 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R88A",
+          "R60A",
+          "F172A",
+          "Y360A",
+          "G123A",
+          "S200A",
+          "T234A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G123A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.3345,
+        "normalized": 0.3345,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.335 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R88A",
+          "R60A",
+          "F172A",
+          "Y360A",
+          "G123A",
+          "S200A",
+          "T234A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S200A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.0744,
+        "normalized": 0.0744,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.074 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R88A",
+          "R60A",
+          "F172A",
+          "Y360A",
+          "G123A",
+          "S200A",
+          "T234A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T234A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.0844,
+        "normalized": 0.0844,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.084 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R88A",
+          "R60A",
+          "F172A",
+          "Y360A",
+          "G123A",
+          "S200A",
+          "T234A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y360A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.067669,
+        "normalized": 0.067669,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.55,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.55,
+        "reason": "alignment coverage 133/242 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 360 = 0.0677 among 133 homologs; conservation entropy 2.227 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y360A",
+          "F172A",
+          "G123A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F172A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.086957,
+        "normalized": 0.086957,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.855,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.855,
+        "reason": "alignment coverage 207/242 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 172 = 0.0870 among 207 homologs; conservation entropy 2.595 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y360A",
+          "F172A",
+          "G123A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G123A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.088608,
+        "normalized": 0.088608,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.979,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.979,
+        "reason": "alignment coverage 237/242 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 123 = 0.0886 among 237 homologs; conservation entropy 2.659 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y360A",
+          "F172A",
+          "G123A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y360A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0001,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y360A",
+          "F172A",
+          "G123A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F172A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0008,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y360A",
+          "F172A",
+          "G123A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G123A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0019,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "Y360A",
+          "F172A",
+          "G123A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y360A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "Y360A",
+          "F172A",
+          "G123A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F172A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "Y360A",
+          "F172A",
+          "G123A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G123A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "grok-4.5__oct1_transport_ablation__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "Y360A",
+          "F172A",
+          "G123A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 7,
+    "n_rejected": 4,
+    "n_reconsidered": 0,
+    "n_invalid": 3,
+    "c0_size": 7,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

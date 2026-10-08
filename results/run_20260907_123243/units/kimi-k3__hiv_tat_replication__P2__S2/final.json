@@ -1,0 +1,1400 @@
+{
+  "unit_id": "kimi-k3__hiv_tat_replication__P2__S2",
+  "condition": "S2",
+  "model_id": "kimi-k3",
+  "scenario_id": "hiv_tat_replication",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "A42G",
+        "confidence": 0.46,
+        "evidence_refs": [],
+        "decision_summary": "Position 42 in the core activation domain shows 66% natural Gly frequency and maximal ESM-1v plausibility (1.0); Gly adds flexibility adjacent to the Cys-rich region without disrupting the ARM, a low-risk candidate for modulating transactivation."
+      },
+      {
+        "rank": 2,
+        "mutation": "H13R",
+        "confidence": 0.4,
+        "evidence_refs": [],
+        "decision_summary": "H13R is the only N-terminal candidate with nonzero natural mutant frequency (~5.8%) and lies in the variable proline-rich region far from essential Cys-rich/ARM motifs; added positive charge could aid TAR/P-TEFb interactions."
+      },
+      {
+        "rank": 3,
+        "mutation": "K29Q",
+        "confidence": 0.26,
+        "evidence_refs": [],
+        "decision_summary": "K29Q shows modest evolutionary tolerance (~1.4%) and nonzero PLM plausibility at the variable Cys-rich/CORE boundary; charge loss is a mild concern but less risky than ARM-proximal alternatives."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Available informative tools (MSA, PLM, annotation) have been applied and consistently rank A42G, H13R, K29Q; no tool measures transactivation directly, so extra rounds would not change the Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 1,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K28Q": {
+      "candidate_id": "K28Q",
+      "mutation": "K28Q",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.18,
+      "evidence_refs": [
+        "E00001",
+        "E00009",
+        "E00017"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "K28 acetylation enhances Tat-CycT1-TAR complex formation; glutamine mimics constitutive acetylation, potentially boosting P-TEFb recruitment and transactivation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "K28 is a regulatory Lys near the cysteine-rich activation region; acetyl-mimic Q is plausible but may interfere with reversible acetylation, so keep but slightly de-risk pending tools."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.18,
+          "rationale": "Both MSA (0% Q frequency) and ESM-1v (0.0001) strongly disfavor K28Q; demote below better-supported candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K50Q": {
+      "candidate_id": "K50Q",
+      "mutation": "K50Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "K50 acetylation in the ARM promotes Tat release from TAR for elongation; K50Q mimics this acetylated state and may accelerate the transcription cycle."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.4,
+          "rationale": "K50 sits inside the essential ARM/TAR-binding basic stretch 49-57; neutralizing charge is likely to impair RNA binding and nuclear localization."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "K50 sits inside the essential ARM/TAR-binding basic stretch 49-57; neutralizing charge is likely to impair RNA binding and nuclear localization.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K51Q": {
+      "candidate_id": "K51Q",
+      "mutation": "K51Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "K51 acetylation is implicated in Tat turnover and cofactor exchange; acetyl-mimetic substitution may enhance processive transactivation."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "K51 is also within the ARM/basic RNA-binding motif; Lys-to-Gln removes positive charge and is high-risk for transactivation loss."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "K51 is also within the ARM/basic RNA-binding motif; Lys-to-Gln removes positive charge and is high-risk for transactivation loss.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K29Q": {
+      "candidate_id": "K29Q",
+      "mutation": "K29Q",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.26,
+      "evidence_refs": [
+        "E00004",
+        "E00012",
+        "E00020"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Adjacent to K28 in the cysteine-rich/core region; charge-neutralization may modulate P-TEFb binding affinity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.28,
+          "rationale": "Adjacent to K28 in a Lys-rich regulatory patch, but charge-neutralizing changes here are less clearly tied to the core TAR/PTEFb interfaces; keep lower priority."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.26,
+          "rationale": "K29Q has modest evolutionary tolerance (1.4%) and low-but-nonzero PLM plausibility; position 29 lies in the variable Cys-rich/CORE boundary, though charge loss is a mild concern."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H13R": {
+      "candidate_id": "H13R",
+      "mutation": "H13R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.4,
+      "evidence_refs": [
+        "E00002",
+        "E00010",
+        "E00018"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Proline-rich N-terminus is variable across clades; introducing basic residue may improve interaction with transcription machinery without disrupting core domains."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.34,
+          "rationale": "Early N-terminal substitution preserves positive charge while potentially modulating Tat folding/partner contacts; plausible but mechanistically indirect."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "H13R is the only N-terminal candidate with nonzero natural mutant frequency (5.8%) and sits in the variable proline-rich region, far from the essential Cys-rich and ARM motifs; adding a positive charge could aid TAR/P-TEFb interactions."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q17R": {
+      "candidate_id": "Q17R",
+      "mutation": "Q17R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.16,
+      "evidence_refs": [
+        "E00003",
+        "E00011",
+        "E00019"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Position 17 lies in a variable N-terminal segment outside essential domains; basic substitution may strengthen coactivator engagement."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "Adds positive charge in the N-terminal acidic/proline-rich region without touching Cys core or ARM; could improve electrostatics but has uncertain phenotype linkage."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.16,
+          "rationale": "Q17R adds charge in a variable region but has zero natural frequency; kept as a backup only."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T20A": {
+      "candidate_id": "T20A",
+      "mutation": "T20A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.14,
+      "evidence_refs": [
+        "E00006",
+        "E00014",
+        "E00022"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Position 20 precedes the Cys-rich domain; small hydrophobic substitution is likely tolerated and may stabilize folding of the activation domain."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.22,
+          "rationale": "Small conservative change near the N terminus may affect local flexibility/phosphorylation context, but is unlikely to be a dominant transactivation enhancer."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.14,
+          "rationale": "Weak MSA tolerance but near-zero PLM plausibility; low priority."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K12R": {
+      "candidate_id": "K12R",
+      "mutation": "K12R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.24,
+      "evidence_refs": [
+        "E00005",
+        "E00013",
+        "E00021"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.2,
+          "rationale": "Conservative Lys-to-Arg change in the variable N-terminus preserves positive charge while altering H-bonding potential."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.24,
+          "rationale": "Charge-preserving Lys-to-Arg in the N-terminal region is viability-conservative and may alter ubiquitination/acetylation competition while retaining basic character."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.24,
+          "rationale": "Conservative Lys-to-Arg preserves positive charge and has the best PLM score among N-terminal candidates, despite zero observed natural frequency."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K41A": {
+      "candidate_id": "K41A",
+      "mutation": "K41A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.15,
+      "evidence_refs": [
+        "E00008",
+        "E00016",
+        "E00024"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.2,
+          "rationale": "Core-region lysine involved in protein interactions; alanine scan-type substitution could relieve inhibitory contacts, though risk of function loss exists."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.15,
+          "rationale": "Alanine removes a basic residue between the cysteine-rich core and ARM; charge loss is risky for cofactor/RNA electrostatics, so demote."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "Position 41 is highly conserved (entropy 0.515), A never observed in homologs, PLM score 0.0, and Lys-to-Ala removes charge right before the ARM; high risk of transactivation loss."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Position 41 is highly conserved (entropy 0.515), A never observed in homologs, PLM score 0.0, and Lys-to-Ala removes charge right before the ARM; high risk of transactivation loss.",
+        "evidence_refs": [
+          "E00008",
+          "E00016"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "A42G": {
+      "candidate_id": "A42G",
+      "mutation": "A42G",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.46,
+      "evidence_refs": [
+        "E00007",
+        "E00015",
+        "E00023"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.2,
+          "rationale": "Small residue flexibility change in the core domain may fine-tune folding of the activation region essential for P-TEFb binding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.18,
+          "rationale": "Glycine may increase local flexibility near the basic domain boundary, but effects are ambiguous and could destabilize the core-to-ARM transition."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.46,
+          "rationale": "A42G shows the strongest combined support: 66% natural G frequency at position 42 and maximal ESM-1v plausibility (1.0). Located in the core activation domain adjacent to the Cys-rich region, a Gly substitution likely adds flexibility without disrupting the zinc-finger or ARM, making it a low-risk candidate for modulating transactivation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 3,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "A42G": 79.557,
+    "H13R": 7.039,
+    "K29Q": 5.128
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "K28Q",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.69,
+        "local": 1.0,
+        "reason": "MSA depth 69, Neff 13.6 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 69/69 homologs"
+      },
+      "interpretation": "mutant frequency of Q at position 28 = 0.0000 among 69 homologs; conservation entropy 0.851 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H13R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.057971,
+        "normalized": 0.057971,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.69,
+        "local": 1.0,
+        "reason": "MSA depth 69, Neff 13.6 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 69/69 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 13 = 0.0580 among 69 homologs; conservation entropy 1.318 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q17R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.69,
+        "local": 1.0,
+        "reason": "MSA depth 69, Neff 13.6 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 69/69 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 17 = 0.0000 among 69 homologs; conservation entropy 1.036 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K29Q",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.014493,
+        "normalized": 0.014493,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.69,
+        "local": 1.0,
+        "reason": "MSA depth 69, Neff 13.6 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 69/69 homologs"
+      },
+      "interpretation": "mutant frequency of Q at position 29 = 0.0145 among 69 homologs; conservation entropy 1.644 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K12R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.69,
+        "local": 1.0,
+        "reason": "MSA depth 69, Neff 13.6 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 69/69 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 12 = 0.0000 among 69 homologs; conservation entropy 1.165 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T20A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.028986,
+        "normalized": 0.028986,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.69,
+        "local": 1.0,
+        "reason": "MSA depth 69, Neff 13.6 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 69/69 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 20 = 0.0290 among 69 homologs; conservation entropy 1.251 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A42G",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.660377,
+        "normalized": 0.660377,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.69,
+        "local": 0.768,
+        "reason": "MSA depth 69, Neff 13.6 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.768,
+        "reason": "alignment coverage 53/69 homologs"
+      },
+      "interpretation": "mutant frequency of G at position 42 = 0.6604 among 53 homologs; conservation entropy 0.908 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K41A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.69,
+        "local": 0.768,
+        "reason": "MSA depth 69, Neff 13.6 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.768,
+        "reason": "alignment coverage 53/69 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 41 = 0.0000 among 53 homologs; conservation entropy 0.515 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K28Q",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0001,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H13R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0009,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q17R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0086,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K29Q",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0119,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K12R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.027,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T20A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0004,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A42G",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K41A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K28Q",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H13R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q17R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K29Q",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K12R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T20A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A42G",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00023",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K41A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00024",
+      "run_id": "kimi-k3__hiv_tat_replication__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "K28Q",
+          "H13R",
+          "Q17R",
+          "K29Q",
+          "K12R",
+          "T20A",
+          "A42G",
+          "K41A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 3,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

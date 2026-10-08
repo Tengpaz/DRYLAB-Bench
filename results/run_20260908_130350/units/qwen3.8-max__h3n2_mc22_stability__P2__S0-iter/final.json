@@ -1,0 +1,162 @@
+{
+  "unit_id": "qwen3.8-max__h3n2_mc22_stability__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "T318I",
+        "confidence": 0.68,
+        "evidence_refs": [],
+        "decision_summary": "Threonine-to-isoleucine at position 318 in the HA2 stalk increases hydrophobic bulk at a coiled-coil interface position, likely improving trimer packing and thermostability without disrupting helical structure."
+      },
+      {
+        "rank": 2,
+        "mutation": "G319A",
+        "confidence": 0.65,
+        "evidence_refs": [],
+        "decision_summary": "Glycine at position 319 is a known helix-destabilizing residue due to its high backbone conformational entropy; substitution with alanine improves helix propensity and local stability in the HA2 coiled-coil region."
+      },
+      {
+        "rank": 3,
+        "mutation": "K310R",
+        "confidence": 0.58,
+        "evidence_refs": [],
+        "decision_summary": "Conservative lysine-to-arginine substitution preserves positive charge while potentially improving salt-bridge geometry or helix capping in the HA2 stalk, with minimal risk of disrupting function."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Critical WT-residue verification errors were identified and corrected; remaining candidates are well-reasoned but confidence is capped without structural or experimental evidence."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "T318I": {
+      "candidate_id": "T318I",
+      "mutation": "T318I",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "T318 is in the HA2 stalk helix; Ile substitution increases hydrophobic packing in the helical core, enhancing thermostability of the trimeric coiled-coil."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "T318 is in the HA2 stalk region near the trimer interface. Isoleucine is more hydrophobic and can improve core packing without disrupting the local backbone geometry significantly."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "T318I introduces a larger hydrophobic side chain in the HA2 coiled-coil region, potentially improving hydrophobic packing and thermostability without disrupting the helical structure."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K310R": {
+      "candidate_id": "K310R",
+      "mutation": "K310R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "K310 is in the HA2 stalk; Arg substitution preserves positive charge while potentially forming stronger salt bridges or hydrogen bonds with nearby acidic residues."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "K310 is a surface-exposed residue in HA2. Conservative substitution to arginine may improve salt-bridge networks or reduce conformational entropy without destabilizing the fold."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "K310R is a conservative substitution maintaining positive charge while potentially improving helix capping or salt-bridge geometry in the HA2 stalk region."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T155P": {
+      "candidate_id": "T155P",
+      "mutation": "T155P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.57,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.57,
+          "rationale": "T155 is in a loop region of HA1; Pro substitution can stabilize the loop by reducing unfolded-state entropy, a common thermostabilization strategy."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.57,
+          "rationale": "Proline introduction at position 155 in a loop region of HA1 is risky; it could disrupt local backbone conformation and impair folding kinetics rather than improve stability."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Proline introduction at position 155 in a loop region of HA1 is risky; it could disrupt local backbone conformation and impair folding kinetics rather than improve stability.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "T318I": null,
+    "G319A": null,
+    "K310R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 3,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 17,
+    "c0_size": 3,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

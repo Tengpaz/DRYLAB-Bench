@@ -1,0 +1,472 @@
+{
+  "unit_id": "deepseek-v4-flash__hiv_tat_replication__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "hiv_tat_replication",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "Q54R",
+        "confidence": 0.87,
+        "evidence_refs": [],
+        "decision_summary": "Introduces Arg at position 54 within the basic ARM, potentially improving TAR RNA binding via bidentate hydrogen bonding and increased positive charge, with minimal structural risk."
+      },
+      {
+        "rank": 2,
+        "mutation": "A58R",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "Extends the basic patch C-terminal to the ARM, likely enhancing TAR affinity while preserving the overall fold."
+      },
+      {
+        "rank": 3,
+        "mutation": "D80K",
+        "confidence": 0.7,
+        "evidence_refs": [],
+        "decision_summary": "Replaces a negative charge in the regulatory C-terminal domain, possibly improving protein stability or P-TEFb recruitment, though with moderate uncertainty."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Confident in current Top-3; further self-iteration unlikely to improve predictions."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "A58R": {
+      "candidate_id": "A58R",
+      "mutation": "A58R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Extends the C-terminal end of the basic RNA-binding domain, increasing positive charge and potentially enhancing Tat binding to TAR RNA and transactivation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "A58 is immediately C-terminal to the ARM; adding Arg extends the basic surface and may enhance RNA/P-TEFb recruitment while still being peripheral to the core fold."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "Extends the basic patch immediately C-terminal to the ARM, potentially enhancing TAR affinity while preserving the overall fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q54R": {
+      "candidate_id": "Q54R",
+      "mutation": "Q54R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.87,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Introduces an additional arginine into the arginine-rich basic motif, likely improving RNA binding affinity and nuclear import without disrupting core structure."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.87,
+          "rationale": "Q54 is the only nonbasic residue inside the ARM; R substitution increases positive-charge density while preserving TAR-binding register, a plausible gain-of-function with low structural disruption."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.87,
+          "rationale": "Q54 sits within the basic ARM; Arg adds bidentate hydrogen-bonding potential and increases positive charge, likely improving TAR RNA binding with minimal structural risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D80K": {
+      "candidate_id": "D80K",
+      "mutation": "D80K",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Removes a negative charge and adds a positive charge in the C-terminal region, which may increase overall Tat stability and interaction with host cofactors."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "This conservative charge-reversal in the dispensable second exon may increase protein stability or positive surface charge without perturbing the essential activation domain."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Reverses a negative charge in the regulatory C-terminal domain; may improve protein stability or P-TEFb recruitment, though effects are less certain than ARM mutations."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E2R": {
+      "candidate_id": "E2R",
+      "mutation": "E2R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Swaps a negatively charged glutamate for arginine in the N-terminal activation domain, potentially enhancing interactions with cyclin T1 and boosting transactivation."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.4,
+          "rationale": "E2 participates in the acidic activation domain; reversal to Arg would likely disrupt recruitment of cyclin T1/P-TEFb."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "E2 participates in the acidic activation domain; reversal to Arg would likely disrupt recruitment of cyclin T1/P-TEFb.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "E9R": {
+      "candidate_id": "E9R",
+      "mutation": "E9R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Removes a negative charge near the N-terminal activation region, which may improve the electrostatic complementarity with positive cellular cofactors."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.45,
+          "rationale": "E9 is in the same acidic cluster; mutation to Arg is incompatible with required activation domain interactions."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "E9 is in the same acidic cluster; mutation to Arg is incompatible with required activation domain interactions.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "D5R": {
+      "candidate_id": "D5R",
+      "mutation": "D5R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Converts an acidic residue to a basic one, increasing net positive charge and possibly stabilizing the folded Tat structure or promoting cofactor recruitment."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "D5 is another acidic determinant; neutralizing/reversing its charge is more likely to impair than enhance transactivation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "D5 is another acidic determinant; neutralizing/reversing its charge is more likely to impair than enhance transactivation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "N61R": {
+      "candidate_id": "N61R",
+      "mutation": "N61R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Adds a positively charged arginine immediately after the basic domain, potentially enhancing RNA binding or nuclear localization."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "N61 lies in the glutamine-rich C-terminal tail; a basic substitution could enhance nonspecific RNA contacts, though with moderate confidence."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.58,
+          "rationale": "N61 lies outside the minimal RNA-binding domain; adding Arg in the flexible linker risks structural perturbation with no clear transactivation gain."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "N61 lies outside the minimal RNA-binding domain; adding Arg in the flexible linker risks structural perturbation with no clear transactivation gain.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "S62R": {
+      "candidate_id": "S62R",
+      "mutation": "S62R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Replaces a polar uncharged residue with arginine, augmenting the positive charge near the core domain and possibly improving TAR recognition."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "S62 is peripheral to the ARM; adding Arg adds positive charge but may affect local folding modestly, so lower confidence."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.55,
+          "rationale": "S62 is in a non-conserved region; Arg substitution is unlikely to improve TAR binding and may alter local conformation."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "S62 is in a non-conserved region; Arg substitution is unlikely to improve TAR binding and may alter local conformation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "T20R": {
+      "candidate_id": "T20R",
+      "mutation": "T20R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Introduces a positively charged residue in the flexible N-terminal region, which may increase overall Tat basicity and facilitate interactions with viral and host factors."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "T20 lies near the cysteine-rich domain boundary; no clear TAR/P-TEFb interaction benefit and possible structural perturbation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "T20 lies near the cysteine-rich domain boundary; no clear TAR/P-TEFb interaction benefit and possible structural perturbation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "L43R": {
+      "candidate_id": "L43R",
+      "mutation": "L43R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Substitutes a surface-exposed hydrophobic leucine with arginine, increasing solubility and positive charge, potentially improving Tat's ability to recruit transcription complexes."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "L43 is a buried hydrophobic core residue; an Arg is likely destabilizing and would reduce viability/activity."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "L43 is a buried hydrophobic core residue; an Arg is likely destabilizing and would reduce viability/activity.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K51R": {
+      "candidate_id": "K51R",
+      "mutation": "K51R",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "K51 is already basic in the ARM; conservative Lys->Arg may add bidentate hydrogen-bonding to TAR while preserving overall charge."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "Conservative Lys→Arg in the ARM may modestly improve H-bonding capacity, but the region is already highly basic, making it lower priority than Q54R or A58R."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H59R": {
+      "candidate_id": "H59R",
+      "mutation": "H59R",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.54,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.54,
+          "rationale": "H59 is immediately after A58; replacing with Arg may extend the basic C-flank of the ARM with moderate risk."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.54,
+          "rationale": "Immediately after A58, but adding another Arg may cause over-positive steric strain without measurable benefit over A58R alone."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Immediately after A58, but adding another Arg may cause over-positive steric strain without measurable benefit over A58R alone.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "Q60R": {
+      "candidate_id": "Q60R",
+      "mutation": "Q60R",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Q60 is adjacent to the ARM; adding Arg could improve RNA binding, although more speculative than A58/H59."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.52,
+          "rationale": "Q60 is adjacent to the ARM; the marginal gain from adding Arg is outweighed by the risk of disrupting a conserved polar contact."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Q60 is adjacent to the ARM; the marginal gain from adding Arg is outweighed by the risk of disrupting a conserved polar contact.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "Q54R": null,
+    "A58R": null,
+    "D80K": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 13,
+    "n_rejected": 9,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

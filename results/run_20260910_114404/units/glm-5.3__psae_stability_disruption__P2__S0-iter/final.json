@@ -1,0 +1,340 @@
+{
+  "unit_id": "glm-5.3__psae_stability_disruption__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "glm-5.3",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "G19P",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "Gly-to-Pro in the structured Gly19-Gly22 region imposes a rigid backbone kink and blocks backbone H-bonding, strongly destabilizing the small PsaE fold. Verified WT residue G at position 19."
+      },
+      {
+        "rank": 2,
+        "mutation": "I33D",
+        "confidence": 0.8,
+        "evidence_refs": [],
+        "decision_summary": "Replacing the likely buried hydrophobic Ile33 with charged Asp is a classic folding-disruptive core mutation. Verified WT residue I at position 33."
+      },
+      {
+        "rank": 3,
+        "mutation": "G22P",
+        "confidence": 0.75,
+        "evidence_refs": [],
+        "decision_summary": "Pro at Gly22, adjacent to Gly19, similarly kinks the backbone and disrupts local secondary structure. Verified WT residue G at position 22."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 fold-disrupting mutations are stable across self-review; no external evidence is available to refine further."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "G19P": {
+      "candidate_id": "G19P",
+      "mutation": "G19P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Introducing a proline into the conserved YWYGD motif's glycine likely breaks the local backbone conformation required for the thioredoxin-like fold of PsaE."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "Gly-to-Pro in a loop/helix region imposes rigid kinks and breaks backbone H-bonding, strongly disrupting the small PsaE fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I33D": {
+      "candidate_id": "I33D",
+      "mutation": "I33D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Replacing a core buried hydrophobe in the IYPVI cluster with a charged Asp should severely destabilize the hydrophobic core."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "Buried hydrophobic Ile replaced by charged Asp is a classic folding-disruptive core mutation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "P35G": {
+      "candidate_id": "P35G",
+      "mutation": "P35G",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "The conserved proline in the IIYP loop stabilizes the turn; substitution with glycine increases flexibility and entropic cost of folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Pro35 is likely a core or turn-anchoring residue; removing its rigid constraint can collapse local packing, but effect is less certain than charge-in-core mutations."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G22P": {
+      "candidate_id": "G22P",
+      "mutation": "G22P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Glycine in the GDVGT turn region replaced by proline disrupts the required backbone geometry."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.75,
+          "rationale": "Gly22 sits adjacent to Gly19; a Pro here is also highly destabilizing and may be structurally equivalent, so I promote it above P35G."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F60D": {
+      "candidate_id": "F60D",
+      "mutation": "F60D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Phe60 is part of the C-terminal hydrophobic cluster; a charged substitution undermines packing and helix integrity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Hydrophobic-to-charged substitution in the C-terminal helix region disrupts packing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L11D": {
+      "candidate_id": "L11D",
+      "mutation": "L11D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Core leucine to aspartate introduces an unfavorable buried charge, destabilizing the first beta-strand/core."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "Charged residue in a hydrophobic N-terminal helix position destabilizes the fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I37E": {
+      "candidate_id": "I37E",
+      "mutation": "I37E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Buried hydrophobic Ile in the VIVR segment replaced by glutamate disrupts strand packing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Core Ile-to-Glu is destabilizing but Glu is slightly more tolerable than Asp in buried sites."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W17A": {
+      "candidate_id": "W17A",
+      "mutation": "W17A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Trp17 in the conserved SYWYGD motif is a key structural anchor; alanine substitution removes aromatic packing and motif integrity."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.4,
+          "rationale": "Trp-to-Ala removes a large hydrophobe but Ala remains fold-compatible; weaker knockout than charge-in-core or Pro-in-helix options."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Trp-to-Ala removes a large hydrophobe but Ala remains fold-compatible; weaker knockout than charge-in-core or Pro-in-helix options.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G53P": {
+      "candidate_id": "G53P",
+      "mutation": "G53P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Glycine within the GSGAGG linker region replaced by proline likely breaks loop geometry connecting structural elements."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.38,
+          "rationale": "Gly53 is in a flexible Gly-rich segment where Pro may be tolerated without global unfolding."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Gly53 is in a flexible Gly-rich segment where Pro may be tolerated without global unfolding.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "F48D": {
+      "candidate_id": "F48D",
+      "mutation": "F48D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Conserved Phe48 in the GFSGS motif to aspartate introduces a buried charge, destabilizing local fold."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "Position may be surface-exposed near the partner-binding face; charged substitution is less reliably fold-disruptive than core-targeted options."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position may be surface-exposed near the partner-binding face; charged substitution is less reliably fold-disruptive than core-targeted options.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "G19P": null,
+    "I33D": null,
+    "G22P": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

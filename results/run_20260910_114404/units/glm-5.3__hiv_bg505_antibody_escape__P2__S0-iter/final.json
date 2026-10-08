@@ -1,0 +1,234 @@
+{
+  "unit_id": "glm-5.3__hiv_bg505_antibody_escape__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "glm-5.3",
+  "scenario_id": "hiv_bg505_antibody_escape",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N301A",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "N301 is the V3-loop high-mannose glycan at the N301/N332 immunodominant face, a documented contact for V3-glycan bNAbs. Deleting it is a plausible escape route with tolerable fitness cost in BG505."
+      },
+      {
+        "rank": 2,
+        "mutation": "N300A",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "The N300 sequon forms an alternate glycan site at the V3 base that can compensate for N301 loss; its removal may further blunt glycan-dependent bNAb binding. Confidence limited by redundant glycan occupancy patterns."
+      },
+      {
+        "rank": 3,
+        "mutation": "N337A",
+        "confidence": 0.42,
+        "evidence_refs": [],
+        "decision_summary": "N337 is a V3-stem glycan contributing to antibody access in the V3 region; deletion may reduce glycan/V3-directed antibody binding. Its peripheral variable-loop location keeps folding risk moderate."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Self-review has converged on the Top-3 glycan-deletion escape candidates and no external evidence is available to refine them further."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N301A": {
+      "candidate_id": "N301A",
+      "mutation": "N301A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Removing the N301 glycan perturbs V3-glycan bnAb epitopes (e.g., 10-1074 class) with partial compensation by adjacent glycans preserving fitness."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "N301 (HXB2 N332) is the V3-loop glycan central to PGT121/PGT128 recognition; removing the sequon is a well-characterized escape route in BG505. Some fitness cost is expected from glycan loss, hence moderate confidence."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "N301 is the V3-loop high-mannose glycan at the 'N301/N332' immunodominant face and is a well-documented bNAb contact; its loss is a plausible escape route with tolerable fitness cost in BG505."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N300A": {
+      "candidate_id": "N300A",
+      "mutation": "N300A",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "The adjacent N300 forms an alternate glycan site in the NNNT sequon at the V3 base and can partially compensate for N301 loss; its removal could further blunt glycan-dependent bNAb binding. Lower confidence due to redundant glycan occupancy patterns."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Adjacent sequon glycan can shift occupancy; removing it may destabilize residual glycan shielding of the V3 base after N301 loss, but compensatory occupancy patterns lower confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N337A": {
+      "candidate_id": "N337A",
+      "mutation": "N337A",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.42,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "N337 (NET at 337-339) is a V3-stem glycan contributing to antibody access in the V3 region; deletion may reduce binding of glycan/V3-directed antibodies. Position is in a variable loop, so folding risk is moderate."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.42,
+          "rationale": "V3-stem glycan near the base contributes to glycan-dependent antibody recognition; slight upward adjustment because it is structurally peripheral and likely folding-tolerant."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N275A": {
+      "candidate_id": "N275A",
+      "mutation": "N275A",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "N275 is a conserved C2-region glycan near the CD4bs/loop D; deletion has been reported to reduce VRC01-class sensitivity. However, proximity to conserved structures raises folding/fitness risk."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "N275 removal reduces VRC01-class CD4bs sensitivity, but its conservation near loop D raises fitness risk; modest raise as CD4bs escape is a distinct, valuable escape axis."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N184A": {
+      "candidate_id": "N184A",
+      "mutation": "N184A",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.28,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.28,
+          "rationale": "N184 lies in the V1/V2 region, and altering V2 glycans can affect apex-directed bNAbs. High structural sensitivity of the apex trimer makes this risky for folding and fitness."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.28,
+          "rationale": "V2-apex glycan edits can reduce apex bNAb binding but trimer-apex structural sensitivity keeps confidence low."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N135A": {
+      "candidate_id": "N135A",
+      "mutation": "N135A",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.25,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "N135 is a V1-loop glycan site; V1 glycan changes are a known general escape axis with often-acceptable fitness costs. Low confidence because no specific antibody target at this site in BG505 is recalled."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "No specific antibody-recallable target at N135 in BG505; V1 glycan removal is speculative and unlikely to outperform the V3-base glycan deletions."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "No specific antibody-recallable target at N135 in BG505; V1 glycan removal is speculative and unlikely to outperform the V3-base glycan deletions.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "N301A": null,
+    "N300A": null,
+    "N337A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 6,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 11,
+    "c0_size": 1,
+    "final_novelty": 0.6666666666666666,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

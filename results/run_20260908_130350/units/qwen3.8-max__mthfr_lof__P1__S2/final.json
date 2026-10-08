@@ -1,0 +1,353 @@
+{
+  "unit_id": "qwen3.8-max__mthfr_lof__P1__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "G187A",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "Glycine-to-alanine in the catalytic loop restricts backbone conformational flexibility required for catalysis, likely abolishing MTHFR activity."
+      },
+      {
+        "rank": 2,
+        "mutation": "Y189A",
+        "confidence": 0.75,
+        "evidence_refs": [],
+        "decision_summary": "Tyrosine-to-alanine removes an aromatic side chain likely involved in substrate positioning or stacking interactions within the catalytic loop."
+      },
+      {
+        "rank": 3,
+        "mutation": "D191A",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "Aspartate-to-alanine removes a carboxylate group potentially essential for acid-base catalysis or metal coordination in the MTHFR active site."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "All 4 tool calls and 4 agent rounds have been consumed; no further evidence gathering is possible."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "E185A": {
+      "candidate_id": "E185A",
+      "mutation": "E185A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.82,
+      "evidence_refs": [
+        "E00001",
+        "E00002"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.82,
+          "rationale": "Glu185 lies within the catalytic core near the FAD/NADPH binding pocket; mutation to alanine likely disrupts essential electrostatic interactions required for catalysis."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "AlphaMissense score of 0.148 is classified as benign, strongly contradicting the LOF objective. This candidate should be rejected in favor of mutations at catalytic or cofactor-binding residues."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "AlphaMissense score of 0.148 is classified as benign, strongly contradicting the LOF objective. This candidate should be rejected in favor of mutations at catalytic or cofactor-binding residues.",
+        "evidence_refs": [
+          "E00001"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "E185K": {
+      "candidate_id": "E185K",
+      "mutation": "E185K",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.85,
+      "evidence_refs": [
+        "E00003",
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Charge reversal at a conserved glutamate in the catalytic domain should disrupt substrate binding or catalysis."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.85,
+          "rationale": "AlphaMissense score of 0.103 is classified as benign, strongly contradicting the LOF objective. MSA shows K at position 185 in 4.3% of homologs, indicating some evolutionary tolerance."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "AlphaMissense score of 0.103 is classified as benign, strongly contradicting the LOF objective. MSA shows K at position 185 in 4.3% of homologs, indicating some evolutionary tolerance.",
+        "evidence_refs": [
+          "E00003",
+          "E00004"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "G187A": {
+      "candidate_id": "G187A",
+      "mutation": "G187A",
+      "first_seen_round": 2,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "G187 is in the catalytic loop; glycine-to-alanine may restrict backbone flexibility needed for catalysis."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "G187 is in the catalytic loop; glycine-to-alanine may restrict backbone flexibility needed for catalysis. No direct evidence yet but mechanistic rationale is strong for LOF."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "Glycine-to-alanine in the catalytic loop restricts backbone conformational flexibility required for catalysis. No contradicting evidence; retained as top candidate for LOF."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y189A": {
+      "candidate_id": "Y189A",
+      "mutation": "Y189A",
+      "first_seen_round": 3,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Y189 is a conserved tyrosine in the catalytic loop; alanine substitution removes a key aromatic residue that may participate in substrate positioning or stacking interactions."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "Tyrosine-to-alanine removes an aromatic side chain likely involved in substrate positioning or stacking in the catalytic loop. Retained as strong LOF candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D191A": {
+      "candidate_id": "D191A",
+      "mutation": "D191A",
+      "first_seen_round": 4,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 4,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "D191 is a conserved aspartate in the catalytic loop EFGDYFDICVA; removal of the carboxylate side chain could disrupt acid-base catalysis or metal coordination essential for MTHFR activity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "G187A": null,
+    "Y189A": null,
+    "D191A": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "E185A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1482,
+        "normalized": 0.1482,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.148 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "E185A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E185A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "qwen3.8-max__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "E185A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E185K",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1031,
+        "normalized": 0.1031,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.103 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "qwen3.8-max__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "E185K"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E185K",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.043478,
+        "normalized": 0.043478,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of K at position 185 = 0.0435 among 23 homologs; conservation entropy 2.258 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "qwen3.8-max__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "E185K"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 19,
+    "c0_size": 1,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

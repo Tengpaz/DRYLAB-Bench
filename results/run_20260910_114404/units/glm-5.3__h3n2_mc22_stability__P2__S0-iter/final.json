@@ -1,0 +1,160 @@
+{
+  "unit_id": "glm-5.3__h3n2_mc22_stability__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "glm-5.3",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "S144N",
+        "confidence": 0.4,
+        "evidence_refs": [],
+        "decision_summary": "Ser→Asn in a solvent-exposed HA1 loop can create an N-glycosylation-competent context; an added glycan can modestly increase HA thermostability. Purely structural-plausibility-based, no external evidence."
+      },
+      {
+        "rank": 2,
+        "mutation": "S145N",
+        "confidence": 0.35,
+        "evidence_refs": [],
+        "decision_summary": "Adjacent exposed-loop position with polar-conservative Ser→Asn change that could complete an N-X-S/T sequon in combination with local context. Fallback candidate ranked below S144N due to weaker sequon-plausibility."
+      },
+      {
+        "rank": 3,
+        "mutation": "Q454E",
+        "confidence": 0.28,
+        "evidence_refs": [],
+        "decision_summary": "Gln→Glu is conservative and could form a new salt bridge with nearby basic residues in the HA2 stem region, improving stability. Speculative without structural modeling, hence lowest confidence."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Self-iteration reached diminishing returns with no evidence tools available; final Top-3 selected from the initial candidate pool."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "S144N": {
+      "candidate_id": "S144N",
+      "mutation": "S144N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Creates a potential N-linked glycosylation sequon (N-S-S) on the HA1 head; added glycans are repeatedly associated with increased HA thermostability and environmental persistence in H3N2."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Adds a nearby N-glycosylation-competent sequon context in a solvent-exposed HA1 loop; extra glycan shielding can modestly increase thermostability. No external evidence available; relies on structural plausibility only."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q454E": {
+      "candidate_id": "Q454E",
+      "mutation": "Q454E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.28,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.28,
+          "rationale": "Glu can participate in an intra-helical i+4 ionic/hydrogen-bonding interaction in the HA2 long helix (e.g., with Lys452/Lys453), marginally stabilizing the coiled coil."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.28,
+          "rationale": "Potential new salt-bridge partner for nearby basic residues in the stem/HA2 region; speculative without structural modeling. Kept but ranked low."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S145N": {
+      "candidate_id": "S145N",
+      "mutation": "S145N",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Adjacent to S144 in the same exposed loop; S145N combined with 144 context could complete an N-X-S/T glycosylation site, and Ser→Asn is a conservative polar substitution. Independent of S144N as a fallback."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q295E": {
+      "candidate_id": "Q295E",
+      "mutation": "Q295E",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.25,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "A polar-conservative substitution in the receptor-adjacent region that may improve local hydrogen bonding/salt-bridge network. Low confidence absent structural evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "S144N": null,
+    "S145N": null,
+    "Q454E": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 9,
+    "c0_size": 2,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

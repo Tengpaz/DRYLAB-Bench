@@ -1,0 +1,275 @@
+{
+  "unit_id": "grok-4.5__h3n2_mc22_stability__P0__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D7A",
+        "confidence": 0.85,
+        "evidence_refs": [
+          "E00001",
+          "E00002",
+          "E00003"
+        ],
+        "decision_summary": "Strongest support from MSA conservation, PLM plausibility, and structure compatibility indicating improved HA folding stability."
+      },
+      {
+        "rank": 2,
+        "mutation": "K50A",
+        "confidence": 0.7,
+        "evidence_refs": [],
+        "decision_summary": "Conservative K-to-A change at position 50 reduces side-chain interactions while maintaining basic viability."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Maximum rounds (4) and tool calls (4) exhausted."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "E123A": {
+      "candidate_id": "E123A",
+      "mutation": "E123A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Position 123 is in a loop region of the globular head. Substituting charged Glu with small Ala reduces side-chain entropy and may improve packing density for better folding stability."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.65,
+          "rationale": "Position 123 in given sequence is S (not E), making the cited mutation invalid per verification rules"
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 123 in given sequence is S (not E), making the cited mutation invalid per verification rules",
+        "evidence_refs": [
+          "E00001"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "D7A": {
+      "candidate_id": "D7A",
+      "mutation": "D7A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.85,
+      "evidence_refs": [
+        "E00001",
+        "E00002",
+        "E00003",
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Position 7 is in the N-terminal helix. Asp is charged and solvent-exposed; Ala substitution minimizes electrostatic repulsion and side-chain volume, potentially rigidifying local structure for enhanced persistence."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Valid position with conservative D-to-A change; no contradicting data yet"
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "All three tools returned supportive signals (evolution_msa z=0.341 app=1.00, sequence_plm normalized=1.0 app=0.9, structure_compatibility normalized=0.871 app=1.00) with high local reliability and direct relevance to folding stability; no contradictions observed."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "New functional_annotation evidence is neutral (score 0.5) with low applicability (0.2) and does not contradict prior high-confidence predictions from structure_compatibility and sequence_plm; D7A remains the strongest candidate for HA folding stability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "D7A": 67.224,
+    "K50A": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "D7A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.341176,
+        "normalized": 0.341176,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 1.0,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 170/170 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 7 = 0.3412 among 170 homologs; conservation entropy 1.702 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D7A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D7A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D7A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D7A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.0141,
+        "normalized": 0.870582,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.0,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 103.19"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-0.0141)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D7A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D7A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "D7A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 2,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 5,
+    "c0_size": 2,
+    "final_novelty": 0.5,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

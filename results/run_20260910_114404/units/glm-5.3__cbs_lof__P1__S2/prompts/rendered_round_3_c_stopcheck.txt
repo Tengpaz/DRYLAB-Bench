@@ -1,0 +1,172 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in human cystathionine beta-synthase (CBS, 551 aa).
+
+PRIMARY OBJECTIVE: Abolish CBS enzyme activity (loss-of-function).
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MPSETPQAEVGPTGCPHRSGPHSAKGSLEKGSPEDKEAKEPLWIRPDAPSRCTWQLGRPASESPHHHTAPAKSPKILPDILKKIGDTPMVRINKIGKKFGLKCELLAKCEFFNAGGSVKDRISLRMIEDAERDGTLKPGDTIIEPTSGNTGIGLALAAAVRGYRCIIVMPEKMSSEKVDVLRALGAEIVRTPTNARFDSPESHVGVAWRLKNEIPNSHILDQYRNASNPLAHYDTTADEILQQCDGKLDMLVASVGTGGTITGIARKLKEKCPGCRIIGVDPEGSILAEPEELNQTEQTTYEVEGIGYDFIPTVLDRTVVDKWFKSNDEEAFTFARMLIAQEGLLCGGSAGSTVAVAVKAAQELQEGQRCVVILPDSVRNYMTKFLSDRWMLQKGFLKEEDLTEKKPWWWHLRVQELGLSAPLTVLPTITCGHTIEILREKGFDQAPVVDEAGVILGMVTLGNMLSSLLAGKVQPSDQVGKVIYKQFKQIRLTDTLGRLSHILEMDHFALVVHEQIQYHSTGKSSQRQMVFGVVTAIDLLNFVAAQERDQK
+```
+NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   No experimental structure is configured for this task — every query returns status = "not_applicable".
+
+4. functional_annotation — curated UniProt features for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'pathogenicity (LOF proxy)' via alphamissense — predictions are AVAILABLE for this task.. Higher = more of that phenotype.
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  G307D  confidence=0.930  rank=1
+  K119N  confidence=0.910  rank=2
+  G305D  confidence=0.880  rank=3
+  C52Y  confidence=0.780  rank=4
+  R121W  confidence=0.700  rank=5
+BT evidence so far:
+  E00001 phenotype(C52Y): z=0.878, app=1.00
+  E00002 phenotype(H65Y): z=0.357, app=1.00
+  E00003 phenotype(K119N): z=0.991, app=1.00
+  E00004 phenotype(T191M): z=0.716, app=1.00
+  E00005 phenotype(R121W): z=0.895, app=1.00
+  E00006 phenotype(E239K): z=0.828, app=1.00
+  E00007 phenotype(G305D): z=0.971, app=1.00
+  E00008 phenotype(G307D): z=0.992, app=1.00
+  E00009 evolution_msa(C52Y): z=0.023, app=1.00
+  E00010 evolution_msa(H65Y): z=0.000, app=1.00
+  E00011 evolution_msa(K119N): z=0.028, app=0.83
+  E00012 evolution_msa(T191M): z=0.036, app=0.97
+  E00013 evolution_msa(R121W): z=0.000, app=0.83
+  E00014 evolution_msa(E239K): z=0.048, app=0.95
+  E00015 evolution_msa(G305D): z=0.114, app=0.81
+  E00016 evolution_msa(G307D): z=0.000, app=0.78
+  E00017 sequence_plm(C52Y): z=0.001, app=0.90
+  E00018 sequence_plm(H65Y): z=0.029, app=0.90
+  E00019 sequence_plm(K119N): z=0.000, app=0.90
+  E00020 sequence_plm(T191M): z=0.000, app=0.90
+  E00021 sequence_plm(R121W): z=0.000, app=0.90
+  E00022 sequence_plm(E239K): z=0.000, app=0.90
+  E00023 sequence_plm(G305D): z=0.000, app=0.90
+  E00024 sequence_plm(G307D): z=0.000, app=0.90
+  E00025 functional_annotation(C52Y): z=0.500, app=0.20
+  E00026 functional_annotation(H65Y): z=0.500, app=0.20
+  E00027 functional_annotation(K119N): z=0.500, app=0.20
+  E00028 functional_annotation(T191M): z=0.500, app=0.20
+  E00029 functional_annotation(R121W): z=0.500, app=0.20
+  E00030 functional_annotation(E239K): z=0.500, app=0.20
+  E00031 functional_annotation(G305D): z=0.500, app=0.20
+  E00032 functional_annotation(G307D): z=0.500, app=0.20
+Change history:
+  - drop A114V (round 1): Conservative substitution with weak mechanistic rationale for abolishing activity; drop to make room for stronger catalytic-site candidates.
+  - drop P145L (round 1): No direct catalytic or ligand role documented; low expected LOF yield, remove from pool.
+  - drop H65Y (round 2): Phenotype 0.357 is ambiguous, clearly the weakest on the dimension closest to the reward; removed from the pool.
+Changes this round:
+  - G307D retain: Highest phenotype score (0.992) at a conserved catalytic-loop glycine; PLM and MSA scores near zero confirm the variant is highly disruptive, which supports LOF. Retain as rank 1.
+  - K119N retain: Very high phenotype score (0.991) at the active-site lysine that binds PLP; conservation and plausibility near zero consistent with severe functional impact. Retain as rank 2.
+  - G305D retain: Strong phenotype score (0.971) at a second catalytic-region glycine; modest evolutionary tolerance (0.114) slightly weakens certainty versus G307D. Retain as rank 3.
+  - C52Y rerank: Strong phenotype (0.878) and no homolog tolerance, but Zn-binding Cys loss may destabilize folding rather than cleanly abolish catalysis. Lower confidence and rank below the catalytic glycine/lysine variants.
+  - R121W retain: Good phenotype score (0.895) but slightly lower confidence than C52Y due to less direct catalytic role; kept as backup.
+  - T191M reject: Moderate phenotype (0.716) and, unlike the leaders, some evolutionary tolerance (0.036 relative to pool) and conservative chemistry make it a weaker LOF bet. Drop to keep the pool focused.
+  - E239K reject: Weakest mechanistic link to the active site and only mid-range phenotype score (0.828). Drop from active pool.
+Remaining doubts: Phenotype scores are AlphaMissense-based proxies, not direct activity measurements, so G305D's partial evolutionary tolerance leaves residual uncertainty about complete catalytic abolition.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 3 — respond with a single JSON object, nothing else.

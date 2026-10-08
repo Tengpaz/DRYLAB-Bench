@@ -1,0 +1,202 @@
+{
+  "unit_id": "grok-4.5__h3n2_mc22_stability__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "grok-4.5",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "V26I",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "V26I selected as top due to potential hydrophobic core stabilization in early HA region; high predicted stability gain with minimal disruption risk."
+      },
+      {
+        "rank": 2,
+        "mutation": "I25V",
+        "confidence": 0.68,
+        "evidence_refs": [],
+        "decision_summary": "I25V retained for better packing in N-terminal helix; supports folding stability while preserving viability."
+      },
+      {
+        "rank": 3,
+        "mutation": "K27R",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "K27R kept as lower-confidence option for possible charge stabilization; integrates with pool but less optimal than top two."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No further gains expected from self-iteration alone given lack of structural/functional evidence and task constraints"
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "V26I": {
+      "candidate_id": "V26I",
+      "mutation": "V26I",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Position 26 is valine in a hydrophobic stretch; isoleucine substitution preserves hydrophobicity and may tighten core packing to enhance overall folding stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Retained as top candidate for potential hydrophobic stabilization in core region."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I25V": {
+      "candidate_id": "I25V",
+      "mutation": "I25V",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Position 25 is isoleucine; valine change maintains small hydrophobic character and could reduce steric clashes for improved structural stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Retained, slight improvement in stability prediction via better packing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L42V": {
+      "candidate_id": "L42V",
+      "mutation": "L42V",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": null,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Position 42 is leucine in the stem region; valine substitution may strengthen hydrophobic interactions at the trimer interface without disrupting viability."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Reranked down due to less favorable position for stability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H18F": {
+      "candidate_id": "H18F",
+      "mutation": "H18F",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Position 18 is histidine; phenylalanine introduces aromatic side chain that could form stabilizing pi-stacking or hydrophobic contacts."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.55,
+          "rationale": "Rejected as histidine to phenylalanine may disrupt potential interactions."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Rejected as histidine to phenylalanine may disrupt potential interactions.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K27R": {
+      "candidate_id": "K27R",
+      "mutation": "K27R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Position 27 is lysine; arginine substitution maintains positive charge and size, potentially forming salt bridges that rigidify local structure for better environmental persistence."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Retained but low confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "V26I": null,
+    "I25V": null,
+    "K27R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 5,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

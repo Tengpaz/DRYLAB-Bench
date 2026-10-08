@@ -1,0 +1,100 @@
+{
+  "unit_id": "qwen3.8-max__h3n2_mc22_stability__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "T318I",
+        "confidence": 0.52,
+        "evidence_refs": [],
+        "decision_summary": "Replaces polar threonine with hydrophobic isoleucine in the HA2 stalk helix, potentially improving core packing and thermostability in the coiled-coil region."
+      },
+      {
+        "rank": 2,
+        "mutation": "G342A",
+        "confidence": 0.48,
+        "evidence_refs": [],
+        "decision_summary": "Replaces glycine with alanine near the fusion peptide region of HA2, reducing backbone conformational entropy and stabilizing the folded state through restricted phi/psi angles."
+      },
+      {
+        "rank": 3,
+        "mutation": "N464D",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "Removes an Asn-Gly deamidation hotspot (positions 464-465) in the HA2 stalk, reducing chemical degradation over time and improving environmental persistence."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Verified all positions against the sequence and selected three candidates with distinct stabilizing mechanisms; further iteration unlikely to improve without external evidence."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "T318I": {
+      "candidate_id": "T318I",
+      "mutation": "T318I",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Isoleucine substitution at a surface-exposed position in HA2 may improve hydrophobic packing within the trimer interface, enhancing thermostability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "T318 is in the HA1 globular head; isoleucine substitution may improve hydrophobic packing but position is surface-exposed, limiting stability gains."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "T318I in the HA2 stalk region replaces a polar threonine with a hydrophobic isoleucine, potentially improving core packing and thermostability. Position 318 is in the helical stalk domain where hydrophobic substitutions often stabilize."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "T318I": null,
+    "G342A": null,
+    "N464D": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 1,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 23,
+    "c0_size": 1,
+    "final_novelty": 0.6666666666666666,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

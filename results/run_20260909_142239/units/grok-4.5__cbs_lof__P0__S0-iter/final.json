@@ -1,0 +1,198 @@
+{
+  "unit_id": "grok-4.5__cbs_lof__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "grok-4.5",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "R413C",
+        "confidence": 0.9,
+        "evidence_refs": [],
+        "decision_summary": "R413C targets conserved catalytic Arg in active site; cysteine substitution likely abolishes activity via charge loss and potential disulfide issues while preserving core fold."
+      },
+      {
+        "rank": 2,
+        "mutation": "K119A",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "K119A removes positive charge in PLP-binding pocket critical for CBS catalysis; alanine substitution disrupts substrate binding without major stability loss."
+      },
+      {
+        "rank": 3,
+        "mutation": "R413H",
+        "confidence": 0.8,
+        "evidence_refs": [],
+        "decision_summary": "R413H maintains some charge but introduces histidine for potential activity loss at catalytic Arg; lower priority than cysteine variant due to partial charge preservation."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 finalized; further rounds unlikely to enhance due to sequence-only analysis and budget limits"
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Lys119 coordinates the PLP cofactor in the active site of CBS. Alanine substitution eliminates this interaction, abolishing catalytic activity while maintaining overall fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "K119A retains high viability for abolishing activity given K119 position in PLP-binding pocket"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R413C": {
+      "candidate_id": "R413C",
+      "mutation": "R413C",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.9,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "Arg413 forms hydrogen bonds with the substrate in the active site. Cysteine replacement disrupts substrate binding, resulting in complete loss of enzyme function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.9,
+          "rationale": "R413C shows strongest initial signal for loss-of-function as R413 is a conserved catalytic residue in the active site per sequence alignment"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119M": {
+      "candidate_id": "K119M",
+      "mutation": "K119M",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": null,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Lys119 is essential for PLP binding. Methionine substitution removes the positive charge and coordination capability, preventing cofactor attachment and abolishing activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "K119M retained for diversity but lower priority as M is bulkier"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R413H": {
+      "candidate_id": "R413H",
+      "mutation": "R413H",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Arg413 is critical for substrate positioning. Histidine change alters charge and hydrogen bonding, likely eliminating CBS catalytic function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "R413H still strong candidate but slightly lower than C variant due to charge preservation"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D444A": {
+      "candidate_id": "D444A",
+      "mutation": "D444A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Asp444 participates in the active site network. Alanine substitution removes key interactions, disrupting catalysis and abolishing enzyme activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "D444A retained as auxiliary site mutation but lowest priority for core activity loss"
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "R413C": null,
+    "K119A": null,
+    "R413H": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 5,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

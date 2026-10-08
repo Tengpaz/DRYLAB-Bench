@@ -1,0 +1,979 @@
+{
+  "unit_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "L65P",
+        "confidence": 0.9,
+        "evidence_refs": [
+          "E00004",
+          "E00009",
+          "E00014"
+        ],
+        "decision_summary": "All three tools consistently indicate severe incompatibility: ProteinMPNN z=0.076, evolution z=0.000, PLM z=0.000. Proline at this position should disrupt local backbone geometry and destabilize the fold."
+      },
+      {
+        "rank": 2,
+        "mutation": "L11P",
+        "confidence": 0.87,
+        "evidence_refs": [
+          "E00003",
+          "E00008",
+          "E00013"
+        ],
+        "decision_summary": "Strong multi-tool support for destabilization: ProteinMPNN z=0.107, evolution z=0.023, PLM z=0.000. Proline introduction at this conserved leucine should disrupt secondary structure."
+      },
+      {
+        "rank": 3,
+        "mutation": "V36P",
+        "confidence": 0.85,
+        "evidence_refs": [
+          "E00004"
+        ],
+        "decision_summary": "ProteinMPNN z=0.062 (ΔlogP=-5.0) is the most extreme backbone rejection observed across all candidates, indicating proline at position 36 is highly incompatible with the local structure and should severely disrupt folding."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "All 4 tool calls have been used; no further evidence can be gathered to resolve the remaining doubt about V36P's evolutionary/PLM corroboration."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "Y16A": {
+      "candidate_id": "Y16A",
+      "mutation": "Y16A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.75,
+      "evidence_refs": [
+        "E00005",
+        "E00010",
+        "E00015"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Tyrosine at this position likely contributes to hydrophobic core packing and potential hydrogen bonding; alanine substitution removes these stabilizing interactions."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "Removes aromatic side chain from a region near W17 that likely forms a hydrophobic cluster; moderately destabilizing but less aggressive than core charge introductions."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "ProteinMPNN z=0.943 (raw ΔlogP=+0.85) indicates high backbone compatibility with alanine at position 16, suggesting this position tolerates the substitution structurally. Despite high conservation, the mutation likely won't disrupt folding."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "ProteinMPNN z=0.943 (raw ΔlogP=+0.85) indicates high backbone compatibility with alanine at position 16, suggesting this position tolerates the substitution structurally. Despite high conservation, the mutation likely won't disrupt folding.",
+        "evidence_refs": [
+          "E00005"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "L11P": {
+      "candidate_id": "L11P",
+      "mutation": "L11P",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.87,
+      "evidence_refs": [
+        "E00003",
+        "E00008",
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Proline at a hydrophobic core position breaks secondary structure elements and disrupts packing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "Proline is a strong helix-breaker; position 11 is in a likely helical region of PsaE, making this a potent destabilizer."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.86,
+          "rationale": "ProteinMPNN z=0.107 (raw ΔlogP=-4.63) indicates strong structural incompatibility. Position 11 has very low conservation entropy (1.019), confirming functional/structural importance. All evidence supports destabilization."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.87,
+          "rationale": "All three tools (structure z=0.107, evolution z=0.023, PLM z=0.000) consistently support destabilization. Slightly less extreme structure rejection than L65P but still very strong."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L65P": {
+      "candidate_id": "L65P",
+      "mutation": "L65P",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.9,
+      "evidence_refs": [
+        "E00004",
+        "E00009",
+        "E00014"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.76,
+          "rationale": "Proline introduction near the C-terminus disrupts the final structural element, potentially unfolding the entire domain."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.76,
+          "rationale": "Proline introduction near the C-terminal helix should disrupt local secondary structure and overall fold stability."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.88,
+          "rationale": "ProteinMPNN gives the lowest compatibility score (z=0.076, raw ΔlogP=-4.89), strongly indicating backbone rejection of proline at this position. Combined with zero evolutionary tolerance and zero PLM plausibility, all three tools converge on strong destabilization."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.9,
+          "rationale": "All three tools (structure z=0.076, evolution z=0.000, PLM z=0.000) consistently indicate this mutation is structurally incompatible, evolutionarily intolerant, and implausible — strongly supporting destabilization."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W17A": {
+      "candidate_id": "W17A",
+      "mutation": "W17A",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00001",
+        "E00006",
+        "E00011"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.83,
+          "rationale": "Tryptophan is the largest residue and often a critical hydrophobic core anchor; replacing with alanine removes substantial van der Waals contacts and should severely destabilize the fold."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Evolution and PLM strongly reject this substitution (z=0.000 both), but ProteinMPNN gives moderate compatibility (z=0.803), suggesting the backbone partially accommodates alanine. Still likely destabilizing due to loss of large hydrophobic core residue, but less certain than proline substitutions."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "While evolution and PLM support intolerance, ProteinMPNN z=0.803 indicates the backbone readily accepts alanine at position 17, suggesting the position may be surface-exposed or structurally permissive, reducing expected destabilization impact."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I32D": {
+      "candidate_id": "I32D",
+      "mutation": "I32D",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.81,
+      "evidence_refs": [
+        "E00002",
+        "E00007",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.81,
+          "rationale": "Introducing a charged aspartate into a hydrophobic region (positions 32-38 are predominantly hydrophobic) creates a severe energetic penalty that should disrupt folding."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "ProteinMPNN z=0.991 (raw ΔlogP=+2.00) indicates the backbone strongly accepts aspartate at position 32, suggesting this position is surface-exposed or structurally permissive. The mutation is unlikely to destabilize the fold despite being evolutionarily intolerant."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "ProteinMPNN z=0.991 (raw ΔlogP=+2.00) indicates the backbone strongly accepts aspartate at position 32, suggesting this position is surface-exposed or structurally permissive. The mutation is unlikely to destabilize the fold despite being evolutionarily intolerant.",
+        "evidence_refs": [
+          "E00002"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "Y16P": {
+      "candidate_id": "Y16P",
+      "mutation": "Y16P",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.74,
+      "evidence_refs": [
+        "E00016"
+      ],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.74,
+          "rationale": "Position 16 has the lowest conservation entropy (0.932) indicating extreme functional importance. While Y16A is structurally compatible, proline introduces backbone constraint that should disrupt local structure regardless of side-chain compatibility."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "ProteinMPNN z=0.999 (ΔlogP=+2.7) indicates the backbone strongly accepts proline at position 16, meaning the substitution is structurally compatible and unlikely to disrupt folding. This directly contradicts the destabilization goal."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "ProteinMPNN z=0.999 (ΔlogP=+2.7) indicates the backbone strongly accepts proline at position 16, meaning the substitution is structurally compatible and unlikely to disrupt folding. This directly contradicts the destabilization goal.",
+        "evidence_refs": [
+          "E00016"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "V36P": {
+      "candidate_id": "V36P",
+      "mutation": "V36P",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.85,
+      "evidence_refs": [
+        "E00017"
+      ],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Position 36 is in the hydrophobic stretch (positions 32-38) near I32. Since I32D showed high backbone compatibility suggesting surface exposure, V36P targets an adjacent position where proline's backbone disruption may be more effective in a hydrophobic context."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.85,
+          "rationale": "ProteinMPNN z=0.062 (ΔlogP=-5.0) is the most extreme backbone rejection observed, indicating proline at position 36 is highly incompatible with the local structure and should severely disrupt folding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "L65P": 2.74,
+    "L11P": 4.459,
+    "V36P": 6.197
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "W17A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.2129,
+        "normalized": 0.803253,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-0.2129)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I32D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 2.0013,
+        "normalized": 0.991479,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=2.0013)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L11P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.6289,
+        "normalized": 0.106894,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-4.6289)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L65P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.8897,
+        "normalized": 0.07591,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-4.8897)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y16A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.8467,
+        "normalized": 0.94268,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=0.8467)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W17A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 17 = 0.0000 among 43 homologs; conservation entropy 1.485 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I32D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.953,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.953,
+        "reason": "alignment coverage 41/43 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 32 = 0.0000 among 41 homologs; conservation entropy 1.428 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L11P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.023256,
+        "normalized": 0.023256,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 11 = 0.0233 among 43 homologs; conservation entropy 1.019 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L65P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 0.907,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.907,
+        "reason": "alignment coverage 39/43 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 65 = 0.0000 among 39 homologs; conservation entropy 1.311 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y16A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.43,
+        "local": 1.0,
+        "reason": "MSA depth 43, Neff 13.2 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 43/43 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 16 = 0.0000 among 43 homologs; conservation entropy 0.932 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W17A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I32D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0003,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L11P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0002,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L65P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y16A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0002,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "W17A",
+          "I32D",
+          "L11P",
+          "L65P",
+          "Y16A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y16P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 2.7,
+        "normalized": 0.999225,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=2.7)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "Y16P",
+          "V36P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V36P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.9967,
+        "normalized": 0.061967,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 1.0,
+        "reason": "PDB 1PSE at nan A; residue B-factor 0.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 1PSE:A (ΔlogP=-4.9967)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "qwen3.8-max__psae_stability_disruption__P0__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "Y16P",
+          "V36P"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 7,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 7,
+    "c0_size": 3,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

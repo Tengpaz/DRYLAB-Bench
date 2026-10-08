@@ -1,0 +1,1680 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in the H5N1 hemagglutinin HA0 (A/Vietnam/1203/2004 lineage, 567 aa).
+
+THE DESIGN OBJECTIVE: Maximize HA folding stability (heat / environmental persistence) while preserving cell entry.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MENIVLLLAIVSLVKSDQICIGYHANNSTEQVDTIMEKNVTVTHAQDILEKTHNGKLCDLNGVKPLILKDCSVAGWLLGNPMCDEFIRVPEWSYIVERANPANDLCYPGSLNDYEELKHMLSRINHFEKILIIPKSSWPNHETSLGVSAACPYQGAPSFFRNVVWLIKKNDAYPTIKISYNNTNREDLLILWGIHHSNNAEEQTNLYKNPTTYISVGTSTLNQRLAPKIATRSQVNGQRGRMDFFWTILKPDDAIHFESNGNFIAPEYAYKIVKKGDSTIMKSGVEYGHCNTKCQTPVGAINSSMPFHNIHPLTIGECPKYVKSNKLVLATGLRNSPLREKRRKRGLFGAIAGFIEGGWQGMVDGWYGYHHSNEQGSGYAADKESTQKAIDGVTNKVNSIIDKMNTQFEAVGREFNNLERRIENLNKKMEDGFLDVWTYNAELLVLMENERTLDFHDSNVKNLYDKVRLQLRDNAKELGNGCFEFYHKCDNECMESVRNGTYDYPQYSEEARLKREEISGVKLESVGTYQILSIYSTAASSLALAIMMAGLSLWMCSNGSLQCRICI
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   For THIS task the backbone is PDB 2FK0 chain A — 57% of this sequence's residues have experimental coordinates (resolution 2.95 Å). Positions OUTSIDE the structure return status = "not_applicable" (no score).
+
+4. functional_annotation — curated UniProt features for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Given the evidence (if any) and the current pool, decide the updates: add / modify (rerank) / delete (reject) / re-evaluate candidates, and give your reasoning. Do NOT output a STOP decision in this step. Weigh each tool's evidence by how close its measured dimension is to the REWARD phenotype: a tool whose dimension differs from the reward (or trades off against it) must not be followed blindly.
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  A150E  confidence=0.610  rank=1
+  A411V  confidence=0.600  rank=2
+  I402L  confidence=0.560  rank=3
+  V394I  confidence=0.550  rank=4
+  I423L  confidence=0.530  rank=5
+  M405L  confidence=0.520  rank=6
+  F409Y  confidence=0.480  rank=7
+  G393A  confidence=0.450  rank=8
+  N406D  confidence=0.440  rank=9
+BT evidence so far (before this round):
+  (no evidence collected before this round)
+Evidence obtained this round:
+  E00001 evolution_msa(A150E): z=0.021, app=0.96
+  E00002 evolution_msa(A411V): z=0.503, app=0.81
+  E00003 evolution_msa(I402L): z=0.006, app=0.81
+  E00004 evolution_msa(V394I): z=0.000, app=0.81
+  E00005 evolution_msa(I423L): z=0.117, app=0.81
+  E00006 evolution_msa(M405L): z=0.000, app=0.81
+  E00007 evolution_msa(F409Y): z=0.006, app=0.81
+  E00008 evolution_msa(G393A): z=0.000, app=0.81
+  E00009 evolution_msa(N406D): z=0.374, app=0.81
+  E00010 sequence_plm(A150E): z=0.004, app=0.90
+  E00011 sequence_plm(A411V): z=1.000, app=0.90
+  E00012 sequence_plm(I402L): z=0.754, app=0.90
+  E00013 sequence_plm(V394I): z=1.000, app=0.90
+  E00014 sequence_plm(I423L): z=0.536, app=0.90
+  E00015 sequence_plm(M405L): z=0.512, app=0.90
+  E00016 sequence_plm(F409Y): z=1.000, app=0.90
+  E00017 sequence_plm(G393A): z=1.000, app=0.90
+  E00018 sequence_plm(N406D): z=0.048, app=0.90
+  E00019 structure_compatibility(A150E): z=0.220, app=1.00
+  E00020 structure_compatibility(A411V): z=?, app=0.00
+  E00021 structure_compatibility(I402L): z=?, app=0.00
+  E00022 structure_compatibility(V394I): z=?, app=0.00
+  E00023 structure_compatibility(I423L): z=?, app=0.00
+  E00024 structure_compatibility(M405L): z=?, app=0.00
+  E00025 structure_compatibility(F409Y): z=?, app=0.00
+  E00026 structure_compatibility(G393A): z=?, app=0.00
+  E00027 structure_compatibility(N406D): z=?, app=0.00
+  E00028 functional_annotation(A150E): z=0.500, app=0.20
+  E00029 functional_annotation(A411V): z=0.500, app=0.20
+  E00030 functional_annotation(I402L): z=0.500, app=0.20
+  E00031 functional_annotation(V394I): z=0.500, app=0.20
+  E00032 functional_annotation(I423L): z=0.500, app=0.20
+  E00033 functional_annotation(M405L): z=0.500, app=0.20
+  E00034 functional_annotation(F409Y): z=0.500, app=0.20
+  E00035 functional_annotation(G393A): z=0.500, app=0.20
+  E00036 functional_annotation(N406D): z=0.500, app=0.20
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+</WORKING_MEMORY>
+
+<NEW_EVIDENCE>
+[
+  {
+    "candidate": "A150E",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.020619,
+      "normalized": 0.020619,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.965,
+      "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.965,
+      "reason": "alignment coverage 194/201 homologs"
+    },
+    "interpretation": "mutant frequency of E at position 150 = 0.0206 among 194 homologs; conservation entropy 1.954 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00001",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "A411V",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.503067,
+      "normalized": 0.503067,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.811,
+      "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.811,
+      "reason": "alignment coverage 163/201 homologs"
+    },
+    "interpretation": "mutant frequency of V at position 411 = 0.5031 among 163 homologs; conservation entropy 1.603 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00002",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I402L",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.006135,
+      "normalized": 0.006135,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.811,
+      "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.811,
+      "reason": "alignment coverage 163/201 homologs"
+    },
+    "interpretation": "mutant frequency of L at position 402 = 0.0061 among 163 homologs; conservation entropy 1.840 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00003",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "V394I",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.811,
+      "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.811,
+      "reason": "alignment coverage 163/201 homologs"
+    },
+    "interpretation": "mutant frequency of I at position 394 = 0.0000 among 163 homologs; conservation entropy 1.708 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00004",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I423L",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.116564,
+      "normalized": 0.116564,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.811,
+      "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.811,
+      "reason": "alignment coverage 163/201 homologs"
+    },
+    "interpretation": "mutant frequency of L at position 423 = 0.1166 among 163 homologs; conservation entropy 1.808 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00005",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "M405L",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.811,
+      "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.811,
+      "reason": "alignment coverage 163/201 homologs"
+    },
+    "interpretation": "mutant frequency of L at position 405 = 0.0000 among 163 homologs; conservation entropy 1.638 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00006",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "F409Y",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.006135,
+      "normalized": 0.006135,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.811,
+      "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.811,
+      "reason": "alignment coverage 163/201 homologs"
+    },
+    "interpretation": "mutant frequency of Y at position 409 = 0.0061 among 163 homologs; conservation entropy 1.990 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00007",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G393A",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.811,
+      "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.811,
+      "reason": "alignment coverage 163/201 homologs"
+    },
+    "interpretation": "mutant frequency of A at position 393 = 0.0000 among 163 homologs; conservation entropy 1.439 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00008",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N406D",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.374233,
+      "normalized": 0.374233,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.811,
+      "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.811,
+      "reason": "alignment coverage 163/201 homologs"
+    },
+    "interpretation": "mutant frequency of D at position 406 = 0.3742 among 163 homologs; conservation entropy 1.845 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00009",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "A150E",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.004,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00010",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "A411V",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 1.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00011",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I402L",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.7541,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00012",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "V394I",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 1.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00013",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I423L",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5358,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00014",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "M405L",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5116,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00015",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "F409Y",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 1.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00016",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G393A",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 1.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00017",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N406D",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0482,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00018",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "A150E",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": -4.8895,
+      "normalized": 0.220365,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 1.0,
+      "local": 0.283,
+      "reason": "PDB 2FK0 at 2.95 A; residue B-factor 71.66"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "residue has experimental coordinates in the mapped chain"
+    },
+    "interpretation": "ProteinMPNN conditional log-prob delta on 2FK0:A (ΔlogP=-4.8895)",
+    "limitations": [
+      "fixed-backbone approximation; decoding-order averaged (N=2)",
+      "structure-conditioned compatibility does not equal the requested phenotype"
+    ],
+    "evidence_id": "E00019",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "A411V",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 411 has no coordinates in 2FK0"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 411 has no coordinates in 2FK0"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00020",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I402L",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 402 has no coordinates in 2FK0"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 402 has no coordinates in 2FK0"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00021",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "V394I",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 394 has no coordinates in 2FK0"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 394 has no coordinates in 2FK0"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00022",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I423L",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 423 has no coordinates in 2FK0"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 423 has no coordinates in 2FK0"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00023",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "M405L",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 405 has no coordinates in 2FK0"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 405 has no coordinates in 2FK0"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00024",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "F409Y",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 409 has no coordinates in 2FK0"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 409 has no coordinates in 2FK0"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00025",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G393A",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 393 has no coordinates in 2FK0"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 393 has no coordinates in 2FK0"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00026",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N406D",
+    "tool": "structure_compatibility",
+    "tool_version": "proteinmpnn_v48_020",
+    "score": {
+      "raw": null,
+      "normalized": null,
+      "percentile": null,
+      "direction": null
+    },
+    "reliability": {
+      "global": 0.0,
+      "local": 0.0,
+      "reason": "position 406 has no coordinates in 2FK0"
+    },
+    "applicability": {
+      "value": 0.0,
+      "reason": "position 406 has no coordinates in 2FK0"
+    },
+    "interpretation": null,
+    "status": "not_applicable",
+    "limitations": [
+      "structure evidence unavailable for this candidate"
+    ],
+    "evidence_id": "E00027",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "A150E",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00028",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "A411V",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00029",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I402L",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00030",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "V394I",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00031",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "I423L",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00032",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "M405L",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00033",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "F409Y",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00034",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G393A",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00035",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N406D",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00036",
+    "run_id": "deepseek-v4-flash__flu_h5_stability_dual__P2__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "A150E",
+        "A411V",
+        "I402L",
+        "V394I",
+        "I423L",
+        "M405L",
+        "F409Y",
+        "G393A",
+        "N406D"
+      ],
+      "positions": null
+    }
+  }
+]
+</NEW_EVIDENCE>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "candidate_updates": [
+    {"mutation": "<WT><POS><MUT>", "action": "add | retain | rerank | reject | reconsider",
+     "current_confidence": 0.78,
+     "supporting_evidence_ids": ["E00003"],
+     "contradicting_evidence_ids": ["E00021"],
+     "origin": "initial_pool | new_hypothesis_from_evidence",
+     "trigger_evidence_ids": ["E00017"],
+     "decision_rationale": "<= 2 sentences"}
+  ],
+  "active_candidate_ranking": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.78}
+  ],
+  "evidence_assessment": [
+    {"evidence_id": "E00017", "candidate": "<WT><POS><MUT>",
+     "llm_reliability_assessment": "high | medium | low",
+     "effect_on_candidate": "support | weak_against | against",
+     "reason": "<= 2 sentences"}
+  ],
+  "thinking": "<= 3 sentences — the reasoning behind THIS round's changes",
+  "doubts": "<= 1 sentence — remaining uncertainties"
+}
+Rules: if you add/reconsider, give decision_rationale; every supporting/
+contradicting evidence id referenced in updates must appear in evidence_assessment.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

@@ -1,0 +1,170 @@
+{
+  "unit_id": "qwen3.8-max__zikv_viral_growth__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "zikv_viral_growth",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "T76A",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "Position 76 (T) is in the fusion loop proximal region of domain II; alanine substitution may reduce steric constraints and improve membrane fusion efficiency, a key determinant of viral entry and replication fitness."
+      },
+      {
+        "rank": 2,
+        "mutation": "L107F",
+        "confidence": 0.52,
+        "evidence_refs": [],
+        "decision_summary": "Position 107 (L) is within the conserved fusion loop; phenylalanine substitution may enhance hydrophobic packing and membrane insertion stability, correlating with improved virion production and entry efficiency."
+      },
+      {
+        "rank": 3,
+        "mutation": "G106A",
+        "confidence": 0.48,
+        "evidence_refs": [],
+        "decision_summary": "Position 106 (G) is adjacent to the fusion loop; alanine substitution may stabilize local backbone conformation and improve domain I-II hinge dynamics, potentially enhancing receptor binding and fusion triggering."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 candidates are verified against the sequence and target the functionally critical fusion loop region; without external evidence tools, further self-iteration cannot meaningfully improve confidence or ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "S16G": {
+      "candidate_id": "S16G",
+      "mutation": "S16G",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Position 16 (S) is near the N-terminus in domain I; glycine substitution may increase backbone flexibility in a loop region, potentially improving conformational dynamics."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "Position 16 is in a structured beta-strand region of domain I; glycine substitution likely destabilizes local structure without clear benefit to replication fitness."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Position 16 is in a structured beta-strand region of domain I; glycine substitution likely destabilizes local structure without clear benefit to replication fitness.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "T76A": {
+      "candidate_id": "T76A",
+      "mutation": "T76A",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Position 76 (T) is in the fusion loop proximal region; alanine substitution may reduce steric constraints and improve membrane fusion efficiency, a key determinant of viral entry and replication fitness."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Position 76 (T) is near the fusion loop region; alanine substitution may reduce steric hindrance and improve membrane fusion efficiency, a key driver of viral entry and replication fitness."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L107F": {
+      "candidate_id": "L107F",
+      "mutation": "L107F",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Position 107 (L) is in a hydrophobic core region of domain I; phenylalanine substitution may improve hydrophobic packing and thermostability, which correlates with higher virion production."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.52,
+          "rationale": "Position 107 (L) is in a hydrophobic core region of domain I; phenylalanine substitution may improve hydrophobic packing and thermostability, correlating with higher virion production."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G106A": {
+      "candidate_id": "G106A",
+      "mutation": "G106A",
+      "first_seen_round": 3,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Position 106 (G) is in a loop region of domain I; alanine substitution may stabilize local conformation and improve domain I-II hinge dynamics, potentially enhancing receptor binding and entry."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "T76A": null,
+    "L107F": null,
+    "G106A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 25,
+    "c0_size": 0,
+    "final_novelty": 1.0,
+    "tool_calls_used": 0,
+    "rounds_used": 3,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,663 @@
+{
+  "unit_id": "qwen3.8-max__h3n2_mc22_stability__P2__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N285D",
+        "confidence": 0.62,
+        "evidence_refs": [
+          "E00003",
+          "E00006",
+          "E00009"
+        ],
+        "decision_summary": "N285D shows the highest structure compatibility (z=0.693) and best PLM plausibility (z=0.173) among all candidates tested. The N→D substitution maintains charge and size while potentially improving local electrostatic interactions that stabilize the folded state."
+      },
+      {
+        "rank": 2,
+        "mutation": "T318I",
+        "confidence": 0.55,
+        "evidence_refs": [
+          "E00002",
+          "E00005",
+          "E00008"
+        ],
+        "decision_summary": "T318I has strong structure compatibility (z=0.609) at a well-ordered region with low B-factor, suggesting improved hydrophobic core packing. The T→I substitution replaces a polar residue with a hydrophobic one in a region where hydrophobic burial may enhance thermodynamic stability."
+      },
+      {
+        "rank": 3,
+        "mutation": "N285S",
+        "confidence": 0.5,
+        "evidence_refs": [
+          "E00003"
+        ],
+        "decision_summary": "N285S is a conservative polar substitution at the same high-compatibility position (z=0.693 for position 285) that removes a potential deamidation liability (N-X motif), directly relevant to environmental persistence. Slightly less favorable than N285D due to loss of charge-charge stabilization potential."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Remaining available tools (functional_annotation is static context, phenotype is not applicable, toxin is safety-side only) are unlikely to materially alter the current ranking of the top-3 candidates."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "T155P": {
+      "candidate_id": "T155P",
+      "mutation": "T155P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.58,
+      "evidence_refs": [
+        "E00001",
+        "E00004",
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Located in a flexible loop region; proline substitution may reduce conformational entropy of the unfolded state and improve thermal stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "Proline at position 155 may stabilize a loop region by reducing backbone entropy in the unfolded state, potentially improving folding stability. Awaiting tool evidence to confirm."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "T155P shows very poor structure compatibility (ΔlogP=-4.60, z=0.247), near-zero ESM-1v plausibility (0.013), and zero evolutionary frequency. Proline at a surface-exposed position in the globular head is strongly destabilizing."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "T155P shows very poor structure compatibility (ΔlogP=-4.60, z=0.247), near-zero ESM-1v plausibility (0.013), and zero evolutionary frequency. Proline at a surface-exposed position in the globular head is strongly destabilizing.",
+        "evidence_refs": [
+          "E00001",
+          "E00004",
+          "E00007"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "T318I": {
+      "candidate_id": "T318I",
+      "mutation": "T318I",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00002",
+        "E00005",
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Threonine to isoleucine in a helical region may improve hydrophobic packing and helix propensity, contributing to stalk stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Isoleucine substitution at position 318 may improve hydrophobic core packing in the stalk domain, contributing to thermal stability. Needs structural and evolutionary validation."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.52,
+          "rationale": "T318I has the best structure compatibility among the three (ΔlogP=-1.78, z=0.609, local reliability 0.962 due to low B-factor), suggesting good backbone fit. However, ESM-1v and MSA scores are very low, indicating limited evolutionary and sequence-model support."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "T318I maintains strong structure compatibility (z=0.609) with the lowest B-factor (3.78) indicating a well-ordered region where hydrophobic packing improvements are most impactful."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N285D": {
+      "candidate_id": "N285D",
+      "mutation": "N285D",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.62,
+      "evidence_refs": [
+        "E00003",
+        "E00006",
+        "E00009"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.44,
+          "rationale": "Another potential deamidation-prone asparagine on the surface; aspartate substitution improves chemical stability for environmental persistence."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.44,
+          "rationale": "Asparagine to aspartate at position 285 may introduce a stabilizing salt bridge or hydrogen bond network. Requires structural compatibility evidence."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "N285D has the highest structure compatibility (z=0.693) and the best ESM-1v score (0.173) among the three candidates. The N→D is a conservative substitution that may improve local packing or hydrogen bonding. Zero MSA frequency is a concern but the position has moderate conservation entropy."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "N285D retains the highest structure compatibility (z=0.693) and best PLM score (z=0.173) among all candidates. Zero evolutionary frequency is a minor concern but structural evidence is the most relevant proxy for folding stability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N285S": {
+      "candidate_id": "N285S",
+      "mutation": "N285S",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "N285 showed the best structure compatibility; N→S is a conservative polar substitution that removes a potential deamidation liability (N-G or N-S motifs) while maintaining similar size and polarity, potentially improving environmental persistence."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "N285S shows solid structure compatibility (z=0.578) and removes a deamidation liability, directly relevant to environmental persistence. Promoted above T318V which scored significantly worse."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T318V": {
+      "candidate_id": "T318V",
+      "mutation": "T318V",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00011"
+      ],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "T318 showed good structure compatibility with low B-factor indicating a well-ordered region. T→V is a conservative hydrophobic substitution that may improve core packing and stability without introducing steric clashes."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "T318V structure compatibility (z=0.386, ΔlogP=-3.512) is substantially worse than T318I (z=0.609) at the same position, indicating the valine substitution is less compatible with the local backbone geometry."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "T318V structure compatibility (z=0.386, ΔlogP=-3.512) is substantially worse than T318I (z=0.609) at the same position, indicating the valine substitution is less compatible with the local backbone geometry.",
+        "evidence_refs": [
+          "E00011"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "N285D": 30.32,
+    "T318I": 24.578,
+    "N285S": 57.84
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "T155P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.6027,
+        "normalized": 0.247387,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.701,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 29.89"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-4.6027)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T155P",
+          "T318I",
+          "N285D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T318I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.7819,
+        "normalized": 0.609258,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.962,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 3.78"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.7819)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T155P",
+          "T318I",
+          "N285D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N285D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.2335,
+        "normalized": 0.693255,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.838,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 16.25"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.2335)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T155P",
+          "T318I",
+          "N285D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T155P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0125,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T155P",
+          "T318I",
+          "N285D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T318I",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0238,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T155P",
+          "T318I",
+          "N285D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N285D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1729,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T155P",
+          "T318I",
+          "N285D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T155P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.994,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.994,
+        "reason": "alignment coverage 169/170 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 155 = 0.0000 among 169 homologs; conservation entropy 1.789 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T155P",
+          "T318I",
+          "N285D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T318I",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.011905,
+        "normalized": 0.011905,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.988,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.988,
+        "reason": "alignment coverage 168/170 homologs"
+      },
+      "interpretation": "mutant frequency of I at position 318 = 0.0119 among 168 homologs; conservation entropy 1.160 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T155P",
+          "T318I",
+          "N285D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N285D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.994,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.994,
+        "reason": "alignment coverage 169/170 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 285 = 0.0000 among 169 homologs; conservation entropy 1.267 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T155P",
+          "T318I",
+          "N285D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N285S",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.9913,
+        "normalized": 0.578397,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.838,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 16.25"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.9913)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "N285S",
+          "T318V"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T318V",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -3.512,
+        "normalized": 0.385889,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.962,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 3.78"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-3.512)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "N285S",
+          "T318V"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 13,
+    "c0_size": 3,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

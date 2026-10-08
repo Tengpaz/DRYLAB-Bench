@@ -1,0 +1,340 @@
+{
+  "unit_id": "kimi-k3__psae_stability_disruption__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "kimi-k3",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "W17G",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "W17 is a large aromatic residue in the N-terminal core (within the conserved YWY motif); replacing it with glycine removes aromatic/hydrophobic packing and adds backbone flexibility, strongly favoring unfolding."
+      },
+      {
+        "rank": 2,
+        "mutation": "L11D",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "L11 sits in the hydrophobic N-terminal segment; introducing a buried negative charge should severely destabilize core packing and disrupt folding."
+      },
+      {
+        "rank": 3,
+        "mutation": "F40D",
+        "confidence": 0.76,
+        "evidence_refs": [],
+        "decision_summary": "F40 is a bulky hydrophobe in the central I/V-rich cluster; hydrophobic-to-charge substitution at this central position is expected to be highly destabilizing to the fold."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 candidates are verified, well-differentiated in mechanism, and further self-iteration offers no expected improvement."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "W17G": {
+      "candidate_id": "W17G",
+      "mutation": "W17G",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "W17 sits in the conserved YWY aromatic motif; removing the bulky tryptophan for glycine should collapse local hydrophobic packing and increase backbone flexibility, disrupting the SH3-like fold core."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "W17 is a conserved aromatic core residue; replacing it with glycine should maximally remove hydrophobic/aromatic packing and increase local flexibility."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L11D": {
+      "candidate_id": "L11D",
+      "mutation": "L11D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "L11 is a buried hydrophobic residue in the N-terminal region; introducing a charged aspartate into the hydrophobic core is strongly destabilizing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "Introducing aspartate at buried hydrophobic L11 should strongly disrupt core packing and solubility-compatible folding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F40D": {
+      "candidate_id": "F40D",
+      "mutation": "F40D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.76,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "F40 is likely a core-packing aromatic; a phenylalanine-to-aspartate change places an uncompensated negative charge in the hydrophobic interior."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.76,
+          "rationale": "F40 is a bulky hydrophobic residue in the central region; charge substitution is likely to be highly destabilizing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y16A": {
+      "candidate_id": "Y16A",
+      "mutation": "Y16A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Y16 is part of the conserved YWY motif essential for PsaE structure/PsaC interaction; truncating it to alanine removes key aromatic packing."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.58,
+          "rationale": "Y16A removes an aromatic interaction but alanine is less destabilizing than glycine or buried charge, so it is downgraded."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I33D": {
+      "candidate_id": "I33D",
+      "mutation": "I33D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.74,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "I33 is a buried hydrophobic residue adjacent to the DKS loop; an Asp substitution should disrupt core packing and solvation balance."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.74,
+          "rationale": "I33D places a charged residue in a hydrophobic cluster and is reranked upward as a core-disrupting candidate comparable to F40D."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "P35A": {
+      "candidate_id": "P35A",
+      "mutation": "P35A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "P35 likely enforces a critical turn conformation; alanine removes this conformational constraint and may misfold the loop region."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.55,
+          "rationale": "Removing P35 may perturb local geometry, but alanine can be tolerated and does not guarantee global knockout."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Removing P35 may perturb local geometry, but alanine can be tolerated and does not guarantee global knockout.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "V38D": {
+      "candidate_id": "V38D",
+      "mutation": "V38D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "V38 is a hydrophobic core residue; introducing a charged residue into the beta-sheet interior should be destabilizing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "V38D remains a plausible hydrophobic-to-charge disruption but may be less central than residues 11, 17, 33, and 40."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F60D": {
+      "candidate_id": "F60D",
+      "mutation": "F60D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "F60 is an aromatic residue likely contributing to C-terminal packing; replacement with aspartate introduces an unsatisfied charge."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "F60D could disrupt a later hydrophobic/contact region, but its C-terminal location may be less folding-critical than the N/Mid core."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L55D": {
+      "candidate_id": "L55D",
+      "mutation": "L55D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "L55 is hydrophobic and likely buried near the glycine-rich region; a charged substitution should destabilize local packing."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.6,
+          "rationale": "Rejected to prioritize higher-confidence core substitutions; L55 appears less central and has weaker expected folding disruption."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Rejected to prioritize higher-confidence core substitutions; L55 appears less central and has weaker expected folding disruption.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G54A": {
+      "candidate_id": "G54A",
+      "mutation": "G54A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "G54 in the GG motif may require glycine-only backbone geometry; alanine could introduce steric strain, though effect size is uncertain."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.45,
+          "rationale": "G54A is too conservative for the stated knockout objective and is unlikely to strongly destabilize folding."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "G54A is too conservative for the stated knockout objective and is unlikely to strongly destabilize folding.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "W17G": null,
+    "L11D": null,
+    "F40D": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

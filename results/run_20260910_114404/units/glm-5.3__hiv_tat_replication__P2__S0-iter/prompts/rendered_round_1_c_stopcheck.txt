@@ -1,0 +1,114 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in the HIV-1 Tat protein (86 aa).
+
+THE DESIGN OBJECTIVE: Maximize virus replication efficiency via Tat-mediated transactivation.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MEPVDPRLEPWKHPGSQPKTACTNCYCKKCCFHCQVCFMTKALGISYGRKKRRQRRRAHQNSQTHQASLSKQPTSQSRGDPTGPKE
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  F38W  confidence=0.550  rank=1
+  N24K  confidence=0.500  rank=2
+  K41R  confidence=0.480  rank=3
+  T40R  confidence=0.450  rank=4
+  S62R  confidence=0.400  rank=5
+  W11Y  confidence=0.350  rank=6
+  P18S  confidence=0.300  rank=7
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+Changes this round:
+  - F38W rerank: F38 lies in the conserved Tat core domain critical for transactivation; aromatic Trp conserves hydrophobic packing while potentially enhancing P-TEFb/CDK9 interface stability. Structural conservation argues for cautious confidence boost.
+  - N24K rerank: Position 24 borders the cysteine-rich region; a basic substitution could improve electrostatic contacts without disrupting the essential Cys cluster. Risk of perturbing the nearby Zn-coordinating residues limits confidence.
+  - K41R rerank: K41 sits at the junction of the core and basic domains; Arg maintains positive charge and may strengthen TAR RNA or host-factor binding. Conservative charge-conserving substitution supports viability.
+  - S62R retain: S62 is in a variable regulatory region; phospho-site changes have unpredictable effects on transactivation. Retained as mid-tier without external evidence to adjust.
+  - W11Y rerank: W11 is in the acidic N-terminal activation region; Tyr conserves aromaticity but loss of indole may weaken activation-domain contacts. Uncertain net effect, lowered slightly.
+  - P18S retain: P18 is in a flexible N-terminal region; Ser could add a phosphorylation site with ambiguous functional consequence. Kept at low confidence.
+  - A58T reject: A58 lies near the glutamine-rich region with no clear mechanism linking Thr to improved transactivation. Low prior utility; rejected to trim pool.
+  - H33Q reject: H33 is adjacent to cysteines involved in metal coordination and disulfide architecture; any perturbation risks destabilizing the essential cysteine cluster. Rejected as risky.
+  - K19R reject: Charge-conserving change in the acidic N-terminal region with no strong mechanistic rationale for improved transactivation. Dropped from active pool.
+  - T40R add: T40 sits at the core/basic boundary; introducing Arg extends positive charge toward the RKKRRQRRR TAR-binding motif, plausibly enhancing RNA affinity. Viability risk is moderate given motif tolerance.
+Remaining doubts: All assessments rest on general Tat biology knowledge without empirical validation, so ranking among the top three is uncertain.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 1 — respond with a single JSON object, nothing else.

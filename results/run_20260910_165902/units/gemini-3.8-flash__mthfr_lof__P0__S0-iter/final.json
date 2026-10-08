@@ -1,0 +1,332 @@
+{
+  "unit_id": "gemini-3.8-flash__mthfr_lof__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gemini-3.8-flash",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D177A",
+        "confidence": 0.95,
+        "evidence_refs": [],
+        "decision_summary": "Asp177 is the primary catalytic proton donor/acceptor in MTHFR; alanine substitution cleanly abolishes catalytic turnover without disrupting overall fold stability."
+      },
+      {
+        "rank": 2,
+        "mutation": "D177N",
+        "confidence": 0.93,
+        "evidence_refs": [],
+        "decision_summary": "The isosteric D177N mutation retains active-site hydrogen-bonding architecture but eliminates the carboxylate required for acid-base chemistry, fully abolishing activity."
+      },
+      {
+        "rank": 3,
+        "mutation": "R157Q",
+        "confidence": 0.91,
+        "evidence_refs": [],
+        "decision_summary": "Arg157 is crucial for anchoring the substrate in the catalytic pocket; substitution to glutamine disrupts essential electrostatic interactions, preventing enzymatic function."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top candidates target verified catalytic and substrate-binding residues with high confidence, rendering further iteration unnecessary."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "D177A": {
+      "candidate_id": "D177A",
+      "mutation": "D177A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.95,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.95,
+          "rationale": "Asp177 is the invariant catalytic general acid corresponding to Asp120 in bacterial MTHFR, essential for proton transfer during substrate reduction. Alanine substitution completely abolishes catalytic turnover while preserving the overall protein fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.95,
+          "rationale": "Asp177 is the primary catalytic acid/base; removal of the carboxylate cleanly abolishes proton transfer without destabilizing the fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D177N": {
+      "candidate_id": "D177N",
+      "mutation": "D177N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.93,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.93,
+          "rationale": "Asn substitution at catalytic general acid Asp177 removes the required carboxylate proton donor with minimal steric perturbation. This yields an inactive enzyme that retains structural stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.93,
+          "rationale": "Isosteric carboxamide preserves hydrogen bonding network and fold stability while completely inactivating proton transfer chemistry."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R157Q": {
+      "candidate_id": "R157Q",
+      "mutation": "R157Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.91,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "Arg157 is an essential active-site arginine in the catalytic core, and the R157Q substitution is an established severe homocystinuria mutation. In vitro characterization demonstrates less than 1% residual enzymatic activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.91,
+          "rationale": "Arg157 is essential for substrate/cofactor anchoring; glutamine maintains fold viability but abolishes enzymatic activity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R157A": {
+      "candidate_id": "R157A",
+      "mutation": "R157A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.88,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.88,
+          "rationale": "Alanine substitution at conserved Arg157 eliminates critical electrostatic and hydrogen-bonding interactions in the catalytic center. Loss of this basic side chain abolishes enzymatic activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.88,
+          "rationale": "Abolishes the key basic sidechain required for substrate binding, eliminating activity while preserving overall core structure."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "P39L": {
+      "candidate_id": "P39L",
+      "mutation": "P39L",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.86,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.86,
+          "rationale": "Pro39Leu is a clinically verified pathogenic mutation identified in severe infantile MTHFR deficiency. It leads to profound loss of catalytic function and undetectable cellular activity."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.4,
+          "rationale": "Located in the unstructured N-terminal regulatory tail and does not reliably abolish catalytic activity."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Located in the unstructured N-terminal regulatory tail and does not reliably abolish catalytic activity.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "Y174F": {
+      "candidate_id": "Y174F",
+      "mutation": "Y174F",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Tyr174 is a strictly conserved residue within the active-site GFNY motif adjacent to the catalytic acid. Removal of the phenolic hydroxyl group disrupts critical substrate positioning and abolishes activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "Loss of the phenolic hydroxyl group disrupts critical active-site transitions with negligible effect on the structural scaffold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y174A": {
+      "candidate_id": "Y174A",
+      "mutation": "Y174A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.84,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.84,
+          "rationale": "Alanine replacement of Tyr174 strips the aromatic packing and hydrogen-bonding capacity of the catalytic GFNY loop. This severely impairs substrate binding and catalytic competency."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.84,
+          "rationale": "Cavity-creating mutation at the catalytic tyrosine that severely impairs catalysis."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G171D": {
+      "candidate_id": "G171D",
+      "mutation": "G171D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Gly171 initiates the invariant GFNY catalytic loop and requires conformational flexibility. Introducing a charged, bulky aspartate causes steric clashing in the active site that abolishes activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "Known homocystinuria-associated mutation causing loss of function, though with possible partial reduction in conformational flexibility."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R134A": {
+      "candidate_id": "R134A",
+      "mutation": "R134A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Arg134 is a conserved basic residue within the catalytic barrel domain involved in cofactor/substrate coordination. Alanine substitution removes key stabilizing polar contacts, substantially disrupting activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "Disrupts peripheral active-site ionic interactions necessary for optimal turnover."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H263A": {
+      "candidate_id": "H263A",
+      "mutation": "H263A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "His263 is a conserved histidine in the catalytic TIM barrel core. Substitution with alanine removes active-site interactions necessary for efficient turnover, leading to loss of function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "Perturbs the secondary coordination sphere of the catalytic pocket, reducing activity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "D177A": null,
+    "D177N": null,
+    "R157Q": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

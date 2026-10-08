@@ -1,0 +1,328 @@
+{
+  "unit_id": "gpt-5.6-sol__cbs_lof__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gpt-5.6-sol",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.97,
+        "evidence_refs": [],
+        "decision_summary": "K119 is the catalytic PLP-binding lysine; replacing it with alanine should directly eliminate cofactor-dependent catalysis while minimizing backbone disruption."
+      },
+      {
+        "rank": 2,
+        "mutation": "K119E",
+        "confidence": 0.94,
+        "evidence_refs": [],
+        "decision_summary": "Replacing catalytic K119 with a negatively charged residue should prevent its essential PLP-linked catalytic function, although local active-site perturbation may be greater than with alanine."
+      },
+      {
+        "rank": 3,
+        "mutation": "G307S",
+        "confidence": 0.91,
+        "evidence_refs": [],
+        "decision_summary": "G307S is expected to severely impair the catalytic region while being less globally disruptive than a proline substitution, favoring a folded but inactive enzyme."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further self-review without external evidence is unlikely to yield a more reliable Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.97,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.97,
+          "rationale": "K119 is the catalytic lysine that forms the internal aldimine with PLP. Removing its reactive side chain should directly abolish catalysis while limiting global structural disruption."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.97,
+          "rationale": "K119 is the catalytic lysine expected to bind PLP; alanine substitution should directly abolish catalysis while avoiding a highly disruptive backbone change."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119E": {
+      "candidate_id": "K119E",
+      "mutation": "K119E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.94,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.96,
+          "rationale": "Replacing the catalytic lysine with an acidic residue prevents PLP Schiff-base formation and introduces an incompatible charge in the active site. Enzymatic activity is therefore expected to be essentially absent."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.94,
+          "rationale": "Charge reversal at the catalytic lysine should eliminate its catalytic role, but it may perturb the active-site structure more than K119A."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G307S": {
+      "candidate_id": "G307S",
+      "mutation": "G307S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.91,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.91,
+          "rationale": "G307 lies in a tightly constrained region of the catalytic core, and adding a side chain is expected to disrupt active-site geometry. This substitution is likely to cause severe loss of function without requiring wholesale truncation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.91,
+          "rationale": "G307S is a conservative-looking but potentially severe active-site-region substitution and is likely compatible with production of a folded yet inactive protein."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T257P": {
+      "candidate_id": "T257P",
+      "mutation": "T257P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.84,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.89,
+          "rationale": "T257 is located in the conserved glycine/threonine-rich catalytic region. Proline should distort the local backbone and PLP-site geometry, strongly impairing catalysis."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.84,
+          "rationale": "T257 lies in the catalytic core, but proline may cause broader local structural disruption rather than a clean catalytic knockout."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R266A": {
+      "candidate_id": "R266A",
+      "mutation": "R266A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.89,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.87,
+          "rationale": "R266 participates in the catalytic-core interaction network near the PLP site. Alanine removes both its positive charge and hydrogen-bonding capacity, likely causing profound activity loss."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.89,
+          "rationale": "Removing the Arg266 side chain may disrupt substrate or cofactor positioning while preserving the protein backbone, making it a strong clean loss-of-function candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y223A": {
+      "candidate_id": "Y223A",
+      "mutation": "Y223A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Y223 is positioned in the catalytic domain where its aromatic side chain can support substrate positioning and active-site packing. Alanine should disrupt these interactions and markedly reduce activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "Y223A removes a bulky polar aromatic side chain from the catalytic core and may strongly impair active-site organization without introducing backbone strain."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H65A": {
+      "candidate_id": "H65A",
+      "mutation": "H65A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.76,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.83,
+          "rationale": "H65 is a heme axial ligand in human CBS. Removing the coordinating imidazole should compromise heme incorporation and regulatory coupling, with a strong risk of loss of functional enzyme."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.76,
+          "rationale": "H65 participates in the heme-regulatory region, but disrupting heme coordination has less certain consequences for complete catalytic loss and protein stability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C52A": {
+      "candidate_id": "C52A",
+      "mutation": "C52A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.74,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.82,
+          "rationale": "C52 is the other axial heme ligand. Its substitution by alanine should disrupt the heme environment and destabilize the functional catalytic architecture."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.74,
+          "rationale": "C52A may compromise heme binding, but its effect on catalytic activity is less direct and could include destabilization."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T353P": {
+      "candidate_id": "T353P",
+      "mutation": "T353P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 10,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "T353 lies within a structured, glycine-rich portion of the catalytic core. Introducing proline is expected to perturb local folding and substantially impair enzyme activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "A proline in the catalytic domain could abolish activity, but the mechanism is likely nonspecific structural damage and therefore less desirable."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G256P": {
+      "candidate_id": "G256P",
+      "mutation": "G256P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.77,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.79,
+          "rationale": "G256 is immediately adjacent to T257 in the constrained catalytic-region motif. Proline should impose incompatible backbone geometry and can render the active site nonfunctional."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.77,
+          "rationale": "G256P should strongly perturb the nearby catalytic loop, although its high risk of misfolding makes it inferior to direct side-chain knockouts."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K119A": null,
+    "K119E": null,
+    "G307S": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

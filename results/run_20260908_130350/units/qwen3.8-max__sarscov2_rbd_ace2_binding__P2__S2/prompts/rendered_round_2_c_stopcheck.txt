@@ -1,0 +1,148 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in the SARS-CoV-2 Spike receptor-binding domain (Wuhan-Hu-1, 201 aa).
+
+THE DESIGN OBJECTIVE: Maximize / maintain RBD binding to the human ACE2 receptor (enhanced cell attachment).
+
+SEQUENCE (full-length exactly as numbered below):
+```
+NITNLCPFGEVFNATRFASVYAWNRKRISNCVADYSVLYNSASFSTFKCYGVSPTKLNDLCFTNVYADSFVIRGDEVRQIAPGQTGKIADYNYKLPDDFTGCVIAWNSNNLDSKVGGNYNYLYRLFRKSNLKPFERDISTEIYQAGSTPCNGVEGFNCYFPLQSYGFQPTNGVGYQPYRVVVLSFELLHAPATVCGPKKST
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   No experimental structure is configured for this task — every query returns status = "not_applicable".
+
+4. functional_annotation — curated UniProt features (accession P0DTC2) for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  Q168R  confidence=0.850  rank=1
+  N171Y  confidence=0.820  rank=2
+  Q163R  confidence=0.800  rank=3
+  T148K  confidence=0.650  rank=4
+  S147N  confidence=0.600  rank=5
+  E154K  confidence=0.580  rank=6
+  L122R  confidence=0.550  rank=7
+  Y123F  confidence=0.500  rank=8
+  N109K  confidence=0.480  rank=9
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+Changes this round:
+  - N171Y rerank: ESM-1v score 0.699 is moderate but not exceptional; MSA shows zero evolutionary tolerance at this position. However, N171 is a known ACE2-contact residue in the RBD, and the N171Y substitution has been reported in variants with enhanced binding. Retaining but lowering confidence slightly.
+  - Q168R rerank: ESM-1v score 0.994 is very high, indicating strong plausibility. Q168 is near the ACE2 interface; the Q→R change introduces a positive charge that could form new salt bridges with ACE2 acidic residues. MSA shows no evolutionary precedent but this is expected for a gain-of-function mutation.
+  - Q163R rerank: ESM-1v score 1.0 is maximal. However, position 163 is annotated with a disulfide bond in UniProt, and mutating Q to R near a disulfide could disrupt local structure. Lowering confidence due to structural risk despite high PLM score.
+  - S147N rerank: ESM-1v score 0.672 is low. Position 147 is annotated with a disulfide bond and natural variant. The S→N change is conservative but the low PLM score and structural context reduce confidence.
+  - T148K rerank: ESM-1v score 0.696 is moderate. MSA shows K at position 148 in 33% of homologs, providing evolutionary support. However, position 148 is near a disulfide bond. The evolutionary signal is the strongest among all candidates.
+  - L122R rerank: ESM-1v score 1.0 is maximal but MSA shows zero frequency of R at position 122 among 7 homologs with high coverage. Position 122 has glycosylation annotation. The L→R change is drastic (hydrophobic to charged) and may disrupt the local environment.
+  - E154K rerank: ESM-1v score 1.0 but this is a conservative charge-preserving mutation (E→K). MSA shows zero frequency. Position 154 has natural variant annotation. The mutation is unlikely to significantly enhance ACE2 binding since it preserves the negative charge.
+  - Y123F rerank: ESM-1v score 1.0 but Y→F removes a hydroxyl group that may participate in hydrogen bonding with ACE2. MSA shows zero frequency. This mutation is more likely to reduce than enhance binding.
+  - N109K rerank: ESM-1v score 0.784 is moderate. MSA shows zero frequency with full coverage (8/8 homologs), strongly suggesting this position is intolerant to substitution. Position 109 is in a beta strand with disulfide bond annotation.
+  - F156V reject: Despite ESM-1v score 1.0, MSA shows zero frequency with very low coverage (2/8). F→V is a size-reducing mutation that may destabilize the hydrophobic core. Position 156 has natural variant and disulfide bond annotations. Unlikely to enhance ACE2 binding.
+  - N501Y add: N501Y is the most well-characterized ACE2-binding-enhancing mutation in SARS-CoV-2, found in Alpha, Omicron, and other VOCs. However, position 501 is outside the 201-aa sequence provided (which ends at position 201). Cannot add this candidate.
+  - Q498R add: Q498R is another well-known ACE2-binding-enhancing mutation. However, position 498 is also outside the 201-aa sequence provided. Cannot add this candidate.
+Remaining doubts: The MSA is extremely shallow (8 homologs) and limited to Swiss-Prot, making evolutionary evidence unreliable; the true ACE2-binding effect of these mutations cannot be confirmed without structural or experimental data, and the best-known binding-enhancing mutations (N501Y, Q498R) fall outside the provided 201-aa sequence window.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

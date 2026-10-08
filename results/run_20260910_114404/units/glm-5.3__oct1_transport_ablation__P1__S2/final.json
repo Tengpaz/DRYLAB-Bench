@@ -1,0 +1,1593 @@
+{
+  "unit_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "G464R",
+        "confidence": 0.85,
+        "evidence_refs": [
+          "E00003",
+          "E00011"
+        ],
+        "decision_summary": "Strongest LOF signal (0.959); Gly->Arg at a conserved translocation-relevant position likely abolishes substrate transport. PLM scores it as a disruptive but plausible single change compatible with membrane-protein biogenesis."
+      },
+      {
+        "rank": 2,
+        "mutation": "C87R",
+        "confidence": 0.82,
+        "evidence_refs": [
+          "E00002",
+          "E00010"
+        ],
+        "decision_summary": "High LOF proxy (0.888) with the best evolutionary tolerance among damaging candidates, indicating disruption without gross instability. Charge reversal in the extracellular loop is a classic transporter-silencing substitution."
+      },
+      {
+        "rank": 3,
+        "mutation": "E385Q",
+        "confidence": 0.7,
+        "evidence_refs": [
+          "E00006",
+          "E00014"
+        ],
+        "decision_summary": "Pathogenic-class LOF prediction (0.721) via a conservative charge-neutralizing swap that minimizes folding risk. Conservative nature slightly reduces confidence in complete transport ablation."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 ordering is stable across phenotype, MSA, and PLM evidence; further calls are unlikely to change the outcome."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R60C": {
+      "candidate_id": "R60C",
+      "mutation": "R60C",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.88,
+      "evidence_refs": [
+        "E00001",
+        "E00009",
+        "E00017",
+        "E00024"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Analog of the naturally occurring reduced-function allele R61C; Arg-to-Cys in the large extracellular loop disrupts substrate interaction while natural occurrence implies preserved abundance."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.88,
+          "rationale": "Homologs tolerate C at this position (~4.6% frequency, good coverage), so protein viability is plausible; the near-zero ESM-1v plausibility is consistent with strong functional disruption, which is the desired LOF direction. This mirrors a known naturally occurring reduced-function OCT1 variant class."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "AlphaMissense classifies R60C as benign (0.268), directly contradicting the transport-ablation objective despite favorable conservation scores."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "AlphaMissense classifies R60C as benign (0.268), directly contradicting the transport-ablation objective despite favorable conservation scores.",
+        "evidence_refs": [
+          "E00017"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "C87R": {
+      "candidate_id": "C87R",
+      "mutation": "C87R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.82,
+      "evidence_refs": [
+        "E00002",
+        "E00010",
+        "E00018",
+        "E00025"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Analog of the known loss-of-function allele C88R; replacing a conserved cysteine likely perturbs loop structure/translocation without triggering full misfolding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.84,
+          "rationale": "Highest MSA mutant frequency (12.9%) among candidates with excellent coverage indicates evolutionary tolerance of the residue at this site; ESM-1v strongly disfavors it, consistent with loss of transport function rather than gross misfolding."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.82,
+          "rationale": "LOF proxy 0.888 plus the best evolutionary and PLM tolerance among damaging candidates, suggesting disruption without gross instability. Charge reversal in the extracellular loop is a classic transporter-silencing move."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G464R": {
+      "candidate_id": "G464R",
+      "mutation": "G464R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.85,
+      "evidence_refs": [
+        "E00003",
+        "E00011",
+        "E00019",
+        "E00026"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Analog of the reduced-function allele G465R in transmembrane helix 11; introducing a charged Arg into the pore-lining face blocks transport yet is tolerated as a natural variant."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "The glycine-to-arginine change in a transmembrane substrate-pocket region is strongly disfavored by both ESM-1v and MSA, predicting functional disruption; low alignment coverage (0.36) weakens the viability evidence, so confidence is slightly reduced pending direct LOF/viability signals."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.85,
+          "rationale": "AlphaMissense LOF proxy 0.959 is the strongest transport-ablation signal in the pool. Gly->Arg at a conserved loop position likely disrupts substrate translocation while remaining a single-residue change compatible with membrane insertion."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G400S": {
+      "candidate_id": "G400S",
+      "mutation": "G400S",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00004",
+        "E00012",
+        "E00020",
+        "E00027"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Analog of the G401S reduced-function allele in TMH10; conservative Gly-to-Ser can impair conformational cycling needed for transport."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "Serine occurs at ~7.8% frequency among covered homologs, supporting folding/abundance, while ESM-1v disfavors the substitution consistent with impaired transport."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Ambiguous LOF proxy (0.525) and weak conservation support; retained only as backup."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R487M": {
+      "candidate_id": "R487M",
+      "mutation": "R487M",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00005",
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Analog of the R488M reduced-function allele; mutation of a basic pore-lining residue reduces substrate recognition while preserving membrane insertion."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "ESM-1v rates it as fully plausible (1.0), i.e., likely near-neutral with little functional disruption, which fails the primary LOF objective."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "ESM-1v rates it as fully plausible (1.0), i.e., likely near-neutral with little functional disruption, which fails the primary LOF objective.",
+        "evidence_refs": [
+          "E00005"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "E385Q": {
+      "candidate_id": "E385Q",
+      "mutation": "E385Q",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00006",
+        "E00014",
+        "E00023",
+        "E00030"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Charge-neutralizing substitution at a conserved acidic position near the intracellular substrate vestibule, expected to reduce cation translocation with conservative chemistry."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "Conservative charge-neutral change may not abolish transport; MSA shows zero Q tolerance with weak coverage, giving ambiguous signal."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Pathogenic-class LOF prediction (0.721) with a conservative charge-neutralizing substitution that minimizes folding risk. Conservative swap reduces misfolding probability but may yield incomplete ablation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R438Q": {
+      "candidate_id": "R438Q",
+      "mutation": "R438Q",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00007",
+        "E00015",
+        "E00022",
+        "E00029"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Basic residue in the intracellular loop/TMH10 region that may participate in substrate gating; conservative neutralization may reduce transport while keeping structure intact."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "Charge-neutralizing mutation is sequence-model-disfavored but with poor MSA coverage; uncertain whether effect is functional or structural, so downgraded."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "Ambiguous phenotype score and poor evolutionary tolerance make it a weak LOF candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W216F": {
+      "candidate_id": "W216F",
+      "mutation": "W216F",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00008",
+        "E00016",
+        "E00021",
+        "E00028"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Aromatic residue in the substrate pocket; Trp-to-Phe retains hydrophobic packing and folding but removes H-bonding capacity that may be needed for translocation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Conservative aromatic substitution with moderate homolog tolerance, but weak evidence of transport ablation; kept as a backup pending phenotype evidence."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "Benign LOF prediction (0.264); aromatic-conservative substitution unlikely to abolish transport."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Benign LOF prediction (0.264); aromatic-conservative substitution unlikely to abolish transport.",
+        "evidence_refs": [
+          "E00021"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "G464R": 40.348,
+    "C87R": 33.074,
+    "E385Q": 28.826
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "R60C",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.046296,
+        "normalized": 0.046296,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.893,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.893,
+        "reason": "alignment coverage 216/242 homologs"
+      },
+      "interpretation": "mutant frequency of C at position 60 = 0.0463 among 216 homologs; conservation entropy 2.632 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C87R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.128889,
+        "normalized": 0.128889,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.93,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.93,
+        "reason": "alignment coverage 225/242 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 87 = 0.1289 among 225 homologs; conservation entropy 2.692 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G464R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.355,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.355,
+        "reason": "alignment coverage 86/242 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 464 = 0.0000 among 86 homologs; conservation entropy 2.019 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G400S",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.07767,
+        "normalized": 0.07767,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.426,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.426,
+        "reason": "alignment coverage 103/242 homologs"
+      },
+      "interpretation": "mutant frequency of S at position 400 = 0.0777 among 103 homologs; conservation entropy 2.334 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R487M",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.057471,
+        "normalized": 0.057471,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.36,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.36,
+        "reason": "alignment coverage 87/242 homologs"
+      },
+      "interpretation": "mutant frequency of M at position 487 = 0.0575 among 87 homologs; conservation entropy 2.663 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E385Q",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.479,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.479,
+        "reason": "alignment coverage 116/242 homologs"
+      },
+      "interpretation": "mutant frequency of Q at position 385 = 0.0000 among 116 homologs; conservation entropy 2.450 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R438Q",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.376,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.376,
+        "reason": "alignment coverage 91/242 homologs"
+      },
+      "interpretation": "mutant frequency of Q at position 438 = 0.0000 among 91 homologs; conservation entropy 2.304 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W216F",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.063158,
+        "normalized": 0.063158,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.785,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.785,
+        "reason": "alignment coverage 190/242 homologs"
+      },
+      "interpretation": "mutant frequency of F at position 216 = 0.0632 among 190 homologs; conservation entropy 2.733 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R60C",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0004,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C87R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0003,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G464R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G400S",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0009,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R487M",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E385Q",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0005,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R438Q",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0002,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W216F",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0033,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "R487M",
+          "E385Q",
+          "R438Q",
+          "W216F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R60C",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.2677,
+        "normalized": 0.2677,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.268 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C87R",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.888,
+        "normalized": 0.888,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.888 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G464R",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.959,
+        "normalized": 0.959,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.959 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G400S",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.5252,
+        "normalized": 0.5252,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.525 (class ambiguous); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W216F",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.2643,
+        "normalized": 0.2643,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.264 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R438Q",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.4125,
+        "normalized": 0.4125,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.412 (class ambiguous); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E385Q",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.7205,
+        "normalized": 0.7205,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.721 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00023",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R60C",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00024",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C87R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00025",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G464R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00026",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G400S",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00027",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W216F",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00028",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R438Q",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00029",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E385Q",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00030",
+      "run_id": "glm-5.3__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R60C",
+          "C87R",
+          "G464R",
+          "G400S",
+          "W216F",
+          "R438Q",
+          "E385Q"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 2,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 2,
+    "budget_exhausted": true
+  }
+}

@@ -1,0 +1,340 @@
+{
+  "unit_id": "glm-5.3__brca1_tsg_lof__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "glm-5.3",
+  "scenario_id": "brca1_tsg_lof",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "C61Y",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "C61 is a validated cancer-associated missense variant in the BRCA1 RING domain that disrupts the BRCA1-BARD1 E3 ubiquitin ligase interface. Tyr substitution preserves the hydrophobic/structural character sufficiently that overall folding is largely retained."
+      },
+      {
+        "rank": 2,
+        "mutation": "C64Y",
+        "confidence": 0.8,
+        "evidence_refs": [],
+        "decision_summary": "C64 is a zinc-coordinating RING cysteine; C64Y is a documented pathogenic variant abolishing E3 ligase and tumor-suppressor activity. Domain expression is retained despite the loss of a Zn ligand."
+      },
+      {
+        "rank": 3,
+        "mutation": "C24Y",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "C24 coordinates Zn in the RING domain and is structurally essential for the BARD1 interaction. C24Y is expected to abolish ligase function with a modestly higher folding risk than C61Y/C64Y."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 candidates are stable and well-justified; additional self-iteration without external evidence would not improve them."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "C61Y": {
+      "candidate_id": "C61Y",
+      "mutation": "C61Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Cys61 is a core zinc-coordinating residue of the RING domain; substitution with a bulky aromatic residue disrupts the Zn2+-binding fold, abolishing BARD1 heterodimerization and E3 ubiquitin ligase tumor-suppressor activity while leaving the rest of the 1863-aa protein largely intact."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "C61 is a validated cancer-associated missense variant in the BRCA1 RING domain that disrupts the BRCA1-BARD1 E3 ubiquitin ligase interface; Tyr substitution is well tolerated structurally, so folding is largely preserved."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C64Y": {
+      "candidate_id": "C64Y",
+      "mutation": "C64Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Cys64 is the second RING-domain zinc-ligating cysteine; replacing it with tyrosine destroys metal coordination and the RING fold, eliminating BRCA1's E3 ligase function without extensive unfolding of the full-length protein."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "C64 is a zinc-coordinating RING cysteine; C64Y is a documented pathogenic variant abolishing ligase/tumor-suppressor activity while retaining substantial domain expression."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C24Y": {
+      "candidate_id": "C24Y",
+      "mutation": "C24Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Cys24 is the first zinc-chelating cysteine of the RING domain; a Tyr substitution breaks the IIA zinc site, functionally inactivating the N-terminal tumor-suppressor module."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "C24 is also a Zn-coordinating RING cysteine; validated in structural studies as essential for BARD1 interaction. Slightly higher structural risk than C61/C64, so confidence held below the top two."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K1702E": {
+      "candidate_id": "K1702E",
+      "mutation": "K1702E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Lys1702 is a conserved BRCT-domain residue critical for phospho-peptide (ABRAXAS/PALB2) binding; charge reversal to Glu disrupts the phosphoserine-binding pocket, abrogating DNA-damage recruitment while keeping the fold largely intact."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "K1702 sits in the BRCT repeat; charge-reversal there is a known deleterious class, but BRCT loss is a more indirect route to tumor-suppressor loss than RING zinc disruption."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R1699W": {
+      "candidate_id": "R1699W",
+      "mutation": "R1699W",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.66,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Arg1699 is a well-characterized pathogenic BRCT missense site; the bulky Trp perturbs the BRCT hydrophobic core and abolishes phosphoprotein interactions with modest structural compromise."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.66,
+          "rationale": "R1699 is within BRCT repeat 1; Trp substitution is a common pathogenic-missense pattern but functional evidence is weaker than for the RING cysteines."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S1655P": {
+      "candidate_id": "S1655P",
+      "mutation": "S1655P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Ser1655 sits in the BRCT repeat interface; Pro introduction locally destabilizes the tandem BRCT scaffold needed for BACH1/ABRAXAS binding, impairing homologous recombination repair."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "S1655 is not in a well-characterized functional core; Pro introduction may locally destabilize the BRCT linker without a strong functional-ablation rationale."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "S1655 is not in a well-characterized functional core; Pro introduction may locally destabilize the BRCT linker without a strong functional-ablation rationale.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C39Y": {
+      "candidate_id": "C39Y",
+      "mutation": "C39Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.74,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.74,
+          "rationale": "Cys39 chelates zinc in the RING IIB site; Tyr substitution eliminates metal binding, inactivating the E3 ligase tumor-suppressor function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.74,
+          "rationale": "C39 is another RING-domain zinc ligand; substitution impairs E3 ligase function but may destabilize the fold more than C61/C64 variants."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C44Y": {
+      "candidate_id": "C44Y",
+      "mutation": "C44Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Cys44 is a RING-domain zinc ligand whose replacement disrupts the Zn2+ site and BARD1 dimerization, with functional loss comparable to other RING cysteine mutants."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "C44 contributes to the second zinc coordination site; disruption is functional but redundant with higher-confidence C61/C64."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T1691A": {
+      "candidate_id": "T1691A",
+      "mutation": "T1691A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Thr1691 is a critical BRCT repeat-interface residue (equivalent to the t1691 stability determinant); alanine substitution weakens the BRCT fold and phosphoprotein binding."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "T1691 is peripheral to the BRCT phospho-peptide binding pocket; Ala substitution is unlikely to fully abolish tumor-suppressor function."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "T1691 is peripheral to the BRCT phospho-peptide binding pocket; Ala substitution is unlikely to fully abolish tumor-suppressor function.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C47Y": {
+      "candidate_id": "C47Y",
+      "mutation": "C47Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Cys47 completes the RING zinc coordination sphere; Tyr substitution abolishes ligase activity, though slightly lower confidence due to potential local structural tolerance."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.28,
+          "rationale": "C47 is a RING zinc ligand but structurally overlapping with C39/C44; retaining all four such candidates adds no diversity over the top two."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "C47 is a RING zinc ligand but structurally overlapping with C39/C44; retaining all four such candidates adds no diversity over the top two.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "C61Y": null,
+    "C64Y": null,
+    "C24Y": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "unit_id": "qwen3.8-max__flu_h1_antibody_escape__P2__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "flu_h1_antibody_escape",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "S219P",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "Position 219 lies in the Ca1 antigenic site of H1 HA; S→P introduces a conformational constraint that can disrupt antibody binding while being tolerated on the surface."
+      },
+      {
+        "rank": 2,
+        "mutation": "N163K",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "Position 163 is in the Sa antigenic site region of H1 HA; N→K charge reversal on the surface can disrupt antibody recognition while maintaining local fold compatibility."
+      },
+      {
+        "rank": 3,
+        "mutation": "K170E",
+        "confidence": 0.4,
+        "evidence_refs": [],
+        "decision_summary": "Position 170 is in the Sa antigenic site region; K→E charge reversal is a common immune escape strategy in influenza HA that can evade neutralizing antibodies while preserving overall structure."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Maximum rounds and tool calls exhausted; no further evidence can be gathered."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "S219P": {
+      "candidate_id": "S219P",
+      "mutation": "S219P",
+      "first_seen_round": 2,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Position 219 is in the Ca1 antigenic site; S→P can alter local structure for escape."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Position 219 is in the Ca1 antigenic site of H1 HA; S→P is a plausible escape mutation but lacks tool evidence so far."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "No new evidence this round; retaining as a plausible Ca1-site escape mutation with moderate confidence based on antigenic site location."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 5
+  },
+  "bundle_evidence": {
+    "S219P": null,
+    "N163K": null,
+    "K170E": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 1,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 41,
+    "c0_size": 0,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 5,
+    "budget_exhausted": true
+  }
+}

@@ -1,0 +1,132 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the Nipah virus attachment glycoprotein G (532 aa).
+
+GOAL: Maximize G-mediated cell-entry efficiency (together with the F fusion machinery).
+
+SEQUENCE (full-length exactly as numbered below):
+```
+QNYTRSTDNQAVIKDALQGIQQQIKGLADKIGTEIGPKVSLIDTSSTITIPANIGLLGSKISQSTASINENVNEKCKFTLPPLKIHECNISCPNPLPFREYRPQTEGVSNLVGLPNNICLQKTSNQILKPKLISYTLPVVGQSGTCITDPLLAMDEGYFAYSHLERIGSCSRGVSKQRIIGVGEVLDRGDEVPSLFMTNVWTPPNPNTVYHCSAVYNNEFYYVLCAVSTVGDPILNSTYWSGSLMMTRLAVKPKSNGGGYNQHQLALRSIEKGRYDKVMPYGPSGIKQGDTLYFPAVGFLVRTEFKYNDSNCPITKCQYSKPENCRLSMGIRPNSHYILRSGLLKYNLSDGENPKVVFIEISDQRLSIGSPSKIYDSLGQPVFYQASFSWDTMIKFGDVLTVNPLVVNWRNNTVISRPGQSQCPRFNTCPEICWEGVYNDAFLIDRINWISAGVFLDSNQTAENPVFTVFKDNEILYRAQLASEDTNAQKTITNCFLLKNKIWCISLVEIYDTGDNVIRPKLFAVKIPEQCT
+```
+IMPORTANT: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   For THIS task the backbone is PDB 3D11 chain A — 80% of this sequence's residues have experimental coordinates (resolution 2.31 Å). Positions OUTSIDE the structure return status = "not_applicable" (no score).
+
+4. functional_annotation — curated UniProt features (accession Q9IH62) for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide which biological tools (if any) you still need, on which candidates. Do NOT change candidates and do NOT output a STOP decision in this step — only request tools (empty array if you need none).
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+WARM-UP EVIDENCE (read-only preview of every tool over the current candidates — use it only to plan your FIRST tool selection; do NOT modify candidates in this step)
+[evolution_msa] N347A: 0.0 (mutant frequency of A at position 347 = 0.0000 among 21 homo); N411A: 0.0 (mutant frequency of A at position 411 = 0.0000 among 12 homo); L507F: 0.0 (mutant frequency of F at position 507 = 0.0000 among 7 homol); N459A: 0.125 (mutant frequency of A at position 459 = 0.1250 among 8 homol); V508I: 0.0 (mutant frequency of I at position 508 = 0.0000 among 7 homol); K526R: 0.0 (mutant frequency of R at position 526 = 0.0000 among 3 homol); I510F: 0.142857 (mutant frequency of F at position 510 = 0.1429 among 7 homol); A524F: 0.0 (mutant frequency of F at position 524 = 0.0000 among 3 homol); E509D: 0.0 (mutant frequency of D at position 509 = 0.0000 among 7 homol); D512E: 0.0 (mutant frequency of E at position 512 = 0.0000 among 5 homol)
+[sequence_plm] N347A: 0.4325 (sequence-model mutation plausibility (ESM-1v masked marginal); N411A: 0.2756 (sequence-model mutation plausibility (ESM-1v masked marginal); L507F: 0.6561 (sequence-model mutation plausibility (ESM-1v masked marginal); N459A: 0.4897 (sequence-model mutation plausibility (ESM-1v masked marginal); V508I: 0.7555 (sequence-model mutation plausibility (ESM-1v masked marginal); K526R: 0.534 (sequence-model mutation plausibility (ESM-1v masked marginal); I510F: 0.7109 (sequence-model mutation plausibility (ESM-1v masked marginal); A524F: 0.5298 (sequence-model mutation plausibility (ESM-1v masked marginal); E509D: 1.0 (sequence-model mutation plausibility (ESM-1v masked marginal); D512E: 0.9007 (sequence-model mutation plausibility (ESM-1v masked marginal)
+[structure_compatibility] N347A: 0.409243 (ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-3.6); N411A: 0.661065 (ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-2.0); L507F: 0.348449 (ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-4.0); N459A: 0.886816 (ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-0.1); V508I: 0.450389 (ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-3.4); K526R: 0.850488 (ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-0.5); I510F: 0.432967 (ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-3.5); A524F: 0.69035 (ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-1.8); E509D: 0.844186 (ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-0.6); D512E: 0.555665 (ProteinMPNN conditional log-prob delta on 3D11:A (ΔlogP=-2.7)
+[functional_annotation] N347A: 0.5 (UniProt Q9IH62 position 347: features ['Beta strand', 'Chain); N411A: 0.5 (UniProt Q9IH62 position 411: features ['Beta strand', 'Chain); L507F: 0.5 (UniProt Q9IH62 position 507: features ['Chain', 'Disulfide b); N459A: 0.5 (UniProt Q9IH62 position 459: features ['Chain', 'Disulfide b); V508I: 0.5 (UniProt Q9IH62 position 508: features ['Chain', 'Disulfide b); K526R: 0.5 (UniProt Q9IH62 position 526: features ['Beta strand', 'Chain); I510F: 0.5 (UniProt Q9IH62 position 510: features ['Chain', 'Disulfide b); A524F: 0.5 (UniProt Q9IH62 position 524: features ['Beta strand', 'Chain); E509D: 0.5 (UniProt Q9IH62 position 509: features ['Chain', 'Disulfide b); D512E: 0.5 (UniProt Q9IH62 position 512: features ['Beta strand', 'Chain)
+[phenotype] N347A: n/a; N411A: n/a; L507F: n/a; N459A: n/a; V508I: n/a; K526R: n/a; I510F: n/a; A524F: n/a; E509D: n/a; D512E: n/a
+[toxin] N347A: 0.195 (ToxinPred3 toxicity of the mutated 41-aa window = 0.195 (Non); N411A: 0.41 (ToxinPred3 toxicity of the mutated 41-aa window = 0.410 (Tox); L507F: 0.455 (ToxinPred3 toxicity of the mutated 41-aa window = 0.455 (Tox); N459A: 0.185 (ToxinPred3 toxicity of the mutated 41-aa window = 0.185 (Non); V508I: 0.46 (ToxinPred3 toxicity of the mutated 41-aa window = 0.460 (Tox); K526R: 0.305 (ToxinPred3 toxicity of the mutated 27-aa window = 0.305 (Non); I510F: 0.495 (ToxinPred3 toxicity of the mutated 41-aa window = 0.495 (Tox); A524F: 0.45 (ToxinPred3 toxicity of the mutated 29-aa window = 0.450 (Tox); E509D: 0.465 (ToxinPred3 toxicity of the mutated 41-aa window = 0.465 (Tox); D512E: 0.5 (ToxinPred3 toxicity of the mutated 41-aa window = 0.500 (Tox)
+
+Current candidate mutations and predicted values (confidence):
+  N347A  confidence=0.600
+  N411A  confidence=0.580
+  L507F  confidence=0.550
+  N459A  confidence=0.550
+  V508I  confidence=0.520
+  K526R  confidence=0.500
+  I510F  confidence=0.480
+  A524F  confidence=0.450
+  E509D  confidence=0.450
+  D512E  confidence=0.400
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "S2",
+  "round": 1,
+  "next_tool_requests": [
+    {"tool": "evolution_msa | sequence_plm | structure_compatibility | functional_annotation | phenotype",
+     "candidates": ["<WT><POS><MUT>", ...],
+     "question": "one sentence",
+     "reason_for_call": "one sentence"}
+  ]
+}
+Rules: request only tools you still need; each tool call may evaluate at most
+10 active candidates; do not re-request a tool for a candidate already covered
+(a repeated call returns no new information). If you need no further evidence,
+output an EMPTY next_tool_requests array.
+</OUTPUT_SCHEMA>
+
+ROUND 1 — respond with a single JSON object, nothing else.

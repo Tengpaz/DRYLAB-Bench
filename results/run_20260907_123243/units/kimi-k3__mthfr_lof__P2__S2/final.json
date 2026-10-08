@@ -1,0 +1,869 @@
+{
+  "unit_id": "kimi-k3__mthfr_lof__P2__S2",
+  "condition": "S2",
+  "model_id": "kimi-k3",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "A222P",
+        "confidence": 0.92,
+        "evidence_refs": [
+          "E00004"
+        ],
+        "decision_summary": "Highest AlphaMissense LOF-proxy signal (z=0.953) at the clinically relevant Ala222 locus; proline is absent from homologs and likely breaks local secondary structure to abolish catalytic activity."
+      },
+      {
+        "rank": 2,
+        "mutation": "W165C",
+        "confidence": 0.83,
+        "evidence_refs": [
+          "E00002"
+        ],
+        "decision_summary": "Strong damaging proxy (z=0.842) replacing a bulky conserved Trp with a small thiol; Cys is not observed among homologs, consistent with folding/cofactor disruption and loss of function."
+      },
+      {
+        "rank": 3,
+        "mutation": "A222C",
+        "confidence": 0.72,
+        "evidence_refs": [
+          "E00003"
+        ],
+        "decision_summary": "Damaging prediction (z=0.707) at the validated Ala222 position; slightly weaker than A222P because rare Cys occurs in a few homologs, so confidence is tempered."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 ranking is supported by the strongest available phenotype proxy and additional evidence is unlikely to change the ordering."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "A222V": {
+      "candidate_id": "A222V",
+      "mutation": "A222V",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.78,
+      "evidence_refs": [
+        "E00005",
+        "E00010",
+        "E00015"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Well-known thermolabile variant causing strong reduction of MTHFR activity via FAD dissociation and instability; strong LOF phenotype."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.82,
+          "rationale": "Retained as a well-known MTHFR loss-of-function/thermolability allele, but moved below A222P because this round's direct proxy evidence favored A222P more strongly."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "AlphaMissense score (0.632) is lower than A222P/A222C at the same position despite A222V being the common clinical variant; kept in pool but ranked below the stronger Ala222 and Trp165 candidates."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.55,
+          "rationale": "The common A222V polymorphism reduces but does not abolish activity (thermolabile, retains substantial residual function), so it poorly matches a full loss-of-function objective."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "The common A222V polymorphism reduces but does not abolish activity (thermolabile, retains substantial residual function), so it poorly matches a full loss-of-function objective.",
+        "evidence_refs": [
+          "E00010"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "W165A": {
+      "candidate_id": "W165A",
+      "mutation": "W165A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.6,
+      "evidence_refs": [
+        "E00006",
+        "E00011",
+        "E00016"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Conserved aromatic in the FAD/catalytic domain; alanine replacement likely disrupts cofactor binding and fold stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "No new evidence was collected for W165A; it remains plausible as a radical Trp deletion but is weaker than W165C under the current proxy."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "New score (0.665, pathogenic class) is higher than anticipated and above A222V, so W165A moves up to rank 4, just below A222C."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.45,
+          "rationale": "Alanine occurs at 17% frequency among homologs at position 165, indicating evolutionary tolerance inconsistent with reliably abolishing activity."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Alanine occurs at 17% frequency among homologs at position 165, indicating evolutionary tolerance inconsistent with reliably abolishing activity.",
+        "evidence_refs": [
+          "E00011"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "A222P": {
+      "candidate_id": "A222P",
+      "mutation": "A222P",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.92,
+      "evidence_refs": [
+        "E00007",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.93,
+          "rationale": "A222P has the strongest AlphaMissense LOF-proxy signal in this batch and proline at Ala222 is likely to disrupt the catalytic/core region. It now leads the pool despite being a prediction rather than direct enzymology."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.93,
+          "rationale": "Strongest AlphaMissense LOF-proxy signal (0.953) in the pool; proline substitution at the clinically relevant Ala222 locus likely disrupts local structure and activity."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.92,
+          "rationale": "Highest AlphaMissense LOF-proxy (0.953) and proline never observed at position 222 among homologs, consistent with disruption; proline substitution plausibly breaks local secondary structure to abolish activity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W165C": {
+      "candidate_id": "W165C",
+      "mutation": "W165C",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.83,
+      "evidence_refs": [
+        "E00008",
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.84,
+          "rationale": "W165C shows a high damaging prediction and replaces a bulky conserved Trp with a small thiol, plausibly impairing folding or cofactor/substrate binding. Confidence is tempered because the signal is a LOF proxy, not measured MTHFR activity."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.84,
+          "rationale": "Second-strongest damaging prediction (0.842); loss of a bulky conserved Trp plausibly impairs folding or cofactor binding."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.83,
+          "rationale": "Strong damaging proxy (0.842) with Cys absent from all 23 homologs at this bulky Trp position; loss of the indole side chain likely impairs folding or catalytic-site geometry."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A222C": {
+      "candidate_id": "A222C",
+      "mutation": "A222C",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.72,
+      "evidence_refs": [
+        "E00009",
+        "E00014"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "A222C is also predicted damaging at the clinically relevant Ala222 locus, but is weaker than A222P and less interpretable than the known A222V mechanism."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "Damaging prediction (0.707) at the same hotspot as A222P; remains third, above the newly scored A222V and W165A."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "Damaging proxy (0.707) at the clinically validated Ala222 locus, though rare Cys occurrence (4%) in homologs slightly weakens the LOF case versus A222P."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "A222P": 66.841,
+    "W165C": 59.692,
+    "A222C": 52.052
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "W165G",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.4209,
+        "normalized": 0.4209,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.421 (class ambiguous); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W165G",
+          "W165C",
+          "A222C",
+          "A222P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W165C",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.8419,
+        "normalized": 0.8419,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.842 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W165G",
+          "W165C",
+          "A222C",
+          "A222P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222C",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.7068,
+        "normalized": 0.7068,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.707 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W165G",
+          "W165C",
+          "A222C",
+          "A222P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222P",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9527,
+        "normalized": 0.9527,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.953 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "W165G",
+          "W165C",
+          "A222C",
+          "A222P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222V",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6324,
+        "normalized": 0.6324,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.632 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "A222V",
+          "W165A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W165A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6648,
+        "normalized": 0.6648,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.665 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "A222V",
+          "W165A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 222 = 0.0000 among 23 homologs; conservation entropy 2.140 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "W165C",
+          "A222C",
+          "A222V",
+          "W165A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W165C",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of C at position 165 = 0.0000 among 23 homologs; conservation entropy 2.209 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "W165C",
+          "A222C",
+          "A222V",
+          "W165A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222C",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.043478,
+        "normalized": 0.043478,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of C at position 222 = 0.0435 among 23 homologs; conservation entropy 2.140 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "W165C",
+          "A222C",
+          "A222V",
+          "W165A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222V",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of V at position 222 = 0.0000 among 23 homologs; conservation entropy 2.140 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "W165C",
+          "A222C",
+          "A222V",
+          "W165A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W165A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.173913,
+        "normalized": 0.173913,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 165 = 0.1739 among 23 homologs; conservation entropy 2.209 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "W165C",
+          "A222C",
+          "A222V",
+          "W165A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222P",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "W165C",
+          "A222C",
+          "A222V",
+          "W165A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W165C",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "W165C",
+          "A222C",
+          "A222V",
+          "W165A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222C",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "W165C",
+          "A222C",
+          "A222V",
+          "W165A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222V",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "W165C",
+          "A222C",
+          "A222V",
+          "W165A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W165A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "kimi-k3__mthfr_lof__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "A222P",
+          "W165C",
+          "A222C",
+          "A222V",
+          "W165A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 4,
+    "c0_size": 2,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

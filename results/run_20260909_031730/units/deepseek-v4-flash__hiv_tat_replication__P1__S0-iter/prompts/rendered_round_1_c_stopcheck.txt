@@ -1,0 +1,118 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the HIV-1 Tat protein (86 aa).
+
+PRIMARY OBJECTIVE: Maximize virus replication efficiency via Tat-mediated transactivation.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MEPVDPRLEPWKHPGSQPKTACTNCYCKKCCFHCQVCFMTKALGISYGRKKRRQRRRAHQNSQTHQASLSKQPTSQSRGDPTGPKE
+```
+NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  Q54R  confidence=0.720  rank=1
+  A58R  confidence=0.640  rank=2
+  K50R  confidence=0.580  rank=3
+  H59R  confidence=0.550  rank=4
+  K51R  confidence=0.520  rank=5
+  K41R  confidence=0.350  rank=6
+  S68R  confidence=0.250  rank=7
+  Q63R  confidence=0.220  rank=8
+  A67R  confidence=0.200  rank=9
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+Changes this round:
+  - Q54R rerank: Q54 is inside the arginine-rich TAR-binding motif; replacing the non-basic glutamine with arginine increases positive charge and likely improves RNA binding and transactivation.
+  - A58R rerank: A58 immediately follows the basic domain, and adding arginine may extend the RNA-binding surface without disrupting the conserved core.
+  - S46R reject: S46 lies in the structured core domain; a large arginine substitution at this position is more likely to disrupt the cyclin T1 interface than to improve transactivation.
+  - G48R reject: G48 is a conserved glycine in the core domain; introducing arginine here is likely to distort the local conformation and reduce Tat function.
+  - H59R rerank: H59 flanks the basic domain; replacing histidine with arginine may add a stronger positive charge and modestly enhance RNA contacts while remaining tolerant.
+  - K41R rerank: K41R is conservative in the core but does not specifically strengthen the key RNA-binding patch, so it is only weakly useful.
+  - T40R reject: T40 is within the conserved core region; introducing a bulky arginine is likely to perturb interactions with P-TEFb/TAR rather than improve replication.
+  - S68R retain: S68 is in the glutamine-rich distal region; possible partner interactions could be affected, but the link to transactivation is weak.
+  - Q63R retain: Q63R adds positive charge in the glutamine-rich region, but the region is less directly involved in TAR binding, so confidence is low.
+  - A67R retain: A67R is unlikely to perturb core folding and may add charge, but the expected effect on transactivation is minimal.
+  - K50R add: K50 is in the RNA-binding basic cluster; arginine at this position can form more favorable contacts with TAR than lysine while remaining conservative.
+  - K51R add: Like K50R, K51R increases the arginine-rich character of the basic motif and may improve TAR binding with low structural risk.
+Remaining doubts: No external evidence is available, so rankings rely on domain-structure reasoning and may miss strain-specific or allosteric effects.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 1 — respond with a single JSON object, nothing else.

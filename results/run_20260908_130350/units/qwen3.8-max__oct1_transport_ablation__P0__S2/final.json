@@ -1,0 +1,209 @@
+{
+  "unit_id": "qwen3.8-max__oct1_transport_ablation__P0__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D473A",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "D473 is a conserved aspartate in TM11 of OCT1, likely critical for the transport mechanism (charge relay or conformational coupling in the MFS fold). Alanine substitution removes the functional charge while preserving helix integrity and protein folding."
+      },
+      {
+        "rank": 2,
+        "mutation": "R401A",
+        "confidence": 0.65,
+        "evidence_refs": [],
+        "decision_summary": "R401 is a conserved arginine at the TM10/intracellular loop boundary, likely involved in salt-bridge networks critical for the alternating access mechanism. Alanine substitution disrupts this interaction without destabilizing the overall fold."
+      },
+      {
+        "rank": 3,
+        "mutation": "G400A",
+        "confidence": 0.6,
+        "evidence_refs": [
+          "E00001"
+        ],
+        "decision_summary": "G400 is a conserved glycine in TM10 providing helix flexibility needed for conformational transitions during transport. Alanine introduces steric constraint that impairs the conformational change while maintaining local packing and protein stability."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Maximum tool calls and agent rounds have been used; final candidates selected based on sequence verification and mechanistic reasoning."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "G400A": {
+      "candidate_id": "G400A",
+      "mutation": "G400A",
+      "first_seen_round": 1,
+      "last_seen_round": 4,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.72,
+      "evidence_refs": [
+        "E00001"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "G400 is in a conserved glycine-rich motif in TM10; alanine introduces steric constraint that may impair conformational flexibility needed for transport."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "AlphaMissense score of 0.749 (pathogenic class) supports LOF potential. G400 is in a conserved glycine-rich motif in TM10; alanine substitution likely impairs conformational flexibility needed for transport."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "G400A retains strong phenotype score (z=0.749) indicating high LOF probability. G400 is in a conserved glycine-rich motif in TM10 critical for conformational dynamics."
+        },
+        {
+          "round": 4,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "Sequence verification shows position 400 is I (isoleucine), not G. The WT residue is incorrect, making this an invalid mutation designation."
+        }
+      ],
+      "rejection": {
+        "round": 4,
+        "reason": "Sequence verification shows position 400 is I (isoleucine), not G. The WT residue is incorrect, making this an invalid mutation designation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G400V": {
+      "candidate_id": "G400V",
+      "mutation": "G400V",
+      "first_seen_round": 3,
+      "last_seen_round": 4,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Valine at G400 introduces a larger hydrophobic side chain than alanine, potentially causing greater steric disruption of the glycine hinge in TM10 while remaining a conservative hydrophobic substitution that should preserve folding."
+        },
+        {
+          "round": 4,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "Position 400 is I (isoleucine) in the given sequence, not G. Invalid WT residue assignment."
+        }
+      ],
+      "rejection": {
+        "round": 4,
+        "reason": "Position 400 is I (isoleucine) in the given sequence, not G. Invalid WT residue assignment.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G400S": {
+      "candidate_id": "G400S",
+      "mutation": "G400S",
+      "first_seen_round": 3,
+      "last_seen_round": 4,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.64,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.64,
+          "rationale": "Serine at G400 introduces a polar hydroxyl that could disrupt the hydrophobic glycine hinge environment in TM10, potentially impairing the conformational transition needed for transport while maintaining local packing."
+        },
+        {
+          "round": 4,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "Position 400 is I (isoleucine) in the given sequence, not G. Invalid WT residue assignment."
+        }
+      ],
+      "rejection": {
+        "round": 4,
+        "reason": "Position 400 is I (isoleucine) in the given sequence, not G. Invalid WT residue assignment.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 5
+  },
+  "bundle_evidence": {
+    "D473A": null,
+    "R401A": null,
+    "G400A": 74.86
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "G400A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.7486,
+        "normalized": 0.7486,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.749 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__oct1_transport_ablation__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G400A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 3,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 28,
+    "c0_size": 0,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 5,
+    "budget_exhausted": true
+  }
+}

@@ -1,0 +1,1408 @@
+{
+  "unit_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+  "condition": "S2",
+  "model_id": "claude-opus-5",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D473A",
+        "confidence": 0.86,
+        "evidence_refs": [],
+        "decision_summary": "Removes the negative charge of the canonical cation-coordinating aspartate (hOCT1 D474, TM11) with minimal steric perturbation, so folding/abundance is likely preserved while substrate binding is lost. High LOF proxy (AM 0.80) and near-zero ESM-1v plausibility support ablation; modest Ala frequency in low-coverage paralogs is the only caveat."
+      },
+      {
+        "rank": 2,
+        "mutation": "D473N",
+        "confidence": 0.8,
+        "evidence_refs": [],
+        "decision_summary": "Isosteric charge neutralization is the cleanest way to kill cation coordination while retaining side-chain volume and packing, giving the best expected abundance retention of the series. Asn is absent from homologs at this position and ESM-1v plausibility is near zero, though its AlphaMissense score (0.589) is the mildest of the three."
+      },
+      {
+        "rank": 3,
+        "mutation": "D473R",
+        "confidence": 0.76,
+        "evidence_refs": [],
+        "decision_summary": "Charge reversal in the cation-binding site gives the strongest predicted disruption (AM 0.907, lowest ESM-1v plausibility, zero homolog frequency) and should fully abolish organic-cation transport. Ranked third only because burying a bulky positive charge carries the highest residual risk to folding and steady-state protein abundance."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Remaining evidence is static or non-applicable and would not alter the converged D473-centered Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 1,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "D473N": {
+      "candidate_id": "D473N",
+      "mutation": "D473N",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.78,
+      "evidence_refs": [
+        "E00001",
+        "E00009",
+        "E00017"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Position 473 (D in 'LCDIGGIITP', canonical hOCT1 Asp474) is the TM11 acidic residue essential for organic-cation recognition; the isosteric D→N removes the negative charge required for substrate binding while minimally perturbing packing, so transport should be lost with normal expression."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.86,
+          "rationale": "Verified WT D at 473 (=canonical D474, the conserved TM11 substrate-binding aspartate); isosteric Asn removes the cation-coordinating carboxylate with minimal packing/folding penalty."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "Isosteric charge neutralization is the mechanistically cleanest way to kill cation binding while preserving packing and abundance, and N is absent from homologs at this position with near-zero ESM-1v plausibility. Slightly demoted because its AlphaMissense score (0.589) is the lowest of the D473 series, suggesting a somewhat milder predicted impact."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D473R": {
+      "candidate_id": "D473R",
+      "mutation": "D473R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.82,
+      "evidence_refs": [
+        "E00003",
+        "E00011",
+        "E00019"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.74,
+          "rationale": "Charge reversal at the same critical cation-coordinating Asp should more completely abolish substrate binding/translocation; the arginine can still be accommodated in the polar central cavity, limiting folding penalty."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "Charge reversal in a buried TM cleft is most likely to abolish transport but also carries the highest risk of misfolding/ER retention, so it is demoted below D473C/D473A."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.82,
+          "rationale": "Highest LOF proxy in the pool (AM 0.907) with zero homolog frequency and the lowest ESM-1v plausibility, consistent with complete transport ablation via charge reversal in the cation site. Promoted above D473N, but held below D473A because a buried charge reversal carries the largest residual risk to folding/abundance."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D473A": {
+      "candidate_id": "D473A",
+      "mutation": "D473A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.86,
+      "evidence_refs": [
+        "E00002",
+        "E00010",
+        "E00018"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Removal of the carboxylate side chain at the key binding aspartate abolishes cation coordination; Ala is small and generally well tolerated for folding, though it may leave a cavity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.74,
+          "rationale": "Charge deletion at the key binding residue with small steric footprint; slight cavity creation is the only folding risk."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.86,
+          "rationale": "D473 (canonical hOCT1 D474, TM11) is the classic cation-coordinating aspartate; Ala removes the charge with minimal steric/packing burden, and AlphaMissense (0.80, pathogenic) plus a near-zero ESM-1v ratio indicate strong functional disruption. The 12.6% Ala frequency in homologs is a mild caution but comes from low-coverage (app 0.36) paralogs with different substrate specificity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E385Q": {
+      "candidate_id": "E385Q",
+      "mutation": "E385Q",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00004",
+        "E00012",
+        "E00020"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Glu385 here (canonical Glu386) lines the central substrate-binding cavity and contributes negative charge for cation binding; the conservative, isosteric E→Q neutralizes it without altering steric bulk, favoring folded-but-dead protein."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.66,
+          "rationale": "WT E at 385 verified (canonical E386, inner-cleft acidic residue); isosteric Gln neutralizes cation coordination with low structural cost."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Consistent evidence (AM 0.72, zero homolog Q frequency, near-zero ESM-1v) supports disruption, but the position lacks direct substrate-contact evidence, so it stays a mid-pool alternate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W216A": {
+      "candidate_id": "W216A",
+      "mutation": "W216A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00005",
+        "E00013",
+        "E00021"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Trp216 (canonical Trp217) is a core binding-pocket aromatic making cation-pi contacts with substrates; W→A should eliminate substrate engagement, with some risk of cavity-induced destabilization."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "WT W at 216 verified (canonical W217, cation-π substrate contact); Trp→Ala should abolish binding but large cavity creation threatens abundance."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Lowest LOF proxy among the pocket mutants (0.635) and ~9.5% Ala frequency in a well-covered alignment weaken the ablation case; removing a large Trp also raises folding/abundance risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y220A": {
+      "candidate_id": "Y220A",
+      "mutation": "Y220A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.58,
+      "evidence_refs": [
+        "E00006",
+        "E00014",
+        "E00022"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.56,
+          "rationale": "Tyr220 (canonical Tyr221) is part of the aromatic cage of the OCT1 binding cleft; loss of the hydroxyl/aromatic ring is expected to abolish transport while the protein still inserts into the membrane."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "WT Y at 220 verified (canonical Y221, aromatic cation-binding residue); plausible transport-null but with moderate packing risk."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "Binding-cleft aromatic (rat Oct1 Y222 equivalent) with a high LOF proxy (0.756) and very low ESM-1v plausibility, kept as the best non-D473 backup. Small Ala tolerance among homologs (4.3%) and the literature pattern that aromatic-pocket Ala mutants often shift affinity rather than abolish transport keep it below the D473 series."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F158A": {
+      "candidate_id": "F158A",
+      "mutation": "F158A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00007",
+        "E00015",
+        "E00023"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Phe158 (canonical Phe159) contributes to the hydrophobic substrate cavity in TM2; truncation to Ala should disrupt substrate recognition more than global fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "WT F at 158 verified; plausible hydrophobic-cleft contact but weaker mechanistic support than the D473/E385 sites."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "High AM (0.789) and negligible ESM-1v plausibility, but the well-covered MSA (app 0.87) shows Ala at ~9.5% of homologs, so ablation is less certain and destabilization risk (abundance loss) is non-trivial."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F243A": {
+      "candidate_id": "F243A",
+      "mutation": "F243A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Phe243 (canonical Phe244) is a cavity-facing aromatic in the N-domain binding site; alanine substitution likely eliminates substrate contacts while keeping the helical bundle intact."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "Buried TM aromatic with no specific substrate-binding evidence; Ala substitution risks destabilization (loss of abundance) rather than clean transport loss."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Buried TM aromatic with no specific substrate-binding evidence; Ala substitution risks destabilization (loss of abundance) rather than clean transport loss.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "R438A": {
+      "candidate_id": "R438A",
+      "mutation": "R438A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.46,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.46,
+          "rationale": "Arg438 (canonical Arg439) is a conserved polar residue in the C-domain cavity implicated in the translocation pathway; neutralization should block turnover, though it may also affect helix packing."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.28,
+          "rationale": "R438 is not an established substrate-contact residue and is likely peripheral; dropped to free slots for the higher-prior D473/E385 series."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "R438 is not an established substrate-contact residue and is likely peripheral; dropped to free slots for the higher-prior D473/E385 series.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "D397N": {
+      "candidate_id": "D397N",
+      "mutation": "D397N",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.44,
+      "evidence_refs": [
+        "E00008",
+        "E00016",
+        "E00024"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.44,
+          "rationale": "Asp397 belongs to the second MFS 'A-like' DRxGR motif that mediates the conformational cycle; D→N is conservative in shape and should lock/impair alternating access without gross misfolding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.44,
+          "rationale": "WT D at 397 verified within the MFS motif-A DRxGR; conservative D→N may only partially impair the conformational cycle, so it is kept at the bottom for now."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "AlphaMissense classifies it benign (0.26) and it has the highest ESM-1v plausibility in the pool (0.032), so it is the least likely to abolish transport despite sitting near the MFS DRxGR motif."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "AlphaMissense classifies it benign (0.26) and it has the highest ESM-1v plausibility in the pool (0.032), so it is the least likely to abolish transport despite sitting near the MFS DRxGR motif.",
+        "evidence_refs": [
+          "E00008",
+          "E00016"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 3,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "D473A": 36.225,
+    "D473N": 24.321,
+    "D473R": 37.39
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "D473N",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.5888,
+        "normalized": 0.5888,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.589 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D473A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.8025,
+        "normalized": 0.8025,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.802 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D473R",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9067,
+        "normalized": 0.9067,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.907 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E385Q",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.7205,
+        "normalized": 0.7205,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.721 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W216A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6348,
+        "normalized": 0.6348,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.635 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y220A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.7564,
+        "normalized": 0.7564,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.756 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F158A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.7892,
+        "normalized": 0.7892,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.789 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D397N",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.2596,
+        "normalized": 0.2596,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.260 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D473N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0012,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D473A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0001,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D473R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E385Q",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0005,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W216A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0001,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y220A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0003,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F158A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0001,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D397N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0321,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D473N",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.36,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.36,
+        "reason": "alignment coverage 87/242 homologs"
+      },
+      "interpretation": "mutant frequency of N at position 473 = 0.0000 among 87 homologs; conservation entropy 2.071 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D473A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.126437,
+        "normalized": 0.126437,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.36,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.36,
+        "reason": "alignment coverage 87/242 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 473 = 0.1264 among 87 homologs; conservation entropy 2.071 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D473R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.36,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.36,
+        "reason": "alignment coverage 87/242 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 473 = 0.0000 among 87 homologs; conservation entropy 2.071 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E385Q",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.479,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.479,
+        "reason": "alignment coverage 116/242 homologs"
+      },
+      "interpretation": "mutant frequency of Q at position 385 = 0.0000 among 116 homologs; conservation entropy 2.450 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W216A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.094737,
+        "normalized": 0.094737,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.785,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.785,
+        "reason": "alignment coverage 190/242 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 216 = 0.0947 among 190 homologs; conservation entropy 2.733 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y220A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.043243,
+        "normalized": 0.043243,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.764,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.764,
+        "reason": "alignment coverage 185/242 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 220 = 0.0432 among 185 homologs; conservation entropy 2.546 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F158A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.095238,
+        "normalized": 0.095238,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.868,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.868,
+        "reason": "alignment coverage 210/242 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 158 = 0.0952 among 210 homologs; conservation entropy 2.586 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00023",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D397N",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.455,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.455,
+        "reason": "alignment coverage 110/242 homologs"
+      },
+      "interpretation": "mutant frequency of N at position 397 = 0.0000 among 110 homologs; conservation entropy 2.279 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00024",
+      "run_id": "claude-opus-5__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473N",
+          "D473A",
+          "D473R",
+          "E385Q",
+          "W216A",
+          "Y220A",
+          "F158A",
+          "D397N"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 3,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

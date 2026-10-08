@@ -1,0 +1,400 @@
+{
+  "unit_id": "grok-4.5__oct1_transport_ablation__P2__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "I300P",
+        "confidence": 0.9,
+        "evidence_refs": [
+          "E00002"
+        ],
+        "decision_summary": "Highest phenotype score supports strong LOF; retained as primary despite low evolution stats as phenotype dimension aligns best with objective."
+      },
+      {
+        "rank": 2,
+        "mutation": "S200P",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "New hypothesis at position 200; Pro substitution may disrupt transport; included to broaden pool but lacks direct evidence."
+      },
+      {
+        "rank": 3,
+        "mutation": "G400P",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "New hypothesis at position 400; Pro substitution may disrupt transport; included to broaden pool but lacks direct evidence."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Structure data unavailable prevents viability confirmation; top-3 unlikely to change"
+    },
+    "remaining_budget": {
+      "tool_calls": 1,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "L147P": {
+      "candidate_id": "L147P",
+      "mutation": "L147P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00001",
+        "E00003",
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Position 147 is a leucine in a predicted transmembrane segment. Substituting with proline introduces a kink that can disrupt helical conformation required for substrate translocation in OCT1 while maintaining overall hydrophobicity for folding and stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Structure evidence not applicable (no pipeline), provides zero new information; retained at same confidence."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.65,
+          "rationale": "Phenotype score of 0.289 is low for LOF target while I300P scores 0.946; evolution low but phenotype dimension is closest to reward so reject."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Phenotype score of 0.289 is low for LOF target while I300P scores 0.946; evolution low but phenotype dimension is closest to reward so reject.",
+        "evidence_refs": [
+          "E00003",
+          "E00005"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "I300P": {
+      "candidate_id": "I300P",
+      "mutation": "I300P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.9,
+      "evidence_refs": [
+        "E00002",
+        "E00004",
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Isoleucine at position 300 is located in a transmembrane helix. Replacing it with proline can alter packing interactions and helix tilt, thereby abolishing substrate binding or translocation while the mutation remains conservative enough to preserve native-like folding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Structure evidence not applicable (no pipeline), provides zero new information; retained at same confidence."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "High phenotype score 0.946 strongly supports LOF objective; low evolution frequency is a trade-off but phenotype takes priority over evolution per guidelines."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S200P": {
+      "candidate_id": "S200P",
+      "mutation": "S200P",
+      "first_seen_round": 2,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "New hypothesis at position 200 (WT=S) to expand pool; Pro substitution may disrupt transport similar to known candidates while aiming for LOF."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G400P": {
+      "candidate_id": "G400P",
+      "mutation": "G400P",
+      "first_seen_round": 2,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "New hypothesis at position 400 (WT=G) to expand pool; Pro substitution may disrupt transport similar to known candidates while aiming for LOF."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 3,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "I300P": 48.678,
+    "S200P": null,
+    "G400P": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "L147P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure pipeline"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure pipeline"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__oct1_transport_ablation__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "L147P",
+          "I300P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I300P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure pipeline"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure pipeline"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__oct1_transport_ablation__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "L147P",
+          "I300P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L147P",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.2893,
+        "normalized": 0.2893,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.289 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__oct1_transport_ablation__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L147P",
+          "I300P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I300P",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9456,
+        "normalized": 0.9456,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.946 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__oct1_transport_ablation__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L147P",
+          "I300P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L147P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.030973,
+        "normalized": 0.030973,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.934,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.934,
+        "reason": "alignment coverage 226/242 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 147 = 0.0310 among 226 homologs; conservation entropy 2.639 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "grok-4.5__oct1_transport_ablation__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L147P",
+          "I300P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I300P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.020979,
+        "normalized": 0.020979,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.591,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.591,
+        "reason": "alignment coverage 143/242 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 300 = 0.0210 among 143 homologs; conservation entropy 2.560 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "grok-4.5__oct1_transport_ablation__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L147P",
+          "I300P"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 3,
+    "c0_size": 2,
+    "final_novelty": 0.6666666666666666,
+    "tool_calls_used": 3,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

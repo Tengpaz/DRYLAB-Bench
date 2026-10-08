@@ -1,0 +1,162 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the Zika virus envelope glycoprotein E (504 aa).
+
+GOAL: Maximize viral replication fitness.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+IRCIGVSNRDFVEGMSGGTWVDVVLEHGGCVTVMAQDKPTVDIELVTTTVSNMAEVRSYCYEASISDMASDSRCPTQGEAYLDKQSDTQYVCKRTLVDRGWGNGCGLFGKGSLVTCAKFTCSKKMTGKSIQPENLEYRIMLSVHGSQHSGMIVNDTGYETDENRAKVEVTPNSPRAEATLGGFGSLGLDCEPRTGLDFSDLYYLTMNNKHWLVHKEWFHDIPLPWHAGADTGTPHWNNKEALVEFKDAHAKRQTVVVLGSQEGAVHTALAGALEAEMDGAKGKLFSGHLKCRLKMDKLRLKGVSYSLCTAAFTFTKVPAETLHGTVTVEVQYAGTDGPCKIPVQMAVDMQTLTPVGRLITANPVITESTENSKMMLELDPPFGDSYIVIGVGDKKITHHWHRSGSTIGKAFEATVRGAKRMAVLGDTAWDFGSVGGVFNSLGKGIHQIFGAAFKSLFGGMSWFSQILIGTLLVWLGLNTKNGSISLTCLALGGVMIFLSTAVSA
+```
+IMPORTANT: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   For THIS task the backbone is PDB 6CO8 chain A — 99% of this sequence's residues have experimental coordinates (resolution 3.1 Å).
+
+4. functional_annotation — curated UniProt features for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide which biological tools (if any) you still need, on which candidates. Do NOT change candidates and do NOT output a STOP decision in this step — only request tools (empty array if you need none).
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  A310K  confidence=0.620  rank=1
+  T335K  confidence=0.580  rank=2
+  V330L  confidence=0.560  rank=3
+  K394R  confidence=0.530  rank=4
+  N154D  confidence=0.490  rank=5
+  N154Q  confidence=0.440  rank=6
+BT evidence so far:
+  E00001 evolution_msa(V473M): z=0.041, app=1.00
+  E00002 evolution_msa(N154Q): z=0.029, app=0.46
+  E00003 evolution_msa(K394R): z=0.135, app=1.00
+  E00004 evolution_msa(V330L): z=0.027, app=1.00
+  E00005 evolution_msa(T335K): z=0.167, app=0.97
+  E00006 evolution_msa(N154D): z=0.059, app=0.46
+  E00007 evolution_msa(E320K): z=0.000, app=1.00
+  E00008 evolution_msa(A310K): z=0.392, app=1.00
+  E00009 evolution_msa(D384G): z=0.000, app=1.00
+  E00010 evolution_msa(I387K): z=0.000, app=1.00
+  E00011 sequence_plm(V473M): z=0.129, app=0.90
+  E00012 sequence_plm(N154Q): z=1.000, app=0.90
+  E00013 sequence_plm(K394R): z=0.489, app=0.90
+  E00014 sequence_plm(V330L): z=0.901, app=0.90
+  E00015 sequence_plm(T335K): z=1.000, app=0.90
+  E00016 sequence_plm(N154D): z=1.000, app=0.90
+  E00017 sequence_plm(E320K): z=0.989, app=0.90
+  E00018 sequence_plm(A310K): z=1.000, app=0.90
+  E00019 sequence_plm(D384G): z=0.749, app=0.90
+  E00020 sequence_plm(I387K): z=0.459, app=0.90
+  E00021 structure_compatibility(V473M): z=?, app=0.00
+  E00022 structure_compatibility(N154Q): z=0.511, app=1.00
+  E00023 structure_compatibility(K394R): z=0.724, app=1.00
+  E00024 structure_compatibility(V330L): z=0.786, app=1.00
+  E00025 structure_compatibility(T335K): z=0.705, app=1.00
+  E00026 structure_compatibility(N154D): z=0.823, app=1.00
+  E00027 structure_compatibility(E320K): z=0.442, app=1.00
+  E00028 structure_compatibility(A310K): z=0.695, app=1.00
+  E00029 structure_compatibility(D384G): z=0.319, app=1.00
+  E00030 structure_compatibility(I387K): z=0.078, app=1.00
+  E00031 toxin(V473M): z=0.215, app=0.70
+  E00032 toxin(N154Q): z=0.135, app=0.70
+  E00033 toxin(K394R): z=0.195, app=0.70
+  E00034 toxin(V330L): z=0.290, app=0.70
+  E00035 toxin(T335K): z=0.265, app=0.70
+  E00036 toxin(N154D): z=0.140, app=0.70
+  E00037 toxin(E320K): z=0.385, app=0.70
+  E00038 toxin(A310K): z=0.380, app=0.70
+  E00039 toxin(D384G): z=0.165, app=0.70
+  E00040 toxin(I387K): z=0.165, app=0.70
+Change history:
+  - drop E320K (round 1): Charge-reversal mutation has zero natural occurrence, poor structural compatibility, and pushes the local peptide into toxic territory; rejected despite high PLM score.
+  - drop D384G (round 1): Zero evolutionary occurrence and poor structure compatibility for a glycine substitution in DIII make it unlikely to preserve fitness.
+  - drop I387K (round 1): Zero evolutionary occurrence and severely poor structural compatibility indicate this substitution is not viable.
+  - drop V473M (round 1): Weak evolutionary support, very poor sequence-model plausibility, and no usable structure score make this stem/TM-proximal substitution unlikely to preserve fitness.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "S2",
+  "round": 1,
+  "next_tool_requests": [
+    {"tool": "evolution_msa | sequence_plm | structure_compatibility | functional_annotation | phenotype",
+     "candidates": ["<WT><POS><MUT>", ...],
+     "question": "one sentence",
+     "reason_for_call": "one sentence"}
+  ]
+}
+Rules: request only tools you still need; each tool call may evaluate at most
+10 active candidates; do not re-request a tool for a candidate already covered
+(a repeated call returns no new information). If you need no further evidence,
+output an EMPTY next_tool_requests array.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

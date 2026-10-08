@@ -1,0 +1,344 @@
+{
+  "unit_id": "glm-5.3__flu_h5_stability_dual__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "glm-5.3",
+  "scenario_id": "flu_h5_stability_dual",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "T292I",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "Thr-to-Ile increases hydrophobic packing near, but not within, the receptor-binding region, a frequently stabilizing conservative change. Position is outside known receptor contacts, so cell entry should be preserved."
+      },
+      {
+        "rank": 2,
+        "mutation": "Y268F",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "Removing the polar hydroxyl while retaining the aromatic ring is a classic stabilizing substitution in the vestigial esterase subdomain core. It does not touch the receptor-binding site or fusion peptide."
+      },
+      {
+        "rank": 3,
+        "mutation": "S138P",
+        "confidence": 0.4,
+        "evidence_refs": [],
+        "decision_summary": "Proline restricts unfolded-state backbone entropy, rigidifying a surface loop distant from the RBS and fusion machinery. Risk is limited to local structural tolerance of the kink."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "LLM-only control with no evidence tools; further self-review rounds are unlikely to improve the Top-3 ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "E97K": {
+      "candidate_id": "E97K",
+      "mutation": "E97K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Surface-exposed HA1 residue; Glu-to-Lys can create new inter-helical/inter-protomer salt bridges without touching the receptor-binding site, mildly stabilizing the trimer."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "Charge-swap could form a favorable salt bridge but risk of pH-dependent destabilization near the fusion-domain region lowers confidence. Retain for now pending further reasoning."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T292I": {
+      "candidate_id": "T292I",
+      "mutation": "T292I",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Region near the stem/vestibule; Thr-to-Ile replaces a polar residue with a better-packed hydrophobic side chain in a partially buried environment, a recurring theme in heat-stable HA variants."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "T292 sits in a loop region of HA1 near the receptor-binding domain; substitution to isoleucine increases hydrophobic packing without changing size drastically, and Thr-to-Ile mutations frequently improve thermal tolerance. It is surface-adjacent but not a known receptor-contact residue, so cell entry should be preserved."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S138P": {
+      "candidate_id": "S138P",
+      "mutation": "S138P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Loop-proline substitution can rigidify a surface loop on the HA head away from the RBS, reducing conformational entropy loss on folding while preserving entry functions."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "Proline at position 138 restricts backbone entropy of the unfolded state and can rigidify a surface loop; it is distant from the RBS and fusion peptide. Ser-to-Pro is a well-known generic stabilizing substitution if the position tolerates a kink."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K136N": {
+      "candidate_id": "K136N",
+      "mutation": "K136N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Conservative polar substitution on a solvent-exposed head residue; reduces charge repulsion in a Lys cluster (K136-K168) and may allow improved local packing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.3,
+          "rationale": "Loss of positive charge may reduce repulsion in the 130-loop; effect on folding stability is speculative but plausible. Retained as a mid-tier candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y268F": {
+      "candidate_id": "Y268F",
+      "mutation": "Y268F",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Tyr-to-Phe in a hydrophobic core-adjacent position of the head domain removes a buried hydroxyl while conserving packing, a classic small stabilizing substitution."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Y268F removes a polar hydroxyl while retaining the aromatic ring, commonly stabilizing buried aromatic cores; residue 268 is in the vestigial esterase subdomain and not a receptor-binding site. This is a classic stability-enhancing conservative substitution pattern."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D365N": {
+      "candidate_id": "D365N",
+      "mutation": "D365N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.22,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "HA2 near the fusion peptide N-terminus; Asn maintains H-bonding capacity while lowering local electrostatic strain, plausibly stabilizing the prefusion stem conformation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.22,
+          "rationale": "Asn at 365 removes a negative charge near HA2 but is unproven; retained as a low-confidence option pending one more reasoning pass."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K118N": {
+      "candidate_id": "K118N",
+      "mutation": "K118N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.25,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Solvent-exposed HA1 site; substitution of a charged Lys with Asn can relieve desolvation cost at the surface, marginally improving fold stability."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "Lys118 lies near the 110-loop interacting with the fusion peptide region; charge neutralization risks affecting fusion triggering. Rejected."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Lys118 lies near the 110-loop interacting with the fusion peptide region; charge neutralization risks affecting fusion triggering. Rejected.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "V299A": {
+      "candidate_id": "V299A",
+      "mutation": "V299A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.2,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.2,
+          "rationale": "HA2-adjacent packing position; small hydrophobic substitution could relieve overpacking in the stem bundle, but effect is uncertain."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "Ala at 299 reduces hydrophobic packing; small-to-smaller substitutions generally destabilize cores rather than stabilize. Rejected."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Ala at 299 reduces hydrophobic packing; small-to-smaller substitutions generally destabilize cores rather than stabilize. Rejected.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "E384K": {
+      "candidate_id": "E384K",
+      "mutation": "E384K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "HA2 stem region; introduces a possible intra-stem salt bridge (e.g., with acidic HA2 partners) that would reinforce the prefusion helical bundle against heat-triggered rearrangement."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "Position 384 lies near the HA stem/fusion machinery region; charge reversals there can perturb the low-pH conformational switch required for entry. Rejected to protect cell entry function."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 384 lies near the HA stem/fusion machinery region; charge reversals there can perturb the low-pH conformational switch required for entry. Rejected to protect cell entry function.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "N461D": {
+      "candidate_id": "N461D",
+      "mutation": "N461D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.2,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.2,
+          "rationale": "Exposed HA2 residue; Asp may improve hydration and salt-bridge pairing on the stem surface, with modest expected stability gain."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.08,
+          "rationale": "N461 is in HA2 near the transmembrane region; introducing Asp there may disrupt helical packing in the stem. Rejected as low-value, higher-risk."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "N461 is in HA2 near the transmembrane region; introducing Asp there may disrupt helical packing in the stem. Rejected as low-value, higher-risk.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "T292I": null,
+    "Y268F": null,
+    "S138P": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 4,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

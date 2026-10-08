@@ -1,0 +1,113 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the H5N1 hemagglutinin HA0 (A/Vietnam/1203/2004 lineage, 567 aa).
+
+GOAL: Maximize HA folding stability (heat / environmental persistence) while preserving cell entry.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MENIVLLLAIVSLVKSDQICIGYHANNSTEQVDTIMEKNVTVTHAQDILEKTHNGKLCDLNGVKPLILKDCSVAGWLLGNPMCDEFIRVPEWSYIVERANPANDLCYPGSLNDYEELKHMLSRINHFEKILIIPKSSWPNHETSLGVSAACPYQGAPSFFRNVVWLIKKNDAYPTIKISYNNTNREDLLILWGIHHSNNAEEQTNLYKNPTTYISVGTSTLNQRLAPKIATRSQVNGQRGRMDFFWTILKPDDAIHFESNGNFIAPEYAYKIVKKGDSTIMKSGVEYGHCNTKCQTPVGAINSSMPFHNIHPLTIGECPKYVKSNKLVLATGLRNSPLREKRRKRGLFGAIAGFIEGGWQGMVDGWYGYHHSNEQGSGYAADKESTQKAIDGVTNKVNSIIDKMNTQFEAVGREFNNLERRIENLNKKMEDGFLDVWTYNAELLVLMENERTLDFHDSNVKNLYDKVRLQLRDNAKELGNGCFEFYHKCDNECMESVRNGTYDYPQYSEEARLKREEISGVKLESVGTYQILSIYSTAASSLALAIMMAGLSLWMCSNGSLQCRICI
+```
+IMPORTANT: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  T292I  confidence=0.550  rank=1
+  Y268F  confidence=0.450  rank=2
+  S138P  confidence=0.400  rank=3
+  E97K  confidence=0.350  rank=4
+  K136N  confidence=0.300  rank=5
+  D365N  confidence=0.220  rank=6
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+Changes this round:
+  - T292I rerank: T292 sits in a loop region of HA1 near the receptor-binding domain; substitution to isoleucine increases hydrophobic packing without changing size drastically, and Thr-to-Ile mutations frequently improve thermal tolerance. It is surface-adjacent but not a known receptor-contact residue, so cell entry should be preserved.
+  - Y268F rerank: Y268F removes a polar hydroxyl while retaining the aromatic ring, commonly stabilizing buried aromatic cores; residue 268 is in the vestigial esterase subdomain and not a receptor-binding site. This is a classic stability-enhancing conservative substitution pattern.
+  - S138P rerank: Proline at position 138 restricts backbone entropy of the unfolded state and can rigidify a surface loop; it is distant from the RBS and fusion peptide. Ser-to-Pro is a well-known generic stabilizing substitution if the position tolerates a kink.
+  - E97K retain: Charge-swap could form a favorable salt bridge but risk of pH-dependent destabilization near the fusion-domain region lowers confidence. Retain for now pending further reasoning.
+  - K136N retain: Loss of positive charge may reduce repulsion in the 130-loop; effect on folding stability is speculative but plausible. Retained as a mid-tier candidate.
+  - E384K reject: Position 384 lies near the HA stem/fusion machinery region; charge reversals there can perturb the low-pH conformational switch required for entry. Rejected to protect cell entry function.
+  - V299A reject: Ala at 299 reduces hydrophobic packing; small-to-smaller substitutions generally destabilize cores rather than stabilize. Rejected.
+  - N461D reject: N461 is in HA2 near the transmembrane region; introducing Asp there may disrupt helical packing in the stem. Rejected as low-value, higher-risk.
+  - K118N reject: Lys118 lies near the 110-loop interacting with the fusion peptide region; charge neutralization risks affecting fusion triggering. Rejected.
+  - D365N retain: Asn at 365 removes a negative charge near HA2 but is unproven; retained as a low-confidence option pending one more reasoning pass.
+Remaining doubts: No structural or experimental validation is available, so all confidences rest on generic heuristics that may not transfer to H5 HA specifically.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 1 — respond with a single JSON object, nothing else.

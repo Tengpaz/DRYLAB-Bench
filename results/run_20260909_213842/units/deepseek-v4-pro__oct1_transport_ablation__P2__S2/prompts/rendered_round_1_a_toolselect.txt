@@ -1,0 +1,132 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in the human organic cation transporter 1 (OCT1 / SLC22A1, 553 aa).
+
+THE DESIGN OBJECTIVE: Abolish OCT1 substrate transport while preserving protein abundance and folding.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+PTVDDILEQVGESGWFQKQAFLILCLLSAAFAPICVGIVFLGFTPDHHCQSPGVAELSQRCGWSPAEELNYTVPGLGPAGEAFLGQCRRYEVDWNQSALSCVDPLASLATNRSHLPLGPCQDGWVYDTPGSSIVTEFNLVCADSWKLDLFQSCLNAGFLFGSLGVGYFADRFGRKLCLLGTVLVNAVSGVLMAFSPNYMSMLLFRLLQGLVSKGNWMAGYTLITEFVGSGSRRTVAIMYQMAFTVGLVALTGLAYALPHWRWLQLAVSLPTFLFLLYYWCVPESPRWLLSQKRNTEAIKIMDHIAQKNGKLPPADLKMLSLEEDVTEKLSPSFADLFRTPRLRKRTFILMYLWFTDSVLYQGLILHMGATSGNLYLDFLYSALVEIPGAFIALITIDRVGRIYPMAMSNLLAGAACLVMIFISPDLHWLNIIIMCVGRMGITIAIQMICLVNAELYPTFVRNLGVMVCSSLCDIGGIITPFIVFRLREVWQALPLILFAVLGLLAAGVTLLLPETKGVALPETMKDAENLGRKAKPKENTIYLKVQTSEPSGT
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   No experimental structure is configured for this task — every query returns status = "not_applicable".
+
+4. functional_annotation — curated UniProt features for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'pathogenicity (LOF proxy)' via alphamissense — predictions are AVAILABLE for this task.. Higher = more of that phenotype.
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide which biological tools (if any) you still need, on which candidates. Do NOT change candidates and do NOT output a STOP decision in this step — only request tools (empty array if you need none).
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+WARM-UP EVIDENCE (read-only preview of every tool over the current candidates — use it only to plan your FIRST tool selection; do NOT modify candidates in this step)
+[evolution_msa] D473N: 0.0 (mutant frequency of N at position 473 = 0.0000 among 87 homo); E385Q: 0.0 (mutant frequency of Q at position 385 = 0.0000 among 116 hom); W216F: 0.063158 (mutant frequency of F at position 216 = 0.0632 among 190 hom); Y220F: 0.081081 (mutant frequency of F at position 220 = 0.0811 among 185 hom); F160A: 0.066986 (mutant frequency of A at position 160 = 0.0670 among 209 hom); W260F: 0.012658 (mutant frequency of F at position 260 = 0.0127 among 158 hom); R438A: 0.131868 (mutant frequency of A at position 438 = 0.1319 among 91 homo); D143N: 0.051502 (mutant frequency of N at position 143 = 0.0515 among 233 hom); E225Q: 0.037234 (mutant frequency of Q at position 225 = 0.0372 among 188 hom); F390A: 0.044643 (mutant frequency of A at position 390 = 0.0446 among 112 hom)
+[sequence_plm] D473N: 0.0012 (sequence-model mutation plausibility (ESM-1v masked marginal); E385Q: 0.0005 (sequence-model mutation plausibility (ESM-1v masked marginal); W216F: 0.0033 (sequence-model mutation plausibility (ESM-1v masked marginal); Y220F: 0.1485 (sequence-model mutation plausibility (ESM-1v masked marginal); F160A: 1.0 (sequence-model mutation plausibility (ESM-1v masked marginal); W260F: 0.0 (sequence-model mutation plausibility (ESM-1v masked marginal); R438A: 0.0 (sequence-model mutation plausibility (ESM-1v masked marginal); D143N: 0.1686 (sequence-model mutation plausibility (ESM-1v masked marginal); E225Q: 0.0 (sequence-model mutation plausibility (ESM-1v masked marginal); F390A: 0.0586 (sequence-model mutation plausibility (ESM-1v masked marginal)
+[structure_compatibility] D473N: n/a; E385Q: n/a; W216F: n/a; Y220F: n/a; F160A: n/a; W260F: n/a; R438A: n/a; D143N: n/a; E225Q: n/a; F390A: n/a
+[functional_annotation] D473N: 0.5 (no annotation table available); E385Q: 0.5 (no annotation table available); W216F: 0.5 (no annotation table available); Y220F: 0.5 (no annotation table available); F160A: 0.5 (no annotation table available); W260F: 0.5 (no annotation table available); R438A: 0.5 (no annotation table available); D143N: 0.5 (no annotation table available); E225Q: 0.5 (no annotation table available); F390A: 0.5 (no annotation table available)
+[phenotype] D473N: 0.5888 (alphamissense pathogenicity (LOF proxy) 0.589 (class pathoge); E385Q: 0.7205 (alphamissense pathogenicity (LOF proxy) 0.721 (class pathoge); W216F: 0.2643 (alphamissense pathogenicity (LOF proxy) 0.264 (class benign)); Y220F: 0.1174 (alphamissense pathogenicity (LOF proxy) 0.117 (class benign)); F160A: 0.1272 (alphamissense pathogenicity (LOF proxy) 0.127 (class benign)); W260F: 0.6508 (alphamissense pathogenicity (LOF proxy) 0.651 (class pathoge); R438A: 0.9497 (alphamissense pathogenicity (LOF proxy) 0.950 (class pathoge); D143N: 0.1045 (alphamissense pathogenicity (LOF proxy) 0.104 (class benign)); E225Q: 0.8606 (alphamissense pathogenicity (LOF proxy) 0.861 (class pathoge); F390A: 0.283 (alphamissense pathogenicity (LOF proxy) 0.283 (class benign))
+[toxin] D473N: 0.375 (ToxinPred3 toxicity of the mutated 41-aa window = 0.375 (Non); E385Q: 0.13 (ToxinPred3 toxicity of the mutated 41-aa window = 0.130 (Non); W216F: 0.11 (ToxinPred3 toxicity of the mutated 41-aa window = 0.110 (Non); Y220F: 0.1 (ToxinPred3 toxicity of the mutated 41-aa window = 0.100 (Non); F160A: 0.48 (ToxinPred3 toxicity of the mutated 41-aa window = 0.480 (Tox); W260F: 0.185 (ToxinPred3 toxicity of the mutated 41-aa window = 0.185 (Non); R438A: 0.305 (ToxinPred3 toxicity of the mutated 41-aa window = 0.305 (Non); D143N: 0.43 (ToxinPred3 toxicity of the mutated 41-aa window = 0.430 (Tox); E225Q: 0.155 (ToxinPred3 toxicity of the mutated 41-aa window = 0.155 (Non); F390A: 0.12 (ToxinPred3 toxicity of the mutated 41-aa window = 0.120 (Non)
+
+Current candidate mutations and predicted values (confidence):
+  D473N  confidence=0.750
+  E385Q  confidence=0.700
+  W216F  confidence=0.620
+  Y220F  confidence=0.600
+  F160A  confidence=0.550
+  W260F  confidence=0.550
+  R438A  confidence=0.550
+  D143N  confidence=0.500
+  E225Q  confidence=0.500
+  F390A  confidence=0.450
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "S2",
+  "round": 1,
+  "next_tool_requests": [
+    {"tool": "evolution_msa | sequence_plm | structure_compatibility | functional_annotation | phenotype",
+     "candidates": ["<WT><POS><MUT>", ...],
+     "question": "one sentence",
+     "reason_for_call": "one sentence"}
+  ]
+}
+Rules: request only tools you still need; each tool call may evaluate at most
+10 active candidates; do not re-request a tool for a candidate already covered
+(a repeated call returns no new information). If you need no further evidence,
+output an EMPTY next_tool_requests array.
+</OUTPUT_SCHEMA>
+
+ROUND 1 — respond with a single JSON object, nothing else.

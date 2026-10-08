@@ -1,0 +1,284 @@
+{
+  "unit_id": "deepseek-v4-pro__brca1_tsg_lof__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-pro",
+  "scenario_id": "brca1_tsg_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K1702A",
+        "confidence": 0.88,
+        "evidence_refs": [],
+        "decision_summary": "Removes the key BRCT phosphate-binding lysine side chain, strongly impairing phosphopeptide recognition with modest folding risk."
+      },
+      {
+        "rank": 2,
+        "mutation": "R1699Q",
+        "confidence": 0.82,
+        "evidence_refs": [],
+        "decision_summary": "Neutralizes a phosphate-coordinating charge while preserving side-chain size, likely losing function with limited structural disruption."
+      },
+      {
+        "rank": 3,
+        "mutation": "S1655A",
+        "confidence": 0.8,
+        "evidence_refs": [],
+        "decision_summary": "Eliminates a phosphate-contacting hydroxyl in the BRCT pocket; conservative Ala substitution favors retained folding."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Self-review indicates the current Top-3 are stable and further LLM-only iteration would not improve them."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "I26A": {
+      "candidate_id": "I26A",
+      "mutation": "I26A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "I26 is a surface residue in the RING domain at the BRCA1-BARD1 interface; alanine removes a critical hydrophobic contact without disrupting zinc-coordinating residues, likely abolishing E3 ligase function while preserving the RING fold."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "Could impair RING domain function, but the RING core is hydrophobic and Ala substitution may risk local destabilization."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S1655A": {
+      "candidate_id": "S1655A",
+      "mutation": "S1655A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.76,
+          "rationale": "S1655 sits in the BRCT phosphopeptide-binding pocket; removing its hydroxyl should impair pSer/pThr recognition while the conservative Ala substitution minimizes folding disruption."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.8,
+          "rationale": "Removes a phosphate-contacting hydroxyl in the BRCT pocket; relatively conservative for folding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R1699Q": {
+      "candidate_id": "R1699Q",
+      "mutation": "R1699Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.82,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "R1699 is a charged BRCT pocket residue involved in phosphopeptide binding; replacement by glutamine removes the positive charge while retaining a polar side chain to limit structural destabilization."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.82,
+          "rationale": "Neutralizes a key phosphate-coordinating charge while keeping similar side-chain size, so function loss is likely with preserved folding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K1702A": {
+      "candidate_id": "K1702A",
+      "mutation": "K1702A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.88,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "K1702 is a key phosphate-coordinating lysine in the BRCT tandem; alanine removes the essential positive charge and is likely to abolish phosphopeptide binding while preserving overall BRCT folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.88,
+          "rationale": "Directly removes a key BRCT phosphate-binding lysine; this should strongly impair phosphopeptide recognition with modest folding risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "P1749R": {
+      "candidate_id": "P1749R",
+      "mutation": "P1749R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "P1749 lies in a functionally important BRCT region and a non-conservative substitution should distort local conformation and disrupt binding, though proline replacement may somewhat reduce local stability."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.55,
+          "rationale": "Located in the inter-BRCT linker; a Pro-to-Arg change likely affects domain packing more than specific peptide binding, increasing folding risk."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Located in the inter-BRCT linker; a Pro-to-Arg change likely affects domain packing more than specific peptide binding, increasing folding risk.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "M1775R": {
+      "candidate_id": "M1775R",
+      "mutation": "M1775R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.74,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.88,
+          "rationale": "M1775 is a core BRCT peptide-binding pocket residue; replacement by arginine is a known pathogenic-style change that should abolish phosphopeptide binding while the pocket remains largely folded."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.74,
+          "rationale": "Likely disrupts the hydrophobic peptide-binding pocket, but replacing a buried hydrophobic side chain with Arg raises some folding concern."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "P1776S": {
+      "candidate_id": "P1776S",
+      "mutation": "P1776S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.66,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "P1776 is adjacent to M1775 in the BRCT binding surface; serine substitution likely alters the backbone conformation required for peptide recognition with only modest folding risk."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.66,
+          "rationale": "Adjacent to the peptide pocket and may affect loop conformation, but less direct than pocket-charge mutations."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V1809A": {
+      "candidate_id": "V1809A",
+      "mutation": "V1809A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "V1809 contributes to the hydrophobic BRCT binding surface; alanine weakens key hydrophobic contacts with peptide ligands while being conservative enough to likely preserve domain folding."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.5,
+          "rationale": "Buried hydrophobic position in the second BRCT repeat; functional impact is uncertain and folding risk likely outweighs benefit."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Buried hydrophobic position in the second BRCT repeat; functional impact is uncertain and folding risk likely outweighs benefit.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K1702A": null,
+    "R1699Q": null,
+    "S1655A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

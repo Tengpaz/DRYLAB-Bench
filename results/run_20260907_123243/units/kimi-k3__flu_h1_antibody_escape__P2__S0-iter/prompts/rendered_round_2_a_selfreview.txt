@@ -1,0 +1,90 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in Influenza A H1 hemagglutinin (A/WSN/1933), 565 aa.
+
+THE DESIGN OBJECTIVE: Increase influenza H1 HA antibody immune escape while retaining replication fitness, while preserving overall folding.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MKAKLLVLLYAFVATDADTICIGYHANNSTDTVDTILEKNVAVTHSVNLLEDSHNGKLCKLKGIAPLQLGKCNITGWLLGNPECDSLLPARSWSYIVETPNSENGACYPGDLIDYEELREQLSSVSSLERFEIFPKESSWPNHTFNGVTVSCSHRGKSSFYRNLLWLTKKGDSYPKLTNSYVNNKGKEVLVLWGVHHPSSSDEQQSLYSNGNAYVSVASSNYNRRFTPEIAARPKVRDQHGRMNYYWTLLEPGDTIIFEATGNLIAPWYAFALSRGFESGIITSNASMHECNTKCQTPQGAINSNLPFQNIHPVTIGECPKYVRSTKLRMVTGLRNIPSIQYRGLFGAIAGFIEGGWTGMIDGWYGYHHQNEQGSGYAADQKSTQNAINGITNKVNSVIEKMNTQFTAVGKEFNNLEKRMENLNKKVDDGFLDIWTYNAELLVLLENERTLDFHDLNVKNLYEKVKSQLKNNAKEIGNGCFEFYHKCDNECMESVRNGTYDYPKYSEESKLNREKIDGVKLESMGVYQILAIYSTVASSLVLLVSLGAISFWMCSNGSLQCRICI
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+You have no external tools in this condition. Reflect on the current pool — summarize your read, list remaining doubts, and say whether you should re-evaluate the candidates.
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  K157E  confidence=0.550  rank=1
+  S158N  confidence=0.500  rank=2
+  K169E  confidence=0.500  rank=3
+  E188K  confidence=0.420  rank=4
+  E129K  confidence=0.400  rank=5
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  - add K157E (round 1): Position 157 lies in the Sa antigenic site (156-160 loop) of WSN H1; charge-reversal at a surface-exposed epitope residue is a classic antibody-escape mechanism. The loop location makes folding disruption unlikely and it is adjacent to, not inside, the receptor-binding site.
+  - add S158N (round 1): S158N creates an N-X-S glycosylation sequon (N158-S159-S160) in the Sa site, potentially masking the epitope with a glycan — a well-documented immune-shielding strategy in H1 evolution. Some fitness cost from the added glycan is possible but head-region glycan additions are frequently tolerated.
+  - add K169E (round 1): Position 169 is in the Ca1/Sa-adjacent antigenic region (169-173) on the HA head; a Lys-to-Glu charge swap is expected to disrupt antibody binding while minimally affecting structure.
+  - add E188K (round 1): Position 188 sits in the Sb antigenic site (187-198); charge reversal here mimics natural escape substitutions. It borders the 190-helix receptor-binding region, so modest risk to receptor binding lowers confidence.
+  - add E129K (round 1): Residues 128-129 contribute to the Sa antigenic site in early H1 strains; E129K is a surface charge reversal likely to reduce antibody recognition with low structural risk.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "S0-iter",
+  "round": 1,
+  "self_review": {
+    "summary": "1-2 sentences — your current read of the candidate pool",
+    "doubts": "1 sentence or empty — remaining uncertainties",
+    "should_reevaluate": true
+  }
+}
+Rules: S0-iter has no external tools — this reflection replaces the tool-selection
+step and feeds the re-evaluation that follows.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

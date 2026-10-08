@@ -1,0 +1,340 @@
+{
+  "unit_id": "kimi-k3__hiv_tat_replication__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "kimi-k3",
+  "scenario_id": "hiv_tat_replication",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "R52K",
+        "confidence": 0.5,
+        "evidence_refs": [],
+        "decision_summary": "Conservative Arg-to-Lys in the arginine-rich motif preserves positive charge and RNA-binding capacity, the safest candidate for retaining or slightly enhancing Tat-mediated transactivation. Among ARM mutations it carries the lowest risk of abolishing TAR/P-TEFb interactions."
+      },
+      {
+        "rank": 2,
+        "mutation": "R49K",
+        "confidence": 0.42,
+        "evidence_refs": [],
+        "decision_summary": "R49 flanks the core ARM; Lys substitution retains charge, though Arg-specific RNA contacts at this position make a gain less certain than for R52K. Still the second-safest positively charged ARM-region change."
+      },
+      {
+        "rank": 3,
+        "mutation": "E2D",
+        "confidence": 0.38,
+        "evidence_refs": [],
+        "decision_summary": "Highly conservative N-terminal substitution outside all functional domains, with minimal viability risk. Unlikely to strongly boost transactivation but safest overall non-ARM option preserving replication function."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Without evidence tools, additional self-reflection rounds would only reshuffle priors rather than add information, so the Top-3 is finalized from domain knowledge."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R49K": {
+      "candidate_id": "R49K",
+      "mutation": "R49K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.42,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Arg49 is central to the ARM RNA-binding motif; Lys retains positive charge for TAR binding but may subtly tune affinity and has been observed in natural variants. Conservative substitution likely preserves viability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.42,
+          "rationale": "R49 flanks the core ARM; Lys substitution retains charge but Arg at this position contributes to specific RNA contacts, so confidence slightly below R52K."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R52K": {
+      "candidate_id": "R52K",
+      "mutation": "R52K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Arg52 contributes to TAR recognition; Lys retains basicity and may alter binding dynamics to enhance transactivation kinetics. Low-risk conservative change in the basic domain."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Conservative Arg-to-Lys in the ARM preserves positive charge and RNA-binding capacity while subtly altering TAR/P-TEFb interactions; among ARM mutants it is the least likely to abolish transactivation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R56K": {
+      "candidate_id": "R56K",
+      "mutation": "R56K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Arg56 sits at the edge of the core/basic region; conservative Arg->Lys may improve nuclear localization or TAR binding balance without structural disruption."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "R56 lies within the critical RQRRR stretch of the ARM where Arg identity is important for TAR binding specificity; Lys substitution more likely to impair than enhance."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "R56 lies within the critical RQRRR stretch of the ARM where Arg identity is important for TAR binding specificity; Lys substitution more likely to impair than enhance.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "Q17H": {
+      "candidate_id": "Q17H",
+      "mutation": "Q17H",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.33,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Gln17 lies in the cysteine-rich/proline-rich core region near residues involved in conformational stability; His could add a protonatable group aiding cofactor interactions (e.g., P-TEFb recruitment)."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.33,
+          "rationale": "Position 17 is in a variable region between N-terminal and Cys-rich domains; Gln-to-His could modestly alter acidic-domain helical propensity involved in cofactor binding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E2D": {
+      "candidate_id": "E2D",
+      "mutation": "E2D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.38,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Glu2->Asp is a common natural subtype variation; shortening the acidic side chain may modestly affect N-terminal conformation and acetylation/methylation-dependent activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.38,
+          "rationale": "Highly conservative N-terminal substitution outside all functional domains; low risk of viability loss but also unlikely to strongly boost transactivation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S16A": {
+      "candidate_id": "S16A",
+      "mutation": "S16A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Ser16 is a potential phosphorylation site in the core domain; Ala removal may stabilize an active conformation or reduce inhibitory modification."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.3,
+          "rationale": "Removes a potential phosphorylation site in the acidic domain; could modulate regulatory control of transactivation with low structural risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q66H": {
+      "candidate_id": "Q66H",
+      "mutation": "Q66H",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.28,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Gln66 is in exon 2, a region tolerant of variation; His adds positive charge that may aid interaction with transcriptional machinery or nuclear retention."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.28,
+          "rationale": "Position 66 is in the variable auxiliary region; modest chance of influencing cofactor interactions with low viability risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K29R": {
+      "candidate_id": "K29R",
+      "mutation": "K29R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Lys29->Arg preserves charge in the core domain adjacent to the Cys-rich region; Arg may strengthen electrostatic contacts important for TAR/P-TEFb assembly."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Residue 29 lies in the cysteine-rich core essential for P-TEFb binding and Tat folding; any substitution there carries high risk of loss of function."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Residue 29 lies in the cysteine-rich core essential for P-TEFb binding and Tat folding; any substitution there carries high risk of loss of function.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "H33L": {
+      "candidate_id": "H33L",
+      "mutation": "H33L",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.25,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "His33 in the Cys-rich/core boundary may tolerate hydrophobic substitution; Leu could stabilize the folded core and indirectly support transactivation."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "H33 is in the Cys-rich core (a metal-coordinating/scaffold region); hydrophobic substitution risks misfolding and loss of transactivation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "H33 is in the Cys-rich core (a metal-coordinating/scaffold region); hydrophobic substitution risks misfolding and loss of transactivation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "S62T": {
+      "candidate_id": "S62T",
+      "mutation": "S62T",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.25,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Ser62->Thr is a conservative polar change in exon 2 that may modulate phosphorylation-dependent regulation of Tat activity without structural cost."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.25,
+          "rationale": "Conservative Ser-to-Thr in the auxiliary region; low risk but weak mechanistic rationale for improving replication."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "R52K": null,
+    "R49K": null,
+    "E2D": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

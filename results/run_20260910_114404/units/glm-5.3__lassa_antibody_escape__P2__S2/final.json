@@ -1,0 +1,1599 @@
+{
+  "unit_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "lassa_antibody_escape",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "G160D",
+        "confidence": 0.8,
+        "evidence_refs": [
+          "E00009",
+          "E00016"
+        ],
+        "decision_summary": "Highest applicable EVEscape score (z=0.781) with strong PLM plausibility (0.984). Glycine-to-aspartate in a GP1 epitope surface loop is a classic charge-altering antibody escape mechanism while preserving the overall fold."
+      },
+      {
+        "rank": 2,
+        "mutation": "H115N",
+        "confidence": 0.68,
+        "evidence_refs": [
+          "E00007",
+          "E00014"
+        ],
+        "decision_summary": "Applicable EVEscape z=0.674 and perfect PLM plausibility; H115 lies near the 12.1F epitope and H->N is a natural, well-tolerated substitution that can perturb antibody contact."
+      },
+      {
+        "rank": 3,
+        "mutation": "N119D",
+        "confidence": 0.55,
+        "evidence_refs": [
+          "E00013",
+          "E00020"
+        ],
+        "decision_summary": "Direct applicable phenotype evidence (EVEscape z=0.562) supports escape benefit, but low PLM plausibility (0.290) tempers confidence in functional preservation and keeps it at rank 3."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 is stable with direct applicable phenotype evidence for each candidate and no tool call left that could materially change the ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "H115N": {
+      "candidate_id": "H115N",
+      "mutation": "H115N",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.68,
+      "evidence_refs": [
+        "E00007",
+        "E00014",
+        "E00021"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "GP1 surface residue in the antibody-accessible head region; H→N removes a charged epitope contact while conserving size, plausibly reducing 12.1F/37.2D binding. Not part of the entry-critical FVR triad."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Position 115 lies in the GP1 receptor-binding region; H→N is a conservative glycosylation-compatible change near the 12.1F footprint. No phenotype evidence available, so prior stands."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.65,
+          "rationale": "Strong EVEscape score (0.674) with excellent PLM plausibility (1.0). H115 lies in the 8.9F epitope region; conservative H->N change likely preserves folding."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Solid EVEscape z (0.674, applicable) and maximal PLM plausibility (1.000). Loss of a His at an antibody-contact position plausibly disrupts 12.1F-class contacts."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "Applicable EVEscape z=0.674 with perfect PLM score; H115 sits near the 12.1F epitope and H->N removes a glycosylation-adjacent histidine while remaining a plausible natural substitution. Retain at rank 2."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K124E": {
+      "candidate_id": "K124E",
+      "mutation": "K124E",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00001",
+        "E00008",
+        "E00015",
+        "E00022"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Charge-reversal at a GP1 residue near antigenic loop reported to contribute to 8.9F/37.2D epitopes; alters antibody contact without touching receptor-binding residues H141/F147/Y150."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Charge-reversal at a surface-exposed GP1 position is a plausible epitope-disrupting move, but the phenotype tool returned no usable evidence. Slight confidence reduction pending structural/PLM checks."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Charge-reversal at a solvent-exposed GP1 position is mechanistically plausible for antibody escape and PLM-neutral, but no EVEscape score is available. Retained pending structural/viability evidence next round."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "High PLM plausibility but both phenotype calls returned inapplicable (app=0.00), so no direct escape support; demoted below N119D."
+        },
+        {
+          "round": 4,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "Both EVEscape calls returned inapplicable (z=?, app=0) and confidence has decayed from 0.35 to 0.10 across rounds. Dropping to leave a clean Top-3 with direct phenotype support."
+        }
+      ],
+      "rejection": {
+        "round": 4,
+        "reason": "Both EVEscape calls returned inapplicable (z=?, app=0) and confidence has decayed from 0.35 to 0.10 across rounds. Dropping to leave a clean Top-3 with direct phenotype support.",
+        "evidence_refs": [
+          "E00008"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "G160D": {
+      "candidate_id": "G160D",
+      "mutation": "G160D",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.8,
+      "evidence_refs": [
+        "E00009",
+        "E00016",
+        "E00023"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Loop position adjacent to the GP1 antigenic surface; insertion of negative charge may disrupt antibody binding and is distant from known entry-critical sites."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Glycine-to-acidic substitution on a GP1 loop can alter antibody contact geometry; retained as a moderately risky epitope-targeted candidate."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Highest EVEscape score (0.781) among all candidates with good PLM plausibility (0.984). Promoted to rank 1; G160 sits on the GP1 surface near antibody contact residues."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "Highest EVEscape z (0.781, applicable) with strong PLM plausibility (0.984); charge addition at an epitope-facing GP1 position supports escape. Structure evidence unavailable (no coordinates), so no structural penalty applies."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "Highest applicable EVEscape score (z=0.781) and strong PLM plausibility; glycine-to-aspartate at an epitope surface loop is a classic charge-reversal escape mechanism. Structural tool was inapplicable (no coordinates), which does not contradict the design."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q190R": {
+      "candidate_id": "Q190R",
+      "mutation": "Q190R",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [
+        "E00002",
+        "E00010",
+        "E00017",
+        "E00026"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Surface-exposed GP1 position; charge addition can weaken neutralizing antibody interaction while leaving the LAMP1-binding region and SSP/entry machinery intact."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Retained pending structure/PLM evidence; phenotype call was uninformative."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.3,
+          "rationale": "PLM-neutral but no phenotype score and uncertain epitope relevance. Kept as backup only."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.12,
+          "rationale": "PLM plausibility is not a phenotype signal; both EVEscape calls inapplicable and epitope relevance is weak."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "PLM plausibility is not a phenotype signal; both EVEscape calls inapplicable and epitope relevance is weak.",
+        "evidence_refs": [
+          "E00002",
+          "E00010"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "T216I": {
+      "candidate_id": "T216I",
+      "mutation": "T216I",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.25,
+      "evidence_refs": [
+        "E00003",
+        "E00011",
+        "E00018",
+        "E00027"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Position in GP1 distal domain; conservative hydrophobic substitution with potential to alter local epitope topology for 12.1F without gross folding disruption."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.42,
+          "rationale": "Retained pending alternate evidence sources; phenotype call uninformative."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.25,
+          "rationale": "No escape evidence and lowest PLM plausibility (0.53). Demoted to last; candidate for rejection next round."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "No applicable phenotype evidence, lowest PLM score in the pool, and hydrophobic substitution in SSIM/GP2-adjacent region risks entry function."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "No applicable phenotype evidence, lowest PLM score in the pool, and hydrophobic substitution in SSIM/GP2-adjacent region risks entry function.",
+        "evidence_refs": [
+          "E00018",
+          "E00011"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "Y254F": {
+      "candidate_id": "Y254F",
+      "mutation": "Y254F",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00004",
+        "E00012",
+        "E00019",
+        "E00025"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Near GP1 C-terminus/GP2 interface but outside the conserved fusion peptide; conservative aromatic substitution may modify antibody footprint while preserving entry."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Retained pending alternate evidence sources; phenotype call uninformative."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "Conservative aromatic substitution with good PLM score but no phenotype evidence; weak epitope relevance keeps it low-ranked."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Conservative aromatic substitution with no applicable phenotype evidence and no structural support; escape benefit unlikely."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Conservative aromatic substitution with no applicable phenotype evidence and no structural support; escape benefit unlikely.",
+        "evidence_refs": [
+          "E00004",
+          "E00012"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "N119D": {
+      "candidate_id": "N119D",
+      "mutation": "N119D",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00013",
+        "E00020",
+        "E00024"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "Glycosylation-adjacent residue; mutation may alter glycan-independent antibody contacts; modest risk of folding effects to be checked by structure/PLM tools."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.38,
+          "rationale": "Retained; surface GP1 position with modest epitope-disruption potential."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "EVEscape 0.562 supports escape, but the ESM-1v score (0.29) suggests low mutation plausibility, risking fitness/entry. Demoted below K124E."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "Applicable EVEscape z=0.562 beats candidates with no usable phenotype evidence; promoted to rank 3. Low PLM score (0.290) is a viability caution but does not outweigh direct escape evidence."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Applicable EVEscape z=0.562 supports escape benefit, though PLM plausibility is low (0.290), so confidence is tempered. Retain as rank 3 since it is the only other candidate with direct applicable phenotype evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S166P": {
+      "candidate_id": "S166P",
+      "mutation": "S166P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Loop-constraint mutation in antigenic region could reshape epitope geometry; viability risk moderate, to be evaluated with structure compatibility."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Proline in a GP1 loop risks local backbone disruption affecting folding/entry; no supporting evidence obtained."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Proline in a GP1 loop risks local backbone disruption affecting folding/entry; no supporting evidence obtained.",
+        "evidence_refs": [
+          "E00005"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "V92I": {
+      "candidate_id": "V92I",
+      "mutation": "V92I",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Conservative substitution in GP1 near the entry machinery region; low escape probability but low viability risk, retained as a safe fallback candidate."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Conservative hydrophobic substitution is unlikely to alter antibody binding; weak epitope relevance."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Conservative hydrophobic substitution is unlikely to alter antibody binding; weak epitope relevance.",
+        "evidence_refs": [
+          "E00006"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "L188P": {
+      "candidate_id": "L188P",
+      "mutation": "L188P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.28,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.28,
+          "rationale": "Backbone-disrupting mutation that could substantially alter local epitope structure; high risk to GP1 fold, kept for evidence-based reevaluation or rejection."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "Proline likely destabilizes the GP1 core and could impair folding/entry without clear escape benefit."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Proline likely destabilizes the GP1 core and could impair folding/entry without clear escape benefit.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "G160D": 87.691,
+    "H115N": 82.832,
+    "N119D": 43.351
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "K124E",
+      "tool": "phenotype",
+      "tool_version": "not_available_v1",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no antibody escape (EVEscape) predictor available for this task"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "phenotype table unavailable and no rules proxy defined"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "antibody escape (EVEscape) predictor unavailable for this task"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K124E",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "S166P",
+          "V92I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q190R",
+      "tool": "phenotype",
+      "tool_version": "not_available_v1",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no antibody escape (EVEscape) predictor available for this task"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "phenotype table unavailable and no rules proxy defined"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "antibody escape (EVEscape) predictor unavailable for this task"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K124E",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "S166P",
+          "V92I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T216I",
+      "tool": "phenotype",
+      "tool_version": "not_available_v1",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no antibody escape (EVEscape) predictor available for this task"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "phenotype table unavailable and no rules proxy defined"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "antibody escape (EVEscape) predictor unavailable for this task"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K124E",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "S166P",
+          "V92I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y254F",
+      "tool": "phenotype",
+      "tool_version": "not_available_v1",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no antibody escape (EVEscape) predictor available for this task"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "phenotype table unavailable and no rules proxy defined"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "antibody escape (EVEscape) predictor unavailable for this task"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K124E",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "S166P",
+          "V92I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S166P",
+      "tool": "phenotype",
+      "tool_version": "not_available_v1",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no antibody escape (EVEscape) predictor available for this task"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "phenotype table unavailable and no rules proxy defined"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "antibody escape (EVEscape) predictor unavailable for this task"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K124E",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "S166P",
+          "V92I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V92I",
+      "tool": "phenotype",
+      "tool_version": "not_available_v1",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no antibody escape (EVEscape) predictor available for this task"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "phenotype table unavailable and no rules proxy defined"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "antibody escape (EVEscape) predictor unavailable for this task"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "K124E",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "S166P",
+          "V92I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H115N",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.6738,
+        "normalized": 0.6738,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.674; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K124E",
+      "tool": "phenotype",
+      "tool_version": "not_available_v1",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no antibody escape (EVEscape) predictor available for this task"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "phenotype table unavailable and no rules proxy defined"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "antibody escape (EVEscape) predictor unavailable for this task"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G160D",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.7808,
+        "normalized": 0.7808,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.781; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q190R",
+      "tool": "phenotype",
+      "tool_version": "not_available_v1",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no antibody escape (EVEscape) predictor available for this task"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "phenotype table unavailable and no rules proxy defined"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "antibody escape (EVEscape) predictor unavailable for this task"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T216I",
+      "tool": "phenotype",
+      "tool_version": "not_available_v1",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no antibody escape (EVEscape) predictor available for this task"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "phenotype table unavailable and no rules proxy defined"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "antibody escape (EVEscape) predictor unavailable for this task"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y254F",
+      "tool": "phenotype",
+      "tool_version": "not_available_v1",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no antibody escape (EVEscape) predictor available for this task"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "phenotype table unavailable and no rules proxy defined"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "antibody escape (EVEscape) predictor unavailable for this task"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N119D",
+      "tool": "phenotype",
+      "tool_version": "evescape_v1",
+      "score": {
+        "raw": 0.5623,
+        "normalized": 0.5623,
+        "percentile": null,
+        "direction": "higher_is_more_escaping"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "evescape phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "evescape antibody escape (EVEscape) 0.562; higher = more higher_is_more_escaping",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted antibody escape (EVEscape) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H115N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K124E",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G160D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.9837,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q190R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T216I",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5278,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y254F",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.9763,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N119D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.2904,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "Q190R",
+          "T216I",
+          "Y254F",
+          "N119D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H115N",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "position 115 has no coordinates in 5VK2"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "position 115 has no coordinates in 5VK2"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "N119D",
+          "Y254F",
+          "Q190R",
+          "T216I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K124E",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "position 124 has no coordinates in 5VK2"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "position 124 has no coordinates in 5VK2"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "N119D",
+          "Y254F",
+          "Q190R",
+          "T216I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G160D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "position 160 has no coordinates in 5VK2"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "position 160 has no coordinates in 5VK2"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00023",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "N119D",
+          "Y254F",
+          "Q190R",
+          "T216I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N119D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "position 119 has no coordinates in 5VK2"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "position 119 has no coordinates in 5VK2"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00024",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "N119D",
+          "Y254F",
+          "Q190R",
+          "T216I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y254F",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "position 254 has no coordinates in 5VK2"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "position 254 has no coordinates in 5VK2"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00025",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "N119D",
+          "Y254F",
+          "Q190R",
+          "T216I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q190R",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "position 190 has no coordinates in 5VK2"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "position 190 has no coordinates in 5VK2"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00026",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "N119D",
+          "Y254F",
+          "Q190R",
+          "T216I"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T216I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "position 216 has no coordinates in 5VK2"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "position 216 has no coordinates in 5VK2"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00027",
+      "run_id": "glm-5.3__lassa_antibody_escape__P2__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "H115N",
+          "K124E",
+          "G160D",
+          "N119D",
+          "Y254F",
+          "Q190R",
+          "T216I"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 7,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

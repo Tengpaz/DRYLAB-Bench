@@ -1,0 +1,1892 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in human methylenetetrahydrofolate reductase (MTHFR, 656 aa).
+
+GOAL: Abolish MTHFR enzyme activity (loss-of-function).
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MVNEARGNSSLNPCLEGSASSGSESSKDSSRCSTPGLDPERHERLREKMRRRLESGDKWFSLEFFPPRTAEGAVNLISRFDRMAAGGPLYIDVTWHPAGDPGSDKETSSMMIASTAVNYCGLETILHMTCCRQRLEEITGHLHKAKQLGLKNIMALRGDPIGDQWEEEEGGFNYAVDLVKHIRSEFGDYFDICVAGYPKGHPEAGSFEADLKHLKEKVSAGADFIITQLFFEADTFFRFVKACTDMGITCPIVPGIFPIQGYHSLRQLVKLSKLEVPQEIKDVIEPIKDNDAAIRNYGIELAVSLCQELLASGLVPGLHFYTLNREMATTEVLKRLGMWTEDPRRPLPWALSAHPKRREEDVRPIFWASRPKSYIYRTQEWDEFPNGRWGNSSSPAFGELKDYYLFYLKSKSPKEELLKMWGEELTSEESVFEVFVLYLSGEPNRNGHKVTCLPWNDEPLAAETSLLKEELLRVNRQGILTINSQPNINGKPSSDPIVGWGPSGGYVFQKAYLEFFTSRETAEALLQVLKKYELRVNYHLVNVKGENITNAPELQPNAVTWGIFPGREIIQPTVVDPVSFMFWKDEAFALWIERWGKLYEEESPSRTIIQYIHDNYFLVNLVDNDFPLDNCLWQVVEDTLELLNRPTQNARETEAP
+```
+IMPORTANT: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   No experimental structure is configured for this task — every query returns status = "not_applicable".
+
+4. functional_annotation — curated UniProt features for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'pathogenicity (LOF proxy)' via alphamissense — predictions are AVAILABLE for this task.. Higher = more of that phenotype.
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Given the evidence (if any) and the current pool, decide the updates: add / modify (rerank) / delete (reject) / re-evaluate candidates, and give your reasoning. Do NOT output a STOP decision in this step. Weigh each tool's evidence by how close its measured dimension is to the REWARD phenotype: a tool whose dimension differs from the reward (or trades off against it) must not be followed blindly.
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  G170R  confidence=0.700  rank=1
+  R157E  confidence=0.650  rank=2
+  G171R  confidence=0.650  rank=3
+  T227M  confidence=0.600  rank=4
+  A222D  confidence=0.550  rank=5
+  E232A  confidence=0.450  rank=6
+  E168A  confidence=0.450  rank=7
+  H127A  confidence=0.400  rank=8
+  C130A  confidence=0.400  rank=9
+  R519C  confidence=0.350  rank=10
+BT evidence so far (before this round):
+  (no evidence collected before this round)
+Evidence obtained this round:
+  E00001 phenotype(G170R): z=0.137, app=1.00
+  E00002 phenotype(R157E): z=0.963, app=1.00
+  E00003 phenotype(G171R): z=0.283, app=1.00
+  E00004 phenotype(T227M): z=0.671, app=1.00
+  E00005 phenotype(A222D): z=0.976, app=1.00
+  E00006 phenotype(E232A): z=0.136, app=1.00
+  E00007 phenotype(E168A): z=0.092, app=1.00
+  E00008 phenotype(H127A): z=0.994, app=1.00
+  E00009 phenotype(C130A): z=0.673, app=1.00
+  E00010 phenotype(R519C): z=0.106, app=1.00
+  E00011 evolution_msa(G170R): z=0.043, app=1.00
+  E00012 evolution_msa(R157E): z=0.043, app=1.00
+  E00013 evolution_msa(G171R): z=0.000, app=1.00
+  E00014 evolution_msa(T227M): z=0.000, app=1.00
+  E00015 evolution_msa(A222D): z=0.043, app=1.00
+  E00016 evolution_msa(E232A): z=0.130, app=1.00
+  E00017 evolution_msa(E168A): z=0.130, app=1.00
+  E00018 evolution_msa(H127A): z=0.348, app=1.00
+  E00019 evolution_msa(C130A): z=0.000, app=0.91
+  E00020 evolution_msa(R519C): z=0.000, app=0.56
+  E00021 sequence_plm(G170R): z=0.004, app=0.90
+  E00022 sequence_plm(R157E): z=0.000, app=0.90
+  E00023 sequence_plm(G171R): z=0.002, app=0.90
+  E00024 sequence_plm(T227M): z=0.000, app=0.90
+  E00025 sequence_plm(A222D): z=0.000, app=0.90
+  E00026 sequence_plm(E232A): z=0.035, app=0.90
+  E00027 sequence_plm(E168A): z=0.263, app=0.90
+  E00028 sequence_plm(H127A): z=0.000, app=0.90
+  E00029 sequence_plm(C130A): z=0.001, app=0.90
+  E00030 sequence_plm(R519C): z=0.018, app=0.90
+  E00031 functional_annotation(G170R): z=0.500, app=0.20
+  E00032 functional_annotation(R157E): z=0.500, app=0.20
+  E00033 functional_annotation(G171R): z=0.500, app=0.20
+  E00034 functional_annotation(T227M): z=0.500, app=0.20
+  E00035 functional_annotation(A222D): z=0.500, app=0.20
+  E00036 functional_annotation(E232A): z=0.500, app=0.20
+  E00037 functional_annotation(E168A): z=0.500, app=0.20
+  E00038 functional_annotation(H127A): z=0.500, app=0.20
+  E00039 functional_annotation(C130A): z=0.500, app=0.20
+  E00040 functional_annotation(R519C): z=0.500, app=0.20
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+</WORKING_MEMORY>
+
+<NEW_EVIDENCE>
+[
+  {
+    "candidate": "G170R",
+    "tool": "phenotype",
+    "tool_version": "alphamissense_v1",
+    "score": {
+      "raw": 0.1366,
+      "normalized": 0.1366,
+      "percentile": null,
+      "direction": "higher_is_more_damaging"
+    },
+    "reliability": {
+      "global": 0.6,
+      "local": 0.6,
+      "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "alphamissense pathogenicity (LOF proxy) 0.137 (class benign); higher = more damaging",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00001",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R157E",
+    "tool": "phenotype",
+    "tool_version": "alphamissense_v1",
+    "score": {
+      "raw": 0.9629,
+      "normalized": 0.9629,
+      "percentile": null,
+      "direction": "higher_is_more_damaging"
+    },
+    "reliability": {
+      "global": 0.6,
+      "local": 0.6,
+      "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "alphamissense pathogenicity (LOF proxy) 0.963 (class pathogenic); higher = more damaging",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00002",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G171R",
+    "tool": "phenotype",
+    "tool_version": "alphamissense_v1",
+    "score": {
+      "raw": 0.2828,
+      "normalized": 0.2828,
+      "percentile": null,
+      "direction": "higher_is_more_damaging"
+    },
+    "reliability": {
+      "global": 0.6,
+      "local": 0.6,
+      "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "alphamissense pathogenicity (LOF proxy) 0.283 (class benign); higher = more damaging",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00003",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "T227M",
+    "tool": "phenotype",
+    "tool_version": "alphamissense_v1",
+    "score": {
+      "raw": 0.6706,
+      "normalized": 0.6706,
+      "percentile": null,
+      "direction": "higher_is_more_damaging"
+    },
+    "reliability": {
+      "global": 0.6,
+      "local": 0.6,
+      "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "alphamissense pathogenicity (LOF proxy) 0.671 (class pathogenic); higher = more damaging",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00004",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "A222D",
+    "tool": "phenotype",
+    "tool_version": "alphamissense_v1",
+    "score": {
+      "raw": 0.9758,
+      "normalized": 0.9758,
+      "percentile": null,
+      "direction": "higher_is_more_damaging"
+    },
+    "reliability": {
+      "global": 0.6,
+      "local": 0.6,
+      "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "alphamissense pathogenicity (LOF proxy) 0.976 (class pathogenic); higher = more damaging",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00005",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E232A",
+    "tool": "phenotype",
+    "tool_version": "alphamissense_v1",
+    "score": {
+      "raw": 0.1359,
+      "normalized": 0.1359,
+      "percentile": null,
+      "direction": "higher_is_more_damaging"
+    },
+    "reliability": {
+      "global": 0.6,
+      "local": 0.6,
+      "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "alphamissense pathogenicity (LOF proxy) 0.136 (class benign); higher = more damaging",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00006",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E168A",
+    "tool": "phenotype",
+    "tool_version": "alphamissense_v1",
+    "score": {
+      "raw": 0.0922,
+      "normalized": 0.0922,
+      "percentile": null,
+      "direction": "higher_is_more_damaging"
+    },
+    "reliability": {
+      "global": 0.6,
+      "local": 0.6,
+      "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "alphamissense pathogenicity (LOF proxy) 0.092 (class benign); higher = more damaging",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00007",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "H127A",
+    "tool": "phenotype",
+    "tool_version": "alphamissense_v1",
+    "score": {
+      "raw": 0.9942,
+      "normalized": 0.9942,
+      "percentile": null,
+      "direction": "higher_is_more_damaging"
+    },
+    "reliability": {
+      "global": 0.6,
+      "local": 0.6,
+      "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "alphamissense pathogenicity (LOF proxy) 0.994 (class pathogenic); higher = more damaging",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00008",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "C130A",
+    "tool": "phenotype",
+    "tool_version": "alphamissense_v1",
+    "score": {
+      "raw": 0.6729,
+      "normalized": 0.6729,
+      "percentile": null,
+      "direction": "higher_is_more_damaging"
+    },
+    "reliability": {
+      "global": 0.6,
+      "local": 0.6,
+      "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "alphamissense pathogenicity (LOF proxy) 0.673 (class pathogenic); higher = more damaging",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00009",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R519C",
+    "tool": "phenotype",
+    "tool_version": "alphamissense_v1",
+    "score": {
+      "raw": 0.1056,
+      "normalized": 0.1056,
+      "percentile": null,
+      "direction": "higher_is_more_damaging"
+    },
+    "reliability": {
+      "global": 0.6,
+      "local": 0.6,
+      "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "single-AA substitution with a published prediction"
+    },
+    "interpretation": "alphamissense pathogenicity (LOF proxy) 0.106 (class benign); higher = more damaging",
+    "limitations": [
+      "predictive model, not experimental measurement",
+      "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+    ],
+    "evidence_id": "E00010",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G170R",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.043478,
+      "normalized": 0.043478,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.23,
+      "local": 1.0,
+      "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 23/23 homologs"
+    },
+    "interpretation": "mutant frequency of R at position 170 = 0.0435 among 23 homologs; conservation entropy 2.054 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00011",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R157E",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.043478,
+      "normalized": 0.043478,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.23,
+      "local": 1.0,
+      "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 23/23 homologs"
+    },
+    "interpretation": "mutant frequency of E at position 157 = 0.0435 among 23 homologs; conservation entropy 2.017 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00012",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G171R",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.23,
+      "local": 1.0,
+      "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 23/23 homologs"
+    },
+    "interpretation": "mutant frequency of R at position 171 = 0.0000 among 23 homologs; conservation entropy 1.797 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00013",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "T227M",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.23,
+      "local": 1.0,
+      "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 23/23 homologs"
+    },
+    "interpretation": "mutant frequency of M at position 227 = 0.0000 among 23 homologs; conservation entropy 2.100 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00014",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "A222D",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.043478,
+      "normalized": 0.043478,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.23,
+      "local": 1.0,
+      "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 23/23 homologs"
+    },
+    "interpretation": "mutant frequency of D at position 222 = 0.0435 among 23 homologs; conservation entropy 2.140 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00015",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E232A",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.130435,
+      "normalized": 0.130435,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.23,
+      "local": 1.0,
+      "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 23/23 homologs"
+    },
+    "interpretation": "mutant frequency of A at position 232 = 0.1304 among 23 homologs; conservation entropy 2.378 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00016",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E168A",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.130435,
+      "normalized": 0.130435,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.23,
+      "local": 1.0,
+      "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 23/23 homologs"
+    },
+    "interpretation": "mutant frequency of A at position 168 = 0.1304 among 23 homologs; conservation entropy 1.822 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00017",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "H127A",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.347826,
+      "normalized": 0.347826,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.23,
+      "local": 1.0,
+      "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 1.0,
+      "reason": "alignment coverage 23/23 homologs"
+    },
+    "interpretation": "mutant frequency of A at position 127 = 0.3478 among 23 homologs; conservation entropy 1.907 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00018",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "C130A",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.23,
+      "local": 0.913,
+      "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.913,
+      "reason": "alignment coverage 21/23 homologs"
+    },
+    "interpretation": "mutant frequency of A at position 130 = 0.0000 among 21 homologs; conservation entropy 2.067 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00019",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R519C",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.23,
+      "local": 0.565,
+      "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.565,
+      "reason": "alignment coverage 13/23 homologs"
+    },
+    "interpretation": "mutant frequency of C at position 519 = 0.0000 among 13 homologs; conservation entropy 1.605 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00020",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G170R",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0044,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00021",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R157E",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00022",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G171R",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0022,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00023",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "T227M",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0001,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00024",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "A222D",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00025",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E232A",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0354,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00026",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E168A",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.2633,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00027",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "H127A",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00028",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "C130A",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0011,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00029",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R519C",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.0185,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00030",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G170R",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00031",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R157E",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00032",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "G171R",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00033",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "T227M",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00034",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "A222D",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00035",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E232A",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00036",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E168A",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00037",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "H127A",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00038",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "C130A",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00039",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R519C",
+    "tool": "functional_annotation",
+    "tool_version": "static_annotation_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.5,
+      "local": 0.2,
+      "reason": "static domain-level annotation, no per-position effect"
+    },
+    "applicability": {
+      "value": 0.2,
+      "reason": "contextual evidence only — not a per-candidate predictor"
+    },
+    "interpretation": "no annotation table available",
+    "limitations": [
+      "annotation table unavailable — static fallback, NOT paper-grade"
+    ],
+    "evidence_id": "E00040",
+    "run_id": "deepseek-v4-pro__mthfr_lof__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "G170R",
+        "R157E",
+        "G171R",
+        "T227M",
+        "A222D",
+        "E232A",
+        "E168A",
+        "H127A",
+        "C130A",
+        "R519C"
+      ],
+      "positions": null
+    }
+  }
+]
+</NEW_EVIDENCE>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "candidate_updates": [
+    {"mutation": "<WT><POS><MUT>", "action": "add | retain | rerank | reject | reconsider",
+     "current_confidence": 0.78,
+     "supporting_evidence_ids": ["E00003"],
+     "contradicting_evidence_ids": ["E00021"],
+     "origin": "initial_pool | new_hypothesis_from_evidence",
+     "trigger_evidence_ids": ["E00017"],
+     "decision_rationale": "<= 2 sentences"}
+  ],
+  "active_candidate_ranking": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.78}
+  ],
+  "evidence_assessment": [
+    {"evidence_id": "E00017", "candidate": "<WT><POS><MUT>",
+     "llm_reliability_assessment": "high | medium | low",
+     "effect_on_candidate": "support | weak_against | against",
+     "reason": "<= 2 sentences"}
+  ],
+  "thinking": "<= 3 sentences — the reasoning behind THIS round's changes",
+  "doubts": "<= 1 sentence — remaining uncertainties"
+}
+Rules: if you add/reconsider, give decision_rationale; every supporting/
+contradicting evidence id referenced in updates must appear in evidence_assessment.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

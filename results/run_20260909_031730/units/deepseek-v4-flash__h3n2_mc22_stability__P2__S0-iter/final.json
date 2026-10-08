@@ -1,0 +1,376 @@
+{
+  "unit_id": "deepseek-v4-flash__h3n2_mc22_stability__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "G116A",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "Glycine to alanine at a loop position reduces backbone conformational entropy and is a conservative substitution that should increase local folding stability without major functional disruption."
+      },
+      {
+        "rank": 2,
+        "mutation": "G129A",
+        "confidence": 0.58,
+        "evidence_refs": [],
+        "decision_summary": "Another Gly->Ala substitution near the receptor-binding domain; it likely stabilizes the local structure by filling a small void and rigidifying the backbone."
+      },
+      {
+        "rank": 3,
+        "mutation": "N22Q",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "Removing a potential asparagine deamidation site by substituting glutamine avoids spontaneous isomerization that could destabilize the protein under environmental stress."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further self-iteration without external evidence is unlikely to change the ranking; the top three candidates are conservative and plausible stability-enhancing substitutions."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N22Q": {
+      "candidate_id": "N22Q",
+      "mutation": "N22Q",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "N22 is part of an N-G deamidation hotspot; replacing it with glutamine removes this instability while retaining a polar side chain, likely improving folding stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "No new evidence; hypothesis that substitution improves hydrophobic packing and stability remains plausible."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Retained as a plausible stability/function trade-off (removes deamidation risk) though slightly lower confidence than top Gly->Ala candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G116A": {
+      "candidate_id": "G116A",
+      "mutation": "G116A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Substituting glycine with alanine at a loop position constrains backbone flexibility and may lower the conformational entropy of the unfolded state, stabilizing the folded protein."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Gly to Ala reduces backbone flexibility at a likely non-functional loop position, potentially enhancing fold stability."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "Promoted because Gly->Ala is a conservative stabilizing substitution reducing backbone entropy."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G129A": {
+      "candidate_id": "G129A",
+      "mutation": "G129A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Similar to G116A, replacing glycine with alanine likely reduces flexibility in a loop region, improving local packing and overall HA stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Alanine substitution may stabilize local secondary structure without obvious functional disruption."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.58,
+          "rationale": "Promoted for the same reason as G116A, near the receptor-binding domain potentially increasing local stability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A19V": {
+      "candidate_id": "A19V",
+      "mutation": "A19V",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "A hydrophobic core position may benefit from a larger aliphatic side chain, filling any cavities and enhancing van der Waals contacts, thereby increasing stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Valine adds hydrophobic side-chain bulk at a surface-exposed position, possibly enhancing core packing."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Raised confidence slightly; Val may fill a small hydrophobic cavity, but risk of steric clash is moderate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S156A": {
+      "candidate_id": "S156A",
+      "mutation": "S156A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Replacing serine with alanine removes a surface hydroxyl that may participate in destabilizing interactions or solvation effects, tightening the structure."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Removing hydroxyl reduces solvent exposure and may increase backbone stability in a loop region."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Raised confidence; removing a polar hydroxyl may increase local hydrophobicity if solvent-exposed."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G463A": {
+      "candidate_id": "G463A",
+      "mutation": "G463A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "In the HA2 domain, this glycine-to-alanine substitution may increase helix propensity or reduce flexibility in a functionally tolerant region, contributing to overall stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "Gly to Ala in the HA2 region could rigidify the fusion domain, but uncertain effect on overall stability."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "Gly->Ala stabilizing, but lower confidence due to possible location near a functional epitope."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G333A": {
+      "candidate_id": "G333A",
+      "mutation": "G333A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Located in the HA2 stem, this glycine-to-alanine mutation could stabilize a helical segment by improving packing, though its exact structural role is uncertain."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "Alanine substitution may reduce local entropy in a helices, but position may be functionally sensitive."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "Gly->Ala stabilizing; retained as a moderate-confidence option."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G479A": {
+      "candidate_id": "G479A",
+      "mutation": "G479A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 10,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "This substitution likely reduces backbone flexibility in a loop near the HA2 C-terminus, potentially improving trimer assembly and stability."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "Similar general stability hypothesis, but lower confidence due to proximity to disulfide or interface regions."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "Gly->Ala stabilizing; retained based on general backbone entropy benefit."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G240A": {
+      "candidate_id": "G240A",
+      "mutation": "G240A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 11,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "A conservative G/A mutation in a loop region may stabilize the local conformation without major functional impact; moderate confidence due to unknown structural context."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.3,
+          "rationale": "Potentially beneficial in conformational strain, but less obvious than other glycines; retains lower confidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "Lower confidence; position may be in a flexible region with functional constraints."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G5A": {
+      "candidate_id": "G5A",
+      "mutation": "G5A",
+      "first_seen_round": 2,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Added Gly->Ala at the N-terminal region to reduce backbone entropy with minimal functional impact."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "G116A": null,
+    "G129A": null,
+    "N22Q": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 9,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

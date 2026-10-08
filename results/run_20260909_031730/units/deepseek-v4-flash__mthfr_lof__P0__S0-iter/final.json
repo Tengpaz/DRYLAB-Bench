@@ -1,0 +1,352 @@
+{
+  "unit_id": "deepseek-v4-flash__mthfr_lof__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "C130A",
+        "confidence": 0.95,
+        "evidence_refs": [],
+        "decision_summary": "C130 is a conserved cysteine in the MTHFR active site; replacing the thiol with alanine likely disrupts catalysis and enzyme activity."
+      },
+      {
+        "rank": 2,
+        "mutation": "R132E",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "R132 is a positively charged residue likely involved in substrate or cofactor binding; charge reversal to glutamate is expected to severely impair enzyme function."
+      },
+      {
+        "rank": 3,
+        "mutation": "R157E",
+        "confidence": 0.8,
+        "evidence_refs": [],
+        "decision_summary": "R157 is another arginine in the catalytic region; introducing a negative charge likely disrupts electrostatic interactions essential for activity."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No further self-iteration can be meaningfully improved without external biological evidence."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R157E": {
+      "candidate_id": "R157E",
+      "mutation": "R157E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.95,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "Arg157 is a conserved active-site arginine implicated in folate/substrate binding; charge reversal to glutamate should severely disrupt catalytic activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.95,
+          "rationale": "Charge reversal at a conserved arginine likely disrupts binding of negatively charged cofactor or substrate, giving a high probability of complete loss-of-function."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.95,
+          "rationale": "WT residue at position 157 is glycine (G), not arginine (R); mutation is invalid."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "WT residue at position 157 is glycine (G), not arginine (R); mutation is invalid.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C130A": {
+      "candidate_id": "C130A",
+      "mutation": "C130A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.95,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Cys130 lies in the conserved HMTCCR motif and loss of the thiol should impair catalytically important redox/sulfur chemistry."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Cysteine 130 may form a disulfide or participate in redox chemistry; alanine substitution could disrupt catalytic redox activity."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.95,
+          "rationale": "C130 is a conserved cysteine in the MTHFR active site; replacing with alanine is likely to abolish catalytic activity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C131A": {
+      "candidate_id": "C131A",
+      "mutation": "C131A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Cys131 is the second residue of the tandem cysteine active-site motif; alanine substitution likely ablates enzyme activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Similar reasoning to C130A; adjacent cysteine likely important for structural or redox function."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.7,
+          "rationale": "WT residue at position 131 is arginine (R), not cysteine (C); mutation is invalid."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "WT residue at position 131 is arginine (R), not cysteine (C); mutation is invalid.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "R132E": {
+      "candidate_id": "R132E",
+      "mutation": "R132E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "Arg132 is adjacent to the conserved cysteine pair and likely participates in cofactor/substrate positioning; charge reversal should destabilize the active site."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.75,
+          "rationale": "Charge reversal at another arginine may distort the active site or fold, though impact is less certain than R157E."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.75,
+          "rationale": "WT residue at position 132 is glutamine (Q), not arginine (R); mutation is invalid."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "WT residue at position 132 is glutamine (Q), not arginine (R); mutation is invalid.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G87D": {
+      "candidate_id": "G87D",
+      "mutation": "G87D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Gly87 is within the N-terminal glycine-rich cofactor-binding fold; introducing a bulky charged aspartate should disrupt nucleotide/FAD binding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "Introducing a large charged residue into a glycine position may disrupt the backbone conformation, but effect on activity is less predictable."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.6,
+          "rationale": "WT residue at position 87 is proline (P), not glycine (G); mutation is invalid."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "WT residue at position 87 is proline (P), not glycine (G); mutation is invalid.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "D92N": {
+      "candidate_id": "D92N",
+      "mutation": "D92N",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.9,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Asp92 is embedded in a conserved loop near cofactor-binding residues; removing the negative charge should impair hydride/cofactor processing."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.9,
+          "rationale": "Aspartate 92 is likely a catalytic residue; replacing its carboxylate with amide should abolish catalysis."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.9,
+          "rationale": "WT residue at position 92 is valine (V), not aspartate (D); mutation is invalid."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "WT residue at position 92 is valine (V), not aspartate (D); mutation is invalid.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "E137A": {
+      "candidate_id": "E137A",
+      "mutation": "E137A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Glu137 is a conserved acidic residue near the active-site crossover region; alanine replacement likely removes a required electrostatic/catalytic interaction."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.85,
+          "rationale": "Glutamate at position 137 may contribute to active-site electrostatics; alanine removal eliminates the side chain and likely abolishes activity."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.85,
+          "rationale": "WT residue at position 137 is isoleucine (I), not glutamate (E); mutation is invalid."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "WT residue at position 137 is isoleucine (I), not glutamate (E); mutation is invalid.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K146A": {
+      "candidate_id": "K146A",
+      "mutation": "K146A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Lys146 may contact the folate polyglutamate or phosphate moiety; loss of the positive charge would weaken substrate binding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Lysine to alanine removes a positive charge but might not be in a critical functional site; lower confidence for full ablation."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.5,
+          "rationale": "WT residue at position 146 is glutamine (Q), not lysine (K); mutation is invalid."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "WT residue at position 146 is glutamine (Q), not lysine (K); mutation is invalid.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "C130A": null,
+    "R132E": null,
+    "R157E": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 7,
+    "n_reconsidered": 0,
+    "n_invalid": 6,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

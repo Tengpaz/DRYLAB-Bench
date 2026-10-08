@@ -1,0 +1,809 @@
+{
+  "unit_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N38S",
+        "confidence": 0.72,
+        "evidence_refs": [
+          "E00001",
+          "E00005",
+          "E00009"
+        ],
+        "decision_summary": "Highest ProteinMPNN structure compatibility (z=0.967) directly supporting folding stability; removes a deamidation liability site that could compromise environmental persistence."
+      },
+      {
+        "rank": 2,
+        "mutation": "K50R",
+        "confidence": 0.67,
+        "evidence_refs": [
+          "E00003",
+          "E00007",
+          "E00011"
+        ],
+        "decision_summary": "Most well-rounded candidate with consistent support across structure (z=0.801), PLM (0.728), and MSA (0.190); conservative charge-preserving substitution with potential for improved salt bridge geometry."
+      },
+      {
+        "rank": 3,
+        "mutation": "N38D",
+        "confidence": 0.63,
+        "evidence_refs": [
+          "E00004",
+          "E00008",
+          "E00012"
+        ],
+        "decision_summary": "Second-highest structure compatibility score (z=0.952) strongly supporting folding stability; removes deamidation site though weak PLM and MSA scores introduce some uncertainty about evolutionary tolerance."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 ranking is stable and well-supported by structural evidence; additional evidence from remaining tools is unlikely to alter the final selection."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N38D": {
+      "candidate_id": "N38D",
+      "mutation": "N38D",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.63,
+      "evidence_refs": [
+        "E00004",
+        "E00008",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Aspartate can form stabilizing salt bridges; position 38 is surface-exposed and may benefit from improved electrostatic interactions."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "No evidence collected yet; retain as placeholder until tools are called."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "ProteinMPNN strongly supports N38D (ΔlogP=+0.83, z=0.952), similar to N38S. However, MSA shows zero frequency of D at position 38, and ESM-1v is low, indicating this substitution is not naturally observed and may be structurally compatible but evolutionarily unprecedented."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.63,
+          "rationale": "N38D has the second-highest structure compatibility score (z=0.952), strongly supporting folding stability, but near-zero PLM and MSA scores suggest evolutionary unfamiliarity with this substitution."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N38S": {
+      "candidate_id": "N38S",
+      "mutation": "N38S",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.72,
+      "evidence_refs": [
+        "E00001",
+        "E00005",
+        "E00009"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "N38 is a surface-exposed residue; N->S removes a potential deamidation site while maintaining polarity, likely improving stability."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "ProteinMPNN strongly supports N38S (ΔlogP=+1.08, z=0.967), indicating structural compatibility and likely stability improvement. However, ESM-1v and MSA both show low plausibility/tolerance, suggesting this position is highly conserved and the substitution is unusual in natural sequences."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "N38S retains the highest ProteinMPNN z-score (0.967) among all candidates, which is the most directly relevant metric for folding stability. Weak PLM and MSA scores are noted but structure compatibility dominates for this phenotype."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N38T": {
+      "candidate_id": "N38T",
+      "mutation": "N38T",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.6,
+      "evidence_refs": [
+        "E00002",
+        "E00006",
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "N->T at position 38 removes deamidation liability with conservative change, potentially improving environmental persistence."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "N38T receives negative ProteinMPNN score (ΔlogP=-1.72, z=0.616), low ESM-1v plausibility (0.082), and low MSA frequency (0.035). All three tools provide weak or negative evidence, making this the weakest candidate."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "N38T receives negative ProteinMPNN score (ΔlogP=-1.72, z=0.616), low ESM-1v plausibility (0.082), and low MSA frequency (0.035). All three tools provide weak or negative evidence, making this the weakest candidate.",
+        "evidence_refs": [
+          "E00002",
+          "E00006",
+          "E00010"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "K50R": {
+      "candidate_id": "K50R",
+      "mutation": "K50R",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.67,
+      "evidence_refs": [
+        "E00003",
+        "E00007",
+        "E00011"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.56,
+          "rationale": "K->R maintains charge but can improve stability through better salt bridge geometry or reduced proteolytic susceptibility."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.65,
+          "rationale": "K50R shows the highest ESM-1v plausibility (0.728) and highest MSA frequency (0.19) among all candidates, indicating strong evolutionary and sequence-model support. ProteinMPNN is mildly negative (ΔlogP=-0.54) but not strongly against; the conservative K→R change is well-tolerated."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.67,
+          "rationale": "K50R shows consistent support across all three tools (structure z=0.801, PLM=0.728, MSA=0.190), making it the most well-rounded candidate despite not leading on any single metric."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N38Q": {
+      "candidate_id": "N38Q",
+      "mutation": "N38Q",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.48,
+      "evidence_refs": [
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Position 38 shows high conservation entropy (1.758) suggesting some tolerance for variation. N→Q is a conservative polar substitution that removes deamidation liability while maintaining similar size and chemistry, potentially offering better stability than N38S/D without the structural penalty seen for N38T."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.48,
+          "rationale": "N38Q receives moderate structural support (z=0.741) but this is notably lower than N38S (0.967) and N38D (0.952) at the same position, and no PLM/MSA data is available to compensate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K50Q": {
+      "candidate_id": "K50Q",
+      "mutation": "K50Q",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00014"
+      ],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Position 50 shows moderate evolutionary variation (entropy 1.720) with R at 19% frequency. K→Q removes a positive charge that may be involved in proteolytic susceptibility or surface instability, potentially improving environmental persistence."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "K50Q shows the weakest structure compatibility (z=0.612, ΔlogP=-1.75) among all active candidates and lacks any supporting PLM or MSA evidence, making it the least viable candidate for folding stability."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "K50Q shows the weakest structure compatibility (z=0.612, ΔlogP=-1.75) among all active candidates and lacks any supporting PLM or MSA evidence, making it the least viable candidate for folding stability.",
+        "evidence_refs": [
+          "E00014"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "N38S": 40.589,
+    "K50R": 58.163,
+    "N38D": 38.857
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "N38S",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 1.0826,
+        "normalized": 0.967023,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.788,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 21.21"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=1.0826)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N38S",
+          "N38T",
+          "K50R",
+          "N38D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N38T",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.7246,
+        "normalized": 0.616476,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.788,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 21.21"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.7246)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N38S",
+          "N38T",
+          "K50R",
+          "N38D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K50R",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.5433,
+        "normalized": 0.801394,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.761,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 23.89"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-0.5433)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N38S",
+          "N38T",
+          "K50R",
+          "N38D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N38D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.8266,
+        "normalized": 0.952091,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.788,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 21.21"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=0.8266)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N38S",
+          "N38T",
+          "K50R",
+          "N38D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N38S",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1388,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N38S",
+          "N38T",
+          "K50R",
+          "N38D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N38T",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0823,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N38S",
+          "N38T",
+          "K50R",
+          "N38D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K50R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.7284,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N38S",
+          "N38T",
+          "K50R",
+          "N38D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N38D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1057,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N38S",
+          "N38T",
+          "K50R",
+          "N38D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N38S",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.011765,
+        "normalized": 0.011765,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 1.0,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 170/170 homologs"
+      },
+      "interpretation": "mutant frequency of S at position 38 = 0.0118 among 170 homologs; conservation entropy 1.758 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N38S",
+          "N38T",
+          "K50R",
+          "N38D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N38T",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.035294,
+        "normalized": 0.035294,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 1.0,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 170/170 homologs"
+      },
+      "interpretation": "mutant frequency of T at position 38 = 0.0353 among 170 homologs; conservation entropy 1.758 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N38S",
+          "N38T",
+          "K50R",
+          "N38D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K50R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.190083,
+        "normalized": 0.190083,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.712,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.712,
+        "reason": "alignment coverage 121/170 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 50 = 0.1901 among 121 homologs; conservation entropy 1.720 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N38S",
+          "N38T",
+          "K50R",
+          "N38D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N38D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 1.0,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 170/170 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 38 = 0.0000 among 170 homologs; conservation entropy 1.758 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N38S",
+          "N38T",
+          "K50R",
+          "N38D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N38Q",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.9441,
+        "normalized": 0.741414,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.788,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 21.21"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-0.9441)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "N38Q",
+          "K50Q"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K50Q",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.7547,
+        "normalized": 0.61212,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.761,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 23.89"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.7547)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "qwen3.8-max__h3n2_mc22_stability__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "N38Q",
+          "K50Q"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 6,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 15,
+    "c0_size": 1,
+    "final_novelty": 0.6666666666666666,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

@@ -1,0 +1,348 @@
+{
+  "unit_id": "deepseek-v4-pro__hiv_tat_replication__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-pro",
+  "scenario_id": "hiv_tat_replication",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K50R",
+        "confidence": 0.68,
+        "evidence_refs": [],
+        "decision_summary": "K50R replaces a lysine with arginine in the Tat arginine-rich motif, preserving charge while increasing guanidinium-mediated TAR RNA contacts. This is predicted to improve transactivation without disrupting the basic domain."
+      },
+      {
+        "rank": 2,
+        "mutation": "K51R",
+        "confidence": 0.65,
+        "evidence_refs": [],
+        "decision_summary": "K51R similarly adds an arginine in the ARM and is expected to strengthen TAR RNA binding while maintaining a positive charge. Conservative charge-preserving change likely compatible with viability."
+      },
+      {
+        "rank": 3,
+        "mutation": "Q54R",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "Q54R introduces an additional arginine into the arginine-rich motif, likely enhancing TAR affinity and transactivation. Non-conservative but located within a key RNA-binding domain."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No external evidence is available and additional self-review rounds would not change the selected mechanistic candidates."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R52K": {
+      "candidate_id": "R52K",
+      "mutation": "R52K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "R52 methylation by PRMT6 negatively regulates Tat transactivation; R52K is conservative and likely prevents inhibitory methylation while preserving TAR binding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "Conservative charge-preserving change in the ARM, but lysine is less optimal than arginine for TAR interactions."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R53K": {
+      "candidate_id": "R53K",
+      "mutation": "R53K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.56,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "R53 is also a PRMT6 methylation site linked to reduced Tat activity; R53K blocks methylation while maintaining a positively charged basic domain."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.56,
+          "rationale": "Similar to R52K; likely tolerated but not clearly improving transactivation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K71R": {
+      "candidate_id": "K71R",
+      "mutation": "K71R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "K71 is a major Tat ubiquitination site controlling protein stability; K71R may reduce degradation and increase steady-state Tat transactivation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.48,
+          "rationale": "Outside the core ARM; plausible but less directly linked to TAR-dependent transactivation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K28Q": {
+      "candidate_id": "K28Q",
+      "mutation": "K28Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "K28 acetylation by PCAF enhances P-TEFb/CycT1 recruitment; K28Q mimics acetylated K28 and may improve Tat-CDK9 interaction and transactivation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "K28 modification may affect Tat regulation, but Q substitution has uncertain direction for replication efficiency."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K50Q": {
+      "candidate_id": "K50Q",
+      "mutation": "K50Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "K50 acetylation by p300/CBP weakens Tat-TAR binding and promotes elongation; K50Q may mimic this activated state, though constitutive mimicry could be suboptimal."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "Removes a positive charge in the essential ARM and is likely deleterious for TAR RNA binding."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Removes a positive charge in the essential ARM and is likely deleterious for TAR RNA binding.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K51Q": {
+      "candidate_id": "K51Q",
+      "mutation": "K51Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.47,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.47,
+          "rationale": "K51 acetylation similarly facilitates TAR release during elongation; K51Q is an acetyl-mimetic substitution that may enhance late steps of Tat transactivation."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.34,
+          "rationale": "Same charge-removing problem in the ARM as K50Q."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Same charge-removing problem in the ARM as K50Q.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "Q54R": {
+      "candidate_id": "Q54R",
+      "mutation": "Q54R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Q54 lies within the arginine-rich TAR-binding motif; substituting it with arginine increases positive charge and may strengthen TAR RNA binding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Q54R adds a positive charge in the Tat arginine-rich motif, likely increasing TAR RNA affinity and transactivation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S16E": {
+      "candidate_id": "S16E",
+      "mutation": "S16E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.36,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.36,
+          "rationale": "S16 is a putative phosphorylation site in the N-terminal activation domain; S16E mimics phosphorylated serine and may enhance Tat transcriptional activity."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.28,
+          "rationale": "Weak mechanistic link to Tat transactivation and no clear gain rationale."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Weak mechanistic link to Tat transactivation and no clear gain rationale.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K41R": {
+      "candidate_id": "K41R",
+      "mutation": "K41R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "K41 is a conserved core-domain lysine subject to post-translational modification; K41R conserves charge while potentially blocking inhibitory modification and stabilizing the hydrophobic core."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.27,
+          "rationale": "Conservative change outside the main RNA-binding motif with uncertain benefit."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Conservative change outside the main RNA-binding motif with uncertain benefit.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K19R": {
+      "candidate_id": "K19R",
+      "mutation": "K19R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "K19 lies near the cysteine-rich domain boundary; K19R may reduce non-productive ubiquitination or acetylation while preserving a positively charged residue."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "No strong domain-based rationale for improving Tat-mediated transactivation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "No strong domain-based rationale for improving Tat-mediated transactivation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K50R": null,
+    "K51R": null,
+    "Q54R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 5,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.6666666666666666,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

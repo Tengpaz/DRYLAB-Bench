@@ -1,0 +1,617 @@
+{
+  "unit_id": "glm-5.3__mthfr_lof__P1__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "H96A",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "H96 sits in the highly conserved VTWHPAGD catalytic/FAD-binding motif; alanine substitution of a conserved catalytic histidine is a classic loss-of-function design. Position verified as H in the provided sequence."
+      },
+      {
+        "rank": 2,
+        "mutation": "C193Y",
+        "confidence": 0.5,
+        "evidence_refs": [],
+        "decision_summary": "C193 lies in the conserved FDICVAGYP active-site segment and a bulky tyrosine at a buried catalytic cysteine is strongly destabilizing. Position verified as C in the provided sequence."
+      },
+      {
+        "rank": 3,
+        "mutation": "W339G",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "W339 in the conserved KRLGMW motif is a bulky aromatic whose replacement by glycine should disrupt folding and abolish activity. Position verified as W in the provided sequence."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Maximum agent rounds reached; no further tool calls possible to gather direct phenotype evidence for the catalytic-motif candidates."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "A222V": {
+      "candidate_id": "A222V",
+      "mutation": "A222V",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.9,
+      "evidence_refs": [
+        "E00001",
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "Classic thermolabile MTHFR variant (rs665) that strongly reduces enzyme activity and stability; well-tolerated structurally but functionally impairing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.9,
+          "rationale": "Well-characterized common variant known to reduce MTHFR activity and thermostability; strong prior for loss-of-function direction. No evidence collected yet, so confidence held until tools are run."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "WT-residue verification against the provided sequence shows position 222 is G, not A, so this mutation is undefined under the task's numbering; the AlphaMissense hit likely maps to the well-known catalytic-domain Ala variant one position over (A223V here)."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "WT-residue verification against the provided sequence shows position 222 is G, not A, so this mutation is undefined under the task's numbering; the AlphaMissense hit likely maps to the well-known catalytic-domain Ala variant one position over (A223V here).",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "E429A": {
+      "candidate_id": "E429A",
+      "mutation": "E429A",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.15,
+      "evidence_refs": [
+        "E00002",
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Second common thermolabile MTHFR polymorphism (rs1801131) that further decreases activity, especially combined with A222V."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "Position lies in the catalytic/FAD-binding region of the TIM-barrel domain; alanine substitution of a charged catalytic residue is a canonical activity-ablating move. Retain pending MSA and phenotype evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.2,
+          "rationale": "WT residue E at 429 is verified, but AlphaMissense classifies it as benign (0.082) and position 429 lies in the regulatory SAM-binding domain rather than the catalytic domain, making LOF unlikely. Demoted; retained only pending comparison with corrected candidates."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.2,
+          "rationale": "Both AlphaMissense (0.082) and ESM-1v plausibility are low, so this variant appears neutral/benign and is unlikely to abolish activity. Retained only as a placeholder pending better candidates."
+        },
+        {
+          "round": 4,
+          "action": "rerank",
+          "confidence": 0.15,
+          "rationale": "Phenotype z=0.082 and plausibility z=0.218 both indicate E429A is a mild regulatory-domain variant unlikely to abolish activity; demote toward rejection."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R357C": {
+      "candidate_id": "R357C",
+      "mutation": "R357C",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00003",
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Arginine in a conserved region of the catalytic domain; cysteine substitution is predicted deleterious and can destabilize folding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Reported pathogenic missense candidate affecting a conserved arginine; likely destabilizing but activity impact less certain than catalytic-site substitutions. Confidence kept moderate pending phenotype and conservation scores."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "Position 357 in the given sequence is K, not R, so R357C violates the WT-residue check; the strongly pathogenic prediction and very low ESM-1v plausibility instead support the shifted variant R358C."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Position 357 in the given sequence is K, not R, so R357C violates the WT-residue check; the strongly pathogenic prediction and very low ESM-1v plausibility instead support the shifted variant R358C.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "R358C": {
+      "candidate_id": "R358C",
+      "mutation": "R358C",
+      "first_seen_round": 2,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.3,
+      "evidence_refs": [
+        "E00007",
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Position 358 is R in the given sequence, matching the intended Arg-to-Cys variant; the high pathogenicity score (0.829) and near-zero ESM-1v plausibility of the shifted entry indicate a strongly destabilizing loss-of-function mutation. Direct evidence on R358C to be collected next round."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "The direct AlphaMissense prediction for R358C is only 0.133 (benign class), contradicting the earlier shifted-hit inference of high pathogenicity, so its confidence must be cut substantially. The very low ESM-1v plausibility (0.003) still suggests structural disruption, so it is retained but demoted."
+        },
+        {
+          "round": 4,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "Direct phenotype on R358C (z=0.133) is weakly pathogenic despite the high shifted-variant score, so demote; E00003 refers to the invalid R357C numbering and is weak support at best."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H96A": {
+      "candidate_id": "H96A",
+      "mutation": "H96A",
+      "first_seen_round": 3,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "H96 sits in the highly conserved VTWHPAGD catalytic/FAD-binding motif; alanine substitution of a conserved catalytic histidine is a classic loss-of-function design. Position verified as H in the provided sequence; evidence to be collected next round."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Catalytic-motif histidine in VTWHPAGD; direct phenotype and plm evidence still pending, so no confidence change."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C193Y": {
+      "candidate_id": "C193Y",
+      "mutation": "C193Y",
+      "first_seen_round": 3,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "C193 lies in the conserved FDICVAGYP active-site segment, and bulky substitutions at buried catalytic cysteines are frequently damaging. Position verified as C in the provided sequence; direct evidence to be collected next round."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Conserved FDICVAGYP cysteine; bulky substitution expected damaging; awaiting direct evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W339G": {
+      "candidate_id": "W339G",
+      "mutation": "W339G",
+      "first_seen_round": 3,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "W339 (KRLGMW motif) is a conserved tryptophan; glycine substitution of a bulky conserved aromatic is strongly destabilizing. Position verified as W in the provided sequence; evidence to be collected next round."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Conserved aromatic in KRLGMW motif; glycine strongly destabilizing; evidence pending."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R358P": {
+      "candidate_id": "R358P",
+      "mutation": "R358P",
+      "first_seen_round": 3,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Since R358C was predicted benign, a more disruptive proline at the same conserved arginine may better abolish function via backbone distortion. Direct evidence to be collected next round."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.4,
+          "rationale": "Shifted-variant evidence showed R358C benign (z=0.133), motivating a more disruptive proline; needs direct testing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "H96A": null,
+    "C193Y": null,
+    "W339G": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "A222V",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6324,
+        "normalized": 0.6324,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.632 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "A222V",
+          "E429A",
+          "R357C"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E429A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.0816,
+        "normalized": 0.0816,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.082 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "A222V",
+          "E429A",
+          "R357C"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R357C",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.8287,
+        "normalized": 0.8287,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.829 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "A222V",
+          "E429A",
+          "R357C"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222V",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0025,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "A222V",
+          "E429A",
+          "R357C"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E429A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.2182,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "A222V",
+          "E429A",
+          "R357C"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R357C",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0013,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "A222V",
+          "E429A",
+          "R357C"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R358C",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1326,
+        "normalized": 0.1326,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.133 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__mthfr_lof__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "R358C"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R358C",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0033,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "glm-5.3__mthfr_lof__P1__S2",
+      "round": 3,
+      "input": {
+        "candidate_ids": [
+          "R358C"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 8,
+    "c0_size": 3,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

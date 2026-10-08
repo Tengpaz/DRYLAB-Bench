@@ -1,0 +1,659 @@
+{
+  "unit_id": "kimi-k3__zikv_viral_growth__P0__S2",
+  "condition": "S2",
+  "model_id": "kimi-k3",
+  "scenario_id": "zikv_viral_growth",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "M374L",
+        "confidence": 0.62,
+        "evidence_refs": [],
+        "decision_summary": "Conservative Met-to-Leu swap in E domain III with strong concordant support: ~27% natural Leu frequency in MSA, ESM-1v score 1.0, and favorable ProteinMPNN delta logP (+1.80), indicating high tolerability without viability risk."
+      },
+      {
+        "rank": 2,
+        "mutation": "N154D",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "Strong PLM and structure compatibility; although mutant frequency in MSA is low, position 154 sits in the glycan loop known to modulate flavivirus fitness, supporting moderate confidence."
+      },
+      {
+        "rank": 3,
+        "mutation": "K301R",
+        "confidence": 0.38,
+        "evidence_refs": [],
+        "decision_summary": "Charge-conserving Lys-to-Arg with moderate PLM and structural support, but zero natural mutant frequency at a conserved position lowers confidence in a fitness gain."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Available evidence dimensions are exhausted for discriminating tolerability; remaining tools (toxin, static annotation, n/a phenotype) would not alter the Top-3 ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 1,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N154D": {
+      "candidate_id": "N154D",
+      "mutation": "N154D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00001",
+        "E00005",
+        "E00009"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Position 154 is the conserved E glycosylation site; removing the glycan can accelerate assembly/budding and has been linked to enhanced replication in mammalian cells for flaviviruses."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Residue 154 is in the glycosylation motif region (153-154-155); removing the N-linked glycan can enhance mammalian-cell replication of flaviviruses. Pending MSA/PLM confirmation."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Strong PLM and structure support; MSA mutant frequency low but glycan-loop position 154 (N-linked glycosylation motif) is known to modulate flavivirus fitness, so tolerated with moderate confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "M374L": {
+      "candidate_id": "M374L",
+      "mutation": "M374L",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.62,
+      "evidence_refs": [
+        "E00002",
+        "E00006",
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Conservative DIII substitution likely tolerated; DIII variation is common among naturally fit ZIKV lineages."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.3,
+          "rationale": "Conservative substitution in domain III, likely tolerated and possibly improving fusion/fitness; needs evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Consistently top-scoring across MSA (27% natural L frequency), ESM-1v (1.0), and ProteinMPNN (ΔlogP=+1.80); conservative Met→Leu swap in E-domain III unlikely to impair viability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K301R": {
+      "candidate_id": "K301R",
+      "mutation": "K301R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.38,
+      "evidence_refs": [
+        "E00003",
+        "E00007",
+        "E00011"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "DIII surface lysine-to-arginine is highly conservative and may fine-tune electrostatics for receptor/attachment factor binding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.3,
+          "rationale": "Conservative charge-preserving change in domain III surface; low-risk fitness candidate pending evidence."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.38,
+          "rationale": "Conservative Lys→Arg keeps positive charge; PLM and structure are moderately supportive, but zero natural frequency at a conserved site lowers confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V473A": {
+      "candidate_id": "V473A",
+      "mutation": "V473A",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.25,
+      "evidence_refs": [
+        "E00004",
+        "E00008",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Position 473 lies in the stem/transmembrane-adjacent region; small hydrophobic swaps there are often tolerated and may improve assembly. Verify WT=V473."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "No MSA support, weak PLM score (0.26), and structure evidence unavailable due to WT mismatch; stem/TM-adjacent swaps risk assembly defects."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "No MSA support, weak PLM score (0.26), and structure evidence unavailable due to WT mismatch; stem/TM-adjacent swaps risk assembly defects.",
+        "evidence_refs": [
+          "E00004",
+          "E00008",
+          "E00012"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 3,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "M374L": 74.709,
+    "N154D": 72.765,
+    "K301R": 44.392
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "N154D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.058824,
+        "normalized": 0.058824,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.74,
+        "local": 0.459,
+        "reason": "MSA depth 74, Neff 24.33 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.459,
+        "reason": "alignment coverage 34/74 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 154 = 0.0588 among 34 homologs; conservation entropy 1.226 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "kimi-k3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N154D",
+          "M374L",
+          "K301R",
+          "V473A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M374L",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.27027,
+        "normalized": 0.27027,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.74,
+        "local": 1.0,
+        "reason": "MSA depth 74, Neff 24.33 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 74/74 homologs"
+      },
+      "interpretation": "mutant frequency of L at position 374 = 0.2703 among 74 homologs; conservation entropy 1.677 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "kimi-k3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N154D",
+          "M374L",
+          "K301R",
+          "V473A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K301R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.74,
+        "local": 1.0,
+        "reason": "MSA depth 74, Neff 24.33 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 74/74 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 301 = 0.0000 among 74 homologs; conservation entropy 0.817 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "kimi-k3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N154D",
+          "M374L",
+          "K301R",
+          "V473A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V473A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.74,
+        "local": 1.0,
+        "reason": "MSA depth 74, Neff 24.33 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 74/74 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 473 = 0.0000 among 74 homologs; conservation entropy 1.236 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "kimi-k3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N154D",
+          "M374L",
+          "K301R",
+          "V473A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N154D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "kimi-k3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N154D",
+          "M374L",
+          "K301R",
+          "V473A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M374L",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "kimi-k3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N154D",
+          "M374L",
+          "K301R",
+          "V473A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K301R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.6202,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "kimi-k3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N154D",
+          "M374L",
+          "K301R",
+          "V473A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V473A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.2616,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "kimi-k3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N154D",
+          "M374L",
+          "K301R",
+          "V473A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N154D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.1636,
+        "normalized": 0.823065,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.372,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 62.77"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=-0.1636)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "kimi-k3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N154D",
+          "M374L",
+          "K301R",
+          "V473A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M374L",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 1.8031,
+        "normalized": 0.982274,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.499,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 50.07"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=1.8031)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "kimi-k3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N154D",
+          "M374L",
+          "K301R",
+          "V473A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K301R",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.9906,
+        "normalized": 0.693147,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.501,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 49.9"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=-0.9906)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "kimi-k3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N154D",
+          "M374L",
+          "K301R",
+          "V473A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V473A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "kimi-k3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N154D",
+          "M374L",
+          "K301R",
+          "V473A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 8,
+    "c0_size": 3,
+    "final_novelty": 0.0,
+    "tool_calls_used": 3,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

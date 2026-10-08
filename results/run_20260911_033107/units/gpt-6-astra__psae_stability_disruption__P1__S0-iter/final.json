@@ -1,0 +1,198 @@
+{
+  "unit_id": "gpt-6-astra__psae_stability_disruption__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gpt-6-astra",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "W17D",
+        "confidence": 0.73,
+        "evidence_refs": [],
+        "decision_summary": "W17 is verified in the supplied sequence. Replacing a bulky aromatic residue with an acidic side chain could strongly destabilize aromatic packing if buried, although its solvent exposure is unknown."
+      },
+      {
+        "rank": 2,
+        "mutation": "I33D",
+        "confidence": 0.69,
+        "evidence_refs": [],
+        "decision_summary": "I33 is verified in the supplied sequence within a hydrophobic-rich segment. Introducing an acidic side chain could disrupt core packing, but sequence alone does not establish burial."
+      },
+      {
+        "rank": 3,
+        "mutation": "F40D",
+        "confidence": 0.65,
+        "evidence_refs": [],
+        "decision_summary": "F40 is verified in the supplied sequence. Aromatic-to-acidic substitution could destabilize hydrophobic packing, although an exposed position might instead affect interactions without disrupting folding."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The retained Top-3 have plausible sequence-based destabilization mechanisms, and further unaided reflection cannot resolve their structural uncertainty."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "W17D": {
+      "candidate_id": "W17D",
+      "mutation": "W17D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.73,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Replacing the bulky aromatic Trp17 with an acidic residue could disrupt aromatic packing and introduce an unfavorable charge if this site is buried. This is a sequence-based destabilization hypothesis, not a confirmed folding knockout."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.73,
+          "rationale": "W17 is verified in the supplied sequence. Replacing this bulky aromatic residue with an acidic residue could disrupt aromatic packing, although burial is not established."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I33D": {
+      "candidate_id": "I33D",
+      "mutation": "I33D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.69,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.73,
+          "rationale": "Ile33 lies within a hydrophobic-rich segment; replacing it with Asp could impair core packing and destabilize the fold. The effect depends on its actual solvent exposure."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.69,
+          "rationale": "I33 is verified and lies within a hydrophobic-rich sequence segment. Introducing an acidic side chain could destabilize packing if this position is buried."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V38P": {
+      "candidate_id": "V38P",
+      "mutation": "V38P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.71,
+          "rationale": "Introducing proline at Val38 could disrupt regular backbone hydrogen bonding and constrain backbone geometry within the hydrophobic-rich central segment. Destabilization would be strongest if this position belongs to a beta strand."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "V38 is verified, and proline could disrupt a regular secondary-structure element through backbone restriction and loss of an amide hydrogen. However, nearby P35 makes the local conformation uncertain, limiting confidence in that mechanism."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F40D": {
+      "candidate_id": "F40D",
+      "mutation": "F40D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.69,
+          "rationale": "Replacing Phe40 with Asp removes an aromatic side chain and introduces charge, potentially disrupting hydrophobic packing. Without structural evidence, burial and the magnitude of folding disruption remain uncertain."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.65,
+          "rationale": "F40 is verified; aromatic-to-acidic replacement offers a plausible packing-disruption mechanism. Rank above V38P because its rationale depends less on assigning a specific local backbone conformation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y34P": {
+      "candidate_id": "Y34P",
+      "mutation": "Y34P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.66,
+          "rationale": "Replacing Tyr34 with proline removes aromatic packing potential and creates adjacent prolines at positions 34–35, potentially perturbing local backbone organization. Its proximity to native Pro35 also makes tolerance in a turn a plausible alternative."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "Y34 is verified; substitution removes aromatic packing potential and introduces a consecutive proline pair at positions 34–35. Such a pair could perturb folding, but could also be tolerated in a turn."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "W17D": null,
+    "I33D": null,
+    "F40D": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 5,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

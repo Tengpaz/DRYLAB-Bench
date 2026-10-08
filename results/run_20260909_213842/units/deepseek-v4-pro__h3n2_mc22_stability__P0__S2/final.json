@@ -1,0 +1,642 @@
+{
+  "unit_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+  "condition": "S2",
+  "model_id": "deepseek-v4-pro",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "A364V",
+        "confidence": 0.7,
+        "evidence_refs": [
+          "E00002",
+          "E00005",
+          "E00008",
+          "E00011"
+        ],
+        "decision_summary": "Best ProteinMPNN structural compatibility among candidates, with acceptable PLM and evolutionary support; conservative hydrophobic substitution likely stabilizes packing."
+      },
+      {
+        "rank": 2,
+        "mutation": "L427I",
+        "confidence": 0.62,
+        "evidence_refs": [
+          "E00001",
+          "E00004",
+          "E00007",
+          "E00010"
+        ],
+        "decision_summary": "Conservative isoleucine substitution with strong structural compatibility; evolutionary and sequence-plausibility signals are moderate."
+      },
+      {
+        "rank": 3,
+        "mutation": "G352A",
+        "confidence": 0.25,
+        "evidence_refs": [
+          "E00003",
+          "E00006",
+          "E00009",
+          "E00012"
+        ],
+        "decision_summary": "Only modest evolutionary tolerance, but weak structural compatibility and sequence-plausibility make it a low-confidence third choice."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "All four tool-call slots have been used, and the available evidence is sufficient to rank the current three candidates without further updates."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "L427I": {
+      "candidate_id": "L427I",
+      "mutation": "L427I",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.62,
+      "evidence_refs": [
+        "E00001",
+        "E00004",
+        "E00007",
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Buried leucine to isoleucine could optimize packing in the HA2 helix bundle with minimal functional disruption."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "No new evidence collected this round; retain initial candidate at current confidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Structure compatibility is nearly neutral-to-favorable and is the closest proxy for folding stability, but absence of MSA support and near-zero ESM-1v plausibility limit confidence."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Conservative hydrophobic substitution with strong structural compatibility, though evolutionary and PLM support are modest."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A364V": {
+      "candidate_id": "A364V",
+      "mutation": "A364V",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00002",
+        "E00005",
+        "E00008",
+        "E00011"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Alanine to valine near a turn/linker could enhance local hydrophobic packing and reduce backbone flexibility."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "No new evidence collected this round; retain initial candidate at current confidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "Strong positive ProteinMPNN backbone compatibility is the most direct structural signal for folding stability, and it outweighs weak evolutionary and sequence-prior signals."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Structure compatibility is the most direct available proxy for folding stability, and A364V has the highest ProteinMPNN delta score among current candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G352A": {
+      "candidate_id": "G352A",
+      "mutation": "G352A",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.25,
+      "evidence_refs": [
+        "E00003",
+        "E00006",
+        "E00009",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Glycine to alanine in a loop may reduce unfolded-state entropy and rigidify the local structure, though effects on function need checking."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "No new evidence collected this round; retain initial candidate at current confidence."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.28,
+          "rationale": "High MSA frequency suggests natural tolerance, but the strongly negative ProteinMPNN log-prob delta and near-zero sequence plausibility indicate poor structural compatibility, so retained only as a weak third candidate."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.25,
+          "rationale": "G352A has modest evolutionary support but weak structural compatibility, so it remains third with reduced confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "A364V": 37.482,
+    "L427I": 34.268,
+    "G352A": 23.52
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "L427I",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.959,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.959,
+        "reason": "alignment coverage 163/170 homologs"
+      },
+      "interpretation": "mutant frequency of I at position 427 = 0.0000 among 163 homologs; conservation entropy 1.841 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L427I",
+          "A364V",
+          "G352A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A364V",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.959,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.959,
+        "reason": "alignment coverage 163/170 homologs"
+      },
+      "interpretation": "mutant frequency of V at position 364 = 0.0000 among 163 homologs; conservation entropy 1.834 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L427I",
+          "A364V",
+          "G352A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G352A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.484663,
+        "normalized": 0.484663,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.959,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.959,
+        "reason": "alignment coverage 163/170 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 352 = 0.4847 among 163 homologs; conservation entropy 1.137 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L427I",
+          "A364V",
+          "G352A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L427I",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0195,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L427I",
+          "A364V",
+          "G352A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A364V",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0049,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L427I",
+          "A364V",
+          "G352A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G352A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0007,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L427I",
+          "A364V",
+          "G352A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L427I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.2032,
+        "normalized": 0.846814,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.977,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 2.29"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-0.2032)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L427I",
+          "A364V",
+          "G352A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A364V",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.6505,
+        "normalized": 0.939895,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.76,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 24.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=0.6505)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L427I",
+          "A364V",
+          "G352A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G352A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -5.4416,
+        "normalized": 0.07566,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.887,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 11.33"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-5.4416)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L427I",
+          "A364V",
+          "G352A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L427I",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L427I",
+          "A364V",
+          "G352A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A364V",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L427I",
+          "A364V",
+          "G352A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G352A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "deepseek-v4-pro__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L427I",
+          "A364V",
+          "G352A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 3,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 7,
+    "c0_size": 3,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

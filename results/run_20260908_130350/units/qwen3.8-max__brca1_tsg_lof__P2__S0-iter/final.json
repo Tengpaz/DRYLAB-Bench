@@ -1,0 +1,294 @@
+{
+  "unit_id": "qwen3.8-max__brca1_tsg_lof__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "brca1_tsg_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "C61G",
+        "confidence": 0.92,
+        "evidence_refs": [],
+        "decision_summary": "C61 is a zinc-coordinating cysteine in the RING domain; mutation to glycine disrupts zinc binding and abolishes E3 ubiquitin ligase activity essential for DNA repair signaling, while the rest of the protein retains its fold."
+      },
+      {
+        "rank": 2,
+        "mutation": "C64G",
+        "confidence": 0.9,
+        "evidence_refs": [],
+        "decision_summary": "C64 is another zinc-coordinating cysteine in the RING domain; its mutation to glycine disrupts the zinc finger structure and E3 ligase function critical for tumor suppressor activity, with minimal impact on global folding."
+      },
+      {
+        "rank": 3,
+        "mutation": "C61S",
+        "confidence": 0.88,
+        "evidence_refs": [],
+        "decision_summary": "C61S removes the zinc-coordinating thiol via a conservative substitution, a known pathogenic mechanism that abolishes E3 ligase activity while better preserving local structure than glycine."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 candidates are well-supported by domain knowledge of BRCA1 RING domain zinc coordination and E3 ligase function; further iteration without external tools is unlikely to improve selections."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "C61G": {
+      "candidate_id": "C61G",
+      "mutation": "C61G",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.92,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.92,
+          "rationale": "C61 is a zinc-coordinating residue in the RING domain critical for E3 ubiquitin ligase activity and BARD1 interaction. Substitution to glycine disrupts zinc coordination, abolishing DNA repair function while the rest of the protein can still fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.92,
+          "rationale": "C61 is a zinc-coordinating cysteine in the RING domain; mutation to glycine disrupts zinc binding and E3 ligase activity, abolishing tumor suppressor function while the rest of the protein can still fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C64G": {
+      "candidate_id": "C64G",
+      "mutation": "C64G",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.9,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "C64 is another zinc-coordinating cysteine in the RING domain. Mutation to glycine disrupts the zinc finger structure essential for BRCA1's E3 ligase and tumor suppressor function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.9,
+          "rationale": "C64 is another zinc-coordinating cysteine in the RING domain; its mutation to glycine similarly disrupts the zinc finger and E3 ligase function critical for DNA repair signaling."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H41R": {
+      "candidate_id": "H41R",
+      "mutation": "H41R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "H41 is a zinc-coordinating histidine in the RING domain. Substitution to arginine disrupts zinc binding and E3 ligase activity, a well-characterized loss-of-function mechanism in BRCA1."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "H41 is a zinc-coordinating histidine in the RING domain; mutation to arginine disrupts zinc coordination and E3 ligase activity, a well-known pathogenic mechanism."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I26A": {
+      "candidate_id": "I26A",
+      "mutation": "I26A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "I26 is in the hydrophobic core of the RING domain. Substitution to alanine destabilizes the RING fold, impairing BARD1 interaction and E3 ligase activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "I26 is in the RING domain but is not a direct zinc ligand; its mutation may partially destabilize the domain but is less directly disruptive than zinc-coordinating residue mutations."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "M1775R": {
+      "candidate_id": "M1775R",
+      "mutation": "M1775R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "M1775 is in the BRCT domain critical for phosphoprotein recognition. Substitution to arginine is a known pathogenic mutation that disrupts BRCT-mediated protein interactions required for DNA damage response."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "M1775 is in the BRCT domain critical for phosphoprotein recognition; mutation to arginine disrupts phosphopeptide binding, impairing DNA damage response signaling."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L1780R": {
+      "candidate_id": "L1780R",
+      "mutation": "L1780R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "L1780 is in the BRCT domain hydrophobic core. Substitution to arginine destabilizes the BRCT fold, impairing phosphoprotein binding and DNA repair function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "L1780 is near the BRCT phosphopeptide-binding groove; mutation to arginine could disrupt binding but is less well-characterized than M1775."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D1692A": {
+      "candidate_id": "D1692A",
+      "mutation": "D1692A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "D1692 is in the BRCT domain and participates in phosphopeptide recognition. Substitution to alanine removes a key interaction residue, reducing DNA damage response capability."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.68,
+          "rationale": "D1692 is in a less critical region of the BRCT domain; its mutation is unlikely to fully abolish function compared to direct phosphopeptide-binding site or RING domain mutations."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "D1692 is in a less critical region of the BRCT domain; its mutation is unlikely to fully abolish function compared to direct phosphopeptide-binding site or RING domain mutations.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C61S": {
+      "candidate_id": "C61S",
+      "mutation": "C61S",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.88,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.88,
+          "rationale": "C61S is a conservative substitution that removes the zinc-coordinating thiol; this is a known pathogenic mutation in BRCA1 that abolishes E3 ligase activity while preserving local structure better than glycine."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C64S": {
+      "candidate_id": "C64S",
+      "mutation": "C64S",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.87,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.87,
+          "rationale": "C64S similarly disrupts zinc coordination in the RING domain; serine is a more conservative substitution than glycine, better preserving local folding while abolishing function."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "C61G": null,
+    "C64G": null,
+    "C61S": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 9,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 3,
+    "c0_size": 7,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

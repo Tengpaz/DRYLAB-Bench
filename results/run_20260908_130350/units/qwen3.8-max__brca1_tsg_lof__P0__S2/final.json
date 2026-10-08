@@ -1,0 +1,897 @@
+{
+  "unit_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+  "condition": "S2",
+  "model_id": "qwen3.8-max",
+  "scenario_id": "brca1_tsg_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "C24G",
+        "confidence": 0.94,
+        "evidence_refs": [
+          "phenotype",
+          "evolution_msa"
+        ],
+        "decision_summary": "C24 is a zinc-coordinating cysteine in the BRCA1 RING domain; AlphaMissense 0.993 predicts near-certain pathogenicity, and MSA shows extreme conservation (mutant freq 0.009). Glycine substitution abolishes zinc coordination and E3 ligase activity without disrupting global folding."
+      },
+      {
+        "rank": 2,
+        "mutation": "C61G",
+        "confidence": 0.93,
+        "evidence_refs": [
+          "phenotype",
+          "evolution_msa"
+        ],
+        "decision_summary": "C61 is a zinc-coordinating cysteine in the RING domain; AlphaMissense 0.990 and low MSA mutant frequency (0.036) confirm evolutionary intolerance. Disruption of this zinc finger abolishes BRCA1-BARD1 heterodimerization and ubiquitin ligase function."
+      },
+      {
+        "rank": 3,
+        "mutation": "H41Y",
+        "confidence": 0.9,
+        "evidence_refs": [
+          "phenotype",
+          "evolution_msa"
+        ],
+        "decision_summary": "H41 is critical for BARD1 heterodimerization in the RING domain; AlphaMissense 0.973 and highest MSA applicability (0.96) among top candidates provide strong support. Tyrosine substitution disrupts the interaction interface essential for DNA repair signaling."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 candidates are strongly supported by aligned phenotype tool (AlphaMissense), evolutionary conservation, and clear mechanistic rationale; additional evidence is unlikely to alter rankings."
+    },
+    "remaining_budget": {
+      "tool_calls": 2,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "C61G": {
+      "candidate_id": "C61G",
+      "mutation": "C61G",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.93,
+      "evidence_refs": [
+        "E00001",
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.92,
+          "rationale": "C61 is a zinc-coordinating residue in the RING domain critical for BRCA1-BARD1 heterodimerization and E3 ligase activity. Substitution to glycine disrupts zinc coordination, abolishing E3 ligase function while the RING domain itself may retain partial fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.92,
+          "rationale": "C61 is a zinc-coordinating cysteine in the RING domain; substitution to glycine disrupts the zinc finger and E3 ligase activity. No evidence yet to modify confidence."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.93,
+          "rationale": "Second-highest AlphaMissense score (0.990); C61 is a zinc-coordinating cysteine in the RING domain. Low mutant frequency (0.036) confirms evolutionary intolerance."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C64G": {
+      "candidate_id": "C64G",
+      "mutation": "C64G",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.88,
+      "evidence_refs": [
+        "E00002",
+        "E00009"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "C64 is another zinc-coordinating cysteine in the RING domain. Disruption of zinc coordination abolishes BRCA1 E3 ubiquitin ligase activity and BARD1 interaction, key tumor-suppressor functions."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.9,
+          "rationale": "C64 is another zinc-coordinating cysteine in the RING domain critical for BARD1 interaction and ubiquitin ligase function. Awaiting tool evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.88,
+          "rationale": "AlphaMissense 0.973; zinc-coordinating cysteine in RING domain. Slightly lower MSA applicability (0.75) than H41Y, placing it just below in rank."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H41Y": {
+      "candidate_id": "H41Y",
+      "mutation": "H41Y",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.9,
+      "evidence_refs": [
+        "E00004",
+        "E00011"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "H41 is a zinc-coordinating histidine in the RING domain. Substitution to tyrosine removes the metal-coordinating side chain, disrupting the RING domain's structural integrity and E3 ligase function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "H41 coordinates zinc in the RING domain; tyrosine substitution disrupts the zinc-binding geometry. Awaiting conservation and pathogenicity evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.9,
+          "rationale": "AlphaMissense 0.973 ties with C64G; H41 is critical for BARD1 heterodimerization in the RING domain. Highest MSA applicability (0.96) among top candidates provides strong evolutionary support."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "M1775R": {
+      "candidate_id": "M1775R",
+      "mutation": "M1775R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.82,
+      "evidence_refs": [
+        "E00003",
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.87,
+          "rationale": "M1775 is in the C-terminal BRCT domain, critical for phosphoprotein recognition (e.g., Abraxas, CtIP). Substitution to arginine is a known pathogenic mutation that disrupts the phosphopeptide-binding groove."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.87,
+          "rationale": "M1775R is a well-known clinically pathogenic BRCA1 mutation in the BRCT domain that disrupts phosphopeptide binding. Awaiting AlphaMissense confirmation."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.82,
+          "rationale": "AlphaMissense 0.893 is pathogenic but notably lower than RING domain candidates. MSA applicability is negligible (0.04) due to poor C-terminal coverage, limiting evolutionary evidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C24G": {
+      "candidate_id": "C24G",
+      "mutation": "C24G",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.94,
+      "evidence_refs": [
+        "E00005",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.84,
+          "rationale": "C24 is a zinc-coordinating cysteine in the RING domain. Disruption of zinc binding destabilizes the RING fold and impairs BARD1 interaction and E3 ligase activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.84,
+          "rationale": "C24 is a zinc-coordinating residue in the RING domain. Glycine substitution abolishes zinc coordination and RING function."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.94,
+          "rationale": "Highest AlphaMissense pathogenicity score (0.993) among all candidates; C24 is a zinc-coordinating cysteine in the RING domain, and its mutation to glycine abolishes E3 ligase activity. MSA confirms extreme conservation (freq 0.009, full coverage)."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D67A": {
+      "candidate_id": "D67A",
+      "mutation": "D67A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.75,
+      "evidence_refs": [
+        "E00006",
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "D67 is in the RING domain near the zinc-coordinating residues and may participate in structural stabilization. Alanine substitution could weaken the domain's integrity and E3 ligase function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "D67 is near the RING domain zinc-coordination sphere and contributes to structural integrity. Less directly disruptive than cysteine substitutions."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "AlphaMissense 0.197 classifies as benign; MSA shows 21% tolerance for alanine at this position. Insufficient evidence for LOF."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "AlphaMissense 0.197 classifies as benign; MSA shows 21% tolerance for alanine at this position. Insufficient evidence for LOF.",
+        "evidence_refs": [
+          "E00006",
+          "E00013"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "S1655A": {
+      "candidate_id": "S1655A",
+      "mutation": "S1655A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00007",
+        "E00014"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "S1655 is in the BRCT domain region. While not a canonical phosphopeptide-contact residue, it may contribute to domain stability or interaction surfaces relevant to DNA damage signaling."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "S1655 is in the BRCT domain region; alanine substitution may reduce phosphoprotein binding but is less characterized than M1775R."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "AlphaMissense 0.337 classifies as benign; MSA has negligible applicability (0.04). No support for functional disruption."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "AlphaMissense 0.337 classifies as benign; MSA has negligible applicability (0.04). No support for functional disruption.",
+        "evidence_refs": [
+          "E00007",
+          "E00014"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 2,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "C24G": 37.826,
+    "C61G": 44.445,
+    "H41Y": 42.052
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "C61G",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9904,
+        "normalized": 0.9904,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.990 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C64G",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9729,
+        "normalized": 0.9729,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.973 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M1775R",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.893,
+        "normalized": 0.893,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.893 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H41Y",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9728,
+        "normalized": 0.9728,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.973 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C24G",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9929,
+        "normalized": 0.9929,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.993 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D67A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1971,
+        "normalized": 0.1971,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.197 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S1655A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.3365,
+        "normalized": 0.3365,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.337 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C61G",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.035503,
+        "normalized": 0.035503,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.801,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.801,
+        "reason": "alignment coverage 169/211 homologs"
+      },
+      "interpretation": "mutant frequency of G at position 61 = 0.0355 among 169 homologs; conservation entropy 2.678 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C64G",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.056962,
+        "normalized": 0.056962,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.749,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.749,
+        "reason": "alignment coverage 158/211 homologs"
+      },
+      "interpretation": "mutant frequency of G at position 64 = 0.0570 among 158 homologs; conservation entropy 2.523 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M1775R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.043,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.043,
+        "reason": "alignment coverage 9/211 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 1775 = 0.0000 among 9 homologs; conservation entropy -0.000 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "H41Y",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.074257,
+        "normalized": 0.074257,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.957,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.957,
+        "reason": "alignment coverage 202/211 homologs"
+      },
+      "interpretation": "mutant frequency of Y at position 41 = 0.0743 among 202 homologs; conservation entropy 2.633 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C24G",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.009479,
+        "normalized": 0.009479,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 1.0,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 211/211 homologs"
+      },
+      "interpretation": "mutant frequency of G at position 24 = 0.0095 among 211 homologs; conservation entropy 2.574 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D67A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.212766,
+        "normalized": 0.212766,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.668,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.668,
+        "reason": "alignment coverage 141/211 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 67 = 0.2128 among 141 homologs; conservation entropy 2.395 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S1655A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.043,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.043,
+        "reason": "alignment coverage 9/211 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 1655 = 0.0000 among 9 homologs; conservation entropy -0.000 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "qwen3.8-max__brca1_tsg_lof__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C61G",
+          "C64G",
+          "M1775R",
+          "H41Y",
+          "C24G",
+          "D67A",
+          "S1655A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 7,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 3,
+    "c0_size": 7,
+    "final_novelty": 0.0,
+    "tool_calls_used": 2,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

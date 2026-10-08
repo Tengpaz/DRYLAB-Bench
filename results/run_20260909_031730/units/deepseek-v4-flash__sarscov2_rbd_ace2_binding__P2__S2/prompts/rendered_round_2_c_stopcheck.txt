@@ -1,0 +1,183 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in the SARS-CoV-2 Spike receptor-binding domain (Wuhan-Hu-1, 201 aa).
+
+THE DESIGN OBJECTIVE: Maximize / maintain RBD binding to the human ACE2 receptor (enhanced cell attachment).
+
+SEQUENCE (full-length exactly as numbered below):
+```
+NITNLCPFGEVFNATRFASVYAWNRKRISNCVADYSVLYNSASFSTFKCYGVSPTKLNDLCFTNVYADSFVIRGDEVRQIAPGQTGKIADYNYKLPDDFTGCVIAWNSNNLDSKVGGNYNYLYRLFRKSNLKPFERDISTEIYQAGSTPCNGVEGFNCYFPLQSYGFQPTNGVGYQPYRVVVLSFELLHAPATVCGPKKST
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   No experimental structure is configured for this task — every query returns status = "not_applicable".
+
+4. functional_annotation — curated UniProt features (accession P0DTC2) for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  Q168Y  confidence=0.840  rank=1
+  K87N  confidence=0.750  rank=2
+  Y123F  confidence=0.650  rank=3
+  E154K  confidence=0.600  rank=4
+  Q163Y  confidence=0.600  rank=5
+  T148K  confidence=0.550  rank=6
+  N171Y  confidence=0.420  rank=7
+  N171F  confidence=0.400  rank=8
+BT evidence so far:
+  E00001 evolution_msa(N171Y): z=0.000, app=0.62
+  E00002 evolution_msa(Q168Y): z=0.600, app=0.62
+  E00003 evolution_msa(Q163M): z=0.000, app=0.62
+  E00004 evolution_msa(Q163Y): z=0.000, app=0.62
+  E00005 evolution_msa(E154K): z=0.000, app=0.38
+  E00006 evolution_msa(T148K): z=0.333, app=0.38
+  E00007 evolution_msa(K87N): z=0.375, app=1.00
+  E00008 evolution_msa(N171F): z=0.000, app=0.62
+  E00009 evolution_msa(Q168W): z=0.000, app=0.62
+  E00010 evolution_msa(Y123F): z=0.000, app=0.88
+  E00011 sequence_plm(N171Y): z=0.699, app=0.90
+  E00012 sequence_plm(Q168Y): z=1.000, app=0.90
+  E00013 sequence_plm(Q163M): z=0.334, app=0.90
+  E00014 sequence_plm(Q163Y): z=1.000, app=0.90
+  E00015 sequence_plm(E154K): z=1.000, app=0.90
+  E00016 sequence_plm(T148K): z=0.696, app=0.90
+  E00017 sequence_plm(K87N): z=1.000, app=0.90
+  E00018 sequence_plm(N171F): z=0.698, app=0.90
+  E00019 sequence_plm(Q168W): z=0.321, app=0.90
+  E00020 sequence_plm(Y123F): z=1.000, app=0.90
+  E00021 toxin(N171Y): z=0.240, app=0.70
+  E00022 toxin(Q168Y): z=0.345, app=0.70
+  E00023 toxin(Q163M): z=0.370, app=0.70
+  E00024 toxin(Q163Y): z=0.350, app=0.70
+  E00025 toxin(E154K): z=0.365, app=0.70
+  E00026 toxin(T148K): z=0.365, app=0.70
+  E00027 toxin(K87N): z=0.255, app=0.70
+  E00028 toxin(N171F): z=0.250, app=0.70
+  E00029 toxin(Q168W): z=0.370, app=0.70
+  E00030 toxin(Y123F): z=0.175, app=0.70
+  E00031 functional_annotation(N171Y): z=0.500, app=0.60
+  E00032 functional_annotation(Q168Y): z=0.500, app=0.60
+  E00033 functional_annotation(Q163M): z=0.500, app=0.60
+  E00034 functional_annotation(Q163Y): z=0.500, app=0.60
+  E00035 functional_annotation(E154K): z=0.500, app=0.60
+  E00036 functional_annotation(T148K): z=0.500, app=0.60
+  E00037 functional_annotation(K87N): z=0.500, app=0.60
+  E00038 functional_annotation(N171F): z=0.500, app=0.60
+  E00039 functional_annotation(Q168W): z=0.500, app=0.60
+  E00040 functional_annotation(Y123F): z=0.500, app=0.60
+Change history:
+  - drop Q163M (round 1): Low PLM and zero evolutionary support; rejected as unlikely to be viable or beneficial.
+  - drop Q168W (round 1): Low PLM and zero evolutionary support, with borderline toxicity; rejected.
+Changes this round:
+  - Y123F rerank: High PLM (z=1.0) and low toxicity (z=0.175) make Y123F a strong candidate; despite zero evolutionary support, it may provide a conservative aromatic substitution that could stabilize ACE2 binding.
+  - T148K rerank: Moderate PLM (0.696) and some evolutionary support (0.333) but less competitive than higher-ranked candidates, so moved down.
+  - E154K retain: High PLM (z=1.0) supports plausibility; zero evolutionary support remains a concern, but the charge change could enhance ACE2 interaction.
+  - Q163Y retain: High PLM (z=1.0) and moderate toxicity, but no evolutionary support; kept as a backup.
+  - Q168Y retain: Strongest overall with high PLM (1.0) and evolutionary support (0.6); top-ranked.
+  - K87N retain: High PLM (1.0) and decent evolutionary support (0.375); second-ranked.
+  - N171Y retain: Moderate PLM (0.699) but zero evolutionary support; lower priority.
+  - N171F retain: Moderate PLM (0.698) but zero evolutionary support; lower priority.
+Remaining doubts: Lack of direct ACE2-binding measurements and evolutionary support for some top candidates leaves residual uncertainty.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

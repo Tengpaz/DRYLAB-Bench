@@ -1,0 +1,244 @@
+{
+  "unit_id": "claude-opus-4-8__mthfr_lof__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "claude-opus-4-8",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "G121R",
+        "confidence": 0.7,
+        "evidence_refs": [],
+        "decision_summary": "G121 lies in the conserved glycine-rich GDPIGDQ loop near the FAD/catalytic core; a bulky charged Arg should sterically and electrostatically disrupt cofactor binding, strongly favoring loss-of-function."
+      },
+      {
+        "rank": 2,
+        "mutation": "D223A",
+        "confidence": 0.62,
+        "evidence_refs": [],
+        "decision_summary": "D223 sits in the conserved FFEADT motif where acidic residues commonly serve as catalytic acid/base or cofactor contacts; D->A is a clean catalytic knockout with retained fold."
+      },
+      {
+        "rank": 3,
+        "mutation": "R157A",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "R157 is a conserved arginine likely coordinating substrate/cofactor; removing the charged sidechain should impair catalysis while preserving overall fold."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No evidence tools available and top motif-based catalytic candidates are stable, so additional rounds add little value."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R157A": {
+      "candidate_id": "R157A",
+      "mutation": "R157A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.66,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Arg157 in the RGDP/active-site region likely coordinates substrate phosphate or FAD; charge removal to Ala is expected to strongly impair catalysis."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.66,
+          "rationale": "R157 is a conserved arginine likely involved in substrate/cofactor coordination; Ala removes the charged sidechain, plausibly impairing catalysis while preserving fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "P66A": {
+      "candidate_id": "P66A",
+      "mutation": "P66A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.42,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "The FFPPR motif near residue 66 is highly conserved in MTHFR; the proline is structurally rigid and its substitution can distort the catalytic fold."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.42,
+          "rationale": "P66 may enforce a turn, but P->A is often tolerated and less reliably abolishes activity, so it is deprioritized."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G121R": {
+      "candidate_id": "G121R",
+      "mutation": "G121R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "The glycine in the GDP catalytic loop needs backbone flexibility; introducing a bulky charged Arg should sterically break the active-site geometry."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "G121 lies in the conserved GDP(G121DPIGDQ) glycine-rich loop near the FAD/catalytic core; a bulky charged Arg should sterically and electrostatically disrupt cofactor binding and abolish activity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F65D": {
+      "candidate_id": "F65D",
+      "mutation": "F65D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.57,
+          "rationale": "Phe65 in the conserved FFPPR motif is buried and hydrophobic; a charged Asp substitution should destabilize the catalytic core and disrupt function."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "F65 in the EFFPPRT region is likely buried/structural; introducing a charged Asp could destabilize but effect on activity is less certain than active-site substitutions."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D223A": {
+      "candidate_id": "D223A",
+      "mutation": "D223A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Asp223 in the ITQLFF region may participate in substrate binding within the TIM-barrel; alanine substitution could reduce catalytic competence."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.58,
+          "rationale": "D223 sits in the FFEADT catalytic motif; conserved acidic residues here are common general acid/base or metal/cofactor contacts, and D->A is a clean catalytic knockout mutation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C130Y": {
+      "candidate_id": "C130Y",
+      "mutation": "C130Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "The CCRQR cysteine cluster around 129-130 may have structural/redox roles near the active site; a bulky Tyr can misfold this region and impair activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "C130 in the CCRQR motif could be functional but its exact role is uncertain and Tyr substitution effect is ambiguous, so it stays low."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q147A": {
+      "candidate_id": "Q147A",
+      "mutation": "Q147A",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "The MALRGDP region around residues 145-150 is a conserved active-site-adjacent loop; targeting a polar residue here provides an alternative catalytic-disruption candidate to diversify the pool."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "G121R": null,
+    "D223A": null,
+    "R157A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 7,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 5,
+    "c0_size": 6,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "unit_id": "deepseek-v4-flash__oct1_transport_ablation__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D473A",
+        "confidence": 0.9,
+        "evidence_refs": [],
+        "decision_summary": "D473 is a conserved aspartate in the CDIGG motif, likely a direct organic-cation coordination site; alanine removes charge with minimal side-chain disruption, strongly predicted to block transport while preserving fold."
+      },
+      {
+        "rank": 2,
+        "mutation": "D473N",
+        "confidence": 0.82,
+        "evidence_refs": [],
+        "decision_summary": "Backup at the same key aspartate; asparagine neutralizes the charge while better retaining side-chain packing, likely to impair transport with slightly lower complete abolition than D473A."
+      },
+      {
+        "rank": 3,
+        "mutation": "E454Q",
+        "confidence": 0.76,
+        "evidence_refs": [],
+        "decision_summary": "E454 is a conserved glutamates in the TM helix; glutamine preserves size but removes carboxylate, likely to block cation/H-bonding transport chemistry while maintaining helical stability better than alanine."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further self-iteration without external evidence is unlikely to improve confidence; top-3 rationalized from conserved transport-relevant charged residues."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "D473A": {
+      "candidate_id": "D473A",
+      "mutation": "D473A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.9,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "D473 is a conserved acidic residue in the TM11 signature motif that is critical for organic cation recognition; removing the negative charge is expected to abolish substrate transport while causing minimal steric perturbation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.9,
+          "rationale": "Conserved aspartate in the CDIGG motif is likely a direct organic-cation coordination residue; A removes the charge with minimal side-chain disruption."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D473N": {
+      "candidate_id": "D473N",
+      "mutation": "D473N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.82,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Conservative mutation of the same key aspartate to asparagine preserves the side-chain geometry but eliminates the carboxylate charge, likely uncoupling transport without disturbing protein folding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.82,
+          "rationale": "Backup at the same key position; N neutralizes the negative charge while better preserving packing, though transport abolition may be slightly less complete than with A."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E454A": {
+      "candidate_id": "E454A",
+      "mutation": "E454A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.66,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "E454 is an acidic residue in a transmembrane segment near the proposed substrate cavity; alanine substitution removes a potential cation-binding carboxylate and may impair transport while retaining overall structure."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.66,
+          "rationale": "Keep as a slightly less preferable backup; alanine removes charge but may perturb helix packing, so rank below E454Q."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D425A": {
+      "candidate_id": "D425A",
+      "mutation": "D425A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "D425 lies within a conserved 'SPDLH' motif in a membrane-spanning region and may participate in the translocation cycle; neutralization could block transport without global misfolding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Retain as a plausible charge-neutralizing hit in the translocation pathway, but with lower confidence because structural contribution is less clear."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R461A": {
+      "candidate_id": "R461A",
+      "mutation": "R461A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "R461 is a conserved positively charged residue in the TM11 vicinity that may stabilize conformational transitions during cation transport; alanine substitution can disrupt this process while preserving abundance."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Retain as a candidate; loss of the positive charge may disrupt substrate recognition, but there is higher risk of folding/abundance loss in the transmembrane domain."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y456A": {
+      "candidate_id": "Y456A",
+      "mutation": "Y456A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Y456 is an aromatic residue close to key acidic groups, potentially forming cation-pi or H-bond interactions with substrates; alanine replacement may reduce transport selectivity with limited structural impact."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.25,
+          "rationale": "Alanine at this aromatic position is more likely to impair core packing/folding than to specifically block transport; deprioritized from the active pool."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Alanine at this aromatic position is more likely to impair core packing/folding than to specifically block transport; deprioritized from the active pool.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "E454Q": {
+      "candidate_id": "E454Q",
+      "mutation": "E454Q",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.76,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.76,
+          "rationale": "Q conserves side-chain size but removes the carboxylate; if E454 participates in cation/H-bond transport chemistry, this should block transport while preserving the TM fold better than E454A."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "D473A": null,
+    "D473N": null,
+    "E454Q": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 7,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 6,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

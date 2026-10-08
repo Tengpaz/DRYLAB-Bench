@@ -1,0 +1,206 @@
+{
+  "unit_id": "gpt-5.6-terra__oct1_transport_ablation__P1__S2",
+  "condition": "S2",
+  "model_id": "gpt-5.6-terra",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "All permitted tool calls and agent rounds are exhausted, and the only available evidence was discarded because it referenced a WT residue inconsistent with the supplied sequence."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "budget_exhausted",
+    "detail": "round limit reached"
+  },
+  "candidate_registry": {
+    "F160A": {
+      "candidate_id": "F160A",
+      "mutation": "F160A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.48,
+      "evidence_refs": [
+        "E00001",
+        "E00002",
+        "E00003",
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "F160 is a transmembrane aromatic residue that could contribute to the permeation cavity or substrate-contact surface. Alanine substitution is a focused way to weaken this interaction."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "Direct inspection of the supplied sequence places D, not F, at position 160, so F160A is not a valid substitution under the required numbering. The reported evidence therefore cannot be safely transferred to a valid sequence-indexed candidate."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Direct inspection of the supplied sequence places D, not F, at position 160, so F160A is not a valid substitution under the required numbering. The reported evidence therefore cannot be safely transferred to a valid sequence-indexed candidate.",
+        "evidence_refs": [
+          "E00001",
+          "E00002"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 5
+  },
+  "bundle_evidence": {},
+  "evidence_ledger": [
+    {
+      "candidate": "F160A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1272,
+        "normalized": 0.1272,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.127 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "gpt-5.6-terra__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F160A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.066986,
+        "normalized": 0.066986,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.864,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.864,
+        "reason": "alignment coverage 209/242 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 160 = 0.0670 among 209 homologs; conservation entropy 2.784 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "gpt-5.6-terra__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F160A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "gpt-5.6-terra__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F160A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "gpt-5.6-terra__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {}
+}

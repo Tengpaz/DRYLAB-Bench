@@ -1,0 +1,840 @@
+{
+  "unit_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+  "condition": "S2",
+  "model_id": "kimi-k3",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N53D",
+        "confidence": 0.6,
+        "evidence_refs": [
+          "E00001"
+        ],
+        "decision_summary": "Only candidate with consistent positive support across structure compatibility, PLM plausibility, and MSA tolerance at a conserved surface position. Asn→Asp also removes a deamidation-prone residue, favoring long-term environmental stability."
+      },
+      {
+        "rank": 2,
+        "mutation": "V347I",
+        "confidence": 0.48,
+        "evidence_refs": [],
+        "decision_summary": "Conservative hydrophobic enlargement in the HA2 stem with moderate MSA (0.20) and PLM support, likely improving core packing. Confidence trimmed because structure evidence was not applicable due to a WT-mismatch flag."
+      },
+      {
+        "rank": 3,
+        "mutation": "I48T",
+        "confidence": 0.42,
+        "evidence_refs": [
+          "E00001"
+        ],
+        "decision_summary": "Strongest PLM plausibility and reasonable evolutionary tolerance, but the polar-for-hydrophobic swap is ambiguous for core stability and structure evidence was not applicable; retained as third choice over F120Y and T203P, whose MSA/PLM or structure signals were clearly negative."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Ranking is stable after cross-tool evaluation; remaining doubts (numbering mismatches) cannot be resolved by the available tools and are already reflected in reduced confidences."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "I48T": {
+      "candidate_id": "I48T",
+      "mutation": "I48T",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00001",
+        "E00005",
+        "E00010",
+        "E00015"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Early N-terminal region; polar substitution may improve surface H-bonding. Initial hypothesis pending MSA/structure evidence."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Structural evidence is unavailable (WT mismatch at mapped residue, likely a numbering offset against PDB 5HMG), so the candidate is neither supported nor contradicted; confidence lowered slightly pending MSA/PLM evidence. Introducing Thr at a partly exposed head position could add H-bonding, but hydrophobic-to-polar burial risk needs evolutionary/plausibility checks."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "I48T has the strongest PLM plausibility (z=1.00) and reasonable MSA tolerance (0.31), but structure evidence is not applicable (WT mismatch), and Ile→Thr replaces a core hydrophobe with a polar residue, which is ambiguous for stability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N53D": {
+      "candidate_id": "N53D",
+      "mutation": "N53D",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.6,
+      "evidence_refs": [
+        "E00003",
+        "E00008",
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Surface Asn in N-terminal domain; Asp can add favorable electrostatics while removing deamidation-prone Asn, potentially improving persistence."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Surface Asn-to-Asp can stabilize via favorable electrostatics and reduced deamidation; awaiting MSA and PLM evidence to confirm tolerance at this head-domain position."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "N53D is the only candidate with consistent positive support across structure compatibility (z=0.656), PLM (z=0.616), and MSA tolerance (0.135 at a conserved surface position). Surface Asn→Asp can also remove a deamidation-prone residue, aiding environmental stability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V347I": {
+      "candidate_id": "V347I",
+      "mutation": "V347I",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.48,
+      "evidence_refs": [
+        "E00002",
+        "E00007",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Position 347 lies in the HA2 stem (after the fusion-peptide region); conservative Val→Ile enlarges a buried hydrophobic side chain and can improve core packing and thermal stability with low functional risk."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.48,
+          "rationale": "Moderate MSA (0.20) and PLM (0.36) support the conservative HA2-stem hydrophobic swap, but the structure tool reports a WT-mismatch at the mapped residue (app=0.00), so structural confirmation is unavailable and confidence is trimmed."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T203P": {
+      "candidate_id": "T203P",
+      "mutation": "T203P",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.3,
+      "evidence_refs": [
+        "E00006",
+        "E00011",
+        "E00016"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Thr at 203 sits in a surface loop near the receptor-binding region; proline rigidification of loops is a classic entropic stabilization strategy, though proximity to antigenic/receptor sites warrants conservation checks."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "Pro is common at position 203 among homologs (0.38), but the structure delta is strongly negative (z=0.23) and PLM is essentially zero (z=0.0002), arguing against the rigidification hypothesis on this backbone; demoted to last."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F120Y": {
+      "candidate_id": "F120Y",
+      "mutation": "F120Y",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.38,
+      "evidence_refs": [
+        "E00004",
+        "E00009",
+        "E00014"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Conservative Phe→Tyr retains the aromatic ring while adding a hydroxyl for potential new H-bonds, a frequently tolerated stabilizing change at semi-buried aromatic positions."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.38,
+          "rationale": "Structure compatibility is decent (z=0.61), but MSA mutant frequency (0.018) and PLM (z=0.05) are both very low, suggesting the Tyr substitution is rarely tolerated at this position."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "N53D": 43.371,
+    "V347I": 25.799,
+    "I48T": 57.374
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "I48T",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "I48T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V347I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N53D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.4739,
+        "normalized": 0.65555,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.727,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 27.34"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.4739)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F120Y",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.7765,
+        "normalized": 0.609881,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.8,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 20.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.7765)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I48T",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T203P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.7433,
+        "normalized": 0.227725,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.736,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 26.4"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-4.7433)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V347I",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.203704,
+        "normalized": 0.203704,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.953,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.953,
+        "reason": "alignment coverage 162/170 homologs"
+      },
+      "interpretation": "mutant frequency of I at position 347 = 0.2037 among 162 homologs; conservation entropy 1.666 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N53D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.135294,
+        "normalized": 0.135294,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 1.0,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 170/170 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 53 = 0.1353 among 170 homologs; conservation entropy 1.915 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F120Y",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.017751,
+        "normalized": 0.017751,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.994,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.994,
+        "reason": "alignment coverage 169/170 homologs"
+      },
+      "interpretation": "mutant frequency of Y at position 120 = 0.0178 among 169 homologs; conservation entropy 2.213 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I48T",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.30597,
+        "normalized": 0.30597,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.788,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.788,
+        "reason": "alignment coverage 134/170 homologs"
+      },
+      "interpretation": "mutant frequency of T at position 48 = 0.3060 among 134 homologs; conservation entropy 1.501 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T203P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.378698,
+        "normalized": 0.378698,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.994,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.994,
+        "reason": "alignment coverage 169/170 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 203 = 0.3787 among 169 homologs; conservation entropy 1.283 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V347I",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.3625,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N53D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.6162,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F120Y",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0509,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I48T",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T203P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0002,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "kimi-k3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "V347I",
+          "N53D",
+          "F120Y",
+          "I48T",
+          "T203P"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 8,
+    "c0_size": 2,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 4,
+    "rounds_used": 2,
+    "budget_exhausted": true
+  }
+}

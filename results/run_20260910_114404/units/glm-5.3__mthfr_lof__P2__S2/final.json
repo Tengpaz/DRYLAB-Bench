@@ -1,0 +1,697 @@
+{
+  "unit_id": "glm-5.3__mthfr_lof__P2__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "L333P",
+        "confidence": 0.93,
+        "evidence_refs": [],
+        "decision_summary": "Highest AlphaMissense pathogenicity (0.987) in the pool with low MSA tolerance (P frequency 0.077); Pro in a helical region should break secondary structure and abolish activity."
+      },
+      {
+        "rank": 2,
+        "mutation": "C243Y",
+        "confidence": 0.91,
+        "evidence_refs": [],
+        "decision_summary": "Pathogenicity 0.962 with full MSA coverage showing zero Tyr tolerance at a conserved catalytic-loop cysteine — strong dual evidence for loss of function."
+      },
+      {
+        "rank": 3,
+        "mutation": "R357P",
+        "confidence": 0.88,
+        "evidence_refs": [
+          "E00001",
+          "E00004"
+        ],
+        "decision_summary": "Phenotype score 0.977 strongly pathogenic; proline at this highly sensitive Arg site should disrupt backbone beyond the known damaging R357C (0.829)."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 is stable and further evidence rounds are unlikely to change the ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "E429A": {
+      "candidate_id": "E429A",
+      "mutation": "E429A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.85,
+      "evidence_refs": [
+        "E00003",
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Glu429Ala is a well-established MTHFR polymorphism associated with reduced enzyme activity and thermolability. Loss of the charged side chain at this conserved position destabilizes the FAD-binding region."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "AlphaMissense classifies E429A as benign (0.082) and ESM-1v finds it fairly plausible, strongly contradicting loss-of-function despite its clinical fame as a mild thermolabile variant."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "AlphaMissense classifies E429A as benign (0.082) and ESM-1v finds it fairly plausible, strongly contradicting loss-of-function despite its clinical fame as a mild thermolabile variant.",
+        "evidence_refs": [
+          "E00003",
+          "E00006"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "A222V": {
+      "candidate_id": "A222V",
+      "mutation": "A222V",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00002",
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Ala222Val is the classic thermolabile MTHFR variant causing substantially decreased activity in vivo. Substitution perturbs local packing near the FAD/NADPH-binding domain."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "Pathogenic-class prediction (0.632) and low ESM-1v plausibility support loss of function; retained as rank 2 pending MSA evidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Mild thermolabile variant with only 0.632 pathogenicity and plausible-by-ESM; insufficient for abolishing activity, demoted below Top-3."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R357C": {
+      "candidate_id": "R357C",
+      "mutation": "R357C",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.8,
+      "evidence_refs": [
+        "E00001",
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Arg357Cys is a reported pathogenic MTHFR missense variant associated with severe enzyme deficiency. Cysteine disrupts a conserved charged interaction."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.9,
+          "rationale": "Highest AlphaMissense pathogenicity (0.829, pathogenic class) and lowest ESM-1v plausibility, consistent with a strongly damaging substitution; promoted to rank 1."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "Well-supported damaging variant (0.829) but now outscored by three newer candidates; retained as backup."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R357P": {
+      "candidate_id": "R357P",
+      "mutation": "R357P",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.85,
+      "evidence_refs": [
+        "E00007",
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Since Arg357 is highly sensitive (R357C strongly damaging), a proline at the same site should disrupt local backbone even more; needs phenotype/MSA confirmation next round."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.85,
+          "rationale": "Phenotype 0.977 strongly pathogenic; MSA shows modest P tolerance (0.09) with only moderate coverage, slightly reducing confidence versus C243Y."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C243Y": {
+      "candidate_id": "C243Y",
+      "mutation": "C243Y",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.88,
+      "evidence_refs": [
+        "E00008",
+        "E00011"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Conserved cysteine in the catalytic loop region; substitution to bulky Tyr likely disrupts structure/function — to be tested with phenotype tool next round."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.88,
+          "rationale": "Pathogenic prediction 0.962 with full MSA coverage showing zero Y tolerance at a conserved cysteine — strong combined evidence for loss of function."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L333P": {
+      "candidate_id": "L333P",
+      "mutation": "L333P",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.9,
+      "evidence_refs": [
+        "E00009",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Helical-region Leu-to-Pro substitution designed to break secondary structure and impair folding; to be validated with phenotype/MSA next round."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.9,
+          "rationale": "Highest AlphaMissense pathogenicity (0.987) of the pool; low MSA tolerance (P frequency 0.077) is consistent with disruption despite moderate coverage."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "L333P": 82.457,
+    "C243Y": 69.528,
+    "R357P": 83.936
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "R357C",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.8287,
+        "normalized": 0.8287,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.829 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R357C",
+          "A222V",
+          "E429A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222V",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6324,
+        "normalized": 0.6324,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.632 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R357C",
+          "A222V",
+          "E429A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E429A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.0816,
+        "normalized": 0.0816,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.082 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R357C",
+          "A222V",
+          "E429A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R357C",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0013,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R357C",
+          "A222V",
+          "E429A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222V",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0025,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R357C",
+          "A222V",
+          "E429A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E429A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.2182,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__mthfr_lof__P2__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "R357C",
+          "A222V",
+          "E429A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R357P",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9765,
+        "normalized": 0.9765,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.977 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R357P",
+          "C243Y",
+          "L333P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C243Y",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9618,
+        "normalized": 0.9618,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.962 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "glm-5.3__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R357P",
+          "C243Y",
+          "L333P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L333P",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9865,
+        "normalized": 0.9865,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.987 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "glm-5.3__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R357P",
+          "C243Y",
+          "L333P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R357P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.090909,
+        "normalized": 0.090909,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 0.478,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.478,
+        "reason": "alignment coverage 11/23 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 357 = 0.0909 among 11 homologs; conservation entropy 1.642 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "glm-5.3__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R357P",
+          "C243Y",
+          "L333P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C243Y",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 1.0,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 23/23 homologs"
+      },
+      "interpretation": "mutant frequency of Y at position 243 = 0.0000 among 23 homologs; conservation entropy 2.171 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "glm-5.3__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R357P",
+          "C243Y",
+          "L333P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L333P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.076923,
+        "normalized": 0.076923,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 0.565,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.565,
+        "reason": "alignment coverage 13/23 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 333 = 0.0769 among 13 homologs; conservation entropy 1.631 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "glm-5.3__mthfr_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R357P",
+          "C243Y",
+          "L333P"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 6,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 5,
+    "c0_size": 3,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 2,
+    "budget_exhausted": true
+  }
+}

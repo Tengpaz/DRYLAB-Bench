@@ -1,0 +1,248 @@
+{
+  "unit_id": "grok-4.5__brca1_tsg_lof__P2__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "brca1_tsg_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "C24G",
+        "confidence": 0.95,
+        "evidence_refs": [
+          "phenotype"
+        ],
+        "decision_summary": "C24G shows highest AlphaMissense LOF pathogenicity (0.993) with low MSA tolerance (0.0095), effectively disrupting BRCA1 function in RING domain without compromising viability per available evidence."
+      },
+      {
+        "rank": 2,
+        "mutation": "N106G",
+        "confidence": 0.7,
+        "evidence_refs": [
+          "phenotype"
+        ],
+        "decision_summary": "N106G in RING domain likely disrupts zinc coordination and DNA repair activity; moderate confidence from phenotype and position-specific functional annotation."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "No further tools can provide structure data; budget and evidence integration sufficient for final Top-3"
+    },
+    "remaining_budget": {
+      "tool_calls": 2,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "C24G": {
+      "candidate_id": "C24G",
+      "mutation": "C24G",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.95,
+      "evidence_refs": [
+        "E00001",
+        "E00002"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "C24 is a zinc-coordinating cysteine in the RING domain essential for BRCA1 E3 ligase activity and tumor suppression. Substituting with glycine disrupts zinc binding and abolishes function while maintaining overall protein fold due to glycine's small size."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "WT residue at position 24 is C (verified by direct indexing of provided sequence), matches notation"
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.75,
+          "rationale": "Phenotype tool shows very high damaging score (0.993) indicating strong LOF, while MSA shows low tolerance (0.0095 frequency), supporting disruption of function without structure data available."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C61G": {
+      "candidate_id": "C61G",
+      "mutation": "C61G",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "C61G is a well-documented pathogenic variant in the RING domain that eliminates BRCA1's ubiquitin ligase function critical for DNA repair and tumor suppression. The cysteine-to-glycine change prevents zinc coordination without introducing large side chains that would destabilize the core fold."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.85,
+          "rationale": "WT residue at position 61 is K (verified by direct indexing of provided sequence), not C; mutation notation invalid"
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "WT residue at position 61 is K (verified by direct indexing of provided sequence), not C; mutation notation invalid",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "C64G": {
+      "candidate_id": "C64G",
+      "mutation": "C64G",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "C64 is a conserved zinc-binding cysteine in BRCA1's RING domain required for structural integrity and tumor-suppressor activity. Glycine substitution disrupts metal coordination and abolishes function while preserving basic folding due to the conservative nature of the change at this position."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.8,
+          "rationale": "WT residue at position 64 is L (verified by direct indexing of provided sequence), not C; mutation notation invalid"
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "WT residue at position 64 is L (verified by direct indexing of provided sequence), not C; mutation notation invalid",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "N106G": {
+      "candidate_id": "N106G",
+      "mutation": "N106G",
+      "first_seen_round": 2,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Position 106 in RING domain, key for BRCA1 function; G substitution likely disrupts zinc binding or structure."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 2,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "C24G": 37.826,
+    "N106G": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "C24G",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9929,
+        "normalized": 0.9929,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.993 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__brca1_tsg_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C24G"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C24G",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.009479,
+        "normalized": 0.009479,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 1.0,
+        "reason": "MSA depth 211, Neff 17.43 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 211/211 homologs"
+      },
+      "interpretation": "mutant frequency of G at position 24 = 0.0095 among 211 homologs; conservation entropy 2.574 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__brca1_tsg_lof__P2__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "C24G"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 5,
+    "c0_size": 3,
+    "final_novelty": 0.5,
+    "tool_calls_used": 2,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

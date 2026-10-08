@@ -1,0 +1,172 @@
+{
+  "unit_id": "gpt-5.6-luna__oct1_transport_ablation__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gpt-5.6-luna",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D397N",
+        "confidence": 0.68,
+        "evidence_refs": [],
+        "decision_summary": "Neutralizing an acidic residue in the membrane-embedded transport core could disrupt substrate translocation while being less structurally drastic than a bulky-residue deletion."
+      },
+      {
+        "rank": 2,
+        "mutation": "W216A",
+        "confidence": 0.63,
+        "evidence_refs": [],
+        "decision_summary": "Replacing a membrane-core aromatic residue with alanine may strongly alter substrate recognition or pore geometry, though abundance effects remain uncertain."
+      },
+      {
+        "rank": 3,
+        "mutation": "W260A",
+        "confidence": 0.47,
+        "evidence_refs": [],
+        "decision_summary": "This aromatic-to-alanine substitution is a plausible pore or packing perturbation, but its potential impact on membrane stability lowers confidence in selective transport loss."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further iteration without evidence is unlikely to improve the candidate ranking materially."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "D397N": {
+      "candidate_id": "D397N",
+      "mutation": "D397N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.66,
+          "rationale": "D397 is located in the core transmembrane region and may contribute to the internal polar network or substrate pathway. The conservative D-to-N change tests the importance of its charge while preserving hydrogen-bonding potential."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "Retained and slightly prioritized because removing an acidic side-chain charge in a transmembrane region could disrupt the substrate pathway while being less structurally drastic than a bulky-residue deletion."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W216A": {
+      "candidate_id": "W216A",
+      "mutation": "W216A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.63,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.63,
+          "rationale": "W216 is an aromatic residue in a central transmembrane segment and may form part of the hydrophobic substrate cavity. Replacing it with alanine can reduce aromatic packing or substrate contacts, though the greater size change creates moderate folding risk."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.63,
+          "rationale": "Aromatic-to-small substitution in the predicted membrane-spanning transport core may alter substrate recognition and translocation, although its effect on folding remains uncertain."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y220F": {
+      "candidate_id": "Y220F",
+      "mutation": "Y220F",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.43,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "Y220 is an aromatic residue in the same putative cavity-forming transmembrane region. Removing only its hydroxyl group with a phenylalanine substitution may selectively disrupt substrate recognition while preserving aromatic packing."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.43,
+          "rationale": "The conservative Tyr-to-Phe change preserves aromaticity and is therefore less likely to abolish transport, so it is deprioritized despite potentially changing local hydrogen-bonding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W260A": {
+      "candidate_id": "W260A",
+      "mutation": "W260A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.47,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.44,
+          "rationale": "W260 is a bulky aromatic residue at a transmembrane boundary and may shape the substrate-access pathway. Alanine could reduce steric and aromatic contacts, but its structural impact makes this a lower-priority candidate."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.47,
+          "rationale": "Retained as a plausible pore or packing perturbation, but ranked below D397N and W216A because loss of a conserved aromatic residue could also impair membrane stability or abundance."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "D397N": null,
+    "W216A": null,
+    "W260A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 4,
+    "c0_size": 4,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

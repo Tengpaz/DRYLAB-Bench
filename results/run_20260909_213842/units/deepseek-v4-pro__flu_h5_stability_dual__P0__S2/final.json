@@ -1,0 +1,2236 @@
+{
+  "unit_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+  "condition": "S2",
+  "model_id": "deepseek-v4-pro",
+  "scenario_id": "flu_h5_stability_dual",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "M305L",
+        "confidence": 0.74,
+        "evidence_refs": [
+          "E00005",
+          "E00015",
+          "E00025",
+          "E00035"
+        ],
+        "decision_summary": "Best combined structural compatibility (0.995) and sequence plausibility (1.000), with no functional annotation conflicts. Retained as top candidate."
+      },
+      {
+        "rank": 2,
+        "mutation": "M242L",
+        "confidence": 0.62,
+        "evidence_refs": [
+          "E00002",
+          "E00012",
+          "E00022",
+          "E00032"
+        ],
+        "decision_summary": "Near-perfect structural compatibility (0.985) offsets moderate sequence_plm score; MSA shows the position is highly conserved but buried WT M to L is plausible for packing stability."
+      },
+      {
+        "rank": 3,
+        "mutation": "V163I",
+        "confidence": 0.55,
+        "evidence_refs": [
+          "E00004",
+          "E00014",
+          "E00024",
+          "E00034"
+        ],
+        "decision_summary": "Conservative increase in side-chain size with good structural compatibility (0.780) and strong sequence plausibility (0.713), supporting stability while likely preserving entry."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "All four tool calls available in this run have been exhausted, and the current top three candidates are stable."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "M120L": {
+      "candidate_id": "M120L",
+      "mutation": "M120L",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.48,
+      "evidence_refs": [
+        "E00001",
+        "E00011",
+        "E00021",
+        "E00031"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Replacing an oxidation-prone surface methionine with leucine may reduce chemical degradation and improve environmental persistence without substantially perturbing HA1 folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "Conservative hydrophobic substitution likely to improve core packing with low functional-site risk."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.48,
+          "rationale": "Strong sequence plausibility and moderate evolutionary tolerance, but no structure score available; kept as backup."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.3,
+          "rationale": "Despite high sequence plausibility, lack of structural coverage (app=0.00) makes its folding stability effect too uncertain relative to the top three candidates."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Despite high sequence plausibility, lack of structural coverage (app=0.00) makes its folding stability effect too uncertain relative to the top three candidates.",
+        "evidence_refs": [
+          "E00021"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "M242L": {
+      "candidate_id": "M242L",
+      "mutation": "M242L",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.62,
+      "evidence_refs": [
+        "E00002",
+        "E00012",
+        "E00022",
+        "E00032"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "M242 is a solvent-accessible methionine; substitution to leucine removes an oxidation liability while preserving hydrophobic character."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "M242L is conservative and likely stabilizes hydrophobic packing without disrupting receptor binding or fusion."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Excellent fixed-backbone compatibility supports fold retention, outweighing weak sequence/evolutionary priors."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "Retained despite moderate sequence score because structural compatibility is excellent."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "M305L": {
+      "candidate_id": "M305L",
+      "mutation": "M305L",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.74,
+      "evidence_refs": [
+        "E00005",
+        "E00015",
+        "E00025",
+        "E00035"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "M305L is a conservative replacement that may reduce oxidation and improve HA1 stability without affecting receptor binding or fusion motifs."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Conservative substitution near HA1 C-terminus; likely stability benefit with limited cleavage-site interference."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.74,
+          "rationale": "Best joint evidence: neutral ESM-1v score and top ProteinMPNN backbone compatibility; low MSA frequency is tolerable for a stability-engineered substitution."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.74,
+          "rationale": "Retained as top candidate given strong structural compatibility and high sequence plausibility."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A150V": {
+      "candidate_id": "A150V",
+      "mutation": "A150V",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00007",
+        "E00017",
+        "E00027",
+        "E00037"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Valine at position 150 fills a likely hydrophobic cavity better than alanine, potentially enhancing HA1 core packing and thermostability."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Conservative, but A150 lies in a surface/antigenic loop that may influence receptor binding; lower confidence pending structural evidence."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "Poor sequence and strong negative structural compatibility."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Poor sequence and strong negative structural compatibility.",
+        "evidence_refs": [
+          "E00017",
+          "E00027"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "A389V": {
+      "candidate_id": "A389V",
+      "mutation": "A389V",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00003",
+        "E00013",
+        "E00023",
+        "E00033"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "A389 lies near the HA2 coiled-coil region; increasing side-chain volume to valine may improve hydrophobic core packing and trimer stability."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "A389V in HA2 may improve helical packing; conservative and unlikely to block fusion conformational change."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "Very low sequence plausibility and no structural support; unlikely to stabilize while preserving entry."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Very low sequence plausibility and no structural support; unlikely to stabilize while preserving entry.",
+        "evidence_refs": [
+          "E00013",
+          "E00023"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "G146A": {
+      "candidate_id": "G146A",
+      "mutation": "G146A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.4,
+      "evidence_refs": [
+        "E00008",
+        "E00018",
+        "E00028",
+        "E00038"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Replacing a surface-loop glycine with alanine can reduce loop flexibility and increase folding stability while likely preserving function."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.4,
+          "rationale": "Adding a methyl group in the 130-loop could rigidify the loop but risks altering receptor-binding properties."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "Poor sequence and negative structural compatibility."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Poor sequence and negative structural compatibility.",
+        "evidence_refs": [
+          "E00018",
+          "E00028"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "G332A": {
+      "candidate_id": "G332A",
+      "mutation": "G332A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00009",
+        "E00019",
+        "E00029",
+        "E00039"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "G332 is in a flexible region near the HA1/HA2 boundary; alanine substitution may rigidify the local backbone and improve stability without blocking cleavage."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "Near the HA1/HA2 boundary; increased rigidity could affect cleavage or fusion activation, so downweighted."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.08,
+          "rationale": "MSA tolerance is high but structural and sequence-model scores strongly oppose it."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "MSA tolerance is high but structural and sequence-model scores strongly oppose it.",
+        "evidence_refs": [
+          "E00019",
+          "E00029"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "S137P": {
+      "candidate_id": "S137P",
+      "mutation": "S137P",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [
+        "E00010",
+        "E00020",
+        "E00030",
+        "E00040"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Proline introduction at a turn/loop position can lower configurational entropy and stabilize the native HA1 fold."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "Proline in the 130-loop is risky for receptor binding despite possible local stabilization; kept only as a low-priority candidate."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.06,
+          "rationale": "Some evolutionary tolerance but strong negative structural/sequence compatibility."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Some evolutionary tolerance but strong negative structural/sequence compatibility.",
+        "evidence_refs": [
+          "E00020",
+          "E00030"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "V163I": {
+      "candidate_id": "V163I",
+      "mutation": "V163I",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00004",
+        "E00014",
+        "E00024",
+        "E00034"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Isoleucine at position 163 is a conservative beta-branched substitution that may improve hydrophobic packing in the HA1 core."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.52,
+          "rationale": "Very conservative hydrophobic change; low expected functional disruption."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "Moderate structural compatibility plus good sequence plausibility; conservative I substitution likely preserves function."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Retained with good structural and sequence support."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G392A": {
+      "candidate_id": "G392A",
+      "mutation": "G392A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.48,
+      "evidence_refs": [
+        "E00006",
+        "E00016",
+        "E00026",
+        "E00036"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "G392 lies in a HA2 loop outside the fusion peptide; alanine substitution may reduce flexibility and increase overall HA stability while preserving cell entry."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.48,
+          "rationale": "G-to-A can rigidify helical regions, but position is in HA2 and may affect fusion-core dynamics enough to warrant caution."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "Negligible sequence plausibility and no coordinates for structural validation."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Negligible sequence plausibility and no coordinates for structural validation.",
+        "evidence_refs": [
+          "E00016",
+          "E00026"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "M305L": 62.488,
+    "M242L": 42.723,
+    "V163I": 47.009
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "M120L",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.357895,
+        "normalized": 0.357895,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.945,
+        "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.945,
+        "reason": "alignment coverage 190/201 homologs"
+      },
+      "interpretation": "mutant frequency of L at position 120 = 0.3579 among 190 homologs; conservation entropy 1.746 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M242L",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.965,
+        "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.965,
+        "reason": "alignment coverage 194/201 homologs"
+      },
+      "interpretation": "mutant frequency of L at position 242 = 0.0000 among 194 homologs; conservation entropy 1.842 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A389V",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.030675,
+        "normalized": 0.030675,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.811,
+        "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.811,
+        "reason": "alignment coverage 163/201 homologs"
+      },
+      "interpretation": "mutant frequency of V at position 389 = 0.0307 among 163 homologs; conservation entropy 1.705 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V163I",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.020619,
+        "normalized": 0.020619,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.965,
+        "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.965,
+        "reason": "alignment coverage 194/201 homologs"
+      },
+      "interpretation": "mutant frequency of I at position 163 = 0.0206 among 194 homologs; conservation entropy 1.826 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M305L",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.061856,
+        "normalized": 0.061856,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.965,
+        "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.965,
+        "reason": "alignment coverage 194/201 homologs"
+      },
+      "interpretation": "mutant frequency of L at position 305 = 0.0619 among 194 homologs; conservation entropy 1.910 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G392A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.811,
+        "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.811,
+        "reason": "alignment coverage 163/201 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 392 = 0.0000 among 163 homologs; conservation entropy 1.523 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A150V",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.030928,
+        "normalized": 0.030928,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.965,
+        "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.965,
+        "reason": "alignment coverage 194/201 homologs"
+      },
+      "interpretation": "mutant frequency of V at position 150 = 0.0309 among 194 homologs; conservation entropy 1.954 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G146A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.041237,
+        "normalized": 0.041237,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.965,
+        "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.965,
+        "reason": "alignment coverage 194/201 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 146 = 0.0412 among 194 homologs; conservation entropy 1.809 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G332A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.32967,
+        "normalized": 0.32967,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.905,
+        "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.905,
+        "reason": "alignment coverage 182/201 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 332 = 0.3297 among 182 homologs; conservation entropy 1.653 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S137P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.202073,
+        "normalized": 0.202073,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.96,
+        "reason": "MSA depth 201, Neff 19.21 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.96,
+        "reason": "alignment coverage 193/201 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 137 = 0.2021 among 193 homologs; conservation entropy 2.264 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M120L",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M242L",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1186,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A389V",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0032,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V163I",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.7134,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M305L",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G392A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.012,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A150V",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0182,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G146A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.016,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G332A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.004,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S137P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0069,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M120L",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M242L",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 1.5058,
+        "normalized": 0.985014,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.28,
+        "reason": "PDB 2FK0 at 2.95 A; residue B-factor 72.03"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 2FK0:A (ΔlogP=1.5058)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A389V",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "position 389 has no coordinates in 2FK0"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "position 389 has no coordinates in 2FK0"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00023",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V163I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.2778,
+        "normalized": 0.780403,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.286,
+        "reason": "PDB 2FK0 at 2.95 A; residue B-factor 71.39"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 2FK0:A (ΔlogP=-1.2778)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00024",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M305L",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 2.1354,
+        "normalized": 0.995005,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.284,
+        "reason": "PDB 2FK0 at 2.95 A; residue B-factor 71.62"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 2FK0:A (ΔlogP=2.1354)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00025",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G392A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "position 392 has no coordinates in 2FK0"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "position 392 has no coordinates in 2FK0"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00026",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A150V",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.9318,
+        "normalized": 0.209798,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.283,
+        "reason": "PDB 2FK0 at 2.95 A; residue B-factor 71.66"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 2FK0:A (ΔlogP=-4.9318)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00027",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G146A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -5.3537,
+        "normalized": 0.1122,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.288,
+        "reason": "PDB 2FK0 at 2.95 A; residue B-factor 71.15"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 2FK0:A (ΔlogP=-5.3537)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00028",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G332A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -5.3233,
+        "normalized": 0.122959,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.284,
+        "reason": "PDB 2FK0 at 2.95 A; residue B-factor 71.55"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 2FK0:A (ΔlogP=-5.3233)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00029",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S137P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -5.2912,
+        "normalized": 0.133141,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.292,
+        "reason": "PDB 2FK0 at 2.95 A; residue B-factor 70.84"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 2FK0:A (ΔlogP=-5.2912)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00030",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M120L",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00031",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M242L",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00032",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A389V",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00033",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V163I",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00034",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M305L",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00035",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G392A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00036",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A150V",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00037",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G146A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00038",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G332A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00039",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S137P",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00040",
+      "run_id": "deepseek-v4-pro__flu_h5_stability_dual__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "M120L",
+          "M242L",
+          "A389V",
+          "V163I",
+          "M305L",
+          "G392A",
+          "A150V",
+          "G146A",
+          "G332A",
+          "S137P"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 7,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

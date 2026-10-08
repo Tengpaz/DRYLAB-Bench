@@ -1,0 +1,332 @@
+{
+  "unit_id": "deepseek-v4-flash__cbs_lof__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.99,
+        "evidence_refs": [],
+        "decision_summary": "Lys119 is the PLP-binding residue; alanine substitution removes the covalent Schiff base anchor, abolishing catalytic activity with minimal structural destabilization."
+      },
+      {
+        "rank": 2,
+        "mutation": "G307S",
+        "confidence": 0.94,
+        "evidence_refs": [],
+        "decision_summary": "Gly307 lies in the PLP active-site loop; serine substitution is a documented severe loss-of-function CBS allele, disrupting the active-site geometry and catalysis."
+      },
+      {
+        "rank": 3,
+        "mutation": "R266A",
+        "confidence": 0.89,
+        "evidence_refs": [],
+        "decision_summary": "Arg266 is a conserved active-site residue that contacts substrates; alanine elimination removes charge interactions required for catalysis, leading to near-complete loss of activity."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further self-iteration without external evidence would not improve the top-three selections; the mechanistic case for these active-site knockouts is already strong."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.99,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.98,
+          "rationale": "Lys119 forms the Schiff-base linkage with PLP; substitution to alanine eliminates the catalytic lysine required for transaldimination. This is expected to fully abolish CBS activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.99,
+          "rationale": "Lys119 is the PLP-binding lysine in CBS; alanine removes the covalent Schiff base anchor and should abolish catalysis while not grossly destabilizing the overall fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R266A": {
+      "candidate_id": "R266A",
+      "mutation": "R266A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.89,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.86,
+          "rationale": "Arg266 likely contributes to PLP cofactor binding or substrate stabilization in the active site. Removing its positive charge disrupts cofactor anchoring and catalysis."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.89,
+          "rationale": "Arg266 is a conserved active-site residue that contacts substrates; alanine substitution eliminates charge interactions needed for catalysis."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E304A": {
+      "candidate_id": "E304A",
+      "mutation": "E304A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.86,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.83,
+          "rationale": "Glu304 is in the active-site catalytic region and likely participates in proton transfer or substrate positioning. Alanine substitution should severely impair or abolish enzyme activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.86,
+          "rationale": "Glu304 participates in the active-site/PLP environment; removal by alanine is expected to disrupt catalytic chemistry."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119R": {
+      "candidate_id": "K119R",
+      "mutation": "K119R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Although arginine preserves positive charge, it cannot form the required internal aldimine with PLP. This replacement should disable the PLP-dependent catalytic mechanism."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "Arginine cannot form the same PLP Schiff base as lysine and may preserve less misfolding, but residual activity is less predictable; still worth retaining as an alternative."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G307S": {
+      "candidate_id": "G307S",
+      "mutation": "G307S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.94,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Gly307 is in a conserved active-site loop near the catalytic YDF motif; introducing serine adds a bulky polar side chain that likely disrupts backbone conformation and substrate binding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.94,
+          "rationale": "Gly307 is in the pyridoxal-phosphate active-site loop; Ser substitution is a classic severe CBS loss-of-function allele and is a strong candidate for abolishing activity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T257A": {
+      "candidate_id": "T257A",
+      "mutation": "T257A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.77,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Thr257 is located in the PLP-binding/active-site region and may form critical hydrogen bonds. Removal of the hydroxyl group could ablate catalytic competency."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.77,
+          "rationale": "Thr257 lies adjacent to catalytic machinery and likely helps orient PLP/substrate; alanine replacement should reduce activity, though perhaps not fully abolish it."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y308F": {
+      "candidate_id": "Y308F",
+      "mutation": "Y308F",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.66,
+          "rationale": "Tyr308 is likely involved in acid-base chemistry or substrate orientation. Removing the hydroxyl group while retaining packing may abolish essential hydrogen-bonding interactions."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "Tyr308 likely stabilizes active-site geometry; phenylalanine removes the hydroxyl, a mild but potentially disruptive change."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D309A": {
+      "candidate_id": "D309A",
+      "mutation": "D309A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.63,
+          "rationale": "Asp309 adjacent to Tyr308 is likely part of the catalytic machinery. Loss of the carboxylate side chain should disrupt electrostatic and proton-transfer steps."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Asp309 is near the active site but not as clearly required as Lys119/Arg266; retained as a lower-confidence alternative."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R224A": {
+      "candidate_id": "R224A",
+      "mutation": "R224A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Arg224 may coordinate the substrate carboxylate or stabilize reaction intermediates. Alanine substitution would remove this key interaction and impair catalysis."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.65,
+          "rationale": "Arg224 may contribute to active-site electrostatics, but it is less directly supported than the top candidates."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C52A": {
+      "candidate_id": "C52A",
+      "mutation": "C52A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Cys52 is a heme iron ligand; loss of heme coordination may destabilize the CBS fold and abolishing the heme-dependent function/regulation, though catalytic impairment might be less direct."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.45,
+          "rationale": "Cys52 is in an N-terminal region without strong evidence for a catalytic role; keeping it as an active candidate dilutes the focused loss-of-function pool."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Cys52 is in an N-terminal region without strong evidence for a catalytic role; keeping it as an active candidate dilutes the focused loss-of-function pool.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K119A": null,
+    "G307S": null,
+    "R266A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 10,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

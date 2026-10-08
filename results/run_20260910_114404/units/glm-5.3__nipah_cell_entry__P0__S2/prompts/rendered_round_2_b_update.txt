@@ -1,0 +1,1452 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the Nipah virus attachment glycoprotein G (532 aa).
+
+GOAL: Maximize G-mediated cell-entry efficiency (together with the F fusion machinery).
+
+SEQUENCE (full-length exactly as numbered below):
+```
+QNYTRSTDNQAVIKDALQGIQQQIKGLADKIGTEIGPKVSLIDTSSTITIPANIGLLGSKISQSTASINENVNEKCKFTLPPLKIHECNISCPNPLPFREYRPQTEGVSNLVGLPNNICLQKTSNQILKPKLISYTLPVVGQSGTCITDPLLAMDEGYFAYSHLERIGSCSRGVSKQRIIGVGEVLDRGDEVPSLFMTNVWTPPNPNTVYHCSAVYNNEFYYVLCAVSTVGDPILNSTYWSGSLMMTRLAVKPKSNGGGYNQHQLALRSIEKGRYDKVMPYGPSGIKQGDTLYFPAVGFLVRTEFKYNDSNCPITKCQYSKPENCRLSMGIRPNSHYILRSGLLKYNLSDGENPKVVFIEISDQRLSIGSPSKIYDSLGQPVFYQASFSWDTMIKFGDVLTVNPLVVNWRNNTVISRPGQSQCPRFNTCPEICWEGVYNDAFLIDRINWISAGVFLDSNQTAENPVFTVFKDNEILYRAQLASEDTNAQKTITNCFLLKNKIWCISLVEIYDTGDNVIRPKLFAVKIPEQCT
+```
+IMPORTANT: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   For THIS task the backbone is PDB 3D11 chain A — 80% of this sequence's residues have experimental coordinates (resolution 2.31 Å). Positions OUTSIDE the structure return status = "not_applicable" (no score).
+
+4. functional_annotation — curated UniProt features (accession Q9IH62) for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Given the evidence (if any) and the current pool, decide the updates: add / modify (rerank) / delete (reject) / re-evaluate candidates, and give your reasoning. Do NOT output a STOP decision in this step. Weigh each tool's evidence by how close its measured dimension is to the REWARD phenotype: a tool whose dimension differs from the reward (or trades off against it) must not be followed blindly.
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  N411Q  confidence=0.450  rank=1
+  E509Q  confidence=0.350  rank=2
+  Y511F  confidence=0.300  rank=3
+  D512G  confidence=0.300  rank=4
+  N427Q  confidence=0.300  rank=5
+  N459Q  confidence=0.280  rank=6
+  Q530R  confidence=0.280  rank=7
+  K521R  confidence=0.250  rank=8
+  R519K  confidence=0.220  rank=9
+  K526R  confidence=0.200  rank=10
+BT evidence so far (before this round):
+  (no evidence collected before this round)
+Evidence obtained this round:
+  E00001 evolution_msa(N411Q): z=0.000, app=0.57
+  E00002 evolution_msa(E509Q): z=0.000, app=0.33
+  E00003 evolution_msa(Y511F): z=0.200, app=0.24
+  E00004 evolution_msa(D512G): z=0.000, app=0.24
+  E00005 evolution_msa(N427Q): z=0.000, app=0.48
+  E00006 evolution_msa(N459Q): z=0.000, app=0.38
+  E00007 evolution_msa(Q530R): z=0.000, app=0.10
+  E00008 evolution_msa(K521R): z=0.000, app=0.14
+  E00009 evolution_msa(R519K): z=0.000, app=0.24
+  E00010 evolution_msa(K526R): z=0.000, app=0.14
+  E00011 sequence_plm(N411Q): z=0.321, app=0.90
+  E00012 sequence_plm(E509Q): z=0.711, app=0.90
+  E00013 sequence_plm(Y511F): z=0.910, app=0.90
+  E00014 sequence_plm(D512G): z=1.000, app=0.90
+  E00015 sequence_plm(N427Q): z=0.586, app=0.90
+  E00016 sequence_plm(N459Q): z=0.450, app=0.90
+  E00017 sequence_plm(Q530R): z=0.855, app=0.90
+  E00018 sequence_plm(K521R): z=0.932, app=0.90
+  E00019 sequence_plm(R519K): z=1.000, app=0.90
+  E00020 sequence_plm(K526R): z=0.534, app=0.90
+  E00021 functional_annotation(N411Q): z=0.500, app=0.60
+  E00022 functional_annotation(E509Q): z=0.500, app=0.60
+  E00023 functional_annotation(Y511F): z=0.500, app=0.60
+  E00024 functional_annotation(D512G): z=0.500, app=0.60
+  E00025 functional_annotation(N427Q): z=0.500, app=0.60
+  E00026 functional_annotation(N459Q): z=0.500, app=0.60
+  E00027 functional_annotation(Q530R): z=0.500, app=0.60
+  E00028 functional_annotation(K521R): z=0.500, app=0.60
+  E00029 functional_annotation(R519K): z=0.500, app=0.60
+  E00030 functional_annotation(K526R): z=0.500, app=0.60
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+</WORKING_MEMORY>
+
+<NEW_EVIDENCE>
+[
+  {
+    "candidate": "N411Q",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.21,
+      "local": 0.571,
+      "reason": "MSA depth 21, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.571,
+      "reason": "alignment coverage 12/21 homologs"
+    },
+    "interpretation": "mutant frequency of Q at position 411 = 0.0000 among 12 homologs; conservation entropy 2.023 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00001",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E509Q",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.21,
+      "local": 0.333,
+      "reason": "MSA depth 21, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.333,
+      "reason": "alignment coverage 7/21 homologs"
+    },
+    "interpretation": "mutant frequency of Q at position 509 = 0.0000 among 7 homologs; conservation entropy 1.550 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00002",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Y511F",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.2,
+      "normalized": 0.2,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.21,
+      "local": 0.238,
+      "reason": "MSA depth 21, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.238,
+      "reason": "alignment coverage 5/21 homologs"
+    },
+    "interpretation": "mutant frequency of F at position 511 = 0.2000 among 5 homologs; conservation entropy 1.332 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00003",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "D512G",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.21,
+      "local": 0.238,
+      "reason": "MSA depth 21, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.238,
+      "reason": "alignment coverage 5/21 homologs"
+    },
+    "interpretation": "mutant frequency of G at position 512 = 0.0000 among 5 homologs; conservation entropy 1.332 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00004",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N427Q",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.21,
+      "local": 0.476,
+      "reason": "MSA depth 21, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.476,
+      "reason": "alignment coverage 10/21 homologs"
+    },
+    "interpretation": "mutant frequency of Q at position 427 = 0.0000 among 10 homologs; conservation entropy 1.887 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00005",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N459Q",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.21,
+      "local": 0.381,
+      "reason": "MSA depth 21, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.381,
+      "reason": "alignment coverage 8/21 homologs"
+    },
+    "interpretation": "mutant frequency of Q at position 459 = 0.0000 among 8 homologs; conservation entropy 1.733 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00006",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Q530R",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.21,
+      "local": 0.095,
+      "reason": "MSA depth 21, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.095,
+      "reason": "alignment coverage 2/21 homologs"
+    },
+    "interpretation": "mutant frequency of R at position 530 = 0.0000 among 2 homologs; conservation entropy -0.000 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00007",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "K521R",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.21,
+      "local": 0.143,
+      "reason": "MSA depth 21, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.143,
+      "reason": "alignment coverage 3/21 homologs"
+    },
+    "interpretation": "mutant frequency of R at position 521 = 0.0000 among 3 homologs; conservation entropy -0.000 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00008",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R519K",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.21,
+      "local": 0.238,
+      "reason": "MSA depth 21, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.238,
+      "reason": "alignment coverage 5/21 homologs"
+    },
+    "interpretation": "mutant frequency of K at position 519 = 0.0000 among 5 homologs; conservation entropy 1.332 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00009",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "K526R",
+    "tool": "evolution_msa",
+    "tool_version": "mmseqs2_swissprot_v1",
+    "score": {
+      "raw": 0.0,
+      "normalized": 0.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.21,
+      "local": 0.143,
+      "reason": "MSA depth 21, Neff 17.0 (Swiss-Prot)"
+    },
+    "applicability": {
+      "value": 0.143,
+      "reason": "alignment coverage 3/21 homologs"
+    },
+    "interpretation": "mutant frequency of R at position 526 = 0.0000 among 3 homologs; conservation entropy -0.000 (lower = more conserved)",
+    "limitations": [
+      "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+      "evolutionary tolerance does not equal the requested target phenotype"
+    ],
+    "evidence_id": "E00010",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N411Q",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.3213,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00011",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E509Q",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.7106,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00012",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Y511F",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.9103,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00013",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "D512G",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 1.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00014",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N427Q",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.5857,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00015",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N459Q",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.4498,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00016",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Q530R",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.8546,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00017",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "K521R",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.9319,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00018",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R519K",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 1.0,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00019",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "K526R",
+    "tool": "sequence_plm",
+    "tool_version": "esm1v_ensemble_runtime_v1",
+    "score": {
+      "raw": null,
+      "normalized": 0.534,
+      "percentile": null,
+      "direction": "higher_is_more_supportive"
+    },
+    "reliability": {
+      "global": 0.55,
+      "local": 0.55,
+      "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+    },
+    "applicability": {
+      "value": 0.9,
+      "reason": "single-AA substitution within a known sequence"
+    },
+    "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+    "limitations": [
+      "sequence-model prior only — does not measure the requested phenotype",
+      "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+    ],
+    "evidence_id": "E00020",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N411Q",
+    "tool": "functional_annotation",
+    "tool_version": "uniprot_gff_v1_Q9IH62",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.9,
+      "local": 0.8,
+      "reason": "curated UniProt feature table"
+    },
+    "applicability": {
+      "value": 0.6,
+      "reason": "mutation lies in an annotated functional site"
+    },
+    "interpretation": "UniProt Q9IH62 position 411: features ['Beta strand', 'Chain', 'Disulfide bond', 'Region', 'Topological domain']; containing domains: Chain:1-602 (Glycoprotein G); Topological domain:71-602 (Virion surface); Region:177-602 (Head); Disulfide bond:189-601 (Disulfide bond)",
+    "limitations": [
+      "derived from the UniProt feature table — no per-position effect prediction"
+    ],
+    "evidence_id": "E00021",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "E509Q",
+    "tool": "functional_annotation",
+    "tool_version": "uniprot_gff_v1_Q9IH62",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.9,
+      "local": 0.8,
+      "reason": "curated UniProt feature table"
+    },
+    "applicability": {
+      "value": 0.6,
+      "reason": "mutation lies in an annotated functional site"
+    },
+    "interpretation": "UniProt Q9IH62 position 509: features ['Chain', 'Disulfide bond', 'Region', 'Topological domain']; containing domains: Chain:1-602 (Glycoprotein G); Topological domain:71-602 (Virion surface); Region:177-602 (Head); Disulfide bond:189-601 (Disulfide bond)",
+    "limitations": [
+      "derived from the UniProt feature table — no per-position effect prediction"
+    ],
+    "evidence_id": "E00022",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Y511F",
+    "tool": "functional_annotation",
+    "tool_version": "uniprot_gff_v1_Q9IH62",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.9,
+      "local": 0.8,
+      "reason": "curated UniProt feature table"
+    },
+    "applicability": {
+      "value": 0.6,
+      "reason": "mutation lies in an annotated functional site"
+    },
+    "interpretation": "UniProt Q9IH62 position 511: features ['Beta strand', 'Chain', 'Disulfide bond', 'Region', 'Topological domain']; containing domains: Chain:1-602 (Glycoprotein G); Topological domain:71-602 (Virion surface); Region:177-602 (Head); Disulfide bond:189-601 (Disulfide bond)",
+    "limitations": [
+      "derived from the UniProt feature table — no per-position effect prediction"
+    ],
+    "evidence_id": "E00023",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "D512G",
+    "tool": "functional_annotation",
+    "tool_version": "uniprot_gff_v1_Q9IH62",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.9,
+      "local": 0.8,
+      "reason": "curated UniProt feature table"
+    },
+    "applicability": {
+      "value": 0.6,
+      "reason": "mutation lies in an annotated functional site"
+    },
+    "interpretation": "UniProt Q9IH62 position 512: features ['Beta strand', 'Chain', 'Disulfide bond', 'Region', 'Topological domain']; containing domains: Chain:1-602 (Glycoprotein G); Topological domain:71-602 (Virion surface); Region:177-602 (Head); Disulfide bond:189-601 (Disulfide bond)",
+    "limitations": [
+      "derived from the UniProt feature table — no per-position effect prediction"
+    ],
+    "evidence_id": "E00024",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N427Q",
+    "tool": "functional_annotation",
+    "tool_version": "uniprot_gff_v1_Q9IH62",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.9,
+      "local": 0.8,
+      "reason": "curated UniProt feature table"
+    },
+    "applicability": {
+      "value": 0.6,
+      "reason": "mutation lies in an annotated functional site"
+    },
+    "interpretation": "UniProt Q9IH62 position 427: features ['Beta strand', 'Chain', 'Disulfide bond', 'Region', 'Topological domain']; containing domains: Chain:1-602 (Glycoprotein G); Topological domain:71-602 (Virion surface); Region:177-602 (Head); Disulfide bond:189-601 (Disulfide bond)",
+    "limitations": [
+      "derived from the UniProt feature table — no per-position effect prediction"
+    ],
+    "evidence_id": "E00025",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "N459Q",
+    "tool": "functional_annotation",
+    "tool_version": "uniprot_gff_v1_Q9IH62",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.9,
+      "local": 0.8,
+      "reason": "curated UniProt feature table"
+    },
+    "applicability": {
+      "value": 0.6,
+      "reason": "mutation lies in an annotated functional site"
+    },
+    "interpretation": "UniProt Q9IH62 position 459: features ['Chain', 'Disulfide bond', 'Region', 'Topological domain']; containing domains: Chain:1-602 (Glycoprotein G); Topological domain:71-602 (Virion surface); Region:177-602 (Head); Disulfide bond:189-601 (Disulfide bond)",
+    "limitations": [
+      "derived from the UniProt feature table — no per-position effect prediction"
+    ],
+    "evidence_id": "E00026",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "Q530R",
+    "tool": "functional_annotation",
+    "tool_version": "uniprot_gff_v1_Q9IH62",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.9,
+      "local": 0.8,
+      "reason": "curated UniProt feature table"
+    },
+    "applicability": {
+      "value": 0.6,
+      "reason": "mutation lies in an annotated functional site"
+    },
+    "interpretation": "UniProt Q9IH62 position 530: features ['Beta strand', 'Chain', 'Disulfide bond', 'Region', 'Topological domain']; containing domains: Chain:1-602 (Glycoprotein G); Topological domain:71-602 (Virion surface); Region:177-602 (Head); Disulfide bond:189-601 (Disulfide bond)",
+    "limitations": [
+      "derived from the UniProt feature table — no per-position effect prediction"
+    ],
+    "evidence_id": "E00027",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "K521R",
+    "tool": "functional_annotation",
+    "tool_version": "uniprot_gff_v1_Q9IH62",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.9,
+      "local": 0.8,
+      "reason": "curated UniProt feature table"
+    },
+    "applicability": {
+      "value": 0.6,
+      "reason": "mutation lies in an annotated functional site"
+    },
+    "interpretation": "UniProt Q9IH62 position 521: features ['Beta strand', 'Chain', 'Disulfide bond', 'Region', 'Topological domain']; containing domains: Chain:1-602 (Glycoprotein G); Topological domain:71-602 (Virion surface); Region:177-602 (Head); Disulfide bond:189-601 (Disulfide bond)",
+    "limitations": [
+      "derived from the UniProt feature table — no per-position effect prediction"
+    ],
+    "evidence_id": "E00028",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "R519K",
+    "tool": "functional_annotation",
+    "tool_version": "uniprot_gff_v1_Q9IH62",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.9,
+      "local": 0.8,
+      "reason": "curated UniProt feature table"
+    },
+    "applicability": {
+      "value": 0.6,
+      "reason": "mutation lies in an annotated functional site"
+    },
+    "interpretation": "UniProt Q9IH62 position 519: features ['Chain', 'Disulfide bond', 'Region', 'Topological domain', 'Turn']; containing domains: Chain:1-602 (Glycoprotein G); Topological domain:71-602 (Virion surface); Region:177-602 (Head); Disulfide bond:189-601 (Disulfide bond)",
+    "limitations": [
+      "derived from the UniProt feature table — no per-position effect prediction"
+    ],
+    "evidence_id": "E00029",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  },
+  {
+    "candidate": "K526R",
+    "tool": "functional_annotation",
+    "tool_version": "uniprot_gff_v1_Q9IH62",
+    "score": {
+      "raw": null,
+      "normalized": 0.5,
+      "percentile": null,
+      "direction": "contextual"
+    },
+    "reliability": {
+      "global": 0.9,
+      "local": 0.8,
+      "reason": "curated UniProt feature table"
+    },
+    "applicability": {
+      "value": 0.6,
+      "reason": "mutation lies in an annotated functional site"
+    },
+    "interpretation": "UniProt Q9IH62 position 526: features ['Beta strand', 'Chain', 'Disulfide bond', 'Region', 'Topological domain']; containing domains: Chain:1-602 (Glycoprotein G); Topological domain:71-602 (Virion surface); Region:177-602 (Head); Disulfide bond:189-601 (Disulfide bond)",
+    "limitations": [
+      "derived from the UniProt feature table — no per-position effect prediction"
+    ],
+    "evidence_id": "E00030",
+    "run_id": "glm-5.3__nipah_cell_entry__P0__S2",
+    "round": 2,
+    "input": {
+      "candidate_ids": [
+        "N411Q",
+        "E509Q",
+        "Y511F",
+        "D512G",
+        "N427Q",
+        "N459Q",
+        "Q530R",
+        "K521R",
+        "R519K",
+        "K526R"
+      ],
+      "positions": null
+    }
+  }
+]
+</NEW_EVIDENCE>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "candidate_updates": [
+    {"mutation": "<WT><POS><MUT>", "action": "add | retain | rerank | reject | reconsider",
+     "current_confidence": 0.78,
+     "supporting_evidence_ids": ["E00003"],
+     "contradicting_evidence_ids": ["E00021"],
+     "origin": "initial_pool | new_hypothesis_from_evidence",
+     "trigger_evidence_ids": ["E00017"],
+     "decision_rationale": "<= 2 sentences"}
+  ],
+  "active_candidate_ranking": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.78}
+  ],
+  "evidence_assessment": [
+    {"evidence_id": "E00017", "candidate": "<WT><POS><MUT>",
+     "llm_reliability_assessment": "high | medium | low",
+     "effect_on_candidate": "support | weak_against | against",
+     "reason": "<= 2 sentences"}
+  ],
+  "thinking": "<= 3 sentences — the reasoning behind THIS round's changes",
+  "doubts": "<= 1 sentence — remaining uncertainties"
+}
+Rules: if you add/reconsider, give decision_rationale; every supporting/
+contradicting evidence id referenced in updates must appear in evidence_assessment.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

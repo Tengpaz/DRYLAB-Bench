@@ -1,0 +1,252 @@
+{
+  "unit_id": "kimi-k3__hiv_tat_replication__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "kimi-k3",
+  "scenario_id": "hiv_tat_replication",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "Q54R",
+        "confidence": 0.52,
+        "evidence_refs": [],
+        "decision_summary": "Q54 lies within the basic ARM/TAR-binding region, and Arg substitution increases positive charge without deleting a conserved Arg/Lys. This is the most plausible direct route to stronger TAR engagement and Tat transactivation, though specificity risk remains."
+      },
+      {
+        "rank": 2,
+        "mutation": "Q60R",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "Q60 is immediately adjacent to the ARM in the Gln-rich auxiliary region, so added Arg may enhance electrostatic interactions with RNA or cofactors. It is slightly less central than Q54R and therefore ranked lower."
+      },
+      {
+        "rank": 3,
+        "mutation": "G48R",
+        "confidence": 0.39,
+        "evidence_refs": [],
+        "decision_summary": "G48 directly precedes the R49-start basic domain, and G48R could extend the cationic RNA-binding surface. Proximity to the ARM creates higher risk of altering TAR specificity, so confidence is lower."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Self-iteration reached a stable Top-3 under LLM-only constraints with no additional evidence tools to consult."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N24K": {
+      "candidate_id": "N24K",
+      "mutation": "N24K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Adds a basic residue adjacent to the cysteine-rich activation domain, potentially enhancing interaction with TAR/cyclin T1. Conservative physicochemical change unlikely to disrupt folding."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "N24 is embedded in/around the essential cysteine-rich activation domain (roughly 22-37) required for Cyclin T1/P-TEFb recruitment; charge insertion here has elevated loss-of-function risk."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "N24 is embedded in/around the essential cysteine-rich activation domain (roughly 22-37) required for Cyclin T1/P-TEFb recruitment; charge insertion here has elevated loss-of-function risk.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "Q54R": {
+      "candidate_id": "Q54R",
+      "mutation": "Q54R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Converts glutamine to arginine inside the arginine-rich RNA-binding domain, strengthening TAR RNA binding and transactivation. Basic-domain charge enrichment is a plausible gain-of-function route."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Q54 lies inside the basic/ARM TAR-binding region (49-57); replacing Gln with Arg increases local positive charge and may strengthen TAR RNA binding and nuclear/nucleolar accumulation without removing a critical Arg or acetylatable Lys."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q60R": {
+      "candidate_id": "Q60R",
+      "mutation": "Q60R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.44,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "Q60 lies just C-terminal to the core/basic region; adding positive charge may improve nucleolar localization and TAR affinity. Low structural risk."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.44,
+          "rationale": "Position 60 is just C-terminal to the ARM in the Gln-rich auxiliary region; adding Arg may modestly enhance electrostatics/transactivation while being less likely than core/basic-domain changes to abolish TAR specificity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A42K": {
+      "candidate_id": "A42K",
+      "mutation": "A42K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.36,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "A42 sits near the core domain (K41) that engages P-TEFb; adding lysine could enhance cofactor interaction surface. Moderate risk of disrupting the core fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.36,
+          "rationale": "A42 sits in the core region near functionally important K41; adding Lys could help cofactor interaction but carries more folding/activity risk than basic-region charge additions."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S68K": {
+      "candidate_id": "S68K",
+      "mutation": "S68K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Surface serine in the C-terminal auxiliary region; substitution to lysine adds positive charge and may aid RNA/cofactor interactions with minimal structural penalty."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.3,
+          "rationale": "S68 is in the auxiliary Gln/Ser-rich region where charge addition is plausibly tolerated, but it is farther from the core transactivation interface, so expected effect is smaller."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T40K": {
+      "candidate_id": "T40K",
+      "mutation": "T40K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.28,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.28,
+          "rationale": "T40 precedes the core domain lysine; a lysine substitution may strengthen the P-TEFb binding interface. Higher uncertainty due to proximity to critical core residues."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.18,
+          "rationale": "T40 borders the conserved core sequence and K41 regulatory site; substituting Lys is more likely to disturb core packing/acetylation balance than to selectively increase transactivation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "T40 borders the conserved core sequence and K41 regulatory site; substituting Lys is more likely to disturb core packing/acetylation balance than to selectively increase transactivation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G48R": {
+      "candidate_id": "G48R",
+      "mutation": "G48R",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.4,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "G48 immediately precedes the R49-start basic ARM; converting Gly to Arg could extend the cationic RNA-binding surface and improve TAR engagement, though proximity to the ARM adds specificity risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "Q54R": null,
+    "Q60R": null,
+    "G48R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 7,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 6,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,116 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the HIV-1 Tat protein (86 aa).
+
+GOAL: Maximize virus replication efficiency via Tat-mediated transactivation.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+MEPVDPRLEPWKHPGSQPKTACTNCYCKKCCFHCQVCFMTKALGISYGRKKRRQRRRAHQNSQTHQASLSKQPTSQSRGDPTGPKE
+```
+IMPORTANT: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  Q54R  confidence=0.870  rank=1
+  A58R  confidence=0.850  rank=2
+  D80K  confidence=0.700  rank=3
+  K51R  confidence=0.600  rank=4
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  - drop E2R (round 1): E2 participates in the acidic activation domain; reversal to Arg would likely disrupt recruitment of cyclin T1/P-TEFb.
+  - drop E9R (round 1): E9 is in the same acidic cluster; mutation to Arg is incompatible with required activation domain interactions.
+  - drop D5R (round 1): D5 is another acidic determinant; neutralizing/reversing its charge is more likely to impair than enhance transactivation.
+  - drop T20R (round 1): T20 lies near the cysteine-rich domain boundary; no clear TAR/P-TEFb interaction benefit and possible structural perturbation.
+  - drop L43R (round 1): L43 is a buried hydrophobic core residue; an Arg is likely destabilizing and would reduce viability/activity.
+  - add K51R (round 1): K51 is already basic in the ARM; conservative Lys->Arg may add bidentate hydrogen-bonding to TAR while preserving overall charge.
+  - add H59R (round 1): H59 is immediately after A58; replacing with Arg may extend the basic C-flank of the ARM with moderate risk.
+  - add Q60R (round 1): Q60 is adjacent to the ARM; adding Arg could improve RNA binding, although more speculative than A58/H59.
+Changes this round:
+  - Q54R retain: Q54 sits within the basic ARM; Arg adds bidentate hydrogen-bonding potential and increases positive charge, likely improving TAR RNA binding with minimal structural risk.
+  - A58R retain: Extends the basic patch immediately C-terminal to the ARM, potentially enhancing TAR affinity while preserving the overall fold.
+  - D80K retain: Reverses a negative charge in the regulatory C-terminal domain; may improve protein stability or P-TEFb recruitment, though effects are less certain than ARM mutations.
+  - K51R rerank: Conservative Lys→Arg in the ARM may modestly improve H-bonding capacity, but the region is already highly basic, making it lower priority than Q54R or A58R.
+  - N61R reject: N61 lies outside the minimal RNA-binding domain; adding Arg in the flexible linker risks structural perturbation with no clear transactivation gain.
+  - S62R reject: S62 is in a non-conserved region; Arg substitution is unlikely to improve TAR binding and may alter local conformation.
+  - H59R reject: Immediately after A58, but adding another Arg may cause over-positive steric strain without measurable benefit over A58R alone.
+  - Q60R reject: Q60 is adjacent to the ARM; the marginal gain from adding Arg is outweighed by the risk of disrupting a conserved polar contact.
+Remaining doubts: Without external evidence, the structural impact of D80K is uncertain, and the benefit of Q54R over a purely neutral effect cannot be experimentally validated here.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

@@ -1,0 +1,198 @@
+{
+  "unit_id": "gpt-6-astra__cbs_lof__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gpt-6-astra",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.96,
+        "evidence_refs": [],
+        "decision_summary": "The supplied sequence confirms K119; alanine removes the lysine amino group needed for normal covalent PLP linkage. This is the strongest mechanistic prediction of catalytic loss, although complete abolition and structural integrity remain unverified."
+      },
+      {
+        "rank": 2,
+        "mutation": "K119E",
+        "confidence": 0.94,
+        "evidence_refs": [],
+        "decision_summary": "The supplied sequence confirms K119; glutamate removes the catalytic amino group and reverses local charge. Severe catalytic impairment is expected, with additional uncertainty about local structural disruption."
+      },
+      {
+        "rank": 3,
+        "mutation": "K119R",
+        "confidence": 0.88,
+        "evidence_refs": [],
+        "decision_summary": "The supplied sequence confirms K119; arginine preserves positive charge but cannot provide the normal lysine–PLP Schiff-base linkage. It offers a relatively conservative route to catalytic disruption, though residual activity cannot be excluded."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The direct catalytic-site candidates remain strongest after self-review, and additional unsupported iteration would not resolve their shared mechanistic uncertainty."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.96,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.98,
+          "rationale": "K119 is the catalytic lysine responsible for the internal aldimine linkage to pyridoxal phosphate; alanine removes that essential chemical functionality. This is a strong candidate for abolishing activity without requiring global protein unfolding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.96,
+          "rationale": "K119 is verified in the supplied sequence and is the expected PLP-binding catalytic lysine. Alanine removes its Schiff-base-forming amino group without introducing a bulky or charged side chain, making this the strongest mechanistic loss-of-function candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119E": {
+      "candidate_id": "K119E",
+      "mutation": "K119E",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.94,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.97,
+          "rationale": "Replacing the catalytic lysine with glutamate removes its PLP-linking amino group and reverses its local charge. Near-complete loss of catalysis is expected, although structural preservation is less certain than for K119A."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.94,
+          "rationale": "The verified K119 substitution removes the catalytic amino group and reverses local charge, strongly predicting impaired PLP-dependent catalysis. Confidence is slightly lower than for K119A because effects on local structure and protein integrity are less predictable."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119R": {
+      "candidate_id": "K119R",
+      "mutation": "K119R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.88,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.94,
+          "rationale": "Arginine retains a basic side chain but cannot perform the normal lysine-dependent PLP aldimine chemistry. This substitution could preserve some local structural interactions while abolishing or severely reducing catalysis."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.88,
+          "rationale": "The verified K119 substitution preserves positive charge but replaces the lysine amino group with a guanidinium group that cannot perform the normal PLP-linkage chemistry. Retained electrostatic interactions could permit residual cofactor-supported activity, so complete abolition is less certain."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C52A": {
+      "candidate_id": "C52A",
+      "mutation": "C52A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.74,
+          "rationale": "C52 is a heme-ligating residue, and replacing it with alanine should disrupt heme coordination and its coupling to catalytic function. Complete abolition is less certain than for direct catalytic-lysine substitutions, and protein stability could also be affected."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "C52 is verified in the supplied sequence and is an expected heme ligand, making its removal a plausible disruptive change. Heme disruption is an indirect route to catalytic loss and may affect folding or stability rather than reliably abolishing activity in otherwise intact protein."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H65R": {
+      "candidate_id": "H65R",
+      "mutation": "H65R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "H65 contributes to heme coordination; replacing its imidazole with arginine should strongly perturb that environment. Severe activity loss is plausible, but residual activity and effects on folding remain uncertain."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "H65 is verified in the supplied sequence and is an expected heme ligand whose replacement should alter heme coordination. This mechanism is less directly tied to complete catalytic abolition than removal of the PLP-binding lysine, and residual activity remains plausible."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K119A": null,
+    "K119E": null,
+    "K119R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 5,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

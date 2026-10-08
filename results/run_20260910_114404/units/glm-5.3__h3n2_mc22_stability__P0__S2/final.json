@@ -1,0 +1,602 @@
+{
+  "unit_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "G134T",
+        "confidence": 0.58,
+        "evidence_refs": [
+          "E00001",
+          "E00004",
+          "E00007",
+          "E00010"
+        ],
+        "decision_summary": "G134T shows positive structure-compatibility (z=0.631) with neutral evolutionary (z=0.006) and PLM (z=0.004) signals, making it the best-supported stabilizing candidate without viability risk."
+      },
+      {
+        "rank": 2,
+        "mutation": "N170K",
+        "confidence": 0.35,
+        "evidence_refs": [
+          "E00003",
+          "E00006",
+          "E00009",
+          "E00012"
+        ],
+        "decision_summary": "N170K retains N170D's favorable PLM signal (z=0.065) while replacing the compatibility-penalized aspartate with lysine, potentially adding a stabilizing salt bridge."
+      },
+      {
+        "rank": 3,
+        "mutation": "S145A",
+        "confidence": 0.33,
+        "evidence_refs": [
+          "E00002",
+          "E00005",
+          "E00008",
+          "E00011"
+        ],
+        "decision_summary": "S145A is a conservative alternative at the structurally strong S145 site (z=0.910), avoiding proline's local strain signal (PLM z=0.031)."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Tool-call and round budgets are exhausted; the Top-3 is stable and no further evidence can be gathered."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "budget_exhausted",
+    "detail": "round limit reached"
+  },
+  "candidate_registry": {
+    "G134T": {
+      "candidate_id": "G134T",
+      "mutation": "G134T",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.58,
+      "evidence_refs": [
+        "E00001",
+        "E00004",
+        "E00007",
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Creates a novel N133-G-T N-linked glycosylation motif in HA1 near the head/stem interface; added glycans are known to stabilize HA and extend environmental persistence."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Threonine is observed at low frequency among homologs (evolutionary tolerance), but structure and sequence models are only mildly supportive. Retained but downgraded relative to S145P."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.58,
+          "rationale": "Solid structural compatibility (0.631) and mild positive PLM/evolution signals; retained but demoted below S145P. Thr adds a beta-branch that can stabilize loops."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "Consistent positive evidence from structure, MSA, and PLM, but smaller effect sizes than S145P; kept as strong second candidate."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.58,
+          "rationale": "Best all-around profile: neutral evolutionarily, mild PLM plausibility, and strong structure compatibility (z=0.631) on the experimental backbone. Functional annotation applicability is low, so its flat signal is not informative."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N170K": {
+      "candidate_id": "N170K",
+      "mutation": "N170K",
+      "first_seen_round": 3,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "As an alternative to N170D, lysine introduces a positive charge that may form stabilizing salt bridges while avoiding the aspartate compatibility penalty; needs evaluation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S145A": {
+      "candidate_id": "S145A",
+      "mutation": "S145A",
+      "first_seen_round": 3,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 3,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "A conservative fallback at the strong S145 position in case proline's PLM plausibility (z=0.031) reflects local strain; alanine tests whether the site itself is stabilizing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 5
+  },
+  "bundle_evidence": {
+    "G134T": 25.7,
+    "N170K": null,
+    "S145A": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "G134T",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.005917,
+        "normalized": 0.005917,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.994,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.994,
+        "reason": "alignment coverage 169/170 homologs"
+      },
+      "interpretation": "mutant frequency of T at position 134 = 0.0059 among 169 homologs; conservation entropy 1.029 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G134T",
+          "S145P",
+          "N170D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S145P",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.976,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.976,
+        "reason": "alignment coverage 166/170 homologs"
+      },
+      "interpretation": "mutant frequency of P at position 145 = 0.0000 among 166 homologs; conservation entropy 1.798 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G134T",
+          "S145P",
+          "N170D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N170D",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.994,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.994,
+        "reason": "alignment coverage 169/170 homologs"
+      },
+      "interpretation": "mutant frequency of D at position 170 = 0.0000 among 169 homologs; conservation entropy 1.518 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G134T",
+          "S145P",
+          "N170D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G134T",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0038,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G134T",
+          "S145P",
+          "N170D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S145P",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0308,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G134T",
+          "S145P",
+          "N170D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N170D",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0649,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G134T",
+          "S145P",
+          "N170D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G134T",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.6349,
+        "normalized": 0.630786,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.691,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 30.88"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.6349)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G134T",
+          "S145P",
+          "N170D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S145P",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.316,
+        "normalized": 0.909532,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.55,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 44.98"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=0.316)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G134T",
+          "S145P",
+          "N170D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N170D",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -5.3088,
+        "normalized": 0.121951,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.641,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 35.87"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-5.3088)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "G134T",
+          "S145P",
+          "N170D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G134T",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G134T",
+          "S145P",
+          "N170D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S145P",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G134T",
+          "S145P",
+          "N170D"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N170D",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "G134T",
+          "S145P",
+          "N170D"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 3,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 9,
+    "c0_size": 1,
+    "final_novelty": 0.6666666666666666,
+    "tool_calls_used": 4,
+    "rounds_used": 5,
+    "budget_exhausted": true
+  }
+}

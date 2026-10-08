@@ -1,0 +1,749 @@
+{
+  "unit_id": "glm-5.3__zikv_viral_growth__P0__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "zikv_viral_growth",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "M34V",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "Conservative Met-to-Val at a verified position with the strongest combined evidence: neutral-to-positive ESM-1v plausibility (1.0) and the only positive ProteinMPNN log-probability delta (+0.59) on the experimental 6CO8 pre-fusion E backbone. Evolutionary and annotation evidence is limited, so this remains a moderate-confidence pick."
+      },
+      {
+        "rank": 2,
+        "mutation": "Q77R",
+        "confidence": 0.65,
+        "evidence_refs": [],
+        "decision_summary": "PLM-neutral (1.0) with solid structure compatibility (0.79) at a verified Q77 site; a charge-gaining substitution at a surface-tolerant position is a plausible fitness-compatible change. No direct fitness assay supports it."
+      },
+      {
+        "rank": 3,
+        "mutation": "T233A",
+        "confidence": 0.58,
+        "evidence_refs": [],
+        "decision_summary": "Strong PLM plausibility (0.945) and near-par structure score (0.798) for a conservative Thr-to-Ala change in domain III at a verified T233. Kept ahead of K118R (0.809/0.753) on combined evidence."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Tool call budget (4) is exhausted; the Top-3 ranking is stable and no direct fitness predictor is available for further discrimination."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "D67G": {
+      "candidate_id": "D67G",
+      "mutation": "D67G",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.4,
+      "evidence_refs": [
+        "E00001",
+        "E00003",
+        "E00005",
+        "E00011"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Solvent-exposed domain II position; charge removal is sometimes seen in cell-culture adaptation of flaviviruses."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "Direct sequence check shows position 67 is I (…Y-C-Y-E-A-S-I-S-D…), not D, so D67G is not a valid substitution for this sequence. The MSA also shows zero homolog support at this position."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Direct sequence check shows position 67 is I (…Y-C-Y-E-A-S-I-S-D…), not D, so D67G is not a valid substitution for this sequence. The MSA also shows zero homolog support at this position.",
+        "evidence_refs": [
+          "E00001",
+          "E00003"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "K251R": {
+      "candidate_id": "K251R",
+      "mutation": "K251R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00002",
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Conservative charge-preserving substitution in the flexible region between domains; expected neutral-to-positive with low viability risk."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "Position 251 in the given sequence is A (…E-A-L-V-E-F-K-D-A-H-A-K-R-Q…), not K, so the mutation is invalid. Homolog frequency for R at 251 is also zero."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 251 in the given sequence is A (…E-A-L-V-E-F-K-D-A-H-A-K-R-Q…), not K, so the mutation is invalid. Homolog frequency for R at 251 is also zero.",
+        "evidence_refs": [
+          "E00002",
+          "E00004"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "M34V": 94.286,
+    "Q77R": 86.276,
+    "T233A": 84.727
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "D67G",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.74,
+        "local": 1.0,
+        "reason": "MSA depth 74, Neff 24.33 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 74/74 homologs"
+      },
+      "interpretation": "mutant frequency of G at position 67 = 0.0000 among 74 homologs; conservation entropy 1.721 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "K251R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K251R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.74,
+        "local": 1.0,
+        "reason": "MSA depth 74, Neff 24.33 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 74/74 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 251 = 0.0000 among 74 homologs; conservation entropy 0.656 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "K251R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D67G",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "K251R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K251R",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "K251R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D67G",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "M34V",
+          "Q77R",
+          "K118R",
+          "K123R",
+          "T233A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M34V",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "M34V",
+          "Q77R",
+          "K118R",
+          "K123R",
+          "T233A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q77R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "M34V",
+          "Q77R",
+          "K118R",
+          "K123R",
+          "T233A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K118R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.809,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "M34V",
+          "Q77R",
+          "K118R",
+          "K123R",
+          "T233A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K123R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.7515,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "M34V",
+          "Q77R",
+          "K118R",
+          "K123R",
+          "T233A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T233A",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.9445,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "M34V",
+          "Q77R",
+          "K118R",
+          "K123R",
+          "T233A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D67G",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.8144,
+        "normalized": 0.72233,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.509,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 49.1"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=-0.8144)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "M34V",
+          "Q77R",
+          "K118R",
+          "K123R",
+          "T233A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "M34V",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.5929,
+        "normalized": 0.91364,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.486,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 51.38"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=0.5929)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "M34V",
+          "Q77R",
+          "K118R",
+          "K123R",
+          "T233A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q77R",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.3807,
+        "normalized": 0.792585,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.522,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 47.76"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=-0.3807)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "M34V",
+          "Q77R",
+          "K118R",
+          "K123R",
+          "T233A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K118R",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.6289,
+        "normalized": 0.75281,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.602,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 39.78"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=-0.6289)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "M34V",
+          "Q77R",
+          "K118R",
+          "K123R",
+          "T233A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K123R",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.5879,
+        "normalized": 0.760484,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.65,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 35.0"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=-0.5879)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "M34V",
+          "Q77R",
+          "K118R",
+          "K123R",
+          "T233A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T233A",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.3544,
+        "normalized": 0.797557,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.968,
+        "local": 0.542,
+        "reason": "PDB 6CO8 at 3.1 A; residue B-factor 45.83"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 6CO8:A (ΔlogP=-0.3544)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "glm-5.3__zikv_viral_growth__P0__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D67G",
+          "M34V",
+          "Q77R",
+          "K118R",
+          "K123R",
+          "T233A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 2,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 12,
+    "c0_size": 2,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 2,
+    "budget_exhausted": true
+  }
+}

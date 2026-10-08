@@ -1,0 +1,276 @@
+{
+  "unit_id": "gpt-5.6-luna__psae_stability_disruption__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gpt-5.6-luna",
+  "scenario_id": "psae_stability_disruption",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "W17P",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "Trp17 is in the N-terminal structured region; replacing it with proline is likely to disrupt backbone geometry and local packing."
+      },
+      {
+        "rank": 2,
+        "mutation": "I33P",
+        "confidence": 0.76,
+        "evidence_refs": [],
+        "decision_summary": "Ile33 lies in the central structured, hydrophobic segment, where proline could introduce a strong backbone kink and destabilize folding."
+      },
+      {
+        "rank": 3,
+        "mutation": "V38P",
+        "confidence": 0.74,
+        "evidence_refs": [],
+        "decision_summary": "Val38 is within the central structured region; proline substitution is plausibly disruptive to local secondary structure and packing."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The top three candidates are internally consistent destabilization hypotheses and additional tool-free iteration is unlikely to improve them."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "W17P": {
+      "candidate_id": "W17P",
+      "mutation": "W17P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Proline at the conserved aromatic position is likely to disrupt local backbone geometry and remove a bulky hydrophobic packing residue. This combination could strongly destabilize the compact PsaE fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "Trp17 is in the N-terminal structured region, where replacement by proline is likely to disrupt backbone geometry and packing. This remains the strongest folding-disruption hypothesis."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y16P": {
+      "candidate_id": "Y16P",
+      "mutation": "Y16P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Replacing an aromatic residue with proline may introduce a backbone kink while eliminating hydrophobic packing. The change is therefore likely to impair folding in this small protein."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "Proline at Tyr16 could disrupt the N-terminal structured region, but its proximity to W17P makes the relative impact less certain. Retain below W17P."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V21D": {
+      "candidate_id": "V21D",
+      "mutation": "V21D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.72,
+          "rationale": "Introducing a charged aspartate at a valine position could be unfavorable if this region contributes to a hydrophobic core. The polarity and charge change may destabilize the folded state."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Introducing an acidic residue at Val21 may disrupt hydrophobic packing, but its effect is less directly predictable than proline-mediated backbone disruption. Retain below the top three."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I33P": {
+      "candidate_id": "I33P",
+      "mutation": "I33P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.76,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.76,
+          "rationale": "Proline substitution at an internal isoleucine is likely to disrupt secondary structure and remove hydrophobic core packing. This is a strong candidate for fold destabilization."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.76,
+          "rationale": "Ile33 lies within the central hydrophobic/structured segment, and proline could introduce a substantial backbone kink. It remains a high-priority destabilization candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "V38P": {
+      "candidate_id": "V38P",
+      "mutation": "V38P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.74,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.74,
+          "rationale": "A proline at this internal valine position may kink the backbone and compromise local secondary structure. Loss of hydrophobic packing further supports a destabilizing effect."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.74,
+          "rationale": "Val38 is part of the central structured region, making proline substitution plausibly disruptive to local secondary structure. It remains in the top tier despite uncertainty about the exact fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F40D": {
+      "candidate_id": "F40D",
+      "mutation": "F40D",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.71,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.71,
+          "rationale": "Replacing phenylalanine with a negatively charged residue removes a bulky hydrophobic side chain and may introduce an unfavorable charge into the protein interior. This could substantially weaken folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.71,
+          "rationale": "Phe40 is likely important for hydrophobic packing, so Asp could be destabilizing, but charge introduction may be position-dependent. Retain as a secondary candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G31P": {
+      "candidate_id": "G31P",
+      "mutation": "G31P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Adding proline at glycine can restrict backbone conformational freedom and disrupt a turn or strand boundary. The effect is context-dependent but potentially destabilizing in this short domain."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Although proline can perturb local structure, replacing glycine may be tolerated or alter flexibility in a non-disruptive way. Retain as the lowest-ranked existing candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L55P": {
+      "candidate_id": "L55P",
+      "mutation": "L55P",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.67,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.67,
+          "rationale": "Proline substitution removes a hydrophobic leucine packing group and may break local secondary structure near the C-terminal region. This could impair formation of the compact fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.67,
+          "rationale": "Leu55 is in the glycine/asparagine-rich C-terminal region, where proline may be less disruptive than in the central structured segment. Keep as a lower-confidence alternative."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "W17P": null,
+    "I33P": null,
+    "V38P": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

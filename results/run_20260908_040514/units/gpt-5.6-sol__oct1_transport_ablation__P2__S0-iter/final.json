@@ -1,0 +1,312 @@
+{
+  "unit_id": "gpt-5.6-sol__oct1_transport_ablation__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gpt-5.6-sol",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "D473N",
+        "confidence": 0.84,
+        "evidence_refs": [],
+        "decision_summary": "Conservative neutralization of a transmembrane acidic residue is likely to disrupt transport energetics while retaining side-chain size and hydrogen-bonding capacity, reducing folding risk."
+      },
+      {
+        "rank": 2,
+        "mutation": "R438A",
+        "confidence": 0.79,
+        "evidence_refs": [],
+        "decision_summary": "Removal of this buried transmembrane positive charge could abolish charge coupling or conformational transitions. Alanine remains helix-compatible, although loss of stabilizing interactions creates some abundance risk."
+      },
+      {
+        "rank": 3,
+        "mutation": "W216A",
+        "confidence": 0.74,
+        "evidence_refs": [],
+        "decision_summary": "Eliminating a bulky aromatic residue in a transmembrane substrate-recognition region is likely to strongly impair transport. Confidence is lower because the packing perturbation may also reduce protein abundance."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The leading candidates cover the strongest conservative charge-neutralization and substrate-site disruption hypotheses, and further unsupported reranking is unlikely to improve selection."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R438A": {
+      "candidate_id": "R438A",
+      "mutation": "R438A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "This transmembrane arginine is a strong candidate for an essential charge-network or gating residue; alanine should disable that function without introducing a new buried charge."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.78,
+          "rationale": "Position 438 is M in the provided sequence, so this mutation violates the required WT-residue numbering."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 438 is M in the provided sequence, so this mutation violates the required WT-residue numbering.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "W216A": {
+      "candidate_id": "W216A",
+      "mutation": "W216A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.74,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "Removing a pore-facing aromatic side chain may abolish substrate coordination while leaving the transmembrane backbone and topology intact."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.74,
+          "rationale": "W216 is verified and lies within a transmembrane segment where loss of a bulky aromatic side chain may disrupt substrate recognition, although alanine creates some packing risk."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.74,
+          "rationale": "W216 lies within a transmembrane segment and its aromatic side chain plausibly contributes to substrate recognition. Alanine substitution is likely to impair transport, although loss of a bulky packing group creates some abundance risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y220A": {
+      "candidate_id": "Y220A",
+      "mutation": "Y220A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "This aromatic residue lies in the same hydrophobic transport-region segment and may contribute to substrate recognition or gating."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.67,
+          "rationale": "Y220 is verified and plausibly lines the same transport pathway, but its proximity to W216 makes the functional interpretation less certain."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Y220A may disrupt an aromatic substrate-contact region near W216, but simultaneous removal of aromaticity and hydroxyl chemistry may modestly threaten local packing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F160A": {
+      "candidate_id": "F160A",
+      "mutation": "F160A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.56,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.66,
+          "rationale": "Substitution of this transmembrane aromatic residue may disrupt the polyspecific substrate-binding cavity without directly destabilizing global folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "F160 is verified, but replacing a deeply embedded aromatic residue with alanine may impair membrane packing and abundance as well as transport."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.56,
+          "rationale": "F160 is transmembrane and could affect transport, but there is weaker mechanistic reason to distinguish a specific substrate-pathway role from generic helix packing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R438K": {
+      "candidate_id": "R438K",
+      "mutation": "R438K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.61,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.61,
+          "rationale": "A lysine substitution preserves positive charge and therefore favors folding, but altered geometry could selectively disrupt an essential intramolecular interaction."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.61,
+          "rationale": "Position 438 is M rather than R in the provided sequence, making this candidate invalid."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Position 438 is M rather than R in the provided sequence, making this candidate invalid.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "Y278A": {
+      "candidate_id": "Y278A",
+      "mutation": "Y278A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.57,
+          "rationale": "This aromatic residue near the end of a transmembrane segment may participate in an intracellular gate, and alanine could uncouple transport while preserving membrane insertion."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.52,
+          "rationale": "Y278 is verified, but the surrounding aromatic-rich segment could be structurally sensitive to an alanine substitution."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.42,
+          "rationale": "Y278 is near the end of a highly hydrophobic segment, where alanine substitution may affect membrane-interface packing without reliably abolishing transport. Its objective alignment is weaker than the charged-cavity candidates."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Y278 is near the end of a highly hydrophobic segment, where alanine substitution may affect membrane-interface packing without reliably abolishing transport. Its objective alignment is weaker than the charged-cavity candidates.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "D356N": {
+      "candidate_id": "D356N",
+      "mutation": "D356N",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.66,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.53,
+          "rationale": "Neutralization of this acidic residue within a transmembrane segment could impair proton-independent charge coupling or conformational gating with limited structural perturbation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "D356 is a verified acidic residue within a hydrophobic transmembrane region; conservative charge neutralization is well aligned with loss of transport while preserving size and folding."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.66,
+          "rationale": "D356N remains a conservative neutralization candidate, but its functional importance is less compelling than that of D473 or R438. It is therefore moved below the strongest pathway-centered hypotheses."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D473N": {
+      "candidate_id": "D473N",
+      "mutation": "D473N",
+      "first_seen_round": 2,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.84,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.84,
+          "rationale": "D473 is an ionizable residue embedded in a transmembrane transport pathway, making neutralization a strong loss-of-transport hypothesis. The conservative size of Asn may preserve packing and abundance better than alanine or charge reversal."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "D473N": null,
+    "R438A": null,
+    "W216A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 4,
+    "c0_size": 7,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,962 @@
+{
+  "unit_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+  "condition": "S2",
+  "model_id": "glm-5.3",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K264N",
+        "confidence": 0.65,
+        "evidence_refs": [
+          "E00005",
+          "E00010",
+          "E00015"
+        ],
+        "decision_summary": "Best structure compatibility (0.942) with the strongest PLM (0.155) and MSA (0.325) support among all candidates, indicating a folding-stabilizing, evolutionarily tolerated substitution. Rank 1 across all evidence dimensions."
+      },
+      {
+        "rank": 2,
+        "mutation": "A372T",
+        "confidence": 0.5,
+        "evidence_refs": [
+          "E00006",
+          "E00011",
+          "E00016"
+        ],
+        "decision_summary": "Good structure compatibility (0.717) and moderate PLM (0.227) despite near-zero MSA frequency. Helix-stabilizing Thr substitution retained as rank 2."
+      },
+      {
+        "rank": 3,
+        "mutation": "K264Q",
+        "confidence": 0.45,
+        "evidence_refs": [
+          "E00005"
+        ],
+        "decision_summary": "Conservative charge-preserving alternative at the most evolutionarily plastic position, where the backbone tolerates substitution. No direct tool evaluation of Q, so confidence stays below K264N."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "Max agent rounds and tool budget reached; additional evidence could not change the Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "T318I": {
+      "candidate_id": "T318I",
+      "mutation": "T318I",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [
+        "E00002",
+        "E00007",
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "This threonine-to-isoleucine stem-adjacent substitution is analogous to HA-stabilizing mutations in other influenza A subtypes that strengthen the prefusion trimer interface. It is also conservative enough to plausibly retain folding and function."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "Lowest structure score of the pool and very low PLM/MSA support. Demoted; near rejection."
+        },
+        {
+          "round": 3,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Structure score is only moderate while both PLM (0.024) and MSA (0.012) strongly disfavor the mutation; unlikely to beat the remaining candidates."
+        }
+      ],
+      "rejection": {
+        "round": 3,
+        "reason": "Structure score is only moderate while both PLM (0.024) and MSA (0.012) strongly disfavor the mutation; unlikely to beat the remaining candidates.",
+        "evidence_refs": [
+          "E00007",
+          "E00012"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "R321I": {
+      "candidate_id": "R321I",
+      "mutation": "R321I",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [
+        "E00003",
+        "E00008",
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "R321 lies near the HA1/HA2 stem-stabilizing region, where hydrophobic substitutions have improved prefusion stability in related HAs. Replacing a solvent-exposed arginine with isoleucine may reduce destabilizing buried charge in the prefusion state."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Best structure score (0.83) but zero evolutionary tolerance and near-zero ESM-1v plausibility; charged-to-hydrophobic swap at a conserved site risks function. Demoted but retained as structure-favored option."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "Good structural compatibility but zero PLM plausibility and zero homolog frequency suggest the substitution is not naturally tolerated; demoted below the K264 hedged pair."
+        },
+        {
+          "round": 4,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Despite the highest structure delta, both PLM (0.000) and MSA (0.000) strongly disfavor it, suggesting the fixed-backbone score is overconfident. Reject."
+        }
+      ],
+      "rejection": {
+        "round": 4,
+        "reason": "Despite the highest structure delta, both PLM (0.000) and MSA (0.000) strongly disfavor it, suggesting the fixed-backbone score is overconfident. Reject.",
+        "evidence_refs": [
+          "E00008",
+          "E00013"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "V166N": {
+      "candidate_id": "V166N",
+      "mutation": "V166N",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00004",
+        "E00009",
+        "E00014"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "V166N creates an N-X-T sequon at an exposed HA1 head loop, and added N-linked glycans often improve HA folding efficiency and environmental persistence. The site is outside canonical catalytic or disulfide features."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Zero homolog frequency and low PLM despite acceptable structure score; high B-factor region also weakens structural evidence. Rejected."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Zero homolog frequency and low PLM despite acceptable structure score; high B-factor region also weakens structural evidence. Rejected.",
+        "evidence_refs": [
+          "E00009",
+          "E00014"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "K264N": {
+      "candidate_id": "K264N",
+      "mutation": "K264N",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00005",
+        "E00010",
+        "E00015"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "K264N would create an N-X-S glycosylation sequon in a surface loop, potentially increasing glycan-mediated stability. Lysine-to-asparagine here is structurally plausible but needs compatibility and conservation checks."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Only candidate supported by all three tools: positive ProteinMPNN delta, moderate ESM-1v plausibility, and 32% homolog frequency (evolutionary tolerance). Promoted to rank 1."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "K264N is the only candidate supported by all three dimensions (structure 0.942, PLM 0.155, MSA 0.325), consistent with a stability-neutral-to-positive, evolutionarily tolerated substitution."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Best structure score (0.942) with the strongest PLM and MSA support among remaining candidates; K264 appears evolutionarily plastic. Remains rank 1."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A372T": {
+      "candidate_id": "A372T",
+      "mutation": "A372T",
+      "first_seen_round": 0,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.5,
+      "evidence_refs": [
+        "E00006",
+        "E00011",
+        "E00016"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.38,
+          "rationale": "A372 is in the HA2 stem region, where threonine may increase local hydrogen bonding and has precedent as a tolerated seasonal HA substitution. It is a moderate candidate for improving prefusion stability."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.48,
+          "rationale": "Consistent weak-to-moderate support across all three tools (0.72 structure, 0.23 PLM, small but nonzero MSA frequency). Promoted to rank 2 as a balanced low-risk substitution."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Solid structure and highest PLM plausibility among remaining candidates, but near-zero MSA frequency lowers confidence; retained pending functional-annotation check for epitope/glycosylation context."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Good structure compatibility and moderate PLM despite near-zero MSA frequency; a helix-stabilizing Thr substitution. Retain as rank 2."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S143N": {
+      "candidate_id": "S143N",
+      "mutation": "S143N",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [
+        "E00001"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "S143N would create an N-X-S glycosylation motif in a head-surface serine-rich loop, potentially adding a stabilizing glycan. However, antigenic effects and glycosylation-site feasibility must be evaluated."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "The structure tool reports a WT mismatch at the mapped residue, meaning S143N does not match the sequence/backbone numbering and the candidate is likely invalid as stated. Rejecting pending any re-check."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "The structure tool reports a WT mismatch at the mapped residue, meaning S143N does not match the sequence/backbone numbering and the candidate is likely invalid as stated. Rejecting pending any re-check.",
+        "evidence_refs": [
+          "E00001"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "K264Q": {
+      "candidate_id": "K264Q",
+      "mutation": "K264Q",
+      "first_seen_round": 2,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "K264 shows the highest evolutionary plasticity and a positive structure delta for N; Q is a conservative charge-preserving alternative likely also tolerated. Added as a hedged sibling candidate for the same position."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Same high-plasticity position as K264N with conservative charge-neutral change; structure/MSA evidence at the position transfers partially, promoting it above R321I."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Hedged conservative alternative at the most plastic position; no direct evidence yet, so confidence stays below K264N. Retain as rank 3."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "K264N": 53.483,
+    "A372T": 33.307,
+    "K264Q": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "S143N",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "S143N"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T318I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.7819,
+        "normalized": 0.609258,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.962,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 3.78"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.7819)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R321I",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.3426,
+        "normalized": 0.828024,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.889,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 11.05"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-0.3426)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V166N",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -0.6358,
+        "normalized": 0.787332,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.727,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 27.27"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-0.6358)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K264N",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": 0.6819,
+        "normalized": 0.942135,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.772,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 22.79"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=0.6819)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A372T",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -1.0853,
+        "normalized": 0.717023,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.881,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 11.93"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-1.0853)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T318I",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0238,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R321I",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0003,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V166N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0145,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K264N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.155,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A372T",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.227,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T318I",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.011905,
+        "normalized": 0.011905,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.988,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.988,
+        "reason": "alignment coverage 168/170 homologs"
+      },
+      "interpretation": "mutant frequency of I at position 318 = 0.0119 among 168 homologs; conservation entropy 1.160 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R321I",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.971,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.971,
+        "reason": "alignment coverage 165/170 homologs"
+      },
+      "interpretation": "mutant frequency of I at position 321 = 0.0000 among 165 homologs; conservation entropy 1.263 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "V166N",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.994,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.994,
+        "reason": "alignment coverage 169/170 homologs"
+      },
+      "interpretation": "mutant frequency of N at position 166 = 0.0000 among 169 homologs; conservation entropy 1.671 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "K264N",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.324841,
+        "normalized": 0.324841,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.924,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.924,
+        "reason": "alignment coverage 157/170 homologs"
+      },
+      "interpretation": "mutant frequency of N at position 264 = 0.3248 among 157 homologs; conservation entropy 1.824 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A372T",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.01227,
+        "normalized": 0.01227,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.959,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.959,
+        "reason": "alignment coverage 163/170 homologs"
+      },
+      "interpretation": "mutant frequency of T at position 372 = 0.0123 among 163 homologs; conservation entropy 1.712 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "glm-5.3__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "T318I",
+          "R321I",
+          "V166N",
+          "K264N",
+          "A372T"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 7,
+    "n_rejected": 4,
+    "n_reconsidered": 0,
+    "n_invalid": 4,
+    "c0_size": 6,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

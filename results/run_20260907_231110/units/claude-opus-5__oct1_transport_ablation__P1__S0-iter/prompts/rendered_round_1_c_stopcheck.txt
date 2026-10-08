@@ -1,0 +1,117 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the human organic cation transporter 1 (OCT1 / SLC22A1, 553 aa).
+
+PRIMARY OBJECTIVE: Abolish OCT1 substrate transport while preserving protein abundance and folding.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+PTVDDILEQVGESGWFQKQAFLILCLLSAAFAPICVGIVFLGFTPDHHCQSPGVAELSQRCGWSPAEELNYTVPGLGPAGEAFLGQCRRYEVDWNQSALSCVDPLASLATNRSHLPLGPCQDGWVYDTPGSSIVTEFNLVCADSWKLDLFQSCLNAGFLFGSLGVGYFADRFGRKLCLLGTVLVNAVSGVLMAFSPNYMSMLLFRLLQGLVSKGNWMAGYTLITEFVGSGSRRTVAIMYQMAFTVGLVALTGLAYALPHWRWLQLAVSLPTFLFLLYYWCVPESPRWLLSQKRNTEAIKIMDHIAQKNGKLPPADLKMLSLEEDVTEKLSPSFADLFRTPRLRKRTFILMYLWFTDSVLYQGLILHMGATSGNLYLDFLYSALVEIPGAFIALITIDRVGRIYPMAMSNLLAGAACLVMIFISPDLHWLNIIIMCVGRMGITIAIQMICLVNAELYPTFVRNLGVMVCSSLCDIGGIITPFIVFRLREVWQALPLILFAVLGLLAAGVTLLLPETKGVALPETMKDAENLGRKAKPKENTIYLKVQTSEPSGT
+```
+NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  D473A  confidence=0.870  rank=1
+  W353A  confidence=0.800  rank=2
+  D473N  confidence=0.760  rank=3
+  W216A  confidence=0.620  rank=5
+  Q446A  confidence=0.520  rank=7
+  F243A  confidence=0.500  rank=8
+  R398A  confidence=0.450  rank=10
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  (empty — no drop/add changes yet, all from the initial pool)
+Changes this round:
+  - D473A retain: Verified D at 473 (LCD-IGG context); this is the conserved acidic residue of the central cation-binding cavity (canonical Asp474), whose neutralization abolishes organic cation binding while the small Ala substitution is unlikely to perturb the MFS fold.
+  - W353A rerank: Verified W at 353 (…MYLW353FTDSV…), a pocket-lining tryptophan (canonical Trp354) repeatedly implicated in substrate recognition; promoted because loss of the aromatic cation-π contact should kill transport without global destabilization of the TM bundle.
+  - D473N retain: Isosteric charge-neutralizing substitution at the same key binding aspartate; preserves side-chain volume/H-bonding so folding and abundance are very likely retained while the cation-attracting negative charge is removed.
+  - E385A add: Verified E at 385 (…SALVE385IPGAF…), the second conserved acidic residue of the OCT central cavity (canonical Glu386) that together with Asp474 provides the anionic cation-binding environment; adds an independent position so the Top-3 is not fully correlated with residue 473.
+  - W216A rerank: Verified W at 216 (…KGNW216MAGY…), the TM4 pocket tryptophan homologous to the rat Oct1 binding-site Trp; promoted from 0.38 because aromatic-box removal is a classic transport-null, expression-competent lesion.
+  - D473R add: Charge reversal at the key binding aspartate should electrostatically repel organic cations and abolish transport more completely than neutralization; ranked below Ala/Asn because a buried Arg carries a higher risk of misfolding and reduced abundance.
+  - Q446A retain: Verified Q at 446 (…IAIQ446MICL…), corresponding to the rodent Oct1 pocket glutamine implicated in substrate selectivity; plausible affinity-abolishing but more likely to shift than eliminate transport.
+  - F243A retain: Verified F at 243 (…MAF243TVGLV…), a cavity-lining aromatic; Ala substitution may only enlarge the pocket rather than abolish translocation, so it stays mid-rank.
+  - Y360A add: Verified Y at 360 (…SVLY360QGLILH…), an aromatic in the TM7 face of the central cavity that can contribute cation-π/H-bond contacts; added as a diversification hypothesis with moderate confidence.
+  - R398A rerank: Verified R at 398 within the conserved cytoplasmic D397-R398-x-G-R motif that gates conformational cycling; demoted because motif-A/C-type charge-pair disruption frequently causes ER retention, conflicting with the abundance-preservation requirement.
+  - D473E reject: Conservative Asp→Glu keeps the negative charge and typically only shifts substrate affinity rather than abolishing transport, which is orthogonal to the reward phenotype.
+  - R174A reject: R174 lies in the MFS motif-A GRK element (G173-R174-K175) whose disruption predominantly destabilizes the fold and trafficking, violating the preserve-abundance constraint.
+  - D397N reject: Redundant with R398A at the same intracellular DRxGR motif and, being only mildly perturbing, is more likely to give partial rather than null transport; dropped to make room for binding-site diversification.
+Remaining doubts: Whether charge-neutralizing pocket mutations at D473/E385 are fully null or merely affinity-shifting, and whether buried substitutions such as D473R silently reduce surface abundance, remains unresolved without expression/functional data.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 1 — respond with a single JSON object, nothing else.

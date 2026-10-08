@@ -1,0 +1,161 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in Photosystem-I subunit IV PsaE (68 aa).
+
+PRIMARY OBJECTIVE: Destabilize and disrupt PsaE folding (knock out the photosystem-I component).
+
+SEQUENCE (full-length exactly as numbered below):
+```
+AIERGSKVKILRKESYWYGDVGTVASIDKSGIIYPVIVRFNKVNYNGFSGSAGGLNTNNFAEHELEVV
+```
+NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S2 / sequential adaptive BT iteration.
+
+You have access to a fixed menu of biological evidence tools. Tool outputs
+are evidence, not answers or ground truth.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates
+   (no tool calls in this step — tool requests start in the next round's
+   tool-selection step).
+2. Each following round: first choose which tools to call (tool-selection
+   step), then update the candidate pool given the new evidence (add, retain,
+   rerank, reject, reconsider), and finally decide CONTINUE or STOP.
+3. Each tool call may evaluate at most 10 active candidates.
+4. Stop when additional evidence is unlikely to change the final Top-3, or
+   when the budget is exhausted. When you STOP, embed the final JSON fields
+   (final_candidates / stop_reason / remaining_budget) in the same JSON
+   object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+
+Available biological evidence tools (each measures its own dimension, NOT the
+target phenotype — see the dimension guidance below):
+
+1. evolution_msa — per-position MSA statistics from a homolog search (MMseqs2) over UniProtKB/Swiss-Prot — computed LIVE on the first call (results cached for this task).
+   Returns: alignment coverage, conservation entropy, mutant-residue frequency
+   among homologs (no coverage → applicability 0). Natural evolutionary
+   tolerance of the substitution.
+
+2. sequence_plm — ESM-1v ensemble (5 seeds) mutation-plausibility, one [0,1]
+   score per mutation (higher = more plausible). Scores are computed LIVE at inference time via the ESM-1v 5-seed masked-marginal ensemble (per-candidate, cached).
+
+3. structure_compatibility — ProteinMPNN (v_48_020) conditional log-probability
+   deltas for the mutant residue on a fixed experimental backbone.
+   For THIS task the backbone is PDB 1PSE chain A — 100% of this sequence's residues have experimental coordinates.
+
+4. functional_annotation — curated UniProt features for the mutated position (domains, sites,
+   disulfides, modifications). STATIC: identical every round — context only
+   (score 0.5); one call per candidate set is enough.
+
+5. phenotype — the task phenotype is 'phenotype' but NO precomputed predictor is available for this task yet — the tool returns status = not_applicable.. 
+
+6. toxin — ToxinPred3 toxicity of the local ±window around the mutation
+   (higher = more toxin-like; direction: higher_is_more_toxic). ToxinPred3 toxicity classification is AVAILABLE (runtime, peptide-level ML).
+   For non-toxinification tasks this is a safety-side signal, not the reward.
+
+Choose which tools to call, on which candidates, and when to stop. No required
+order, no required tool. Evidence scores are priors, not answers.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  W17P  confidence=0.920  rank=1
+  V8D  confidence=0.880  rank=2
+  I10P  confidence=0.850  rank=3
+  F40D  confidence=0.650  rank=4
+  R39D  confidence=0.600  rank=5
+BT evidence so far:
+  E00001 structure_compatibility(W17D): z=0.675, app=1.00
+  E00002 structure_compatibility(F40D): z=0.201, app=1.00
+  E00003 structure_compatibility(F48D): z=0.802, app=1.00
+  E00004 structure_compatibility(I10P): z=0.225, app=1.00
+  E00005 structure_compatibility(L55D): z=0.629, app=1.00
+  E00006 structure_compatibility(I33P): z=0.912, app=1.00
+  E00007 structure_compatibility(Y34D): z=0.869, app=1.00
+  E00008 structure_compatibility(V8D): z=0.128, app=1.00
+  E00009 structure_compatibility(R39D): z=0.486, app=1.00
+  E00010 sequence_plm(W17D): z=0.000, app=0.90
+  E00011 sequence_plm(F40D): z=0.000, app=0.90
+  E00012 sequence_plm(F48D): z=0.012, app=0.90
+  E00013 sequence_plm(I10P): z=0.000, app=0.90
+  E00014 sequence_plm(L55D): z=0.116, app=0.90
+  E00015 sequence_plm(I33P): z=0.129, app=0.90
+  E00016 sequence_plm(Y34D): z=0.000, app=0.90
+  E00017 sequence_plm(V8D): z=0.000, app=0.90
+  E00018 sequence_plm(R39D): z=0.000, app=0.90
+Change history:
+  - drop F48D (round 2): Barely destabilizing by structure (z=0.802, ΔlogP=-0.22). The mutation is nearly compatible with the folded state, making it a poor destabilizer.
+  - drop I33P (round 2): Strongly stabilizing by structure (ΔlogP=+0.54, z=0.912). ProteinMPNN indicates this mutation is well-compatible with the backbone, directly opposing our goal.
+  - drop Y34D (round 2): Actually stabilizing by structure (ΔlogP=+0.14, z=0.869). This mutation is compatible with the fold and works against our destabilization objective.
+  - add L55D (round 1): L55 is in a region with multiple hydrophobic residues (F48, L55, F60); introducing D here should disrupt a hydrophobic cluster critical for folding.
+  - add V8D (round 1): V8 is near the N-terminus in a region with hydrophobic residues; D introduction may disrupt early folding nucleation.
+  - add W17P (round 2): W17 is a core tryptophan; replacing with proline should be even more disruptive than W17D due to backbone constraint. W17D showed only mild destabilization, but proline's rigid ring should cause greater steric clash.
+Changes this round:
+  - W17P rerank: Extremely negative ΔlogP (-2.44) from ProteinMPNN indicates severe backbone incompatibility, and 0% evolutionary frequency confirms this substitution is never tolerated in nature. Proline's rigid ring at a conserved tryptophan position maximizes structural disruption.
+  - V8D retain: Very low structure compatibility (z=0.128) combined with 0% evolutionary frequency and low conservation entropy (1.222, highly conserved position) strongly supports destabilization.
+  - I10P retain: Low structure compatibility (z=0.225) and 0% evolutionary frequency at a conserved position support strong destabilization via proline backbone constraint.
+  - F40D rerank: While structure compatibility is low (z=0.201), the 19% evolutionary frequency of D at position 40 indicates natural tolerance, significantly weakening the destabilization hypothesis.
+  - R39D rerank: Zero evolutionary frequency and very low conservation entropy (1.195) support importance, but moderate structure compatibility (z=0.486) limits destabilization potential.
+  - W17D reject: W17P is strictly superior at the same position with much stronger structure incompatibility (ΔlogP=-2.44 vs mild for W17D). W17D is superseded.
+  - L55D reject: Highest structure compatibility among remaining candidates (z=0.629) indicates the backbone tolerates this substitution relatively well, making it the weakest destabilizer.
+Remaining doubts: The MSA depth is modest (43 sequences, Neff=13.2), so evolutionary signals may underestimate true tolerance; additionally, ProteinMPNN's fixed-backbone approximation may overestimate destabilization for mutations that could be partially accommodated by local backbone relaxation.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 3 — respond with a single JSON object, nothing else.

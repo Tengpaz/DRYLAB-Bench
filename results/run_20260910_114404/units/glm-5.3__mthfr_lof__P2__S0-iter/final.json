@@ -1,0 +1,142 @@
+{
+  "unit_id": "glm-5.3__mthfr_lof__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "glm-5.3",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "A222V",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "A222V is the well-known thermolabile MTHFR variant, the most common population loss-of-function allele; WT residue at 222 is Ala as verified. High confidence it strongly reduces activity while retaining expression."
+      },
+      {
+        "rank": 2,
+        "mutation": "E429A",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "E429A is the second common MTHFR activity-reducing variant (Glu verified at 429). Alone it reduces rather than fully abolishes activity, so confidence is moderate."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Self-review converged: pool contains the two best-known MTHFR LoF variants plus a mechanistic candidate, and no tools are available for further evidence."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "A222V": {
+      "candidate_id": "A222V",
+      "mutation": "A222V",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.85,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.85,
+          "rationale": "Well-established thermolabile variant (C677T) that substantially reduces MTHFR activity in vivo by destabilizing the FAD-binding fold. Single substitution with strong prior evidence for loss of function."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "A222V is the well-known thermolabile MTHFR variant (common population LoF allele) and the WT residue at 222 matches Alanine in the sequence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E429A": {
+      "candidate_id": "E429A",
+      "mutation": "E429A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Corresponds to the A1298C variant, which moderately lowers activity and further reduces activity when combined with A222V. Milder effect alone, hence moderate confidence."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "E429A (Glu429Ala in this numbering) is a second common MTHFR activity-reducing variant; verified Glu at 429."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "F239A": {
+      "candidate_id": "F239A",
+      "mutation": "F239A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Bulky aromatic residue likely stabilizing the FAD isoalloxazine pocket; substitution with Ala is expected to weaken FAD binding and reduce activity."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "Alanine-scanning-like guess with no structural rationale and low confidence; better active-site candidates exist."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Alanine-scanning-like guess with no structural rationale and low confidence; better active-site candidates exist.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "A222V": null,
+    "E429A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 3,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 5,
+    "c0_size": 3,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,111 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+YOUR TASK IS AS FOLLOWS: Propose 3 amino acid substitutions in the Zika virus envelope glycoprotein E (504 aa).
+
+THE DESIGN OBJECTIVE: Maximize viral replication fitness.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+IRCIGVSNRDFVEGMSGGTWVDVVLEHGGCVTVMAQDKPTVDIELVTTTVSNMAEVRSYCYEASISDMASDSRCPTQGEAYLDKQSDTQYVCKRTLVDRGWGNGCGLFGKGSLVTCAKFTCSKKMTGKSIQPENLEYRIMLSVHGSQHSGMIVNDTGYETDENRAKVEVTPNSPRAEATLGGFGSLGLDCEPRTGLDFSDLYYLTMNNKHWLVHKEWFHDIPLPWHAGADTGTPHWNNKEALVEFKDAHAKRQTVVVLGSQEGAVHTALAGALEAEMDGAKGKLFSGHLKCRLKMDKLRLKGVSYSLCTAAFTFTKVPAETLHGTVTVEVQYAGTDGPCKIPVQMAVDMQTLTPVGRLITANPVITESTENSKMMLELDPPFGDSYIVIGVGDKKITHHWHRSGSTIGKAFEATVRGAKRMAVLGDTAWDFGSVGGVFNSLGKGIHQIFGAAFKSLFGGMSWFSQILIGTLLVWLGLNTKNGSISLTCLALGGVMIFLSTAVSA
+```
+IMPORTANT NUMBERING NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  T76I  confidence=0.620  rank=1
+  L107F  confidence=0.600  rank=2
+  K281E  confidence=0.550  rank=6
+  I152V  confidence=0.520  rank=7
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  - add K281E (round 1): Position 281 (K) is in domain III; K281E introduces a charge change that could modulate receptor interactions or pH-dependent conformational changes relevant to entry efficiency.
+  - add I152V (round 1): Position 152 (I) is near the fusion loop in domain II; I152V is a conservative change that may fine-tune fusion loop dynamics for improved membrane fusion efficiency.
+  - add N154K (round 1): Position 154 (N) is in domain II; N154K may alter local interactions near the fusion loop region, potentially affecting fusion kinetics.
+Changes this round:
+  - K281E retain: K281E in domain III may modulate receptor binding or pH-dependent conformational changes, potentially improving entry efficiency. However, charge reversal is risky and could destabilize domain III interactions.
+  - I152V retain: I152V is a conservative substitution near the fusion loop that may fine-tune membrane fusion without disrupting the hydrophobic core. Low risk but also low expected gain.
+  - N154K reject: N154K introduces a charge change near the fusion loop that is more likely to disrupt the delicate hydrophobic environment required for fusion rather than improve it. Higher risk than benefit.
+  - T76I add: Position 76 (T) is in domain I near the hinge region between domains I and II. T76I increases hydrophobicity at a hinge position, potentially stabilizing the domain arrangement in the prefusion state and improving particle assembly or stability, which correlates with replication fitness.
+  - L107F add: Position 107 (L) is in domain I. L107F is a conservative aromatic substitution that may enhance hydrophobic packing in the domain I core, improving protein stability and thus virion assembly efficiency.
+  - V264I add: Position 264 (V) is in domain II. V264I is a conservative change that may subtly optimize the domain II structure for improved fusion kinetics or protein stability without disrupting function.
+  - A259V add: Position 259 (A) is in domain II. A259V increases side-chain bulk slightly, potentially improving local packing and stability of domain II, which could enhance fusion efficiency or protein half-life.
+  - S109T add: Position 109 (S) is in domain I. S109T is a conservative change that may optimize local hydrogen bonding or glycosylation-adjacent interactions, subtly improving protein folding or stability.
+Remaining doubts: Without experimental or computational evidence, all confidence values remain speculative and the true fitness effects of these mutations are highly uncertain.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 2 — respond with a single JSON object, nothing else.

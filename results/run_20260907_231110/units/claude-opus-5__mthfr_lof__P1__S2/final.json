@@ -1,0 +1,1085 @@
+{
+  "unit_id": "claude-opus-5__mthfr_lof__P1__S2",
+  "condition": "S2",
+  "model_id": "claude-opus-5",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "W421R",
+        "confidence": 0.94,
+        "evidence_refs": [
+          "E00009"
+        ],
+        "decision_summary": "Highest LOF-proxy score in the entire pool (0.991, applicability 1.00); replacing a buried conserved Trp with a charged Arg should collapse the local fold of the linker/regulatory interface and abolish activity. WT residue W at 421 verified against the given sequence."
+      },
+      {
+        "rank": 2,
+        "mutation": "G158R",
+        "confidence": 0.93,
+        "evidence_refs": [
+          "E00011",
+          "E00004"
+        ],
+        "decision_summary": "Near-maximal pathogenicity score (0.975) at a conserved Gly of the ALRGDP FAD-proximal motif, where a bulky charged Arg is sterically incompatible with the tight backbone turn. WT residue G at 158 verified; supported by the pathogenic-leaning score of the adjacent R157Q."
+      },
+      {
+        "rank": 3,
+        "mutation": "G149R",
+        "confidence": 0.85,
+        "evidence_refs": [
+          "E00010"
+        ],
+        "decision_summary": "Strong pathogenic-class LOF-proxy score (0.826) for a Gly-to-Arg in the catalytic (beta/alpha)8 barrel, the substitution class that dominates the top of this pool. WT residue G at 149 verified against the given sequence."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 is stable and well separated on the reward-closest dimension; remaining tools measure orthogonal dimensions unlikely to reorder them."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R157Q": {
+      "candidate_id": "R157Q",
+      "mutation": "R157Q",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.66,
+      "evidence_refs": [
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.9,
+          "rationale": "Position 157 is R in the given sequence; R157Q is a classic severe MTHFR deficiency allele in the catalytic (TIM-barrel) domain that drastically reduces residual activity. Charge loss at a conserved buried/interface Arg is strongly destabilizing to the FAD-binding barrel."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.9,
+          "rationale": "Verified WT R at 157; classic severe MTHFR-deficiency substitution in the FAD/catalytic barrel with near-abolished residual activity."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.8,
+          "rationale": "Still supported (0.629, pathogenic class) and clinically a severe-deficiency allele, but reported residual activity (~20%) and a mid-range LOF-proxy score place it below the drastic Gly→Arg substitutions."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.66,
+          "rationale": "Pathogenic-leaning but mid-range score (0.629); the adjacent G158R is better supported for the same motif."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T227M": {
+      "candidate_id": "T227M",
+      "mutation": "T227M",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.87,
+          "rationale": "Position 227 is T, and T227M is a well-documented severe loss-of-function allele causing homocystinuria with near-zero residual enzyme activity. Bulky hydrophobic substitution at a conserved polar catalytic-domain residue disrupts FAD/folate binding."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.87,
+          "rationale": "Verified WT T at 227; well-documented severe loss-of-function substitution in the catalytic domain."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.77,
+          "rationale": "Moderate pathogenic score (0.671) consistent with a known severe-deficiency variant, but the conservative Thr→Met change scores below the top disruptors."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "Moderate pathogenicity (0.671) for a known severe-deficiency variant class; retained but below the Gly→Arg/Trp→Arg tier."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R183Q": {
+      "candidate_id": "R183Q",
+      "mutation": "R183Q",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.8,
+      "evidence_refs": [
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Position 183 is R; R183Q is reported in severe MTHFR deficiency and removes a conserved positive charge likely engaging the FAD phosphate/substrate. Predicted strong activity loss with folded but inactive protein."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "Verified WT R at 183; conserved charged residue in the catalytic domain, charge-neutralizing change expected to be strongly destabilizing to function."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "Benign-class score (0.144) indicates a tolerated surface substitution, inconsistent with abolishing activity."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Benign-class score (0.144) indicates a tolerated surface substitution, inconsistent with abolishing activity.",
+        "evidence_refs": [
+          "E00007"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "R335C": {
+      "candidate_id": "R335C",
+      "mutation": "R335C",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.82,
+      "evidence_refs": [
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Position 335 is R; R335C is a recognized severe pathogenic missense variant in the catalytic domain. Arg→Cys loses a conserved salt bridge and introduces an unpaired thiol."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.82,
+          "rationale": "Verified WT R at 335; buried conserved Arg-to-Cys in the catalytic barrel, promoted slightly above R183Q pending phenotype evidence."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.12,
+          "rationale": "Benign-class LOF proxy (0.109) contradicts the assumed catalytic importance of this surface Arg; removed to free pool capacity."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Benign-class LOF proxy (0.109) contradicts the assumed catalytic importance of this surface Arg; removed to free pool capacity.",
+        "evidence_refs": [
+          "E00006"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "R377C": {
+      "candidate_id": "R377C",
+      "mutation": "R377C",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.72,
+      "evidence_refs": [
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.78,
+          "rationale": "Position 377 is R; R377C/H are documented severe MTHFR-deficiency alleles near the linker/catalytic interface. Loss of a conserved Arg is expected to abolish activity while retaining expression."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.78,
+          "rationale": "Verified WT R at 377; Arg-to-Cys at a conserved position near the catalytic/linker interface, plausible severe LOF."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Pathogenic-class score (0.700) at a linker/regulatory-interface Arg keeps it viable as a backup but not top-3."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.72,
+          "rationale": "Solid but sub-top LOF-proxy score (0.700); kept as a backup severe-variant candidate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W421R": {
+      "candidate_id": "W421R",
+      "mutation": "W421R",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.94,
+      "evidence_refs": [
+        "E00009"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Position 421 is W; substituting a large buried aromatic with a charged Arg should severely disrupt the hydrophobic core of the catalytic/linker region. Trp→Arg is among the most destabilizing generic substitutions."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.66,
+          "rationale": "Verified WT W at 421; burying a charged Arg in place of a large aromatic should disrupt folding of the regulatory domain, but it lies outside the catalytic barrel."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.86,
+          "rationale": "Highest LOF-proxy score in the pool (0.991), a buried aromatic replaced by charge; slightly discounted because position 421 lies in the SAM-regulatory domain, so it may impair regulation/stability rather than intrinsic catalysis."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.94,
+          "rationale": "Highest LOF-proxy score in the pool (0.991) and a buried aromatic Trp in the C-terminal regulatory/linker region replaced by a charged Arg; promoted to rank 1 because the phenotype tool is the dimension closest to the reward."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G149R": {
+      "candidate_id": "G149R",
+      "mutation": "G149R",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.86,
+      "evidence_refs": [
+        "E00010"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Position 149 is G in a conserved loop preceding the FAD-binding region; Gly→Arg introduces steric bulk and charge where backbone flexibility is required. Likely to break barrel packing and abolish catalysis."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "Verified WT G at 149; Gly-to-Arg in a tightly packed barrel loop is a canonical destabilizing change."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.82,
+          "rationale": "AlphaMissense 0.826 (pathogenic) and Gly→Arg in the conserved catalytic-domain loop preceding the FAD motif; retained as third catalytic-domain disruptor."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.86,
+          "rationale": "Strong pathogenic-class score (0.826) for a Gly→Arg in the catalytic barrel, consistent with the Gly→Arg class that dominates this pool."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "D223N": {
+      "candidate_id": "D223N",
+      "mutation": "D223N",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00012"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Position 223 is D within the conserved GADFIIT motif; conserved acidic residues in this region are implicated in folate/FAD chemistry. Loss of the carboxylate should abolish catalysis with minimal structural collapse."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Verified WT D at 223; conservative Asp-to-Asn may only partially impair activity, so kept low in the ranking."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.16,
+          "rationale": "Benign-class score (0.156) and an isosteric Asp→Asn change; unlikely to be null."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Benign-class score (0.156) and an isosteric Asp→Asn change; unlikely to be null.",
+        "evidence_refs": [
+          "E00012"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "C130Y": {
+      "candidate_id": "C130Y",
+      "mutation": "C130Y",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Position 130 is C within the conserved MTCC motif of the catalytic domain; replacing it with a bulky aromatic should perturb the active-site environment. Chosen as a mechanistically distinct catalytic-domain hit."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "The evaluated neighboring cysteine substitution (C131Y) is scored benign by AlphaMissense (0.331) and Tyr is actually observed at ~4.8% of homologs at this position, so this Cys-to-Tyr class of change is evolutionarily tolerated and unlikely to abolish activity."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "The evaluated neighboring cysteine substitution (C131Y) is scored benign by AlphaMissense (0.331) and Tyr is actually observed at ~4.8% of homologs at this position, so this Cys-to-Tyr class of change is evolutionarily tolerated and unlikely to abolish activity.",
+        "evidence_refs": [
+          "E00001",
+          "E00003"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "P348L": {
+      "candidate_id": "P348L",
+      "mutation": "P348L",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Position 348 is P in the conserved PLPW linker segment connecting catalytic and regulatory domains; loss of the proline should alter interdomain geometry and SAM-regulated activity. Moderate confidence as a domain-linker disruption candidate."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.35,
+          "rationale": "Weakest prior candidate (linker/inter-domain region, no strong catalytic rationale); removed to make room for better-supported catalytic-domain substitutions within the 10-candidate cap."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "Weakest prior candidate (linker/inter-domain region, no strong catalytic rationale); removed to make room for better-supported catalytic-domain substitutions within the 10-candidate cap.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G158R": {
+      "candidate_id": "G158R",
+      "mutation": "G158R",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.93,
+      "evidence_refs": [
+        "E00011"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Verified WT G at 158, immediately adjacent to the high-confidence R157 in the conserved ...ALRGDP... FAD-proximal motif; a bulky charged Arg at a conserved Gly should abolish catalysis. Added to replace the rejected benign-scored Cys candidate."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.9,
+          "rationale": "AlphaMissense 0.975 (pathogenic) plus strong mechanistic rationale: bulky Arg at an invariant Gly of the FAD-proximal ALRGDP motif in the catalytic barrel should abolish catalysis."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.93,
+          "rationale": "Near-maximal pathogenicity score (0.975) at a conserved Gly of the ALRGDP FAD-proximal motif, where a bulky Arg is sterically incompatible; retained at essentially equal top confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A222V": {
+      "candidate_id": "A222V",
+      "mutation": "A222V",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00013"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Verified WT A at 222; the best-characterized human MTHFR functional variant (thermolabile, FAD-release-prone) with clearly reduced enzyme activity, added as a mechanistically validated backup though it is only partial LOF."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "Score 0.632 is consistent with its documented partial (thermolabile) LOF, which is explicitly not abolition of activity, so it stays as a low-ranked mechanistic control."
+        },
+        {
+          "round": 3,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "Mechanistically only a thermolabile/partial-activity variant (~50-60% activity), which conflicts with the 'abolish activity' objective despite a moderate pathogenicity score; demoted to last."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "G196R": {
+      "candidate_id": "G196R",
+      "mutation": "G196R",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.62,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Evidence shows Gly→Arg at conserved catalytic-domain glycines scores highest (G158R 0.975, G149R 0.826); position 196 is a verified Gly in the conserved CVAGYP catalytic loop, so the same class of substitution is a rational untested addition."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "Still untested by any tool; retained as the one hypothesis worth spending remaining budget on because it shares the Gly→Arg-in-conserved-loop class that scored highest."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "W421R": 99.14,
+    "G158R": 97.5,
+    "G149R": 82.63
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "C131Y",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.3312,
+        "normalized": 0.3312,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.331 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "C131Y"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C131Y",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0002,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "C131Y"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "C131Y",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.047619,
+        "normalized": 0.047619,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.23,
+        "local": 0.913,
+        "reason": "MSA depth 23, Neff 17.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.913,
+        "reason": "alignment coverage 21/23 homologs"
+      },
+      "interpretation": "mutant frequency of Y at position 131 = 0.0476 among 21 homologs; conservation entropy 1.707 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "C131Y"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R157Q",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6287,
+        "normalized": 0.6287,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.629 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "R335C",
+          "R183Q",
+          "R377C",
+          "W421R",
+          "G149R",
+          "G158R",
+          "D223N",
+          "A222V"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T227M",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6706,
+        "normalized": 0.6706,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.671 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "R335C",
+          "R183Q",
+          "R377C",
+          "W421R",
+          "G149R",
+          "G158R",
+          "D223N",
+          "A222V"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R335C",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.109,
+        "normalized": 0.109,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.109 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "R335C",
+          "R183Q",
+          "R377C",
+          "W421R",
+          "G149R",
+          "G158R",
+          "D223N",
+          "A222V"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R183Q",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1436,
+        "normalized": 0.1436,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.144 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "R335C",
+          "R183Q",
+          "R377C",
+          "W421R",
+          "G149R",
+          "G158R",
+          "D223N",
+          "A222V"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R377C",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.7002,
+        "normalized": 0.7002,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.700 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "R335C",
+          "R183Q",
+          "R377C",
+          "W421R",
+          "G149R",
+          "G158R",
+          "D223N",
+          "A222V"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W421R",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9914,
+        "normalized": 0.9914,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.991 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "R335C",
+          "R183Q",
+          "R377C",
+          "W421R",
+          "G149R",
+          "G158R",
+          "D223N",
+          "A222V"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G149R",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.8263,
+        "normalized": 0.8263,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.826 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "R335C",
+          "R183Q",
+          "R377C",
+          "W421R",
+          "G149R",
+          "G158R",
+          "D223N",
+          "A222V"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "G158R",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.975,
+        "normalized": 0.975,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.975 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "R335C",
+          "R183Q",
+          "R377C",
+          "W421R",
+          "G149R",
+          "G158R",
+          "D223N",
+          "A222V"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D223N",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.156,
+        "normalized": 0.156,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.156 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "R335C",
+          "R183Q",
+          "R377C",
+          "W421R",
+          "G149R",
+          "G158R",
+          "D223N",
+          "A222V"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "A222V",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6324,
+        "normalized": 0.6324,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.632 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "claude-opus-5__mthfr_lof__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "R157Q",
+          "T227M",
+          "R335C",
+          "R183Q",
+          "R377C",
+          "W421R",
+          "G149R",
+          "G158R",
+          "D223N",
+          "A222V"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 13,
+    "n_rejected": 5,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

@@ -1,0 +1,332 @@
+{
+  "unit_id": "deepseek-v4-flash__hiv_tat_replication__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "hiv_tat_replication",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "Q54R",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "Q54R adds a positive charge in the arginine-rich motif, likely improving TAR RNA binding and transactivation; conservative substitution preserves structure."
+      },
+      {
+        "rank": 2,
+        "mutation": "K51R",
+        "confidence": 0.7,
+        "evidence_refs": [],
+        "decision_summary": "K51R is a conservative substitution to arginine in the ARM, providing additional hydrogen-bonding potential for TAR recognition and enhancing transactivation."
+      },
+      {
+        "rank": 3,
+        "mutation": "K41R",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "K41R maintains positive charge in the core region involved in cyclin T1 recruitment, potentially improving binding affinity while preserving stability."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Further self-iteration is unlikely to yield a better Top-3 given the lack of external evidence and the clear rationale for the current candidates."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "Q54R": {
+      "candidate_id": "Q54R",
+      "mutation": "Q54R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.78,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "Adds an arginine in the basic RNA-binding ARM, likely strengthening TAR RNA contacts while preserving the motif's positive-charge character."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.74,
+          "rationale": "Q54 lies in the arginine-rich basic domain; replacing the neutral glutamine with arginine increases positive charge and likely improves TAR RNA binding/transactivation. Retain as top candidate."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.78,
+          "rationale": "Q54R adds a positive charge in the arginine-rich motif (ARM), likely improving TAR RNA binding and transactivation, and is a common natural variation in HIV-1 Tat."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K51R": {
+      "candidate_id": "K51R",
+      "mutation": "K51R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.63,
+          "rationale": "Conservative lysine-to-arginine change within the arginine-rich domain may enhance guanidinium-mediated hydrogen bonding to TAR and increase transactivation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "K51R conserves positive charge in the basic domain but could remove a potential lysine-modification site; useful but lower than K50Q. Rerank accordingly."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "K51R is a conservative substitution to arginine, which provides additional hydrogen-bonding potential in the ARM, potentially enhancing TAR recognition and transactivation without structural disruption."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K28Q": {
+      "candidate_id": "K28Q",
+      "mutation": "K28Q",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.68,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Glutamine can mimic acetylated lysine at Tat position 28, a modification associated with improved P-TEFb recruitment and higher transcriptional activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "K28 is a known Tat acetylation-sensitive residue in the cysteine-rich/activation domain; K28Q may mimic constitutive acetylation and improve P-TEFb recruitment. Rank higher after self-review."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "K28 lies in the conserved cysteine-rich region essential for metal coordination and structural integrity; mutation to glutamine would disrupt the functionally critical cysteines and likely abolish transactivation."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "K28 lies in the conserved cysteine-rich region essential for metal coordination and structural integrity; mutation to glutamine would disrupt the functionally critical cysteines and likely abolish transactivation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K50Q": {
+      "candidate_id": "K50Q",
+      "mutation": "K50Q",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.63,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Acetylation-mimetic change at the well-characterized K50 site may promote Tat release from TAR and facilitate efficient transcription elongation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.63,
+          "rationale": "K50 is the major Tat acetylation site whose acetylation promotes transcriptional elongation; K50Q is a plausible acetylation mimic. Moderately strong mechanistic rationale."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "K50 is a key basic residue in the ARM that directly interacts with TAR RNA; replacing it with glutamine would reduce positive charge and impair RNA binding, thus decreasing viral replication."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "K50 is a key basic residue in the ARM that directly interacts with TAR RNA; replacing it with glutamine would reduce positive charge and impair RNA binding, thus decreasing viral replication.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K41R": {
+      "candidate_id": "K41R",
+      "mutation": "K41R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.6,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Adds a bulkier positive residue in the core activation region, potentially improving binding to Cyclin T1 without disrupting the overall hydrophobic core."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "K41R is a conservative basic substitution in the core domain and may support cyclin T1 contacts without disrupting the fold. Moderate confidence."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.6,
+          "rationale": "K41 is in the core region involved in cyclin T1 recruitment; an arginine substitution maintains positive charge and may improve binding affinity while preserving protein stability."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S46A": {
+      "candidate_id": "S46A",
+      "mutation": "S46A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.42,
+          "rationale": "Removes a potential phosphorylation site in the conserved core; if phosphorylation inhibits Tat, preventing it would preserve transactivation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.5,
+          "rationale": "S46 may be a phosphorylation site that negatively regulates Tat; S46A could remove this inhibition. Evidence is indirect, so confidence is moderate."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "S46A removes a potential phosphorylation site in the core domain, which might stabilize the active conformation of Tat, but the impact is uncertain and thus kept at moderate confidence."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "M39I": {
+      "candidate_id": "M39I",
+      "mutation": "M39I",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Increases hydrophobic side-chain size at a core position, possibly enhancing stabilizing contacts within the Tat activation domain if sterically tolerated."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.37,
+          "rationale": "M39I is a conservative hydrophobic change in the core region, with no clear transactivation benefit; keep as low-confidence alternative."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "M39I is a conservative hydrophobic substitution in the core; no clear benefit to transactivation is evident, so confidence is lowered as it is likely neutral."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y47F": {
+      "candidate_id": "Y47F",
+      "mutation": "Y47F",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.25,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Retains the aromatic contact likely important for Cyclin T1 while eliminating the hydroxyl group that could be post-translationally modified."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.34,
+          "rationale": "Y47F removes a potential tyrosine modification site, but the impact on Tat transactivation is unknown; keep at low priority."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.25,
+          "rationale": "Y47F removes the hydroxyl group, potentially affecting hydrogen bonding with cyclin T1; without evidence this could disrupt the interaction, so confidence is low."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "Q54R": null,
+    "K51R": null,
+    "K41R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 1,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

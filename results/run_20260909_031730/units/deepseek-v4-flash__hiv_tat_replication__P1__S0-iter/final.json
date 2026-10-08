@@ -1,0 +1,380 @@
+{
+  "unit_id": "deepseek-v4-flash__hiv_tat_replication__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "deepseek-v4-flash",
+  "scenario_id": "hiv_tat_replication",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "Q54R",
+        "confidence": 0.72,
+        "evidence_refs": [],
+        "decision_summary": "Q54 in the arginine-rich TAR-binding motif; replacing non-basic glutamine with arginine increases positive charge and should enhance RNA binding and transactivation."
+      },
+      {
+        "rank": 2,
+        "mutation": "A58R",
+        "confidence": 0.64,
+        "evidence_refs": [],
+        "decision_summary": "A58 immediately follows the basic domain; adding arginine may extend the RNA-binding surface without disrupting the conserved core."
+      },
+      {
+        "rank": 3,
+        "mutation": "K50R",
+        "confidence": 0.58,
+        "evidence_refs": [],
+        "decision_summary": "K50 in the basic cluster; arginine can form more favorable contacts with TAR than lysine while remaining conservative and low-risk."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Self-iteration without external evidence has converged; top candidates are already based on strong domain reasoning."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "Q54R": {
+      "candidate_id": "Q54R",
+      "mutation": "Q54R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.72,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.63,
+          "rationale": "Replaces the only non-basic residue in the core TAR-binding motif with arginine, increasing the basic patch available for TAR and P-TEFb contacts. The conservative positive-charge gain is likely tolerated and may enhance transactivation."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.72,
+          "rationale": "Q54 is inside the arginine-rich TAR-binding motif; replacing the non-basic glutamine with arginine increases positive charge and likely improves RNA binding and transactivation."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A58R": {
+      "candidate_id": "A58R",
+      "mutation": "A58R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.64,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Extends the arginine-rich basic domain by one residue immediately after R57, potentially strengthening RNA binding. Alanine at 58 is not evolutionarily fixed and the mutation preserves the disordered basic character."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.64,
+          "rationale": "A58 immediately follows the basic domain, and adding arginine may extend the RNA-binding surface without disrupting the conserved core."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S46R": {
+      "candidate_id": "S46R",
+      "mutation": "S46R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.48,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.48,
+          "rationale": "Adds a positive charge at the boundary between core and basic domains, which could improve TAR recognition without altering key core hydrophobic contacts. Serine is small and replaceable by arginine in this flexible region."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "S46 lies in the structured core domain; a large arginine substitution at this position is more likely to disrupt the cyclin T1 interface than to improve transactivation."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "S46 lies in the structured core domain; a large arginine substitution at this position is more likely to disrupt the cyclin T1 interface than to improve transactivation.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "G48R": {
+      "candidate_id": "G48R",
+      "mutation": "G48R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Introduces an arginine immediately before the basic motif, increasing overall positive charge for RNA interaction. Although glycine may contribute flexibility, G48 is near the turn and an arginine at this position could augment TAR contacts."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.05,
+          "rationale": "G48 is a conserved glycine in the core domain; introducing arginine here is likely to distort the local conformation and reduce Tat function."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "G48 is a conserved glycine in the core domain; introducing arginine here is likely to distort the local conformation and reduce Tat function.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "H59R": {
+      "candidate_id": "H59R",
+      "mutation": "H59R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Histidine can be partially charged, so replacing it with arginine adds a stable positive charge adjacent to the basic domain. This may modestly improve RNA or protein binding without disturbing the core."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "H59 flanks the basic domain; replacing histidine with arginine may add a stronger positive charge and modestly enhance RNA contacts while remaining tolerant."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K41R": {
+      "candidate_id": "K41R",
+      "mutation": "K41R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.35,
+          "rationale": "Arginine at a functionally tolerant lysine position in the core can maintain or slightly improve electrostatic contacts with cyclin T1. This conservative substitution preserves charge and shape while enhancing potential hydrogen-bonding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "K41R is conservative in the core but does not specifically strengthen the key RNA-binding patch, so it is only weakly useful."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T40R": {
+      "candidate_id": "T40R",
+      "mutation": "T40R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Threonine to arginine adds positive charge to the core activation segment and may increase the basic character near the RNA-binding interface. This is less conservative and may be destabilizing, so confidence is lower."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.1,
+          "rationale": "T40 is within the conserved core region; introducing a bulky arginine is likely to perturb interactions with P-TEFb/TAR rather than improve replication."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "T40 is within the conserved core region; introducing a bulky arginine is likely to perturb interactions with P-TEFb/TAR rather than improve replication.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "Q63R": {
+      "candidate_id": "Q63R",
+      "mutation": "Q63R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 8,
+      "current_confidence": 0.22,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Adds charge in the C-terminal region that is not needed for transactivation, but may improve overall Tat stability or localization. It is unlikely to affect the core, so it may be tolerated but only weakly beneficial."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.22,
+          "rationale": "Q63R adds positive charge in the glutamine-rich region, but the region is less directly involved in TAR binding, so confidence is low."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "A67R": {
+      "candidate_id": "A67R",
+      "mutation": "A67R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 9,
+      "current_confidence": 0.2,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.25,
+          "rationale": "Introduces arginine to a poorly conserved C-terminal region, potentially increasing basic/nucleolar character. It is unlikely to affect the core, so it may be tolerated but only weakly beneficial."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.2,
+          "rationale": "A67R is unlikely to perturb core folding and may add charge, but the expected effect on transactivation is minimal."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S68R": {
+      "candidate_id": "S68R",
+      "mutation": "S68R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.25,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.28,
+          "rationale": "Removes a potential phosphorylation site and adds arginine in the C-terminal region, which could alter Tat stability or activity. This is speculative and lower confidence for transactivation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.25,
+          "rationale": "S68 is in the glutamine-rich distal region; possible partner interactions could be affected, but the link to transactivation is weak."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K50R": {
+      "candidate_id": "K50R",
+      "mutation": "K50R",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.58,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "K50 is in the RNA-binding basic cluster; arginine at this position can form more favorable contacts with TAR than lysine while remaining conservative."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K51R": {
+      "candidate_id": "K51R",
+      "mutation": "K51R",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.52,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Like K50R, K51R increases the arginine-rich character of the basic motif and may improve TAR binding with low structural risk."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "Q54R": null,
+    "A58R": null,
+    "K50R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 12,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 10,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

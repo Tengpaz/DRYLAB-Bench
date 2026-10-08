@@ -1,0 +1,254 @@
+{
+  "unit_id": "glm-5.3__hiv_tat_replication__P1__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "glm-5.3",
+  "scenario_id": "hiv_tat_replication",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "Q54R",
+        "confidence": 0.55,
+        "evidence_refs": [],
+        "decision_summary": "Q54 is the lone non-basic residue within the RKKRRQRRR TAR-binding core; an arginine extends the positive track, plausibly strengthening TAR binding and transactivation. LLM-only reasoning, so moderate confidence."
+      },
+      {
+        "rank": 2,
+        "mutation": "K41R",
+        "confidence": 0.5,
+        "evidence_refs": [],
+        "decision_summary": "K41 borders the basic domain; K-to-R conserves charge while favoring arginine-mediated RNA contacts. Unvalidated by external evidence."
+      },
+      {
+        "rank": 3,
+        "mutation": "K51R",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "K51 lies within the arginine-rich basic domain; a conservative K-to-R substitution may enhance TAR RNA binding. Direction of effect remains uncertain without experimental support."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Pool converged after one self-review round with no external evidence available to further discriminate candidates."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "R57K": {
+      "candidate_id": "R57K",
+      "mutation": "R57K",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Basic domain residue; conservative change within the arginine-rich RGDPTGPK-like region maintains RNA binding while slightly altering charge distribution. K retains positive charge, likely preserving TAR affinity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.35,
+          "rationale": "Position 57 sits inside the RKKRRQRRR arginine-rich TAR-binding core; replacing an arginine with lysine is more likely to weaken TAR RNA binding than enhance transactivation. Down-ranked on sequence/structure reasoning alone."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K41R": {
+      "candidate_id": "K41R",
+      "mutation": "K41R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.5,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Basic region (K41 in KKRRQRR) — conservative K-to-R substitution may enhance Arg-rich TAR RNA binding characteristics. Well-conserved functional domain."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "K41 borders the basic domain; a conservative K-to-R substitution preserves charge while potentially improving arginine-favored RNA contacts."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S16T": {
+      "candidate_id": "S16T",
+      "mutation": "S16T",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.35,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Phosphorylation site region; T substitution retains hydroxyl sidechain and could modulate kinase recognition, potentially fine-tuning transactivation."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.35,
+          "rationale": "S16 lies outside known functional domains; conservative change is likely near-neutral, so low confidence retained."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "H33Q": {
+      "candidate_id": "H33Q",
+      "mutation": "H33Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Cysteine-rich domain periphery; H-to-Q is conservative and may reduce oxidative sensitivity while preserving fold."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "H33 lies within the cysteine-rich core that coordinates Zn2+ with the host factor; perturbing this region risks destabilizing the transactivation complex."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "H33 lies within the cysteine-rich core that coordinates Zn2+ with the host factor; perturbing this region risks destabilizing the transactivation complex.",
+        "evidence_refs": [
+          "E003"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "Q54R": {
+      "candidate_id": "Q54R",
+      "mutation": "Q54R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.55,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.3,
+          "rationale": "Adjacent to basic domain; introducing positive charge could enhance electrostatic interaction with TAR RNA."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.55,
+          "rationale": "Q54 is the lone non-basic residue within the arginine-rich motif RKKRRQRRR; substituting arginine extends the positive track and plausibly strengthens TAR binding and nuclear import."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T40S": {
+      "candidate_id": "T40S",
+      "mutation": "T40S",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.28,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.28,
+          "rationale": "Boundary of basic domain; conservative phospho-site change with modest potential effect on phosphorylation-regulated activity."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.15,
+          "rationale": "T40 is a conservative site in the core region with no clear link to transactivation; low expected effect, removed to keep the pool focused."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "T40 is a conservative site in the core region with no clear link to transactivation; low expected effect, removed to keep the pool focused.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "K51R": {
+      "candidate_id": "K51R",
+      "mutation": "K51R",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "K51 is within the arginine-rich basic domain; K-to-R keeps charge and size nearly identical while favoring arginine-mediated TAR RNA and phosphoprotein interactions."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "Q54R": null,
+    "K41R": null,
+    "K51R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 7,
+    "n_rejected": 2,
+    "n_reconsidered": 0,
+    "n_invalid": 2,
+    "c0_size": 6,
+    "final_novelty": 0.3333333333333333,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

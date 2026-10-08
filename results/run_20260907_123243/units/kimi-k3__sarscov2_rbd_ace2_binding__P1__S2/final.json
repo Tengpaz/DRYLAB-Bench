@@ -1,0 +1,1340 @@
+{
+  "unit_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+  "condition": "S2",
+  "model_id": "kimi-k3",
+  "scenario_id": "sarscov2_rbd_ace2_binding",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "N171Y",
+        "confidence": 0.78,
+        "evidence_refs": [],
+        "decision_summary": "Core RBM/ACE2-contact ridge position; conservative aromatic N->Y gain plausibly adds hydrophobic/π contacts with ACE2, with moderate plausibility (0.70). MSA non-support discounted given extremely shallow alignment (Neff 6)."
+      },
+      {
+        "rank": 2,
+        "mutation": "Q168R",
+        "confidence": 0.7,
+        "evidence_refs": [],
+        "decision_summary": "RBM-adjacent surface position; Q->R adds positive charge complementary to acidic ACE2 surface, with near-neutral ESM-1v score (0.994) indicating minimal folding risk. No evolutionary support, so confidence stays moderate."
+      },
+      {
+        "rank": 3,
+        "mutation": "T148K",
+        "confidence": 0.6,
+        "evidence_refs": [],
+        "decision_summary": "Only candidate with positive MSA support (K seen in homologs) plus decent plausibility (0.70); lysine on an exposed loop could favorably contact ACE2. Low coverage (3/8) and proximity to a disulfide context cap confidence."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Evidence from all applicable tools is collected and further rounds would not alter the Top-3 ranking."
+    },
+    "remaining_budget": {
+      "tool_calls": 1,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "N171Y": {
+      "candidate_id": "N171Y",
+      "mutation": "N171Y",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.8,
+      "evidence_refs": [
+        "E00001",
+        "E00009",
+        "E00017"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.82,
+          "rationale": "Local 171 is Asn in the 'FQPTNGVGYQPYR' ACE2-contact motif, homologous to N501Y — the best-validated affinity-enhancing Spike mutation (Alpha and later variants). Tyrosine adds aromatic stacking with ACE2 Y41."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.85,
+          "rationale": "Corresponds to the well-documented N501Y substitution, which is experimentally known to increase ACE2 affinity via enhanced aromatic contact with ACE2 Y41; strong prior for the reward phenotype."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "Retained as rank 1: this position lies in the core ACE2-contact ridge (RBM) where conservative aromatic gain (N->Y, mimicking affinity-enhancing aromatic substitutions) plausibly improves hydrophobic/π contacts with ACE2; plausibility (0.70) is moderate. MSA shows no homolog support, but Swiss-Prot depth is very shallow (Neff 6) so this is weak evidence against."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S147N": {
+      "candidate_id": "S147N",
+      "mutation": "S147N",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 7,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00003",
+        "E00011",
+        "E00019"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.62,
+          "rationale": "Ser at 147 corresponds to S477N, an affinity-enhancing mutation found in multiple variants that strengthens hydrogen bonding to ACE2 S19."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Corresponds to S477N, a repeatedly observed convergent variant associated with maintained/enhanced ACE2 binding near the interface."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Retained but demoted: plausibility is only moderate (0.67), no MSA support, and position sits next to a disulfide annotation context (148 region), raising local structural risk; S->N is a conservative change so kept in the pool as backup."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q168R": {
+      "candidate_id": "Q168R",
+      "mutation": "Q168R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.7,
+      "evidence_refs": [
+        "E00002",
+        "E00010",
+        "E00018"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Gln at 168 corresponds to Q498R; paired with N501Y it formed the high-affinity Alpha RBD interface via a new salt bridge to ACE2 D38."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Corresponds to Q498R (Omicron-era change), which adds a favorable electrostatic contact to ACE2 D38 and is associated with increased affinity."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.7,
+          "rationale": "Reranked up to #2: near-neutral ESM-1v score (0.994) means structural/viability risk is minimal, and a Q->R charge gain on the RBM-adjacent surface could add electrostatic complementarity with acidic ACE2 surface residues. MSA non-support is from a very shallow alignment and is heavily discounted."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "T148K": {
+      "candidate_id": "T148K",
+      "mutation": "T148K",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.62,
+      "evidence_refs": [
+        "E00004",
+        "E00012",
+        "E00020"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Thr at 148 corresponds to T478K (Delta-era mutation) reported to increase ACE2 binding and electrostatic complementarity at the interface."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Corresponds to T478K, a Delta-lineage mutation plausibly improving electrostatics with ACE2, though evidence is mixed."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "Moved up to #3: only candidate besides N130K with positive MSA support (K seen in 1/3 homologs) plus decent plausibility (0.70); lysine gain on an exposed loop could favorably interact with ACE2. Coverage is low (3/8), so confidence stays moderate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "N130K": {
+      "candidate_id": "N130K",
+      "mutation": "N130K",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00005",
+        "E00013",
+        "E00021"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Asn at 130 corresponds to N460K, present in BA.2.75/BQ lineages and associated with improved ACE2 affinity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Peripheral to the ACE2 contact patch; positive charge addition is speculative, kept as a lower-priority candidate."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Retained: best MSA support of the pool (K frequency 0.5, full 8/8 coverage), indicating strong evolutionary tolerance, but lowest plm score (0.60) and the position is further from the ACE2 interface, so capped below the top three."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E154K": {
+      "candidate_id": "E154K",
+      "mutation": "E154K",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00006",
+        "E00014",
+        "E00022"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Glu at 154 corresponds to E484K; affinity effects are context-dependent but charge reversal at this interface hotspot can enhance electrostatics with ACE2."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Corresponds to E484K, which affects interface electrostatics; affinity effect is context-dependent (known mainly for immune escape), so moderate confidence."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Retained: maximal plausibility (1.0) and charge reversal (E->K) could improve electrostatics toward acidic ACE2 patches, but zero MSA support and charge-swap risk keep it just outside the top three."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Q163R": {
+      "candidate_id": "Q163R",
+      "mutation": "Q163R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 6,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00007",
+        "E00015",
+        "E00023"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "Gln at 163 corresponds to Q493R (Omicron), a direct ACE2-contact residue whose Arg substitution restores binding contacts."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.5,
+          "rationale": "Interface-adjacent residue where Arg could add polar contacts, but direct evidence is weak."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Retained: perfect plm score (1.0) and Q->R is a mild conservative charge addition on the RBM-adjacent surface; no evolutionary support, so confidence remains moderate."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "L122R": {
+      "candidate_id": "L122R",
+      "mutation": "L122R",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.3,
+      "evidence_refs": [
+        "E00008",
+        "E00016",
+        "E00024"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Leu at 122 corresponds to L452R; primarily an immune-evasion mutation with mixed affinity effects, included as a lower-prior diversification candidate."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.3,
+          "rationale": "Position is far from the ACE2 binding interface; unlikely to affect the reward, downgraded pending evidence."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.2,
+          "rationale": "Rejected: despite plm score 1.0, the position is buried/β-strand with a nearby glycosylation site annotation and zero homolog support across 7 aligned sequences; L->R in a hydrophobic core-adjacent context is a folding risk with no clear ACE2-interface benefit."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Rejected: despite plm score 1.0, the position is buried/β-strand with a nearby glycosylation site annotation and zero homolog support across 7 aligned sequences; L->R in a hydrophobic core-adjacent context is a folding risk with no clear ACE2-interface benefit.",
+        "evidence_refs": [
+          "E00016",
+          "E00024"
+        ]
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 3,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "N171Y": 56.756,
+    "Q168R": 70.242,
+    "T148K": 58.617
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "N171Y",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.6986,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q168R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.9942,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S147N",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.6725,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T148K",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.6955,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N130K",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5967,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E154K",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q163R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L122R",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 1.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N171Y",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 0.625,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.625,
+        "reason": "alignment coverage 5/8 homologs"
+      },
+      "interpretation": "mutant frequency of Y at position 171 = 0.0000 among 5 homologs; conservation entropy 1.332 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q168R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 0.625,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.625,
+        "reason": "alignment coverage 5/8 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 168 = 0.0000 among 5 homologs; conservation entropy 0.950 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00010",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S147N",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 0.375,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.375,
+        "reason": "alignment coverage 3/8 homologs"
+      },
+      "interpretation": "mutant frequency of N at position 147 = 0.0000 among 3 homologs; conservation entropy 0.636 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00011",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T148K",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.333333,
+        "normalized": 0.333333,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 0.375,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.375,
+        "reason": "alignment coverage 3/8 homologs"
+      },
+      "interpretation": "mutant frequency of K at position 148 = 0.3333 among 3 homologs; conservation entropy 1.099 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00012",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N130K",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.5,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 1.0,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 8/8 homologs"
+      },
+      "interpretation": "mutant frequency of K at position 130 = 0.5000 among 8 homologs; conservation entropy 1.213 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00013",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E154K",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 0.375,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.375,
+        "reason": "alignment coverage 3/8 homologs"
+      },
+      "interpretation": "mutant frequency of K at position 154 = 0.0000 among 3 homologs; conservation entropy 1.099 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00014",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q163R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 0.625,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.625,
+        "reason": "alignment coverage 5/8 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 163 = 0.0000 among 5 homologs; conservation entropy 0.950 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00015",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L122R",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.0,
+        "normalized": 0.0,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.08,
+        "local": 0.875,
+        "reason": "MSA depth 8, Neff 6.0 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.875,
+        "reason": "alignment coverage 7/8 homologs"
+      },
+      "interpretation": "mutant frequency of R at position 122 = 0.0000 among 7 homologs; conservation entropy 1.475 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00016",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N171Y",
+      "tool": "functional_annotation",
+      "tool_version": "uniprot_gff_v1_P0DTC2",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.9,
+        "local": 0.8,
+        "reason": "curated UniProt feature table"
+      },
+      "applicability": {
+        "value": 0.6,
+        "reason": "mutation lies in an annotated functional site"
+      },
+      "interpretation": "UniProt P0DTC2 position 171: features ['Beta strand', 'Chain', 'Domain', 'Topological domain']; containing domains: Chain:14-1273 (Spike glycoprotein); Chain:14-685 (Spike protein S1); Topological domain:14-1213 (Extracellular); Domain:14-303 (BetaCoV S1-NTD)",
+      "limitations": [
+        "derived from the UniProt feature table — no per-position effect prediction"
+      ],
+      "evidence_id": "E00017",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q168R",
+      "tool": "functional_annotation",
+      "tool_version": "uniprot_gff_v1_P0DTC2",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.9,
+        "local": 0.8,
+        "reason": "curated UniProt feature table"
+      },
+      "applicability": {
+        "value": 0.6,
+        "reason": "mutation lies in an annotated functional site"
+      },
+      "interpretation": "UniProt P0DTC2 position 168: features ['Beta strand', 'Chain', 'Domain', 'Topological domain']; containing domains: Chain:14-1273 (Spike glycoprotein); Chain:14-685 (Spike protein S1); Topological domain:14-1213 (Extracellular); Domain:14-303 (BetaCoV S1-NTD)",
+      "limitations": [
+        "derived from the UniProt feature table — no per-position effect prediction"
+      ],
+      "evidence_id": "E00018",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "S147N",
+      "tool": "functional_annotation",
+      "tool_version": "uniprot_gff_v1_P0DTC2",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.9,
+        "local": 0.8,
+        "reason": "curated UniProt feature table"
+      },
+      "applicability": {
+        "value": 0.6,
+        "reason": "mutation lies in an annotated functional site"
+      },
+      "interpretation": "UniProt P0DTC2 position 147: features ['Chain', 'Disulfide bond', 'Domain', 'Natural variant', 'Region', 'Topological domain', 'Turn']; containing domains: Chain:14-1273 (Spike glycoprotein); Chain:14-685 (Spike protein S1); Topological domain:14-1213 (Extracellular); Domain:14-303 (BetaCoV S1-NTD)",
+      "limitations": [
+        "derived from the UniProt feature table — no per-position effect prediction"
+      ],
+      "evidence_id": "E00019",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "T148K",
+      "tool": "functional_annotation",
+      "tool_version": "uniprot_gff_v1_P0DTC2",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.9,
+        "local": 0.8,
+        "reason": "curated UniProt feature table"
+      },
+      "applicability": {
+        "value": 0.6,
+        "reason": "mutation lies in an annotated functional site"
+      },
+      "interpretation": "UniProt P0DTC2 position 148: features ['Chain', 'Disulfide bond', 'Domain', 'Region', 'Topological domain', 'Turn']; containing domains: Chain:14-1273 (Spike glycoprotein); Chain:14-685 (Spike protein S1); Topological domain:14-1213 (Extracellular); Domain:14-303 (BetaCoV S1-NTD)",
+      "limitations": [
+        "derived from the UniProt feature table — no per-position effect prediction"
+      ],
+      "evidence_id": "E00020",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "N130K",
+      "tool": "functional_annotation",
+      "tool_version": "uniprot_gff_v1_P0DTC2",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.9,
+        "local": 0.8,
+        "reason": "curated UniProt feature table"
+      },
+      "applicability": {
+        "value": 0.6,
+        "reason": "mutation lies in an annotated functional site"
+      },
+      "interpretation": "UniProt P0DTC2 position 130: features ['Beta strand', 'Chain', 'Disulfide bond', 'Domain', 'Topological domain']; containing domains: Chain:14-1273 (Spike glycoprotein); Chain:14-685 (Spike protein S1); Topological domain:14-1213 (Extracellular); Domain:14-303 (BetaCoV S1-NTD)",
+      "limitations": [
+        "derived from the UniProt feature table — no per-position effect prediction"
+      ],
+      "evidence_id": "E00021",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "E154K",
+      "tool": "functional_annotation",
+      "tool_version": "uniprot_gff_v1_P0DTC2",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.9,
+        "local": 0.8,
+        "reason": "curated UniProt feature table"
+      },
+      "applicability": {
+        "value": 0.6,
+        "reason": "mutation lies in an annotated functional site"
+      },
+      "interpretation": "UniProt P0DTC2 position 154: features ['Beta strand', 'Chain', 'Disulfide bond', 'Domain', 'Natural variant', 'Region', 'Topological domain']; containing domains: Chain:14-1273 (Spike glycoprotein); Chain:14-685 (Spike protein S1); Topological domain:14-1213 (Extracellular); Domain:14-303 (BetaCoV S1-NTD)",
+      "limitations": [
+        "derived from the UniProt feature table — no per-position effect prediction"
+      ],
+      "evidence_id": "E00022",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Q163R",
+      "tool": "functional_annotation",
+      "tool_version": "uniprot_gff_v1_P0DTC2",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.9,
+        "local": 0.8,
+        "reason": "curated UniProt feature table"
+      },
+      "applicability": {
+        "value": 0.6,
+        "reason": "mutation lies in an annotated functional site"
+      },
+      "interpretation": "UniProt P0DTC2 position 163: features ['Beta strand', 'Chain', 'Disulfide bond', 'Domain', 'Region', 'Topological domain']; containing domains: Chain:14-1273 (Spike glycoprotein); Chain:14-685 (Spike protein S1); Topological domain:14-1213 (Extracellular); Domain:14-303 (BetaCoV S1-NTD)",
+      "limitations": [
+        "derived from the UniProt feature table — no per-position effect prediction"
+      ],
+      "evidence_id": "E00023",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L122R",
+      "tool": "functional_annotation",
+      "tool_version": "uniprot_gff_v1_P0DTC2",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.9,
+        "local": 0.8,
+        "reason": "curated UniProt feature table"
+      },
+      "applicability": {
+        "value": 0.6,
+        "reason": "mutation lies in an annotated functional site"
+      },
+      "interpretation": "UniProt P0DTC2 position 122: features ['Beta strand', 'Chain', 'Disulfide bond', 'Domain', 'Glycosylation', 'Topological domain']; containing domains: Chain:14-1273 (Spike glycoprotein); Chain:14-685 (Spike protein S1); Topological domain:14-1213 (Extracellular); Domain:14-303 (BetaCoV S1-NTD)",
+      "limitations": [
+        "derived from the UniProt feature table — no per-position effect prediction"
+      ],
+      "evidence_id": "E00024",
+      "run_id": "kimi-k3__sarscov2_rbd_ace2_binding__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "N171Y",
+          "Q168R",
+          "S147N",
+          "T148K",
+          "N130K",
+          "E154K",
+          "Q163R",
+          "L122R"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 3,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "unit_id": "gpt-6-astra__cbs_lof__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gpt-6-astra",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.96,
+        "evidence_refs": [],
+        "decision_summary": "Removes the catalytic lysine side chain required for the native lysine–PLP Schiff base, strongly favoring loss of activity. This targets catalytic chemistry rather than deliberately destabilizing the entire protein."
+      },
+      {
+        "rank": 2,
+        "mutation": "K119Q",
+        "confidence": 0.94,
+        "evidence_refs": [],
+        "decision_summary": "Replaces the catalytic primary amine with an amide that cannot form the native PLP linkage. Retaining a polar side chain may help preserve local structure, but folding and residual activity are uncertain."
+      },
+      {
+        "rank": 3,
+        "mutation": "K119R",
+        "confidence": 0.92,
+        "evidence_refs": [],
+        "decision_summary": "Retains positive charge but cannot reproduce the native lysine–PLP Schiff base, making loss of activity highly plausible. Retained cofactor electrostatic interactions leave greater uncertainty about complete abolition."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The mechanistic ranking is stable, and further self-iteration cannot resolve residual activity or folding without experimental evidence."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.96,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.97,
+          "rationale": "The supplied sequence has lysine at position 119, corresponding to the expected catalytic PLP-binding lysine. Alanine removes the amino group needed for the internal aldimine, strongly predicting catalytic loss without necessarily disrupting the overall fold."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.96,
+          "rationale": "Sequence verification confirms K119 in residues 111–120, FFNAGGSVKD. Replacing the catalytic PLP-binding lysine with alanine removes its Schiff-base-forming side chain, strongly favoring loss of activity without deliberately disrupting the global fold."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119R": {
+      "candidate_id": "K119R",
+      "mutation": "K119R",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.92,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.95,
+          "rationale": "Arginine preserves positive charge but cannot replace the lysine primary amino group in normal PLP-dependent catalysis. This makes it a strong candidate for catalytic inactivation with comparatively limited structural disruption."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.92,
+          "rationale": "Arginine retains positive charge but cannot reproduce the native lysine–PLP Schiff base, making substantial loss of activity highly plausible. Its retained electrostatic interactions introduce some uncertainty about complete abolition rather than merely severe reduction."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119Q": {
+      "candidate_id": "K119Q",
+      "mutation": "K119Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.94,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.95,
+          "rationale": "Glutamine replaces the catalytic lysine amino group with a non-equivalent amide, likely preventing normal PLP attachment and enzyme turnover. Its polar side chain may preserve local packing better than a strongly disruptive substitution, although complete inactivity is not experimentally established here."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.94,
+          "rationale": "Glutamine cannot supply the lysine primary amine required for the native PLP linkage, while retaining a polar side chain. Rank above K119R because glutamine also removes the positive charge that might support residual cofactor interactions."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "K119A": null,
+    "K119Q": null,
+    "K119R": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 3,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 0,
+    "c0_size": 3,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}

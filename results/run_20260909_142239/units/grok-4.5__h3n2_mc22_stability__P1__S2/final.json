@@ -1,0 +1,541 @@
+{
+  "unit_id": "grok-4.5__h3n2_mc22_stability__P1__S2",
+  "condition": "S2",
+  "model_id": "grok-4.5",
+  "scenario_id": "h3n2_mc22_stability",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "Y100F",
+        "confidence": 0.65,
+        "evidence_refs": [
+          "E00003",
+          "E00006",
+          "E00009"
+        ],
+        "decision_summary": "Y100F retains top rank due to strong evolutionary conservation, high sequence-plausibility, and positive structure compatibility z-score supporting core packing in globular head domain."
+      },
+      {
+        "rank": 2,
+        "mutation": "L42V",
+        "confidence": 0.55,
+        "evidence_refs": [
+          "E00001",
+          "E00004",
+          "E00007"
+        ],
+        "decision_summary": "L42V retains rank 2 with positive MSA tolerance and structure compatibility indicating folding benefit without disrupting N-terminal region."
+      },
+      {
+        "rank": 3,
+        "mutation": "P99A",
+        "confidence": 0.45,
+        "evidence_refs": [],
+        "decision_summary": "P99A retained as conservative adjacent substitution to Y100F; maintains local structure per hypothesis but lacks dedicated tool evidence."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Top-3 stabilized; no further tool calls or rounds expected to change final selection given budget and evidence reliability."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 1
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "L42V": {
+      "candidate_id": "L42V",
+      "mutation": "L42V",
+      "first_seen_round": 0,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00001",
+        "E00004",
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.6,
+          "rationale": "Leucine at 42 in helix; valine may enhance hydrophobic interactions and core packing."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "No new evidence collected; retaining as baseline candidate for further evaluation."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.6,
+          "rationale": "Balanced but moderate scores; structure delta indicates some compatibility but lower than Y100F."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.55,
+          "rationale": "Positive evolution_msa and structure_compatibility scores indicate tolerance and potential folding benefit."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "I3V": {
+      "candidate_id": "I3V",
+      "mutation": "I3V",
+      "first_seen_round": 1,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.55,
+      "evidence_refs": [
+        "E00002",
+        "E00005",
+        "E00008"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.55,
+          "rationale": "Conservative change at N-terminus (I3V) expected to preserve local structure while potentially enhancing folding propensity in a flexible region."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.55,
+          "rationale": "Structure compatibility not applicable due to no experimental coordinates for WT residue at position 3 in PDB 5HMG, limiting assessment of folding stability impact."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "Structure compatibility not applicable due to no experimental coordinates for WT residue at position 3 in PDB 5HMG, limiting assessment of folding stability impact.",
+        "evidence_refs": [
+          "E00008"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "Y100F": {
+      "candidate_id": "Y100F",
+      "mutation": "Y100F",
+      "first_seen_round": 1,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.65,
+      "evidence_refs": [
+        "E00003",
+        "E00006",
+        "E00009"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "Tyr to Phe swap at position 100 is non-disruptive and may improve core packing stability in the globular head domain."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.52,
+          "rationale": "Strongest evidence for stability from highest structure compatibility score and high evolutionary applicability."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "Positive structure compatibility z-score and evolutionary conservation support stability improvement in globular head domain."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "P99A": {
+      "candidate_id": "P99A",
+      "mutation": "P99A",
+      "first_seen_round": 2,
+      "last_seen_round": 3,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.45,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 2,
+          "action": "add",
+          "confidence": 0.45,
+          "rationale": "Adjacent to high-structure Y100F position; conservative substitution likely to maintain local structure while potentially enhancing stability."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "Conservative adjacent substitution to Y100F, maintaining local structure per initial hypothesis."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 3
+  },
+  "bundle_evidence": {
+    "Y100F": 24.038,
+    "L42V": 12.752,
+    "P99A": null
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "L42V",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.006849,
+        "normalized": 0.006849,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.859,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.859,
+        "reason": "alignment coverage 146/170 homologs"
+      },
+      "interpretation": "mutant frequency of V at position 42 = 0.0068 among 146 homologs; conservation entropy 1.791 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L42V",
+          "I3V",
+          "Y100F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I3V",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.023529,
+        "normalized": 0.023529,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 1.0,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "alignment coverage 170/170 homologs"
+      },
+      "interpretation": "mutant frequency of V at position 3 = 0.0235 among 170 homologs; conservation entropy 1.788 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L42V",
+          "I3V",
+          "Y100F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y100F",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.04142,
+        "normalized": 0.04142,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.994,
+        "reason": "MSA depth 170, Neff 29.19 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.994,
+        "reason": "alignment coverage 169/170 homologs"
+      },
+      "interpretation": "mutant frequency of F at position 100 = 0.0414 among 169 homologs; conservation entropy 1.679 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L42V",
+          "I3V",
+          "Y100F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L42V",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.0348,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L42V",
+          "I3V",
+          "Y100F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I3V",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.9409,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L42V",
+          "I3V",
+          "Y100F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y100F",
+      "tool": "sequence_plm",
+      "tool_version": "esm1v_ensemble_runtime_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.1715,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.55,
+        "local": 0.55,
+        "reason": "ESM-1v 5-seed ensemble masked-marginal (runtime)"
+      },
+      "applicability": {
+        "value": 0.9,
+        "reason": "single-AA substitution within a known sequence"
+      },
+      "interpretation": "sequence-model mutation plausibility (ESM-1v masked marginal likelihood ratio)",
+      "limitations": [
+        "sequence-model prior only — does not measure the requested phenotype",
+        "runtime likelihood ratio p(mut)/p(wt) (1.0 = neutral to WT), NOT per-protein percentile"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L42V",
+          "I3V",
+          "Y100F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "L42V",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -4.3355,
+        "normalized": 0.286959,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.888,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 11.18"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-4.3355)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L42V",
+          "I3V",
+          "Y100F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "I3V",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": null,
+        "normalized": null,
+        "percentile": null,
+        "direction": null
+      },
+      "reliability": {
+        "global": 0.0,
+        "local": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "applicability": {
+        "value": 0.0,
+        "reason": "no structure score (WT mismatch at mapped residue)"
+      },
+      "interpretation": null,
+      "status": "not_applicable",
+      "limitations": [
+        "structure evidence unavailable for this candidate"
+      ],
+      "evidence_id": "E00008",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L42V",
+          "I3V",
+          "Y100F"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y100F",
+      "tool": "structure_compatibility",
+      "tool_version": "proteinmpnn_v48_020",
+      "score": {
+        "raw": -2.698,
+        "normalized": 0.487556,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 0.938,
+        "local": 0.847,
+        "reason": "PDB 5HMG at 3.2 A; residue B-factor 15.3"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "residue has experimental coordinates in the mapped chain"
+      },
+      "interpretation": "ProteinMPNN conditional log-prob delta on 5HMG:A (ΔlogP=-2.698)",
+      "limitations": [
+        "fixed-backbone approximation; decoding-order averaged (N=2)",
+        "structure-conditioned compatibility does not equal the requested phenotype"
+      ],
+      "evidence_id": "E00009",
+      "run_id": "grok-4.5__h3n2_mc22_stability__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "L42V",
+          "I3V",
+          "Y100F"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 4,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 4,
+    "c0_size": 1,
+    "final_novelty": 0.6666666666666666,
+    "tool_calls_used": 4,
+    "rounds_used": 3,
+    "budget_exhausted": true
+  }
+}

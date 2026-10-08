@@ -1,0 +1,330 @@
+{
+  "unit_id": "gpt-5.6-terra__cbs_lof__P2__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "gpt-5.6-terra",
+  "scenario_id": "cbs_lof",
+  "prompt_variant": 2,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "K119A",
+        "confidence": 0.97,
+        "evidence_refs": [],
+        "decision_summary": "K119 is the strongest sequence-informed candidate for the essential PLP-linked catalytic lysine. Alanine removes the required lysine side-chain chemistry and is expected to abolish or nearly abolish activity."
+      },
+      {
+        "rank": 2,
+        "mutation": "Y223A",
+        "confidence": 0.92,
+        "evidence_refs": [],
+        "decision_summary": "Y223 lies in the catalytic-domain region and is a strong candidate for productive active-site chemistry or substrate positioning. Alanine removes its aromatic hydroxyl-bearing side chain, likely causing severe loss of activity."
+      },
+      {
+        "rank": 3,
+        "mutation": "R121A",
+        "confidence": 0.86,
+        "evidence_refs": [],
+        "decision_summary": "R121 is immediately adjacent to K119 in the catalytic-region sequence and is plausibly required for active-site electrostatics or substrate orientation. Replacing it with alanine provides an independent, likely strongly inactivating substitution."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "The highest-ranked substitutions target the most plausible catalytic residues available from sequence context, and no external evidence can be collected under this condition."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 2
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "K119A": {
+      "candidate_id": "K119A",
+      "mutation": "K119A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.97,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.97,
+          "rationale": "Lys119 is the conserved catalytic lysine expected to form the essential PLP Schiff-base linkage. Replacing it with alanine should directly eliminate PLP-dependent CBS catalysis."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.97,
+          "rationale": "K119 is verified as the WT residue in the supplied sequence and is a highly plausible essential active-site PLP-linking lysine; alanine substitution should strongly impair catalysis."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.97,
+          "rationale": "K119 is a plausible catalytic PLP-linkage residue; alanine substitution should directly eliminate this essential chemical role."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y223A": {
+      "candidate_id": "Y223A",
+      "mutation": "Y223A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.92,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.92,
+          "rationale": "Tyr223 lies in the catalytic-core active-site region and is expected to support productive substrate/cofactor chemistry. Alanine removes its aromatic hydroxyl functionality with limited global truncation risk."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.92,
+          "rationale": "Y223 is verified in the sequence and is a plausible active-site substrate-recognition residue; alanine removal is likely to substantially reduce enzyme activity."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.92,
+          "rationale": "Y223 is in the structured catalytic-region sequence and its replacement is plausibly strongly disruptive to productive active-site chemistry."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R121A": {
+      "candidate_id": "R121A",
+      "mutation": "R121A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.86,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.88,
+          "rationale": "Arg121 immediately neighbors the PLP-binding Lys119 and is a strong candidate for active-site substrate/cofactor positioning. Loss of its charged guanidinium group is likely severely disruptive to activity."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.88,
+          "rationale": "R121 is verified in the sequence and is immediately adjacent to K119, making it a strong candidate for disrupting the catalytic-site environment while retaining a single-site design."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.86,
+          "rationale": "R121 is adjacent to K119 and is a plausible active-site residue, although its specific mechanistic requirement is less certain than K119."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "K119E": {
+      "candidate_id": "K119E",
+      "mutation": "K119E",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.89,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.91,
+          "rationale": "Changing the catalytic lysine to glutamate removes the required lysine chemistry while introducing an unfavorable negative charge in the PLP-binding site. This is likely strongly inactivating, though potentially more structurally disruptive than K119A."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.91,
+          "rationale": "K119E replaces the critical lysine with a negatively charged residue, likely preventing its catalytic/PLP-related role, but the more drastic local electrostatic disruption may compromise protein stability relative to K119A."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.89,
+          "rationale": "Replacing the putative catalytic lysine with a negatively charged residue should be strongly inactivating, but K119A is the cleaner and less structurally confounded catalytic knockout."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "C52A": {
+      "candidate_id": "C52A",
+      "mutation": "C52A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.76,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.76,
+          "rationale": "Cys52 is the N-terminal heme-coordinating cysteine. Removing this ligand should disrupt the CBS heme center and may markedly impair functional enzyme activity."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.76,
+          "rationale": "C52 is verified and lies in the N-terminal heme-associated region, so its replacement could disrupt a functionally important cofactor environment."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.5,
+          "rationale": "C52 is an N-terminal cysteine and may affect heme-related or structural properties, but is a less direct route to a robust catalytic knockout."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "C52 is an N-terminal cysteine and may affect heme-related or structural properties, but is a less direct route to a robust catalytic knockout.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "H65A": {
+      "candidate_id": "H65A",
+      "mutation": "H65A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.7,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.7,
+          "rationale": "His65 is a second heme-ligating residue in the N-terminal region. Its substitution should destabilize heme coordination, although residual catalytic activity may remain."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.7,
+          "rationale": "H65 is verified and is another plausible heme-environment residue, though effects on catalytic loss versus broader structural perturbation remain uncertain."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.42,
+          "rationale": "H65 has insufficient sequence-only support as an indispensable catalytic residue."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "H65 has insufficient sequence-only support as an indispensable catalytic residue.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    },
+    "E239A": {
+      "candidate_id": "E239A",
+      "mutation": "E239A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "active",
+      "current_rank": 5,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.68,
+          "rationale": "Glu239 is a conserved polar residue in the catalytic-domain active-site neighborhood. Neutralization may disrupt local hydrogen-bonding and substrate positioning."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "E239 is verified in the catalytic-core region and may contribute to local active-site geometry, but its specific indispensability is less certain than K119, R121, or Y223."
+        },
+        {
+          "round": 2,
+          "action": "retain",
+          "confidence": 0.65,
+          "rationale": "E239 lies in the catalytic-domain sequence but has weaker direct rationale for complete loss of enzyme activity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "S349A": {
+      "candidate_id": "S349A",
+      "mutation": "S349A",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.66,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.66,
+          "rationale": "Ser349 lies in the catalytic core near residues contributing to PLP-enzyme active-site architecture. Alanine may weaken catalysis while retaining a full-length protein."
+        },
+        {
+          "round": 1,
+          "action": "reject",
+          "confidence": 0.0,
+          "rationale": "The supplied sequence has G rather than S at position 349, so S349A is invalid under the required sequence numbering."
+        }
+      ],
+      "rejection": {
+        "round": 1,
+        "reason": "The supplied sequence has G rather than S at position 349, so S349A is invalid under the required sequence numbering.",
+        "evidence_refs": []
+      },
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 2
+  },
+  "bundle_evidence": {
+    "K119A": null,
+    "Y223A": null,
+    "R121A": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 8,
+    "n_rejected": 3,
+    "n_reconsidered": 0,
+    "n_invalid": 2,
+    "c0_size": 8,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 2,
+    "budget_exhausted": false
+  }
+}

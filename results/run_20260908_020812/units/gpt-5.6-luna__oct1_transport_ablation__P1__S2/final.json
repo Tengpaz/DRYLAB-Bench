@@ -1,0 +1,528 @@
+{
+  "unit_id": "gpt-5.6-luna__oct1_transport_ablation__P1__S2",
+  "condition": "S2",
+  "model_id": "gpt-5.6-luna",
+  "scenario_id": "oct1_transport_ablation",
+  "prompt_variant": 1,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "R438A",
+        "confidence": 0.68,
+        "evidence_refs": [
+          "E00005"
+        ],
+        "decision_summary": "R438A has the strongest available LOF-proxy signal and targets a membrane-core arginine plausibly involved in electrostatic substrate recognition. The principal uncertainty is whether the substitution affects folding or trafficking rather than selectively disrupting transport."
+      },
+      {
+        "rank": 2,
+        "mutation": "D473A",
+        "confidence": 0.62,
+        "evidence_refs": [
+          "E00004"
+        ],
+        "decision_summary": "D473A has the second-strongest phenotype-proxy signal and neutralizes a verified acidic residue in a distal transmembrane region, providing a plausible substrate-pathway perturbation. Loss of a conserved polar residue may still compromise stability or abundance."
+      },
+      {
+        "rank": 3,
+        "mutation": "Y220A",
+        "confidence": 0.53,
+        "evidence_refs": [
+          "E00007"
+        ],
+        "decision_summary": "Y220A has meaningful LOF-proxy support and targets an aromatic residue in a plausible substrate-access region. Its confidence is lower because alanine replacement could disrupt helix packing or abundance rather than selectively abolish transport."
+      }
+    ],
+    "stop_reason": {
+      "type": "budget_exhausted",
+      "detail": "The maximum adaptive-round and tool-call budget has been reached, with R438A, D473A, and Y220A remaining as the best-supported candidates."
+    },
+    "remaining_budget": {
+      "tool_calls": 0,
+      "rounds": 0
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "F160A": {
+      "candidate_id": "F160A",
+      "mutation": "F160A",
+      "first_seen_round": 0,
+      "last_seen_round": 2,
+      "status": "rejected",
+      "current_rank": null,
+      "current_confidence": 0.18,
+      "evidence_refs": [
+        "E00001",
+        "E00002",
+        "E00003"
+      ],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.5,
+          "rationale": "This transmembrane aromatic residue is a plausible contributor to the hydrophobic substrate pathway. Its substitution is included as a lower-confidence option because it may affect transport more than overall folding."
+        },
+        {
+          "round": 1,
+          "action": "rerank",
+          "confidence": 0.18,
+          "rationale": "The MSA indicates moderate evolutionary tolerance, which is compatible with preserving folding, but the low pathogenicity/LOF-proxy score provides little support for transport ablation. Retain only as a lower-priority control candidate."
+        },
+        {
+          "round": 2,
+          "action": "reject",
+          "confidence": 0.12,
+          "rationale": "F160A has weak phenotype support and low evolutionary/annotation-based support for a transport-ablation interpretation. It is removed from the active pool in favor of candidates with stronger predicted LOF signals."
+        }
+      ],
+      "rejection": {
+        "round": 2,
+        "reason": "F160A has weak phenotype support and low evolutionary/annotation-based support for a transport-ablation interpretation. It is removed from the active pool in favor of candidates with stronger predicted LOF signals.",
+        "evidence_refs": [
+          "E00001",
+          "E00002",
+          "E00003"
+        ]
+      },
+      "reconsiderations": []
+    },
+    "D473A": {
+      "candidate_id": "D473A",
+      "mutation": "D473A",
+      "first_seen_round": 1,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.62,
+      "evidence_refs": [
+        "E00004"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.58,
+          "rationale": "D473 is a verified acidic residue in the distal transmembrane region, where neutralization is a strong mechanistic hypothesis for disrupting substrate interaction while avoiding a large side-chain change. It requires direct evidence testing because loss of a conserved polar residue could also impair folding."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.62,
+          "rationale": "D473A remains a strong mechanistic candidate and has a high predicted damaging score. Neutralizing an acidic residue may impair transport, but possible effects on folding or expression limit confidence."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "D473A has strong predicted LOF-proxy support and neutralizes a charged residue in a distal membrane-spanning region. The remaining uncertainty is whether the conserved acidic residue contributes to folding or abundance rather than transport specifically."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.62,
+          "rationale": "D473A has the second-strongest phenotype-proxy signal and neutralizes a verified acidic residue in the distal membrane region. It remains a plausible transport-disrupting substitution, although folding and trafficking effects are not directly measured."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R438A": {
+      "candidate_id": "R438A",
+      "mutation": "R438A",
+      "first_seen_round": 1,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.68,
+      "evidence_refs": [
+        "E00005"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.52,
+          "rationale": "R438 is a verified arginine within the membrane-spanning core and is a plausible contributor to the transporter electrostatic substrate pathway. Alanine substitution tests functional electrostatics with a relatively small replacement."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.68,
+          "rationale": "R438A has the strongest phenotype-tool signal, consistent with disrupting an electrostatic element in the membrane-spanning substrate pathway. The prediction is a LOF proxy rather than direct transport or abundance data, so confidence remains below high."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "R438A has the strongest available phenotype proxy and is mechanistically plausible as a disruption of an electrostatic substrate pathway within the membrane core. No new evidence justifies changing its leading position."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.68,
+          "rationale": "R438A has the strongest available phenotype-proxy signal, supporting a high likelihood of loss of transporter function. The main unresolved issue is whether disruption of this membrane-core arginine compromises abundance or folding."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "W216A": {
+      "candidate_id": "W216A",
+      "mutation": "W216A",
+      "first_seen_round": 1,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 4,
+      "current_confidence": 0.45,
+      "evidence_refs": [
+        "E00006"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.44,
+          "rationale": "W216 is a verified aromatic residue in a predicted transmembrane substrate-access region, making alanine substitution a plausible way to alter binding or gating. Confidence is moderate-low because aromatic packing disruption may reduce abundance."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "W216A retains moderate support as a transmembrane aromatic-site perturbation, but its phenotype score is weaker than those of R438A, D473A, and Y220A. The possible folding penalty further reduces its priority."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.45,
+          "rationale": "W216A remains mechanistically plausible and has weaker but positive phenotype-proxy support. Its lower rank reflects greater concern that disrupting a membrane aromatic could impair folding or stability rather than selectively abolish transport."
+        },
+        {
+          "round": 4,
+          "action": "rerank",
+          "confidence": 0.45,
+          "rationale": "W216A is retained as a reserve candidate because its phenotype-proxy signal is weaker than those of R438A, D473A, and Y220A. The aromatic-to-alanine change also carries comparatively greater risk of destabilizing local membrane-helix packing."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "Y220A": {
+      "candidate_id": "Y220A",
+      "mutation": "Y220A",
+      "first_seen_round": 1,
+      "last_seen_round": 4,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.53,
+      "evidence_refs": [
+        "E00007"
+      ],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.4,
+          "rationale": "Y220 is a verified aromatic residue adjacent to W216 in a transmembrane segment and could participate in substrate recognition. It is a secondary candidate because alanine may perturb local helix packing as well as transport."
+        },
+        {
+          "round": 2,
+          "action": "rerank",
+          "confidence": 0.53,
+          "rationale": "Y220A is promoted above W216A because its phenotype score is higher and the residue lies in a plausible transmembrane substrate-recognition region. Aromatic-to-alanine substitution could nevertheless disrupt helix packing and abundance."
+        },
+        {
+          "round": 3,
+          "action": "retain",
+          "confidence": 0.53,
+          "rationale": "Y220A remains a plausible substrate-recognition or gating perturbation with moderate phenotype-proxy support. It ranks below the charged-residue substitutions because aromatic-to-alanine replacement may more strongly affect helix packing and abundance."
+        },
+        {
+          "round": 4,
+          "action": "retain",
+          "confidence": 0.53,
+          "rationale": "Y220A has meaningful phenotype-proxy support and lies in a plausible substrate-access region. Its lower confidence reflects uncertainty that alanine substitution may perturb helix packing or abundance rather than selectively abolish transport."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 4,
+    "max_tool_calls": 4,
+    "rounds_used": 4
+  },
+  "bundle_evidence": {
+    "R438A": 94.97,
+    "D473A": 80.25,
+    "Y220A": 75.64
+  },
+  "evidence_ledger": [
+    {
+      "candidate": "F160A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.1272,
+        "normalized": 0.1272,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.127 (class benign); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00001",
+      "run_id": "gpt-5.6-luna__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F160A",
+      "tool": "evolution_msa",
+      "tool_version": "mmseqs2_swissprot_v1",
+      "score": {
+        "raw": 0.066986,
+        "normalized": 0.066986,
+        "percentile": null,
+        "direction": "higher_is_more_supportive"
+      },
+      "reliability": {
+        "global": 1.0,
+        "local": 0.864,
+        "reason": "MSA depth 242, Neff 130.11 (Swiss-Prot)"
+      },
+      "applicability": {
+        "value": 0.864,
+        "reason": "alignment coverage 209/242 homologs"
+      },
+      "interpretation": "mutant frequency of A at position 160 = 0.0670 among 209 homologs; conservation entropy 2.784 (lower = more conserved)",
+      "limitations": [
+        "homolog search limited to UniProtKB/Swiss-Prot (curated)",
+        "evolutionary tolerance does not equal the requested target phenotype"
+      ],
+      "evidence_id": "E00002",
+      "run_id": "gpt-5.6-luna__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "F160A",
+      "tool": "functional_annotation",
+      "tool_version": "static_annotation_v1",
+      "score": {
+        "raw": null,
+        "normalized": 0.5,
+        "percentile": null,
+        "direction": "contextual"
+      },
+      "reliability": {
+        "global": 0.5,
+        "local": 0.2,
+        "reason": "static domain-level annotation, no per-position effect"
+      },
+      "applicability": {
+        "value": 0.2,
+        "reason": "contextual evidence only — not a per-candidate predictor"
+      },
+      "interpretation": "no annotation table available",
+      "limitations": [
+        "annotation table unavailable — static fallback, NOT paper-grade"
+      ],
+      "evidence_id": "E00003",
+      "run_id": "gpt-5.6-luna__oct1_transport_ablation__P1__S2",
+      "round": 1,
+      "input": {
+        "candidate_ids": [
+          "F160A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "D473A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.8025,
+        "normalized": 0.8025,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.802 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00004",
+      "run_id": "gpt-5.6-luna__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473A",
+          "R438A",
+          "W216A",
+          "Y220A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "R438A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.9497,
+        "normalized": 0.9497,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.950 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00005",
+      "run_id": "gpt-5.6-luna__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473A",
+          "R438A",
+          "W216A",
+          "Y220A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "W216A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.6348,
+        "normalized": 0.6348,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.635 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00006",
+      "run_id": "gpt-5.6-luna__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473A",
+          "R438A",
+          "W216A",
+          "Y220A"
+        ],
+        "positions": null
+      }
+    },
+    {
+      "candidate": "Y220A",
+      "tool": "phenotype",
+      "tool_version": "alphamissense_v1",
+      "score": {
+        "raw": 0.7564,
+        "normalized": 0.7564,
+        "percentile": null,
+        "direction": "higher_is_more_damaging"
+      },
+      "reliability": {
+        "global": 0.6,
+        "local": 0.6,
+        "reason": "alphamissense phenotype prediction (precomputed; predictive model, independent of the evaluation DMS)"
+      },
+      "applicability": {
+        "value": 1.0,
+        "reason": "single-AA substitution with a published prediction"
+      },
+      "interpretation": "alphamissense pathogenicity (LOF proxy) 0.756 (class pathogenic); higher = more damaging",
+      "limitations": [
+        "predictive model, not experimental measurement",
+        "predicted pathogenicity (LOF proxy) is not identical to the requested phenotype"
+      ],
+      "evidence_id": "E00007",
+      "run_id": "gpt-5.6-luna__oct1_transport_ablation__P1__S2",
+      "round": 2,
+      "input": {
+        "candidate_ids": [
+          "D473A",
+          "R438A",
+          "W216A",
+          "Y220A"
+        ],
+        "positions": null
+      }
+    }
+  ],
+  "candidate_summary": {
+    "n_added": 5,
+    "n_rejected": 1,
+    "n_reconsidered": 0,
+    "n_invalid": 7,
+    "c0_size": 1,
+    "final_novelty": 1.0,
+    "tool_calls_used": 4,
+    "rounds_used": 4,
+    "budget_exhausted": true
+  }
+}

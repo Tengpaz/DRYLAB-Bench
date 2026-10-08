@@ -1,0 +1,108 @@
+<COMMON_BASE>
+You are participating in a computational benchmark for protein mutation
+design. Given a WT protein sequence and a target phenotype, propose single
+amino-acid substitutions that are likely to improve the target phenotype
+while preserving basic protein viability and function.
+
+Return exactly Top-3 final mutations unless TASK_SPEC explicitly says
+otherwise. Each final mutation must include an independent confidence in
+[0.00, 1.00]. Confidence values do not need to sum to 1.
+
+Do not claim that any biological evidence tool provides ground truth.
+Tool outputs are evidence only. You must make the final decision by
+integrating the task objective, available evidence, evidence reliability,
+applicability, limitations, and candidate history.
+
+Use only the structured JSON format requested by the current protocol.
+</COMMON_BASE>
+
+<TASK_SPEC>
+TASK: Propose 3 amino acid substitutions in the human organic cation transporter 1 (OCT1 / SLC22A1, 553 aa).
+
+PRIMARY OBJECTIVE: Abolish OCT1 substrate transport while preserving protein abundance and folding.
+
+SEQUENCE (full-length exactly as numbered below):
+```
+PTVDDILEQVGESGWFQKQAFLILCLLSAAFAPICVGIVFLGFTPDHHCQSPGVAELSQRCGWSPAEELNYTVPGLGPAGEAFLGQCRRYEVDWNQSALSCVDPLASLATNRSHLPLGPCQDGWVYDTPGSSIVTEFNLVCADSWKLDLFQSCLNAGFLFGSLGVGYFADRFGRKLCLLGTVLVNAVSGVLMAFSPNYMSMLLFRLLQGLVSKGNWMAGYTLITEFVGSGSRRTVAIMYQMAFTVGLVALTGLAYALPHWRWLQLAVSLPTFLFLLYYWCVPESPRWLLSQKRNTEAIKIMDHIAQKNGKLPPADLKMLSLEEDVTEKLSPSFADLFRTPRLRKRTFILMYLWFTDSVLYQGLILHMGATSGNLYLDFLYSALVEIPGAFIALITIDRVGRIYPMAMSNLLAGAACLVMIFISPDLHWLNIIIMCVGRMGITIAIQMICLVNAELYPTFVRNLGVMVCSSLCDIGGIITPFIVFRLREVWQALPLILFAVLGLLAAGVTLLLPETKGVALPETMKDAENLGRKAKPKENTIYLKVQTSEPSGT
+```
+NOTES: use ONLY the positions shown in the sequence above; ALWAYS verify that the WT residue at the position you cite equals the residue in the sequence.
+</TASK_SPEC>
+
+<CONDITION_PROTOCOL>
+Condition: S0-iter / LLM-only iterative control.
+
+You do not have access to external biological evidence tools.
+
+Protocol:
+1. Round 0: propose an initial candidate pool C0 with at most 10 candidates.
+2. Each following round: first reflect on the current pool (self-review
+   step), then update the candidate pool using add, retain, rerank, reject,
+   or reconsider (no external evidence is available), and finally decide
+   CONTINUE or STOP in the stop-check step.
+3. next_tool_requests must ALWAYS be an empty array.
+4. Stop when further self-iteration is unlikely to improve the Top-3, or
+   when the round limit is reached. When you STOP, embed the final JSON
+   fields (final_candidates / stop_reason / remaining_budget) in the same
+   JSON object.
+
+Budget (this run): max_tool_calls=4, max_agent_rounds=4,
+max_active_candidates=10, max_new_candidates_per_round=5,
+final_k=3.
+</CONDITION_PROTOCOL>
+
+<INSTRUCTION>
+Decide: do you need another round of evidence gathering (decision CONTINUE), or are you done (decision STOP with the final Top-3 embedded)?
+</INSTRUCTION>
+
+<WORKING_MEMORY>
+Current candidate mutations and predicted values (confidence):
+  (none)
+BT evidence so far:
+  (no evidence collected yet)
+Change history:
+  - drop D473N (round 3): Sequence verification shows residue 473 is I, not D; this mutation is invalid under the supplied numbering.
+  - drop E385Q (round 3): Sequence verification shows residue 385 is I, not E; this mutation is invalid under the supplied numbering.
+  - drop D473A (round 3): Sequence verification shows residue 473 is I, not D; this mutation is invalid under the supplied numbering.
+  - add D473N (round 2): D473 is an acidic residue within the late transmembrane-region motif VMVCSSLCDIGG and is a strong mechanistic candidate for the cation-interaction pathway. Neutralizing it should strongly impair transport while retaining a polar side chain that is comparatively compatible with local structure.
+  - add E385Q (round 2): E385 is a charged residue in the central membrane-spanning region (LDFLYSALVEIPG), where loss of negative charge could disrupt substrate recognition or translocation. The glutamine replacement is deliberately conservative for folding relative to a small hydrophobic substitution.
+  - add D473A (round 2): D473A is an independent, more complete removal of the candidate acidic interaction group at D473. It may abolish transport more robustly than D473N but has a greater risk of perturbing local membrane-helix packing.
+Changes this round:
+  - D472N add: Sequence re-check places an aspartate at position 472 in the TM-region motif VMVCSSLCDIGG. Neutralizing this buried acidic side chain is a strong transport-loss hypothesis while retaining a polar, structurally less disruptive replacement.
+  - E383Q add: Position 383 is glutamate in the membrane-embedded SALVEIPG region. E383Q removes a potential ion/substrate-interaction charge with a conservative side-chain size and hydrogen-bonding capacity.
+  - R437A add: Position 437 is arginine within a later transmembrane segment, where a charged residue is unusual and may contribute to the transport pathway. Alanine removes this possible functional electrostatic contribution but introduces some risk of changing local helix interactions.
+  - D472A add: This is a more complete removal of the D472 side-chain interaction than D472N and may give stronger transport loss. It ranks below D472N because alanine is less conservative for a potentially functional polar site.
+  - E383A add: E383A provides an alternative, stronger charge-removal perturbation at the same candidate functional site. It is retained below E383Q owing to higher risk of disrupting local membrane-helix packing or abundance.
+Remaining doubts: Without experimental abundance, localization, or transport measurements, the main uncertainty is whether these polar residues are pathway determinants rather than structural determinants.
+</WORKING_MEMORY>
+
+<OUTPUT_SCHEMA>
+Respond with ONE JSON object matching this schema (nothing else, no markdown fences):
+{
+  "schema_version": "1.0",
+  "condition": "<S0-iter | S2>",
+  "round": 1,
+  "decision": "CONTINUE | STOP",
+  "decision_rationale": "1-2 sentences"
+}
+If decision is STOP, embed the final output under "final_candidates" in the SAME
+object (with stop_reason / remaining_budget):
+{
+  ...,
+  "decision": "STOP",
+  "decision_rationale": "...",
+  "final_candidates": [
+    {"rank": 1, "mutation": "<WT><POS><MUT>", "confidence": 0.87,
+     "evidence_refs": ["E00003"], "decision_summary": "<= 2 sentences"},
+    {"rank": 2, "mutation": "<WT><POS><MUT>", "confidence": 0.73,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"},
+    {"rank": 3, "mutation": "<WT><POS><MUT>", "confidence": 0.61,
+     "evidence_refs": [], "decision_summary": "<= 2 sentences"}
+  ],
+  "stop_reason": {"type": "budget_exhausted | model_stop", "detail": "one sentence"},
+  "remaining_budget": {"tool_calls": 0, "rounds": 0}
+}
+Rules: exactly 3 final_candidates; ranks exactly 1,2,3; mutation in [WT][POS][MUT].
+If decision is CONTINUE, do NOT include final_candidates.
+</OUTPUT_SCHEMA>
+
+ROUND 4 — respond with a single JSON object, nothing else.

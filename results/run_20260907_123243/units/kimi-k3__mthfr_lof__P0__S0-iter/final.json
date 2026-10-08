@@ -1,0 +1,132 @@
+{
+  "unit_id": "kimi-k3__mthfr_lof__P0__S0-iter",
+  "condition": "S0-iter",
+  "model_id": "kimi-k3",
+  "scenario_id": "mthfr_lof",
+  "prompt_variant": 0,
+  "final_output": {
+    "final_candidates": [
+      {
+        "rank": 1,
+        "mutation": "R157Q",
+        "confidence": 0.85,
+        "evidence_refs": [],
+        "decision_summary": "R157 is in the catalytic FAD-binding domain and R157Q is a known severe MTHFR-deficiency variant causing markedly reduced enzyme activity, best matching the goal of abolishing activity."
+      },
+      {
+        "rank": 2,
+        "mutation": "A222V",
+        "confidence": 0.75,
+        "evidence_refs": [],
+        "decision_summary": "A222V (C677T) is the classic thermolabile variant causing substantial activity loss via reduced FAD binding; WT residue A222 verified in the catalytic region, though abolition may be partial."
+      }
+    ],
+    "stop_reason": {
+      "type": "model_stop",
+      "detail": "Self-review converged and no evidence tools are available, so additional iteration would not improve the Top-3."
+    },
+    "remaining_budget": {
+      "tool_calls": 4,
+      "rounds": 3
+    }
+  },
+  "stop_reason": {
+    "type": "model_stop",
+    "detail": "model stopped"
+  },
+  "candidate_registry": {
+    "A222V": {
+      "candidate_id": "A222V",
+      "mutation": "A222V",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 2,
+      "current_confidence": 0.75,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.75,
+          "rationale": "The common A222V (C677T) variant is known to produce a thermolabile enzyme with substantially reduced activity, indicating the region is sensitive; it is a validated loss-of-function direction."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.75,
+          "rationale": "A222V (C677T) is a well-characterized variant causing thermolability and ~65% activity loss, though rarely complete abolition."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "R157Q": {
+      "candidate_id": "R157Q",
+      "mutation": "R157Q",
+      "first_seen_round": 0,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 1,
+      "current_confidence": 0.8,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 0,
+          "action": "add",
+          "confidence": 0.8,
+          "rationale": "Arg157 is a recurrent severe pathogenic variant in MTHFR deficiency patients, suggesting it plays a key structural or catalytic role; mutation to Gln removes a critical positive charge."
+        },
+        {
+          "round": 1,
+          "action": "retain",
+          "confidence": 0.8,
+          "rationale": "R157 is in the catalytic FAD-binding domain and R157Q is a known severe MTHFR deficiency variant with markedly reduced activity."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    },
+    "E429A": {
+      "candidate_id": "E429A",
+      "mutation": "E429A",
+      "first_seen_round": 1,
+      "last_seen_round": 1,
+      "status": "active",
+      "current_rank": 3,
+      "current_confidence": 0.65,
+      "evidence_refs": [],
+      "history": [
+        {
+          "round": 1,
+          "action": "add",
+          "confidence": 0.65,
+          "rationale": "E429A corresponds to the common A1298C polymorphism in the regulatory domain, which reduces activity and is well tolerated structurally; adding as a third documented LOF-leaning variant."
+        }
+      ],
+      "rejection": null,
+      "reconsiderations": []
+    }
+  },
+  "tool_usage": {
+    "tool_calls_used": 0,
+    "max_tool_calls": 4,
+    "rounds_used": 1
+  },
+  "bundle_evidence": {
+    "R157Q": null,
+    "A222V": null
+  },
+  "evidence_ledger": [],
+  "candidate_summary": {
+    "n_added": 3,
+    "n_rejected": 0,
+    "n_reconsidered": 0,
+    "n_invalid": 4,
+    "c0_size": 2,
+    "final_novelty": 0.0,
+    "tool_calls_used": 0,
+    "rounds_used": 1,
+    "budget_exhausted": false
+  }
+}
